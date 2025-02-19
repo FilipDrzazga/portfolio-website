@@ -4,14 +4,14 @@ import { CONTACT_MOBILE, CONTACT_TABLET, CONTACT_DESKTOP } from "../../../assets
 const Contact = () => {
   return (
     <section className="container flex flex-col justify-between">
-      <div className="absolute top-0 left-0 w-full h-full">
+      {/* <div className="absolute top-0 left-0 w-full h-full">
         <picture className="w-full h-full">
           <source srcSet={CONTACT_MOBILE} type="image/webp" media="(max-width: 480px)" />
           <source srcSet={CONTACT_TABLET} type="image/webp" media="(min-width: 768px)" />
           <source srcSet={CONTACT_DESKTOP} type="image/webp" media="(min-width: 1200px)" />
           <img className="w-full h-full object-cover" src={CONTACT_MOBILE} alt="A portrait of me" />
         </picture>
-      </div>
+      </div> */}
       <header className="w-full h-auto z-1">
         <h2 className="flex flex-col font-oswald-m text-huge text-white leading-small tracking-tighter">
           {CONTACT_TITLE_ARR.map((text, i) => (
