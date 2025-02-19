@@ -1,7 +1,32 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: "Oswald-light";
+
+  src: url("..\assets\font\Oswald-Light.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Oswald-regular";
+  src: url("..\assets\font\Oswald-Regular.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Oswald-medium";
+  src: url("..\assets\font\Oswald-Medium.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Oswald-bold";
+  src: url("..\assets\font\Oswald-Bold.woff2") format("woff2");
+}
+
 body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+@theme {
+  --font-oswald-l: "Oswald-light", "sans-serif";
+  --font-oswald-r: "Oswald-regular", "sans-serif";
+  --font-oswald-m: "Oswald-medium", "sans-serif";
+  --font-oswald-b: "Oswald-bold", "sans-serif";
 }
