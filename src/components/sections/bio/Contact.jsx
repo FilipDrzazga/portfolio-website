@@ -19,7 +19,7 @@ const Contact = () => {
           ))}
         </h2>
       </header>
-      <div className="w-full h-auto z-1">
+      <div className="w-full h-auto mb-6 z-1">
         <ul className="flex justify-between w-full h-auto">
           {SOCIAL_LINKS.map((text, i) => (
             <li key={i} className="font-oswald-r text-small text-white">
@@ -28,7 +28,7 @@ const Contact = () => {
           ))}
         </ul>
       </div>
-      <footer className="flex flex-col justify-center items-center w-full h-auto leading-xtiny z-1">
+      <footer className="flex flex-col justify-center items-center w-full h-auto mb-4 leading-xtiny z-1">
         {FOOTER_TEXT1_ARR.map((text, i) => (
           <p key={i} className="font-oswald-l text-tiny text-black">
             {text}

@@ -55,6 +55,10 @@ body {
     padding: 2rem;
     background-color: var(--color-white);
   }
+  .mask-image {
+    mask-image: linear-gradient(to bottom, black 55%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, black 55%, transparent 100%);
+  }
 }
 
 /* p-8 around sections 32px */
