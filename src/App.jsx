@@ -1,5 +1,7 @@
+import BioPages from "./pages/BioPages";
+
 function App() {
-  return <div>Hello!</div>;
+  return <BioPages />;
 }
 
 export default App;

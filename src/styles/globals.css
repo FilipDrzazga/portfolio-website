@@ -29,4 +29,41 @@ body {
   --font-oswald-r: "Oswald-regular", "sans-serif";
   --font-oswald-m: "Oswald-medium", "sans-serif";
   --font-oswald-b: "Oswald-bold", "sans-serif";
+
+  --color-black: #1e1e1e;
+  --color-white: #d1d1d1;
+
+  --bg-black: var(--color-black);
+  --bg-white: var(--color-white);
+
+  --text-black: var(--color-black);
+  --text-white: var(--color-white);
+  --text-tiny: 0.625rem;
+  --text-small: 1rem;
+  --text-huge: 2rem;
+
+  --leading-xtiny: 0.6rem;
+  --leading-tiny: 1rem;
+  --leading-small: 1.8rem;
 }
+
+@layer components {
+  .container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    padding: 2rem;
+    background-color: var(--color-white);
+  }
+}
+
+/* p-8 around sections 32px */
+
+/* mt-10 40px  */
+/* mt-8 32px */
+/* mt-4 16px */
+
+/* --text-tiny: 0.625rem; 10px */
+
+/* --leading-small: 1.8rem; line-height */
+/* --leading-tiny: 1rem; line-height */
