@@ -3,23 +3,13 @@ import { useEffect, useRef, useCallback, useMemo } from "react";
 import { useThree, useFrame } from "@react-three/fiber";
 import { useTexture } from "@react-three/drei";
 import * as THREE from "three";
-import { useControls } from 'leva'
 import { useMotionValueEvent, useScroll } from "motion/react";
 
 import Vertex from "./shaders/Vertex.glsl?raw";
 import Fragment from "./shaders/Fragment.glsl?raw";
 import { BIO_MOBILE, CONTACT_MOBILE } from "../../../assets/images/images";
-import { s } from "motion/react-client";
 
 const ImageShaderMaterial = () => {
-  const { speedFreq } = useControls({
-    speedFreq:{
-      value: 0.2,
-      min: 0,
-      max: 2,
-      step: 0.01,
-    }
-  });
   const { viewport, } = useThree();
   const mesh = useRef(null);
   const documentScrollHeight = useRef(null);
@@ -43,7 +33,6 @@ const ImageShaderMaterial = () => {
       u_conactImgTexture: { value: contactImgTexture },
       u_scroll: { value: normalizedScroll.current || 0},
       u_time: { value: 0 },
-      u_speedFreq: { value: 0.5 },
     }),
     [normalizedScroll.current]
   );
@@ -54,10 +43,9 @@ const ImageShaderMaterial = () => {
     const { uniforms: shaderUniforms } = shaderMaterial;
 
     shaderUniforms.u_time.value = clockTime;
-    shaderUniforms.u_speedFreq.value = speedFreq;
     shaderUniforms.u_scroll.value = normalizedScroll.current
 
-  }, [speedFreq, normalizedScroll.current]);
+  }, [normalizedScroll.current]);
 
   useFrame((state) => {
     updateShaderUniforms(state.clock.getElapsedTime());
