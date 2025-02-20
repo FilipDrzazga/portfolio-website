@@ -1,4 +1,15 @@
 import { BIO_MOBILE, BIO_TABLET, BIO_DESKTOP } from "../../../assets/images/images";
+import { COORDINATES_ARR, SPECIAL_SIGNS_ARR } from "../../../utils/constants";
+import {motion} from "motion/react";
+
+const ContainerVariants = {
+  initial:{opacity:0},
+  animate:{opacity:1, transition:{duration:1, staggerChildren:0.1, delayChildren:0.3}},
+}
+const ItemVariants = {
+  initial:{opacity:0},
+  animate:{opacity:1},
+}
 
 const Bio = () => {
   return (
@@ -12,15 +23,13 @@ const Bio = () => {
         </picture>
       </div> */}
       <div className="relative flex justify-between w-full h-auto">
-        <div>
-          <span className="font-oswald-r text-tiny text-black">51.6611°N</span>
-        </div>
-        <div>
-          <span className="font-oswald-r text-tiny text-black">WATFORD</span>
-        </div>
-        <div>
-          <span className="font-oswald-r text-tiny text-black">0.3970°W</span>
-        </div>
+        {COORDINATES_ARR.map((item, i) => ( 
+          <motion.div key={i} variants={ContainerVariants} initial='initial' animate='animate'>
+            {item.split('').map((letter, j) => (
+              <motion.span key={j} variants={ItemVariants} className="font-oswald-r text-tiny text-black">{letter}</motion.span>
+            ))}
+          </motion.div>
+        ))}
       </div>
     </section>
   );
