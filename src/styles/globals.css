@@ -3,22 +3,23 @@
 @font-face {
   font-family: "Oswald-light";
 
-  src: url("..\assets\font\Oswald-Light.woff2") format("woff2");
+  src: url("../assets/font/Oswald-Light.woff2") format("woff2");
 }
 @font-face {
   font-family: "Oswald-regular";
-  src: url("..\assets\font\Oswald-Regular.woff2") format("woff2");
+  src: url("../assets/font/Oswald-Regular.woff2") format("woff2");
 }
 @font-face {
   font-family: "Oswald-medium";
-  src: url("..\assets\font\Oswald-Medium.woff2") format("woff2");
+  src: url("../assets/font/Oswald-Medium.woff2") format("woff2");
 }
 @font-face {
   font-family: "Oswald-bold";
-  src: url("..\assets\font\Oswald-Bold.woff2") format("woff2");
+  src: url("../assets/font/Oswald-Bold.woff2") format("woff2");
 }
 
 body {
+  background-color: var(--color-white);
   margin: 0;
   padding: 0;
   box-sizing: border-box;

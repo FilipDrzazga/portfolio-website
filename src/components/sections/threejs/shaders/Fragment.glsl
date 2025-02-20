@@ -3,8 +3,11 @@ precision mediump float;
 #endif
 varying vec2 vUv;
 
-uniform sampler2D u_texture;
+uniform sampler2D u_bioImgTexture;
+uniform sampler2D u_conactImgTexture;
+uniform float u_scroll;
 uniform float u_time;
+uniform float u_speedFreq;
 
 vec4 mod289(vec4 x) {
   return x - floor(x * (1.0 / 289.0)) * 289.0;
@@ -64,19 +67,26 @@ float cnoise(vec2 P) {
 void main() {
   vec2 uv = vUv;
   float n = 0.0;
-  float amplitude = 1.0;
-  float frequency = 2.0;
+
+  float baseAmplitude = smoothstep(0.0, 0.5, u_scroll) * (1.0 - smoothstep(0.8, 1.0, u_scroll)); // higher value tiner lines
+  float amplitude = baseAmplitude;
+  float frequency = 1.0; //make it more lines
   for (int i = 0; i < 2; i++) {
-    n += amplitude * cnoise(uv * frequency + u_time);
+    n += amplitude * cnoise(uv * frequency + u_time * u_speedFreq);
     frequency *= 2.0;
-    amplitude *= 0.5;
+    amplitude *= 3.0;
   }
   n = abs(n);
   
-  // Apply a hard threshold to sharpen edges.
-  float sharpN = step(0.1, n);
-  n*=sharpN;
-  vec4 color = texture2D(u_texture, n * uv);
+  float sharpN = step(0.4, n);
+  n += sharpN;
+
+  vec4 bioTexture = texture2D(u_bioImgTexture,(1.0 - n) * uv);
+  vec4 contactTexture = texture2D(u_conactImgTexture,(1.0 - n) * uv);
+
+  vec4 color = mix(bioTexture, contactTexture, u_scroll);
+
+  //vec4 color = texture2D(u_bioImgTexture, (1.0 - n) * uv);
   
   gl_FragColor = vec4(color);
 }

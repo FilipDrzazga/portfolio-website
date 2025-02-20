@@ -2,36 +2,62 @@
 import { useEffect, useRef, useCallback, useMemo } from "react";
 import { useThree, useFrame } from "@react-three/fiber";
 import { useTexture } from "@react-three/drei";
-import { Box3, Vector3 } from "three";
+import * as THREE from "three";
+import { useControls } from 'leva'
+import { useMotionValueEvent, useScroll } from "motion/react";
 
-import Vertex from "./shaders/vertex.glsl?raw";
-import Fragment from "./shaders/fragment.glsl?raw";
-import { BIO_MOBILE } from "../../../assets/images/images";
+import Vertex from "./shaders/Vertex.glsl?raw";
+import Fragment from "./shaders/Fragment.glsl?raw";
+import { BIO_MOBILE, CONTACT_MOBILE } from "../../../assets/images/images";
+import { s } from "motion/react-client";
 
 const ImageShaderMaterial = () => {
-  const { viewport } = useThree();
+  const { speedFreq } = useControls({
+    speedFreq:{
+      value: 0.2,
+      min: 0,
+      max: 2,
+      step: 0.01,
+    }
+  });
+  const { viewport, } = useThree();
   const mesh = useRef(null);
-  const texture = useTexture(BIO_MOBILE);
+  const documentScrollHeight = useRef(null);
+  const normalizedScroll = useRef(null);
 
-  const width = window.innerWidth;
-  const height = window.innerHeight;
+  const bioImgTexture = useTexture(BIO_MOBILE);
+  const contactImgTexture = useTexture(CONTACT_MOBILE);
+
+  const { scrollY } = useScroll();
+
+  useMotionValueEvent(scrollY, 'change', (latest)=>{
+    const maxScroll = documentScrollHeight.current - window.innerHeight;
+    const normalize = latest / maxScroll;
+    const clampedScroll = Math.max(0, Math.min(1, normalize));
+    normalizedScroll.current = clampedScroll;
+  })
 
   const uniforms = useMemo(
     () => ({
-      u_texture: { value: texture },
+      u_bioImgTexture: { value: bioImgTexture },
+      u_conactImgTexture: { value: contactImgTexture },
+      u_scroll: { value: normalizedScroll.current || 0},
       u_time: { value: 0 },
+      u_speedFreq: { value: 0.5 },
     }),
-    [texture]
+    [normalizedScroll.current]
   );
 
   const updateShaderUniforms = useCallback((clockTime) => {
     if (!mesh.current) return;
-
     const shaderMaterial = mesh.current.material;
     const { uniforms: shaderUniforms } = shaderMaterial;
 
     shaderUniforms.u_time.value = clockTime;
-  }, []);
+    shaderUniforms.u_speedFreq.value = speedFreq;
+    shaderUniforms.u_scroll.value = normalizedScroll.current
+
+  }, [speedFreq, normalizedScroll.current]);
 
   useFrame((state) => {
     updateShaderUniforms(state.clock.getElapsedTime());
@@ -39,9 +65,10 @@ const ImageShaderMaterial = () => {
 
   useEffect(() => {
     if (!mesh.current) return;
+    documentScrollHeight.current = document.documentElement.scrollHeight;
 
-    const box = new Box3().setFromObject(mesh.current);
-    const size = new Vector3();
+    const box = new THREE.Box3().setFromObject(mesh.current);
+    const size = new THREE.Vector3();
     box.getSize(size);
 
     const scaleX = viewport.width / size.x;
@@ -49,11 +76,12 @@ const ImageShaderMaterial = () => {
     const scale = Math.min(scaleX, scaleY);
 
     mesh.current.scale.set(scale, scale, scale);
+
   }, [viewport.width, viewport.height]);
 
   return (
     <mesh ref={mesh} position={[0, 0, 0]}>
-      <planeGeometry attach="geometry" args={[width, height, 1]} />
+      <planeGeometry attach="geometry" args={[window.innerWidth, window.innerHeight, 1]} />
       <shaderMaterial fragmentShader={Fragment} vertexShader={Vertex} uniforms={uniforms} />
     </mesh>
   );

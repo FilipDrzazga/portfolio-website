@@ -12,14 +12,14 @@ const Contact = () => {
           <img className="w-full h-full object-cover" src={CONTACT_MOBILE} alt="A portrait of me" />
         </picture>
       </div> */}
-      <header className="w-full h-auto z-1">
+      <header className="w-full h-auto">
         <h2 className="flex flex-col font-oswald-m text-huge text-white leading-small tracking-tighter">
           {CONTACT_TITLE_ARR.map((text, i) => (
             <span key={i}>{text}</span>
           ))}
         </h2>
       </header>
-      <div className="w-full h-auto mb-6 z-1">
+      <div className="w-full h-auto mb-6">
         <ul className="flex justify-between w-full h-auto">
           {SOCIAL_LINKS.map((text, i) => (
             <li key={i} className="font-oswald-r text-small text-white">
@@ -28,7 +28,7 @@ const Contact = () => {
           ))}
         </ul>
       </div>
-      <footer className="flex flex-col justify-center items-center w-full h-auto mb-4 leading-xtiny z-1">
+      <footer className="flex flex-col justify-center items-center w-full h-auto mb-4 leading-xtiny">
         {FOOTER_TEXT1_ARR.map((text, i) => (
           <p key={i} className="font-oswald-l text-tiny text-black">
             {text}
