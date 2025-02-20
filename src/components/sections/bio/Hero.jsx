@@ -1,15 +1,15 @@
+import { motion } from "motion/react";
 import { BIO_MOBILE, BIO_TABLET, BIO_DESKTOP } from "../../../assets/images/images";
 import { COORDINATES_ARR, SPECIAL_SIGNS_ARR } from "../../../utils/constants";
-import {motion} from "motion/react";
 
 const ContainerVariants = {
-  initial:{opacity:0},
-  animate:{opacity:1, transition:{duration:1, staggerChildren:0.1, delayChildren:0.3}},
-}
+  initial: { opacity: 0 },
+  animate: { opacity: 1, transition: { duration: 1, staggerChildren: 0.1, delayChildren: 0.3 } },
+};
 const ItemVariants = {
-  initial:{opacity:0},
-  animate:{opacity:1},
-}
+  initial: { opacity: 0, "--after-opacity": 1 },
+  animate: { opacity: 1, "--after-opacity": 0 },
+};
 
 const Bio = () => {
   return (
@@ -23,11 +23,21 @@ const Bio = () => {
         </picture>
       </div> */}
       <div className="relative flex justify-between w-full h-auto">
-        {COORDINATES_ARR.map((item, i) => ( 
-          <motion.div key={i} variants={ContainerVariants} initial='initial' animate='animate'>
-            {item.split('').map((letter, j) => (
-              <motion.span key={j} variants={ItemVariants} className="font-oswald-r text-tiny text-black">{letter}</motion.span>
-            ))}
+        {COORDINATES_ARR.map((item, i) => (
+          <motion.div key={i} variants={ContainerVariants} initial="initial" animate="animate">
+            {item.split("").map((letter, j) => {
+              const getRandomSign = SPECIAL_SIGNS_ARR[Math.floor(Math.random() * SPECIAL_SIGNS_ARR.length)];
+              return (
+                <motion.span
+                  key={j}
+                  className="with-after-content relative font-oswald-r text-tiny text-black"
+                  variants={ItemVariants}
+                  data-content={getRandomSign}
+                >
+                  {letter}
+                </motion.span>
+              );
+            })}
           </motion.div>
         ))}
       </div>

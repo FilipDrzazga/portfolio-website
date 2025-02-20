@@ -60,6 +60,19 @@ body {
     mask-image: linear-gradient(to bottom, black 55%, transparent 100%);
     -webkit-mask-image: linear-gradient(to bottom, black 55%, transparent 100%);
   }
+  .with-after-content::after {
+    content: attr(data-content);
+    width: 100%;
+    height: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: var(--color-black);
+    font-size: var(--text-tiny);
+    font-family: var(--font-oswald-r);
+    color: var(--color-white);
+    opacity: var(--after-opacity);
+  }
 }
 
 /* p-8 around sections 32px */
