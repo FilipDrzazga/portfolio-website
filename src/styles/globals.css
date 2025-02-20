@@ -56,9 +56,20 @@ body {
     padding: 2rem;
     background-color: transparent;
   }
-  .mask-image {
+  .navbar-mask-blur {
     mask-image: linear-gradient(to bottom, black 55%, transparent 100%);
     -webkit-mask-image: linear-gradient(to bottom, black 55%, transparent 100%);
+  }
+  [data-tab-name="LET'S TALK"] {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: auto;
+    height: 1.5rem;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    background-color: var(--color-black);
+    color: var(--color-white);
   }
   .with-after-content::after {
     content: attr(data-content);
@@ -69,7 +80,7 @@ body {
     left: 0;
     background-color: var(--color-black);
     font-size: var(--text-tiny);
-    font-family: var(--font-oswald-r);
+    font-family: var(--font-oswald-l);
     color: var(--color-white);
     opacity: var(--after-opacity);
   }

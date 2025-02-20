@@ -34,20 +34,17 @@ const ImageShaderMaterial = () => {
       u_scroll: { value: normalizedScroll.current || 0 },
       u_time: { value: 0 },
     }),
-    [normalizedScroll.current]
+    [bioImgTexture, contactImgTexture]
   );
 
-  const updateShaderUniforms = useCallback(
-    (clockTime) => {
-      if (!mesh.current) return;
-      const shaderMaterial = mesh.current.material;
-      const { uniforms: shaderUniforms } = shaderMaterial;
+  const updateShaderUniforms = useCallback((clockTime) => {
+    if (!mesh.current) return;
+    const shaderMaterial = mesh.current.material;
+    const { uniforms: shaderUniforms } = shaderMaterial;
 
-      shaderUniforms.u_time.value = clockTime;
-      shaderUniforms.u_scroll.value = normalizedScroll.current;
-    },
-    [normalizedScroll.current]
-  );
+    shaderUniforms.u_time.value = clockTime;
+    shaderUniforms.u_scroll.value = normalizedScroll.current;
+  }, []);
 
   useFrame((state) => {
     updateShaderUniforms(state.clock.getElapsedTime());

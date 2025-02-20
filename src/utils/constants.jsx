@@ -43,6 +43,7 @@ const FOOTER_TEXT2_ARR = ["2@25 ALL RIGHTS RESERVED"];
 const SOCIAL_LINKS = ["EMAIL", "GITHUB", "LINKEDIN"];
 
 const SPECIAL_SIGNS_ARR = ["&", "<", ">", "=", "+", "*", "/", "%", "$", "#", "@", "!", "?"];
+const NAVIGATION_LINKS = ["BIO", "PLAYGROUND", "WORK", "LET'S TALK"];
 
 export {
   TITLE_TEXT_ARR,
@@ -58,4 +59,5 @@ export {
   FOOTER_TEXT2_ARR,
   SOCIAL_LINKS,
   SPECIAL_SIGNS_ARR,
+  NAVIGATION_LINKS,
 };

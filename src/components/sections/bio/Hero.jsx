@@ -1,5 +1,5 @@
 import { motion } from "motion/react";
-import { BIO_MOBILE, BIO_TABLET, BIO_DESKTOP } from "../../../assets/images/images";
+// import { BIO_MOBILE, BIO_TABLET, BIO_DESKTOP } from "../../../assets/images/images";
 import { COORDINATES_ARR, SPECIAL_SIGNS_ARR } from "../../../utils/constants";
 
 const ContainerVariants = {
@@ -23,9 +23,9 @@ const Bio = () => {
         </picture>
       </div> */}
       <div className="relative flex justify-between w-full h-auto">
-        {COORDINATES_ARR.map((item, i) => (
+        {COORDINATES_ARR.map((text, i) => (
           <motion.div key={i} variants={ContainerVariants} initial="initial" animate="animate">
-            {item.split("").map((letter, j) => {
+            {text.split("").map((letter, j) => {
               const getRandomSign = SPECIAL_SIGNS_ARR[Math.floor(Math.random() * SPECIAL_SIGNS_ARR.length)];
               return (
                 <motion.span
