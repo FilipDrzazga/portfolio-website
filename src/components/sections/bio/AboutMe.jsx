@@ -10,25 +10,21 @@ import {
 } from "../../../utils/constants";
 
 const ItemVariants = {
-  initial: { top: '1.7rem'},
-  animate:(j)=>( { top: '-1.9rem', transition:{duration:1.5, delay: j * Math.random() * 0.1} }),
+  initial: {  top: '1.7rem' },
+  animate:(i)=>( { top: '0rem', transition: { duration: 0.8, delay: i * 0.05 } }),
 };
 
 const AboutMe = () => {
   return (
     <section className="container h-auto flex flex-col">
       <header className="w-full h-auto">
-        <h1 className="w-full h-auto flex flex-col font-oswald-m text-huge text-black leading-small tracking-tighter">
-          {TITLE_TEXT_ARR.map((text, i) => (
-            <p className="relative overflow-hidden" key={i}>{text.split('').map((letter,j)=>{
-              return(
-                <motion.span custom={j} variants={ItemVariants} initial='initial' whileInView='animate' viewport={{ once: true }} key={j} className="relative inline-block title-after-content top-[var(--text-huge)]" data-content={letter}>
-                  {letter}
-                </motion.span>
-              )
-            })}</p>
+        <motion.h1 className="w-full h-auto flex flex-col font-oswald-m text-huge text-black leading-small tracking-tighter">
+          {TITLE_TEXT_ARR.map((text,i)=>(
+            <p className="relative w-full h-7 overflow-hidden" key={i}>
+              <motion.span custom={i} variants={ItemVariants} initial='initial' whileInView='animate' viewport={{once:true}} className="absolute top-0 left-0" key={i}>{text}</motion.span>
+            </p>
           ))}
-        </h1>
+        </motion.h1>
       </header>
       <div className="w-full h-auto mt-10">
         {SUBTITLE_TEXT_ARR.map((text, i) => (

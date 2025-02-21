@@ -1,4 +1,4 @@
-import { motion } from "motion/react";
+import { motion} from "motion/react";
 // import { BIO_MOBILE, BIO_TABLET, BIO_DESKTOP } from "../../../assets/images/images";
 import { COORDINATES_ARR, SPECIAL_SIGNS_ARR } from "../../../utils/constants";
 
