@@ -71,13 +71,10 @@ void main() {
   float amplitude = baseAmplitude;
   float frequency = 1.0;
 
-  for (int i = 0; i < 2; i++) {
-    n += amplitude * cnoise(uv * frequency + u_time * 0.15);
-    frequency *= 2.0; // make it more lines
-    amplitude *= 5.0; //make it tiny lines
-  }
-  n = abs(n);
+  float n1 = amplitude * cnoise(uv * 1.0 + u_time * 0.15);
+  float n2 = (amplitude * 5.0) * cnoise(uv * 2.0 + u_time * 0.15);
   
+  n = abs(n1 + n2);
   float sharpN = step(0.4, n);
   n += sharpN;
 

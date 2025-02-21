@@ -84,7 +84,20 @@ body {
     color: var(--color-white);
     opacity: var(--after-opacity);
   }
-    .navbar-after-content::after {
+  .footer-after-content::after {
+    content: attr(data-content);
+    width: 100%;
+    height: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: var(--color-black);
+    font-size: var(--text-tiny);
+    font-family: var(--font-oswald-l);
+    color: var(--color-white);
+    opacity: var(--after-opacity);
+  }
+  .navbar-after-content::after {
     content: attr(data-content);
     width: 100%;
     height: auto;

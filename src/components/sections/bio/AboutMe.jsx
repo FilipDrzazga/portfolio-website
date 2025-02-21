@@ -1,4 +1,5 @@
-import { motion } from "motion/react";
+import { useRef } from "react";
+import { motion, useInView } from "motion/react";
 import {
   TITLE_TEXT_ARR,
   SUBTITLE_TEXT_ARR,
@@ -10,18 +11,34 @@ import {
 } from "../../../utils/constants";
 
 const ItemVariants = {
-  initial: {  top: '1.7rem' },
-  animate:(i)=>( { top: '0rem', transition: { duration: 0.8, delay: i * 0.05 } }),
+  initial: { top: "1.7rem" },
+  animate: (i) => ({ top: "0rem", transition: { duration: 0.5, delay: i * 0.05 } }),
 };
 
 const AboutMe = () => {
+  const ref = useRef();
+  const isInView = useInView(ref, { once: true, amount: "all" });
+
   return (
     <section className="container h-auto flex flex-col">
       <header className="w-full h-auto">
-        <motion.h1 className="w-full h-auto flex flex-col font-oswald-m text-huge text-black leading-small tracking-tighter">
-          {TITLE_TEXT_ARR.map((text,i)=>(
+        <motion.h1
+          ref={ref}
+          className="w-full h-auto flex flex-col font-oswald-m text-huge text-black leading-small tracking-tighter"
+        >
+          {TITLE_TEXT_ARR.map((text, i) => (
             <p className="relative w-full h-7 overflow-hidden" key={i}>
-              <motion.span custom={i} variants={ItemVariants} initial='initial' whileInView='animate' viewport={{once:true}} className="absolute top-0 left-0" key={i}>{text}</motion.span>
+              <motion.span
+                custom={i}
+                variants={ItemVariants}
+                initial="initial"
+                animate={isInView ? "animate" : "initial"}
+                viewport={{ once: true }}
+                className="absolute top-0 left-0"
+                key={i}
+              >
+                {text}
+              </motion.span>
             </p>
           ))}
         </motion.h1>

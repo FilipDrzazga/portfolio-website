@@ -1,10 +1,11 @@
-import { motion} from "motion/react";
+import { motion, useScroll, useTransform } from "motion/react";
 // import { BIO_MOBILE, BIO_TABLET, BIO_DESKTOP } from "../../../assets/images/images";
 import { COORDINATES_ARR, SPECIAL_SIGNS_ARR } from "../../../utils/constants";
 
 const ContainerVariants = {
   initial: { opacity: 0 },
-  animate: { opacity: 1, transition: { duration: 1, staggerChildren: 0.1, delayChildren: 0.3 } },
+  animate: { opacity: 1, transition: { duration: 0.5, staggerChildren: 0.1, delayChildren: 0.3 } },
+  fadeOnScroll: { opacity: 0, transition: { duration: 1.5, ease: "easeInOut" } },
 };
 const ItemVariants = {
   initial: { opacity: 0, "--after-opacity": 1 },
@@ -12,6 +13,10 @@ const ItemVariants = {
 };
 
 const Bio = () => {
+  const { scrollY } = useScroll();
+  const opacity = useTransform(scrollY, [0, 100], [1, 0]);
+  const y = useTransform(scrollY, [0, 110], [0, -15]);
+
   return (
     <section className="container flex flex-col justify-end">
       {/* <div className="absolute top-0 left-0 w-full h-full">
@@ -24,13 +29,20 @@ const Bio = () => {
       </div> */}
       <div className="relative flex justify-between w-full h-auto">
         {COORDINATES_ARR.map((text, i) => (
-          <motion.div key={i} variants={ContainerVariants} initial="initial" animate="animate">
+          <motion.div
+            key={i}
+            style={{ opacity, y }}
+            variants={ContainerVariants}
+            initial="initial"
+            animate="animate"
+            className="flex"
+          >
             {text.split("").map((letter, j) => {
               const getRandomSign = SPECIAL_SIGNS_ARR[Math.floor(Math.random() * SPECIAL_SIGNS_ARR.length)];
               return (
                 <motion.span
                   key={j}
-                  className="coordinates-after-content relative font-oswald-r text-tiny text-black"
+                  className="coordinates-after-content relative font-oswald-r text-tiny text-black inline-block"
                   variants={ItemVariants}
                   data-content={getRandomSign}
                 >

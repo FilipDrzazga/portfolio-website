@@ -1,7 +1,27 @@
-import { CONTACT_TITLE_ARR, SOCIAL_LINKS, FOOTER_TEXT1_ARR, FOOTER_TEXT2_ARR } from "../../../utils/constants";
+import { useRef } from "react";
+import { motion, useInView } from "motion/react";
+import { CONTACT_TITLE_ARR, SOCIAL_LINKS, FOOTER_TEXT1_ARR, FOOTER_TEXT2_ARR, SPECIAL_SIGNS_ARR } from "../../../utils/constants";
 // import { CONTACT_MOBILE, CONTACT_TABLET, CONTACT_DESKTOP } from "../../../assets/images/images";
 
+const ContactTitleVariants = {
+  initial: { top: "1.7rem" },
+  animate: (i) => ({ top: "0rem", transition: { duration: 0.5, delay: i * 0.05 } }),
+};
+const FooterVariants = {
+  initial: { opacity: 0 },
+  animate: { opacity: 1, transition: { duration: 0.5, staggerChildren: 0.1, delayChildren: 0.3 } },
+};
+const FooterItemVariants = {
+  initial: { opacity: 0, "--after-opacity": 1 },
+  animate: { opacity: 1, "--after-opacity": 0 },
+};
+
 const Contact = () => {
+  const titleRef = useRef();
+  const footerRef = useRef();
+  const isInViewTittle = useInView(titleRef, { once: true, amount: 0.4 });
+  const isInViewFooter = useInView(footerRef, { once: true, amount: 0.4 });
+
   return (
     <section className="container flex flex-col justify-between">
       {/* <div className="absolute top-0 left-0 w-full h-full">
@@ -12,12 +32,24 @@ const Contact = () => {
           <img className="w-full h-full object-cover" src={CONTACT_MOBILE} alt="A portrait of me" />
         </picture>
       </div> */}
-      <header className="w-full h-auto">
-        <h2 className="flex flex-col font-oswald-m text-huge text-white leading-small tracking-tighter">
+      <header className="w-full h-auto mt-6">
+        <motion.h2 ref={titleRef} className="flex flex-col font-oswald-m text-huge text-white leading-small tracking-tighter">
           {CONTACT_TITLE_ARR.map((text, i) => (
-            <span key={i}>{text}</span>
+            <p className="relative w-full h-7 overflow-hidden" key={i}>
+              <motion.span
+                custom={i}
+                variants={ContactTitleVariants}
+                initial="initial"
+                animate={isInViewTittle ? "animate" : "initial"}
+                viewport={{ once: true }}
+                className="absolute top-0 left-0"
+                key={i}
+              >
+                {text}
+              </motion.span>
+            </p>
           ))}
-        </h2>
+        </motion.h2>
       </header>
       <div className="w-full h-auto mb-6">
         <ul className="flex justify-between w-full h-auto">
@@ -28,18 +60,58 @@ const Contact = () => {
           ))}
         </ul>
       </div>
-      <footer className="flex flex-col justify-center items-center w-full h-auto mb-4 leading-xtiny">
+      <motion.footer
+        ref={footerRef}
+        variants={FooterItemVariants}
+        className="flex flex-col justify-center items-center w-full h-auto mb-4 leading-xtiny"
+      >
         {FOOTER_TEXT1_ARR.map((text, i) => (
-          <p key={i} className="font-oswald-l text-tiny text-black">
-            {text}
-          </p>
+          <motion.p
+            key={i}
+            variants={FooterVariants}
+            initial="initial"
+            animate={isInViewFooter ? "animate" : "initial"}
+            className="font-oswald-l text-tiny text-black"
+          >
+            {text.split("").map((letter, j) => {
+              const getRandomSign = SPECIAL_SIGNS_ARR[Math.floor(Math.random() * SPECIAL_SIGNS_ARR.length)];
+              return (
+                <motion.span
+                  key={j}
+                  className="footer-after-content relative inline-block"
+                  variants={FooterItemVariants}
+                  data-content={getRandomSign}
+                >
+                  {letter}
+                </motion.span>
+              );
+            })}
+          </motion.p>
         ))}
         {FOOTER_TEXT2_ARR.map((text, i) => (
-          <p key={i} className="font-oswald-l text-tiny text-black">
-            {text}
-          </p>
+          <motion.p
+            key={i}
+            variants={FooterVariants}
+            initial="initial"
+            animate={isInViewFooter ? "animate" : "initial"}
+            className="font-oswald-l text-tiny text-black"
+          >
+            {text.split("").map((letter, j) => {
+              const getRandomSign = SPECIAL_SIGNS_ARR[Math.floor(Math.random() * SPECIAL_SIGNS_ARR.length)];
+              return (
+                <motion.span
+                  key={j}
+                  className="footer-after-content relative inline-block"
+                  variants={FooterItemVariants}
+                  data-content={getRandomSign}
+                >
+                  {letter}
+                </motion.span>
+              );
+            })}
+          </motion.p>
         ))}
-      </footer>
+      </motion.footer>
     </section>
   );
 };

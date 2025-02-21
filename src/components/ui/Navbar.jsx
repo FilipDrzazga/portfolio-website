@@ -3,7 +3,7 @@ import { NAVIGATION_LINKS, SPECIAL_SIGNS_ARR } from "../../utils/constants";
 
 const ContainerVariants = {
   initial: { opacity: 0 },
-  animate: { opacity: 1, transition: { duration: 1, staggerChildren: 0.1, delayChildren: 0.3 } },
+  animate: { opacity: 1, transition: { duration: 0.5, staggerChildren: 0.1, delayChildren: 0.3 } },
 };
 const ItemVariants = {
   initial: { opacity: 0, "--after-opacity": 1 },
