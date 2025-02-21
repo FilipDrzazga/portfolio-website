@@ -1,3 +1,4 @@
+import { motion } from "motion/react";
 import {
   TITLE_TEXT_ARR,
   SUBTITLE_TEXT_ARR,
@@ -8,13 +9,24 @@ import {
   TECH_STACK,
 } from "../../../utils/constants";
 
+const ItemVariants = {
+  initial: { top: '1.7rem'},
+  animate:(j)=>( { top: '-1.9rem', transition:{duration:1.5, delay: j * Math.random() * 0.1} }),
+};
+
 const AboutMe = () => {
   return (
     <section className="container h-auto flex flex-col">
       <header className="w-full h-auto">
-        <h1 className="flex flex-col font-oswald-m text-huge text-black leading-small tracking-tighter">
+        <h1 className="w-full h-auto flex flex-col font-oswald-m text-huge text-black leading-small tracking-tighter">
           {TITLE_TEXT_ARR.map((text, i) => (
-            <span key={i}>{text}</span>
+            <p className="relative overflow-hidden" key={i}>{text.split('').map((letter,j)=>{
+              return(
+                <motion.span custom={j} variants={ItemVariants} initial='initial' whileInView='animate' viewport={{ once: true }} key={j} className="relative inline-block title-after-content top-[var(--text-huge)]" data-content={letter}>
+                  {letter}
+                </motion.span>
+              )
+            })}</p>
           ))}
         </h1>
       </header>

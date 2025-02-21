@@ -27,7 +27,7 @@ const Navbar = () => {
                   return (
                     <motion.span
                       key={j}
-                      className="with-after-content relative"
+                      className="navbar-after-content relative"
                       variants={ItemVariants}
                       data-content={getRandomSign}
                     >

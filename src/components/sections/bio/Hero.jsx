@@ -30,7 +30,7 @@ const Bio = () => {
               return (
                 <motion.span
                   key={j}
-                  className="with-after-content relative font-oswald-r text-tiny text-black"
+                  className="coordinates-after-content relative font-oswald-r text-tiny text-black"
                   variants={ItemVariants}
                   data-content={getRandomSign}
                 >
