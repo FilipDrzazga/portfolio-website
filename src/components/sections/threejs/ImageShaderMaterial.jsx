@@ -4,7 +4,7 @@ import { usePageStore } from "../../../store/useStore";
 import { useThree, useFrame } from "@react-three/fiber";
 import { useTexture } from "@react-three/drei";
 import * as THREE from "three";
-import { useScroll, useMotionValueEvent } from "motion/react";
+import { useScroll, useMotionValueEvent, animate, useTransform } from "motion/react";
 
 import Vertex from "./shaders/Vertex.glsl?raw";
 import Fragment from "./shaders/Fragment.glsl?raw";
@@ -13,6 +13,7 @@ import { BIO_MOBILE, CONTACT_MOBILE } from "../../../assets/images/images";
 const ImageShaderMaterial = () => {
   const isCanvasLoaded = usePageStore((state) => state.isCanvasLoaded);
   const { viewport } = useThree();
+
   const mesh = useRef(null);
   const documentScrollHeight = useRef(null);
   const normalizedScroll = useRef(null);
@@ -32,8 +33,10 @@ const ImageShaderMaterial = () => {
     () => ({
       u_bioImgTexture: { value: bioImgTexture },
       u_conactImgTexture: { value: contactImgTexture },
+      u_backgroundColor: { value: new THREE.Color('#d1d1d1') },
       u_scroll: { value: normalizedScroll.current || 0 },
       u_time: { value: 0 },
+      u_progress: { value: 0 },
     }),
     [bioImgTexture, contactImgTexture]
   );
@@ -52,23 +55,32 @@ const ImageShaderMaterial = () => {
   });
 
   useEffect(() => {
-    if (!mesh.current) return;
-    if (isCanvasLoaded) {
-      const timer = setTimeout(() => {
-        documentScrollHeight.current = document.body.scrollHeight;
-      }, 100);
-      return () => clearTimeout(timer);
-    }
+    if (!mesh.current || !isCanvasLoaded) return;
 
+    const timer = setTimeout(() => {
+      documentScrollHeight.current = document.body.scrollHeight;
+    }, 100);
+    
+    const controls = animate(0, 1, {
+      duration: 3,
+      onUpdate: (latest) => {
+        uniforms.u_progress.value = latest;
+      },
+    });
+    
     const box = new THREE.Box3().setFromObject(mesh.current);
     const size = new THREE.Vector3();
     box.getSize(size);
-
     const scaleX = viewport.width / size.x;
     const scaleY = viewport.height / size.y;
     const scale = Math.min(scaleX, scaleY);
-
     mesh.current.scale.set(scale, scale, scale);
+
+    return () => {
+      clearTimeout(timer);
+      controls.stop();
+    };
+
   }, [viewport.width, viewport.height,isCanvasLoaded]);
 
   return (
