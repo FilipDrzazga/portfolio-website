@@ -1,5 +1,6 @@
 /* eslint-disable react/no-unknown-property */
 import { useEffect, useRef, useCallback, useMemo } from "react";
+import { usePageStore } from "../../../store/useStore";
 import { useThree, useFrame } from "@react-three/fiber";
 import { useTexture } from "@react-three/drei";
 import * as THREE from "three";
@@ -10,6 +11,7 @@ import Fragment from "./shaders/Fragment.glsl?raw";
 import { BIO_MOBILE, CONTACT_MOBILE } from "../../../assets/images/images";
 
 const ImageShaderMaterial = () => {
+  const isCanvasLoaded = usePageStore((state) => state.isCanvasLoaded);
   const { viewport } = useThree();
   const mesh = useRef(null);
   const documentScrollHeight = useRef(null);
@@ -23,8 +25,7 @@ const ImageShaderMaterial = () => {
   useMotionValueEvent(scrollY, "change", (latest) => {
     const maxScroll = documentScrollHeight.current - window.innerHeight;
     const normalize = latest / maxScroll;
-    const clampedScroll = Math.max(0, Math.min(1, normalize));
-    normalizedScroll.current = clampedScroll;
+    normalizedScroll.current = normalize;
   });
 
   const uniforms = useMemo(
@@ -52,7 +53,12 @@ const ImageShaderMaterial = () => {
 
   useEffect(() => {
     if (!mesh.current) return;
-    documentScrollHeight.current = document.documentElement.scrollHeight;
+    if (isCanvasLoaded) {
+      const timer = setTimeout(() => {
+        documentScrollHeight.current = document.body.scrollHeight;
+      }, 100);
+      return () => clearTimeout(timer);
+    }
 
     const box = new THREE.Box3().setFromObject(mesh.current);
     const size = new THREE.Vector3();
@@ -63,7 +69,7 @@ const ImageShaderMaterial = () => {
     const scale = Math.min(scaleX, scaleY);
 
     mesh.current.scale.set(scale, scale, scale);
-  }, [viewport.width, viewport.height]);
+  }, [viewport.width, viewport.height,isCanvasLoaded]);
 
   return (
     <mesh ref={mesh} position={[0, 0, 0]}>
