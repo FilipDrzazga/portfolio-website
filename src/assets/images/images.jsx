@@ -1,8 +1,20 @@
-import BIO_MOBILE from "./bio_mobile_img_480w.webp";
-import BIO_TABLET from "./bio_tablet_img_768w.webp";
-import BIO_DESKTOP from "./bio_desktop_img_1920w.webp";
-import CONTACT_MOBILE from "./contact_mobile_img_480w.webp";
-import CONTACT_TABLET from "./contact_tablet_img_768w.webp";
-import CONTACT_DESKTOP from "./contact_desktop_img_1920w.webp";
+import BIO_MOBILE_XS from "./bio_mobile_img_xs.webp";
+import BIO_MOBILE_M from "./bio_mobile_img_m.webp";
+import BIO_MOBILE_LG from "./bio_mobile_img_lg.webp";
+import BIO_MOBILE_XL from "./bio_mobile_img_xl.webp";
 
-export { BIO_MOBILE, BIO_TABLET, BIO_DESKTOP, CONTACT_MOBILE, CONTACT_TABLET, CONTACT_DESKTOP };
+import CONTACT_MOBILE_XS from "./contact_mobile_img_xs.webp";
+import CONTACT_MOBILE_M from "./contact_mobile_img_m.webp";
+import CONTACT_MOBILE_LG from "./contact_mobile_img_lg.webp";
+import CONTACT_MOBILE_XL from "./contact_mobile_img_xl.webp";
+
+export {
+  BIO_MOBILE_XS,
+  BIO_MOBILE_M,
+  BIO_MOBILE_LG,
+  BIO_MOBILE_XL,
+  CONTACT_MOBILE_XS,
+  CONTACT_MOBILE_M,
+  CONTACT_MOBILE_LG,
+  CONTACT_MOBILE_XL,
+};

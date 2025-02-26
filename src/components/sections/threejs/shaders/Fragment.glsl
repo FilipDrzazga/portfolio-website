@@ -3,6 +3,7 @@ precision mediump float;
 #endif
 varying vec2 vUv;
 
+uniform vec2 u_resolution;
 uniform sampler2D u_bioImgTexture;
 uniform sampler2D u_conactImgTexture;
 uniform vec3 u_backgroundColor;
@@ -66,36 +67,43 @@ float cnoise(vec2 P) {
 }
 
 void main() {
+    // Get screen and texture aspect ratios
+  float screenAspect = u_resolution.x / u_resolution.y;
+  float textureAspect = 9.0 / 16.; // Match your texture aspect ratio
+
   vec2 uv = vUv;
-  float n = 0.0;
+  float aspectFix = screenAspect / textureAspect;
+  float zoomFactor = 0.85; // Slightly zoom the texture to fill top/bottom
 
-  // For the initial load, we use a simple noise level based solely on u_progress.
-  float amplitudeInitial = u_progress; // increases from 0 to 1 during load
+  vec2 scale = vec2(
+        mix(zoomFactor, aspectFix * zoomFactor, step(textureAspect, screenAspect)), 
+        mix(zoomFactor, (1.0 / aspectFix) * zoomFactor, step(screenAspect, textureAspect))
+  );
+  uv = (vUv - 0.5) * scale + 0.5;
 
-  // For the post-load effect, we compute your scroll-based amplitude.
-  float amplitudeScroll = smoothstep(0.0, 0.6, u_scroll) * (1.0 - smoothstep(0.7, 1.0, u_scroll));
+// Cache smoothstep calculations to avoid redundancy
+  float s0 = smoothstep(0.0, 0.6, u_scroll);
+  float s1 = smoothstep(0.7, 1.0, u_scroll);
+  float amplitudeScroll = s0 * (1.0 - s1);
+  // Replace mix(u_progress, amplitudeScroll, u_progress) with an equivalent expression
+  float amplitude = u_progress * (1.0 - u_progress + amplitudeScroll);
 
-  // Interpolate between the two noise modes.
-  // When u_progress is 0, amplitude is based on the initial value (0).
-  // When u_progress is 1, amplitude is fully determined by the scroll.
-  float amplitude = mix(amplitudeInitial, amplitudeScroll, u_progress);
+  // Precompute the time factor once
+  float t = u_time * 0.15;
+  // Combine noise calculations
+  float baseNoise = abs(cnoise(uv + t) * amplitude + cnoise(uv * 2.0 + t) * amplitude * 5.0);
+  // Add a sharp threshold effect
+  float n = baseNoise + step(0.4, baseNoise);
 
-  // Compute noise using the effective amplitude.
-  float n1 = amplitude * cnoise(uv * 1.0 + u_time * 0.15);
-  float n2 = (amplitude * 5.0) * cnoise(uv * 2.0 + u_time * 0.15);
-  n = abs(n1 + n2);
-  float sharpN = step(0.4, n);
-  n += sharpN;
-
-  // Distort texture coordinates with the noise.
+  // Distort UV coordinates based on the computed noise
   vec2 distortedUv = (1.0 - n) * uv;
+
+  // Sample textures and blend them using the scroll value
   vec4 bioTexture = texture2D(u_bioImgTexture, distortedUv);
   vec4 contactTexture = texture2D(u_conactImgTexture, distortedUv);
-
-  // Mix textures using the scroll value.
   vec4 textureMix = mix(bioTexture, contactTexture, u_scroll);
 
-  // Fade in from black as u_progress goes from 0 to 1.
+  // Fade in from the background color based on u_progress
   vec4 finalColor = mix(vec4(u_backgroundColor, 1.0), textureMix, u_progress);
   gl_FragColor = finalColor;
 }
