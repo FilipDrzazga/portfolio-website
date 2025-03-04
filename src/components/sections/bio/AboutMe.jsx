@@ -24,7 +24,7 @@ const AboutMe = () => {
       <header className="w-full h-auto">
         <motion.h1
           ref={ref}
-          className="w-full h-auto flex flex-col font-oswald-m text-huge text-black leading-7 tracking-tighter mobile-sm:text-xl mobile-sm:leading-8"
+          className="w-full h-auto flex flex-col font-oswald-m text-huge text-black leading-7 tracking-tighter mobile-sm:text-xl mobile-sm:leading-8 mobile-md:text-2xl mobile-md:leading-9"
         >
           {TITLE_TEXT_ARR.map((text, i) => (
             <p className="relative w-full overflow-hidden" key={i}>
@@ -35,7 +35,7 @@ const AboutMe = () => {
                 initial="initial"
                 animate={isInView ? "animate" : "initial"}
                 viewport={{ once: true }}
-                className="absolute w-full left-0"
+                className="absolute w-full left-0 -top-px"
                 key={i}
               >
                 {text}
@@ -52,22 +52,22 @@ const AboutMe = () => {
         ))}
       </div>
       <div className="flex flex-col w-full h-auto mt-8">
-        <p className="font-oswald-l text-tiny text-black mobile-sm:text-xs">
+        <p className="font-oswald-l text-tiny text-black mobile-sm:text-xs mobile-md:text-sm">
           {PARAGRAPH_TEXT1_ARR.map((text, i) => (
             <span key={i}>{text}</span>
           ))}
         </p>
-        <p className="mt-4 font-oswald-l text-tiny text-black mobile-sm:text-xs">
+        <p className="mt-4 font-oswald-l text-tiny text-black mobile-sm:text-xs mobile-md:text-sm">
           {PARAGRAPH_TEXT2_ARR.map((text, i) => (
             <span key={i}>{text}</span>
           ))}
         </p>
-        <p className="mt-4 font-oswald-l text-tiny text-black mobile-sm:text-xs">
+        <p className="mt-4 font-oswald-l text-tiny text-black mobile-sm:text-xs mobile-md:text-sm">
           {PARAGRAPH_TEXT3_ARR.map((text, i) => (
             <span key={i}>{text}</span>
           ))}
         </p>
-        <p className="mt-4 font-oswald-l text-tiny text-black mobile-sm:text-xs">
+        <p className="mt-4 font-oswald-l text-tiny text-black mobile-sm:text-xs mobile-md:text-sm">
           {PARAGRAPH_TEXT4_ARR.map((text, i) => (
             <span key={i}>{text}</span>
           ))}

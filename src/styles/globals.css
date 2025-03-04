@@ -27,6 +27,7 @@ body {
 
 @theme {
   --breakpoint-mobile-sm: 22rem; /* 352px */
+  --breakpoint-mobile-md: 25.75rem; /* 412px */
 
   --font-oswald-l: "Oswald-light", "sans-serif";
   --font-oswald-r: "Oswald-regular", "sans-serif";
@@ -46,6 +47,7 @@ body {
   /* --text-small: 1rem; */
   --text-huge: 2rem;
   --text-xl: 2.3rem;
+  --text-2xl:2.75rem;
 }
 
 @layer components {
@@ -122,3 +124,13 @@ body {
 
 /* --leading-small: 1.8rem; line-height */
 /* --leading-tiny: 1rem; line-height */
+
+
+/* Mobile */
+/* 320 ok */
+/* 360 ok */
+/* 375 ok */
+/* 390 ok */
+/* 412 ok */
+
+/* Tablet */

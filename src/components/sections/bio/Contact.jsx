@@ -32,10 +32,10 @@ const Contact = () => {
           <img className="w-full h-full object-cover" src={CONTACT_MOBILE} alt="A portrait of me" />
         </picture>
       </div> */}
-      <header className="w-full h-auto mt-6">
-        <motion.h2 ref={titleRef} className="flex flex-col font-oswald-m text-huge text-white leading-7 tracking-tighter mobile-sm:text-xl mobile-sm:leading-8">
+      <header className="w-full h-auto mt-6 mobile-md:mt-11">
+        <motion.h2 ref={titleRef} className="w-full h-auto flex flex-col font-oswald-m text-huge text-white leading-7 tracking-tighter mobile-sm:text-xl mobile-sm:leading-8 mobile-md:text-2xl mobile-md:leading-9">
           {CONTACT_TITLE_ARR.map((text, i) => (
-            <p className="relative w-full h-auto overflow-hidden" key={i}>
+            <p className="relative w-full overflow-hidden" key={i}>
               <span className="invisible">{text}</span>
               <motion.span
                 custom={i}
@@ -43,7 +43,7 @@ const Contact = () => {
                 initial="initial"
                 animate={isInViewTitle ? "animate" : "initial"}
                 viewport={{ once: true }}
-                className="absolute w-full left-0"
+                className="absolute w-full left-0 -top-px"
                 key={i}
               >
                 {text}
@@ -72,7 +72,7 @@ const Contact = () => {
             variants={FooterVariants}
             initial="initial"
             animate={isInViewFooter ? "animate" : "initial"}
-            className="font-oswald-l text-tiny text-black"
+            className="font-oswald-l text-tiny text-black mobile-md:text-xs"
           >
             {text.split("").map((letter, j) => {
               const getRandomSign = SPECIAL_SIGNS_ARR[Math.floor(Math.random() * SPECIAL_SIGNS_ARR.length)];
@@ -95,7 +95,7 @@ const Contact = () => {
             variants={FooterVariants}
             initial="initial"
             animate={isInViewFooter ? "animate" : "initial"}
-            className="font-oswald-l text-tiny text-black"
+            className="font-oswald-l text-tiny text-black mobile-md:text-xs"
           >
             {text.split("").map((letter, j) => {
               const getRandomSign = SPECIAL_SIGNS_ARR[Math.floor(Math.random() * SPECIAL_SIGNS_ARR.length)];

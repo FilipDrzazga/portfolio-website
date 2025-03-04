@@ -33,7 +33,7 @@ const Navbar = () => {
               data-tab-name={text}
               className="data-[tab-name=LET'S TALK] flex justify-center items-center w-auto h-6 tracking-wide"
             >
-              <motion.a variants={ContainerVariants} initial="initial" animate="animate" className="text-tiny font-oswald-l">
+              <motion.a variants={ContainerVariants} initial="initial" animate="animate" className="text-tiny font-oswald-l mobile-md:text-xs">
                 {text.split("").map((letter, j) => {
                   const getRandomSign = SPECIAL_SIGNS_ARR[Math.floor(Math.random() * SPECIAL_SIGNS_ARR.length)];
                   return (
