@@ -1,4 +1,4 @@
-import { motion } from "motion/react";
+import { motion, useScroll,useAnimate, useMotionValueEvent} from "motion/react";
 import { NAVIGATION_LINKS, SPECIAL_SIGNS_ARR } from "../../utils/constants";
 
 const ContainerVariants = {
@@ -11,9 +11,21 @@ const ItemVariants = {
 };
 
 const Navbar = () => {
+  const [ref, animate] = useAnimate();
+  const {scrollYProgress }= useScroll();
+
+  useMotionValueEvent(scrollYProgress, 'change', (latestScrollY) => {
+    if(latestScrollY === 1){
+      animate(ref.current, {color: '#d1d1d1',duration: 0.1})
+    }
+    else{
+      animate(ref.current,{color: '#1e1e1e', duration: 0.1})
+    }
+  });
+  
   return (
     <nav className="fixed top-0 left-0 w-full h-16 navbar-mask-blur px-8 bg-transparent backdrop-blur-sm z-1">
-      <ul className="flex justify-between items-center w-full h-full">
+      <ul ref={ref} className="flex justify-between items-center w-full h-full">
         {NAVIGATION_LINKS.map((text, i) => {
           return (
             <li

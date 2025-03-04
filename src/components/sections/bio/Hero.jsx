@@ -18,7 +18,7 @@ const Bio = () => {
   const y = useTransform(scrollY, [0, 110], [0, -15]);
 
   return (
-    <section className="container flex flex-col justify-end">
+    <section className="wrapper flex flex-col justify-end">
       {/* <div className="absolute top-0 left-0 w-full h-full">
         <picture className="w-full h-full">
           <source srcSet={BIO_MOBILE} type="image/webp" media="(max-width: 480px)" />

@@ -4,8 +4,8 @@ import { CONTACT_TITLE_ARR, SOCIAL_LINKS, FOOTER_TEXT1_ARR, FOOTER_TEXT2_ARR, SP
 // import { CONTACT_MOBILE, CONTACT_TABLET, CONTACT_DESKTOP } from "../../../assets/images/images";
 
 const ContactTitleVariants = {
-  initial: { top: "1.7rem" },
-  animate: (i) => ({ top: "0rem", transition: { duration: 0.5, delay: i * 0.05 } }),
+  initial: { y: "100%" },
+  animate: (i) => ({ y: "0%", transition: { duration: 0.5, delay: i * 0.05 } }),
 };
 const FooterVariants = {
   initial: { opacity: 0 },
@@ -19,11 +19,11 @@ const FooterItemVariants = {
 const Contact = () => {
   const titleRef = useRef();
   const footerRef = useRef();
-  const isInViewTittle = useInView(titleRef, { once: true, amount: 0.4 });
+  const isInViewTitle = useInView(titleRef, { once: true, amount: 0.4 });
   const isInViewFooter = useInView(footerRef, { once: true, amount: 0.4 });
 
   return (
-    <section className="container flex flex-col justify-between">
+    <section className="wrapper flex flex-col justify-between">
       {/* <div className="absolute top-0 left-0 w-full h-full">
         <picture className="w-full h-full">
           <source srcSet={CONTACT_MOBILE} type="image/webp" media="(max-width: 480px)" />
@@ -33,16 +33,17 @@ const Contact = () => {
         </picture>
       </div> */}
       <header className="w-full h-auto mt-6">
-        <motion.h2 ref={titleRef} className="flex flex-col font-oswald-m text-huge text-white leading-small tracking-tighter">
+        <motion.h2 ref={titleRef} className="flex flex-col font-oswald-m text-huge text-white leading-7 tracking-tighter mobile-sm:text-xl mobile-sm:leading-8">
           {CONTACT_TITLE_ARR.map((text, i) => (
-            <p className="relative w-full h-7 overflow-hidden" key={i}>
+            <p className="relative w-full h-auto overflow-hidden" key={i}>
+              <span className="invisible">{text}</span>
               <motion.span
                 custom={i}
                 variants={ContactTitleVariants}
                 initial="initial"
-                animate={isInViewTittle ? "animate" : "initial"}
+                animate={isInViewTitle ? "animate" : "initial"}
                 viewport={{ once: true }}
-                className="absolute top-0 left-0"
+                className="absolute w-full left-0"
                 key={i}
               >
                 {text}
@@ -54,7 +55,7 @@ const Contact = () => {
       <div className="w-full h-auto mb-6">
         <ul className="flex justify-between w-full h-auto">
           {SOCIAL_LINKS.map((text, i) => (
-            <li key={i} className="font-oswald-r text-small text-white">
+            <li key={i} className="font-oswald-r text-base text-white mobile-sm:text-lg">
               {text}
             </li>
           ))}
@@ -63,7 +64,7 @@ const Contact = () => {
       <motion.footer
         ref={footerRef}
         variants={FooterItemVariants}
-        className="flex flex-col justify-center items-center w-full h-auto mb-4 leading-xtiny"
+        className="flex flex-col justify-center items-center w-full h-auto mb-4"
       >
         {FOOTER_TEXT1_ARR.map((text, i) => (
           <motion.p

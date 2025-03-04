@@ -11,8 +11,8 @@ import {
 } from "../../../utils/constants";
 
 const ItemVariants = {
-  initial: { top: "1.7rem" },
-  animate: (i) => ({ top: "0rem", transition: { duration: 0.5, delay: i * 0.05 } }),
+  initial: { y: "100%" },
+  animate: (i) => ({ y: "0%", transition: { duration: 0.5, delay: i * 0.05 } }),
 };
 
 const AboutMe = () => {
@@ -20,21 +20,22 @@ const AboutMe = () => {
   const isInView = useInView(ref, { once: true, amount: "all" });
 
   return (
-    <section className="container h-auto flex flex-col">
+    <section className="wrapper h-auto flex flex-col">
       <header className="w-full h-auto">
         <motion.h1
           ref={ref}
-          className="w-full h-auto flex flex-col font-oswald-m text-huge text-black leading-small tracking-tighter"
+          className="w-full h-auto flex flex-col font-oswald-m text-huge text-black leading-7 tracking-tighter mobile-sm:text-xl mobile-sm:leading-8"
         >
           {TITLE_TEXT_ARR.map((text, i) => (
-            <p className="relative w-full h-7 overflow-hidden" key={i}>
+            <p className="relative w-full overflow-hidden" key={i}>
+              <span className="invisible">{text}</span>
               <motion.span
                 custom={i}
                 variants={ItemVariants}
                 initial="initial"
                 animate={isInView ? "animate" : "initial"}
                 viewport={{ once: true }}
-                className="absolute top-0 left-0"
+                className="absolute w-full left-0"
                 key={i}
               >
                 {text}
@@ -45,36 +46,36 @@ const AboutMe = () => {
       </header>
       <div className="w-full h-auto mt-10">
         {SUBTITLE_TEXT_ARR.map((text, i) => (
-          <p key={i} className="font-oswald-r text-small text-black leading-tiny">
+          <p key={i} className="font-oswald-r text-base text-black leading-4 mobile-sm:text-lg">
             {text}
           </p>
         ))}
       </div>
       <div className="flex flex-col w-full h-auto mt-8">
-        <p className="font-oswald-l text-tiny text-black">
+        <p className="font-oswald-l text-tiny text-black mobile-sm:text-xs">
           {PARAGRAPH_TEXT1_ARR.map((text, i) => (
             <span key={i}>{text}</span>
           ))}
         </p>
-        <p className="mt-4 font-oswald-l text-tiny text-black">
+        <p className="mt-4 font-oswald-l text-tiny text-black mobile-sm:text-xs">
           {PARAGRAPH_TEXT2_ARR.map((text, i) => (
             <span key={i}>{text}</span>
           ))}
         </p>
-        <p className="mt-4 font-oswald-l text-tiny text-black">
+        <p className="mt-4 font-oswald-l text-tiny text-black mobile-sm:text-xs">
           {PARAGRAPH_TEXT3_ARR.map((text, i) => (
             <span key={i}>{text}</span>
           ))}
         </p>
-        <p className="mt-4 font-oswald-l text-tiny text-black">
+        <p className="mt-4 font-oswald-l text-tiny text-black mobile-sm:text-xs">
           {PARAGRAPH_TEXT4_ARR.map((text, i) => (
             <span key={i}>{text}</span>
           ))}
         </p>
       </div>
-      <div className="w-full h-auto mt-10 leading-tiny">
+      <div className="flex flex-col w-full h-auto mt-10">
         {TECH_STACK.map((text, i) => (
-          <p key={i} className="font-oswald-m text-small text-black">
+          <p key={i} className="font-oswald-m text-base text-black leading-4 mobile-sm:text-lg">
             {text}
           </p>
         ))}

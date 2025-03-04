@@ -26,6 +26,8 @@ body {
 }
 
 @theme {
+  --breakpoint-mobile-sm: 22rem; /* 352px */
+
   --font-oswald-l: "Oswald-light", "sans-serif";
   --font-oswald-r: "Oswald-regular", "sans-serif";
   --font-oswald-m: "Oswald-medium", "sans-serif";
@@ -39,17 +41,15 @@ body {
 
   --text-black: var(--color-black);
   --text-white: var(--color-white);
-  --text-tiny: 0.625rem;
-  --text-small: 1rem;
-  --text-huge: 2rem;
 
-  --leading-xtiny: 0.6rem;
-  --leading-tiny: 1rem;
-  --leading-small: 1.8rem;
+  --text-tiny: 0.625rem;
+  /* --text-small: 1rem; */
+  --text-huge: 2rem;
+  --text-xl: 2.3rem;
 }
 
 @layer components {
-  .container {
+  .wrapper {
     position: relative;
     width: 100vw;
     height: 100vh;
