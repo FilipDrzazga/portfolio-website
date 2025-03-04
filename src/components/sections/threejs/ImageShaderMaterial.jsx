@@ -5,6 +5,7 @@ import { useThree, useFrame } from "@react-three/fiber";
 import { useTexture } from "@react-three/drei";
 import * as THREE from "three";
 import { useScroll, useMotionValueEvent, animate } from "motion/react";
+import { useMediaQuery } from "react-responsive";
 import useResponsiveImages from "../../../hook/useResponsiveImage";
 
 import Vertex from "./shaders/Vertex.glsl?raw";
@@ -12,6 +13,7 @@ import Fragment from "./shaders/Fragment.glsl?raw";
 
 const ImageShaderMaterial = () => {
   const isCanvasLoaded = usePageStore((state) => state.isCanvasLoaded);
+  const isScreen = useMediaQuery({ minWidth: 1280 });
   const { bioImageSrc, contactImageSrc } = useResponsiveImages();
 
   const mesh = useRef(null);
@@ -22,6 +24,7 @@ const ImageShaderMaterial = () => {
 
   const { viewport } = useThree();
   const { scrollY } = useScroll();
+  const planeWidth = isScreen ? window.innerWidth * 0.45 : window.innerWidth;
 
   const textureSettings = useMemo(
     () => ({
@@ -47,7 +50,7 @@ const ImageShaderMaterial = () => {
 
   const uniforms = useMemo(
     () => ({
-      u_resolution: { value: new THREE.Vector2(window.innerWidth, viewport.height) },
+      u_resolution: { value: new THREE.Vector2(planeWidth, viewport.height) },
       u_bioImgTexture: { value: bioImgTexture },
       u_conactImgTexture: { value: contactImgTexture },
       u_bioTextureDimensions: { value: new THREE.Vector2(1, 1) },
@@ -57,7 +60,7 @@ const ImageShaderMaterial = () => {
       u_time: { value: 0 },
       u_progress: { value: 0 },
     }),
-    [bioImgTexture, contactImgTexture, viewport.height]
+    [bioImgTexture, contactImgTexture, planeWidth, viewport.height]
   );
 
   useFrame((state) => {
@@ -100,8 +103,8 @@ const ImageShaderMaterial = () => {
   }, [viewport.height, isCanvasLoaded, bioImgTexture, contactImgTexture, uniforms]);
 
   return (
-    <mesh ref={mesh} position={[0, 0, 0]}>
-      <planeGeometry attach="geometry" args={[window.innerWidth, viewport.height, 1]} />
+    <mesh ref={mesh} position={[isScreen ? (viewport.width - planeWidth) / 2 : 0, 0, 0]}>
+      <planeGeometry attach="geometry" args={[planeWidth, viewport.height, 1]} />
       <shaderMaterial fragmentShader={Fragment} vertexShader={Vertex} uniforms={uniforms} />
     </mesh>
   );

@@ -57,8 +57,6 @@ const useResponsiveImages = () => {
   else if (isScreenLG) contactImageSrc = CONTACT_SCREEN_LG;
   else contactImageSrc = CONTACT_MOBILE_XL;
 
-  console.log(bioImageSrc, contactImageSrc);
-
   return { bioImageSrc, contactImageSrc };
 };
 

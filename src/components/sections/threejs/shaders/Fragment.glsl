@@ -78,19 +78,14 @@ void main() {
     
     // Calculate the current texture aspect based on scroll blend
     float currentTextureAspect = mix(bioTextureAspect, contactTextureAspect, u_scroll);
+    float ratio = screenAspect / currentTextureAspect;
     
     // Create cover scaled UVs that work on all device types
     vec2 uv = vUv;
     
     // Calculate scaling factors to fully cover the screen
     vec2 coverScale;
-    if (screenAspect > currentTextureAspect) {
-        // Screen is wider than texture - scale by width and crop height
-        coverScale = vec2(1.0, screenAspect / currentTextureAspect);
-    } else {
-        // Texture is wider than screen - scale by height and crop width
-        coverScale = vec2(currentTextureAspect / screenAspect, 1.0);
-    }
+    coverScale = (ratio > 1.0) ? vec2(1.0, ratio) : vec2(1.0 / ratio, 1.0);
     
     // Apply the cover scaling centered on the texture
     uv = (uv - 0.5) / coverScale + 0.5;
