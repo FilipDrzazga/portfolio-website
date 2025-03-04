@@ -1,4 +1,4 @@
-import { motion, useScroll,useAnimate, useMotionValueEvent} from "motion/react";
+import { motion, useScroll, useAnimate, useMotionValueEvent } from "motion/react";
 import { NAVIGATION_LINKS, SPECIAL_SIGNS_ARR } from "../../utils/constants";
 
 const ContainerVariants = {
@@ -12,20 +12,19 @@ const ItemVariants = {
 
 const Navbar = () => {
   const [ref, animate] = useAnimate();
-  const {scrollYProgress }= useScroll();
+  const { scrollYProgress } = useScroll();
 
-  useMotionValueEvent(scrollYProgress, 'change', (latestScrollY) => {
-    if(latestScrollY === 1){
-      animate(ref.current, {color: '#d1d1d1',duration: 0.1})
-    }
-    else{
-      animate(ref.current,{color: '#1e1e1e', duration: 0.1})
+  useMotionValueEvent(scrollYProgress, "change", (latestScrollY) => {
+    if (latestScrollY === 1) {
+      animate(ref.current, { color: "#d1d1d1", duration: 0.1 });
+    } else {
+      animate(ref.current, { color: "#1e1e1e", duration: 0.1 });
     }
   });
-  
+
   return (
-    <nav className="fixed top-0 left-0 w-full h-16 navbar-mask-blur px-8 bg-transparent backdrop-blur-sm z-1">
-      <ul ref={ref} className="flex justify-between items-center w-full h-full">
+    <nav className="fixed top-0 left-0 flex justify-center items-center w-full h-25 navbar-mask-blur p-8 pt-0 bg-transparent backdrop-blur-sm z-1">
+      <ul ref={ref} className="flex justify-between items-center w-full h-1/2">
         {NAVIGATION_LINKS.map((text, i) => {
           return (
             <li
@@ -33,7 +32,12 @@ const Navbar = () => {
               data-tab-name={text}
               className="data-[tab-name=LET'S TALK] flex justify-center items-center w-auto h-6 tracking-wide tablet-md:w-28 tablet-md:h-10 lg:w-36 lg:h-12"
             >
-              <motion.a variants={ContainerVariants} initial="initial" animate="animate" className="text-tiny font-oswald-l mobile-md:text-xs md:text-base tablet-md:text-lg lg:text-xl">
+              <motion.a
+                variants={ContainerVariants}
+                initial="initial"
+                animate="animate"
+                className="text-tiny font-oswald-l mobile-md:text-xs tablet-md:text-sm lg:text-lg"
+              >
                 {text.split("").map((letter, j) => {
                   const getRandomSign = SPECIAL_SIGNS_ARR[Math.floor(Math.random() * SPECIAL_SIGNS_ARR.length)];
                   return (

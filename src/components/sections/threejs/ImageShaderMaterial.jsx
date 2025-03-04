@@ -5,13 +5,14 @@ import { useThree, useFrame } from "@react-three/fiber";
 import { useTexture } from "@react-three/drei";
 import * as THREE from "three";
 import { useScroll, useMotionValueEvent, animate } from "motion/react";
+import useResponsiveImages from "../../../hook/useResponsiveImage";
 
 import Vertex from "./shaders/Vertex.glsl?raw";
 import Fragment from "./shaders/Fragment.glsl?raw";
-import { BIO_MOBILE_XL, CONTACT_MOBILE_XL } from "../../../assets/images/images";
 
 const ImageShaderMaterial = () => {
   const isCanvasLoaded = usePageStore((state) => state.isCanvasLoaded);
+  const { bioImageSrc, contactImageSrc } = useResponsiveImages();
 
   const mesh = useRef(null);
   const materialRef = useRef(null);
@@ -22,21 +23,21 @@ const ImageShaderMaterial = () => {
   const { viewport } = useThree();
   const { scrollY } = useScroll();
 
-  const textureSettings = useMemo(() => ({
-    minFilter: THREE.LinearFilter,
-    magFilter: THREE.LinearFilter,
-    generateMipmaps: false
-  }), []);
-
-  const [bioImgTexture, contactImgTexture] = useTexture(
-    [BIO_MOBILE_XL, CONTACT_MOBILE_XL], 
-    (textures) => {
-      textures.forEach(texture => {
-        Object.assign(texture, textureSettings);
-        texture.needsUpdate = true;
-      });
-    }
+  const textureSettings = useMemo(
+    () => ({
+      minFilter: THREE.LinearFilter,
+      magFilter: THREE.LinearFilter,
+      generateMipmaps: false,
+    }),
+    []
   );
+
+  const [bioImgTexture, contactImgTexture] = useTexture([bioImageSrc, contactImageSrc], (textures) => {
+    textures.forEach((texture) => {
+      Object.assign(texture, textureSettings);
+      texture.needsUpdate = true;
+    });
+  });
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     if (!documentScrollHeight.current) return;
@@ -44,17 +45,20 @@ const ImageShaderMaterial = () => {
     normalizedScroll.current = maxScroll > 0 ? latest / maxScroll : 0;
   });
 
-  const uniforms = useMemo(() => ({
-    u_resolution: { value: new THREE.Vector2(window.innerWidth, viewport.height) },
-    u_bioImgTexture: { value: bioImgTexture },
-    u_conactImgTexture: { value: contactImgTexture },
-    u_bioTextureDimensions: { value: new THREE.Vector2(1, 1) },
-    u_contactTextureDimensions: { value: new THREE.Vector2(1, 1) },
-    u_backgroundColor: { value: new THREE.Color("#d1d1d1") },
-    u_scroll: { value: 0 },
-    u_time: { value: 0 },
-    u_progress: { value: 0 },
-  }), [bioImgTexture, contactImgTexture, window.innerWidth, viewport.height]);
+  const uniforms = useMemo(
+    () => ({
+      u_resolution: { value: new THREE.Vector2(window.innerWidth, viewport.height) },
+      u_bioImgTexture: { value: bioImgTexture },
+      u_conactImgTexture: { value: contactImgTexture },
+      u_bioTextureDimensions: { value: new THREE.Vector2(1, 1) },
+      u_contactTextureDimensions: { value: new THREE.Vector2(1, 1) },
+      u_backgroundColor: { value: new THREE.Color("#d1d1d1") },
+      u_scroll: { value: 0 },
+      u_time: { value: 0 },
+      u_progress: { value: 0 },
+    }),
+    [bioImgTexture, contactImgTexture, viewport.height]
+  );
 
   useFrame((state) => {
     if (materialRef.current) {
@@ -67,16 +71,9 @@ const ImageShaderMaterial = () => {
     if (!mesh.current || !isCanvasLoaded || !bioImgTexture?.image || !contactImgTexture?.image) return;
 
     materialRef.current = mesh.current.material;
-    
-    uniforms.u_bioTextureDimensions.value.set(
-      bioImgTexture.image.width, 
-      bioImgTexture.image.height
-    );
-    
-    uniforms.u_contactTextureDimensions.value.set(
-      contactImgTexture.image.width, 
-      contactImgTexture.image.height
-    );
+
+    uniforms.u_bioTextureDimensions.value.set(bioImgTexture.image.width, bioImgTexture.image.height);
+    uniforms.u_contactTextureDimensions.value.set(contactImgTexture.image.width, contactImgTexture.image.height);
 
     const timer = setTimeout(() => {
       documentScrollHeight.current = document.body.scrollHeight;
@@ -89,7 +86,6 @@ const ImageShaderMaterial = () => {
           materialRef.current.uniforms.u_progress.value = latest;
         }
       },
-      
     });
 
     const size = new THREE.Vector3();
@@ -101,17 +97,12 @@ const ImageShaderMaterial = () => {
       clearTimeout(timer);
       animationControls.current?.stop();
     };
-  }, [window.innerWidth, viewport.height, isCanvasLoaded, bioImgTexture, contactImgTexture, uniforms]);
-  
+  }, [viewport.height, isCanvasLoaded, bioImgTexture, contactImgTexture, uniforms]);
 
   return (
     <mesh ref={mesh} position={[0, 0, 0]}>
       <planeGeometry attach="geometry" args={[window.innerWidth, viewport.height, 1]} />
-      <shaderMaterial 
-        fragmentShader={Fragment} 
-        vertexShader={Vertex} 
-        uniforms={uniforms}
-      />
+      <shaderMaterial fragmentShader={Fragment} vertexShader={Vertex} uniforms={uniforms} />
     </mesh>
   );
 };

@@ -48,7 +48,8 @@ body {
 }
 
 @layer base {
-  html, body {
+  html,
+  body {
     @apply overflow-x-hidden w-full;
   }
 }
@@ -75,7 +76,6 @@ body {
     padding-right: 0.75rem;
     background-color: var(--color-black);
     color: var(--color-white);
-    
   }
   .coordinates-after-content::after {
     content: attr(data-content);
@@ -129,7 +129,6 @@ body {
 /* --leading-small: 1.8rem; line-height */
 /* --leading-tiny: 1rem; line-height */
 
-
 /* Mobile */
 /* 320 ok */
 /* 360 ok */
@@ -141,4 +140,3 @@ body {
 /* 768 ok */
 /* 820 ok */
 /* 1024 ok */
-

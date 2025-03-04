@@ -1,54 +1,63 @@
-// useResponsiveImages.js
 import { useMediaQuery } from "react-responsive";
-
-// Import your image files for each breakpoint
-import BIO_MOBILE_SMALL from "../../../assets/images/bio_mobile_small.jpg";
-import BIO_MOBILE_MD from "../../../assets/images/bio_mobile_md.jpg";
-import BIO_MOBILE_LG from "../../../assets/images/bio_mobile_lg.jpg";
-import BIO_TABLET_SM from "../../../assets/images/bio_tablet_sm.jpg";
-import BIO_TABLET_LG from "../../../assets/images/bio_tablet_lg.jpg";
-import BIO_DESKTOP_SM from "../../../assets/images/bio_desktop_sm.jpg";
-import BIO_DESKTOP_LG from "../../../assets/images/bio_desktop_lg.jpg";
-
-import CONTACT_MOBILE_SMALL from "../../../assets/images/contact_mobile_small.jpg";
-import CONTACT_MOBILE_MD from "../../../assets/images/contact_mobile_md.jpg";
-import CONTACT_MOBILE_LG from "../../../assets/images/contact_mobile_lg.jpg";
-import CONTACT_TABLET_SM from "../../../assets/images/contact_tablet_sm.jpg";
-import CONTACT_TABLET_LG from "../../../assets/images/contact_tablet_lg.jpg";
-import CONTACT_DESKTOP_SM from "../../../assets/images/contact_desktop_sm.jpg";
-import CONTACT_DESKTOP_LG from "../../../assets/images/contact_desktop_lg.jpg";
+import {
+  BIO_MOBILE_XS,
+  BIO_MOBILE_M,
+  BIO_MOBILE_LG,
+  BIO_MOBILE_XL,
+  BIO_TABLET_SM,
+  BIO_TABLET_LG,
+  BIO_SCREEN_XS,
+  BIO_SCREEN_M,
+  BIO_SCREEN_LG,
+  CONTACT_MOBILE_XS,
+  CONTACT_MOBILE_M,
+  CONTACT_MOBILE_LG,
+  CONTACT_MOBILE_XL,
+  CONTACT_TABLET_SM,
+  CONTACT_TABLET_LG,
+  CONTACT_SCREEN_XS,
+  CONTACT_SCREEN_M,
+  CONTACT_SCREEN_LG,
+} from "../assets/images/images";
 
 const useResponsiveImages = () => {
-  // Define breakpoints using react-responsive
-  const isMobileSmall = useMediaQuery({ maxWidth: 360 });
-  const isMobileMD = useMediaQuery({ minWidth: 361, maxWidth: 480 });
-  const isMobileLG = useMediaQuery({ minWidth: 481, maxWidth: 640 });
-  const isTabletSM = useMediaQuery({ minWidth: 641, maxWidth: 768 });
-  const isTabletLG = useMediaQuery({ minWidth: 769, maxWidth: 1024 });
-  const isDesktopSM = useMediaQuery({ minWidth: 1025, maxWidth: 1440 });
-  const isDesktopLG = useMediaQuery({ minWidth: 1441 });
+  const isMobileXS = useMediaQuery({ maxWidth: 320 });
+  const isMobileM = useMediaQuery({ minWidth: 359, maxWidth: 375 });
+  const isMobileLG = useMediaQuery({ minWidth: 376, maxWidth: 414 });
+  const isMobileXL = useMediaQuery({ minWidth: 415, maxWidth: 480 });
 
-  // Select the appropriate bio image source
+  const isTabletSM = useMediaQuery({ minWidth: 768, maxWidth: 1023 });
+  const isTabletLG = useMediaQuery({ minWidth: 1024, maxWidth: 1279 });
+
+  const isScreenXS = useMediaQuery({ minWidth: 1280, maxWidth: 1365 });
+  const isScreenM = useMediaQuery({ minWidth: 1366, maxWidth: 1439 });
+  const isScreenLG = useMediaQuery({ minWidth: 1440 });
+
   let bioImageSrc;
-  if (isMobileSmall) bioImageSrc = BIO_MOBILE_SMALL;
-  else if (isMobileMD) bioImageSrc = BIO_MOBILE_MD;
+  if (isMobileXS) bioImageSrc = BIO_MOBILE_XS;
+  else if (isMobileM) bioImageSrc = BIO_MOBILE_M;
   else if (isMobileLG) bioImageSrc = BIO_MOBILE_LG;
+  else if (isMobileXL) bioImageSrc = BIO_MOBILE_XL;
   else if (isTabletSM) bioImageSrc = BIO_TABLET_SM;
   else if (isTabletLG) bioImageSrc = BIO_TABLET_LG;
-  else if (isDesktopSM) bioImageSrc = BIO_DESKTOP_SM;
-  else if (isDesktopLG) bioImageSrc = BIO_DESKTOP_LG;
-  else bioImageSrc = BIO_MOBILE_MD; // fallback
+  else if (isScreenXS) bioImageSrc = BIO_SCREEN_XS;
+  else if (isScreenM) bioImageSrc = BIO_SCREEN_M;
+  else if (isScreenLG) bioImageSrc = BIO_SCREEN_LG;
+  else bioImageSrc = BIO_MOBILE_XL;
 
-  // Select the appropriate contact image source
   let contactImageSrc;
-  if (isMobileSmall) contactImageSrc = CONTACT_MOBILE_SMALL;
-  else if (isMobileMD) contactImageSrc = CONTACT_MOBILE_MD;
+  if (isMobileXS) contactImageSrc = CONTACT_MOBILE_XS;
+  else if (isMobileM) contactImageSrc = CONTACT_MOBILE_M;
   else if (isMobileLG) contactImageSrc = CONTACT_MOBILE_LG;
+  else if (isMobileXL) contactImageSrc = CONTACT_MOBILE_XL;
   else if (isTabletSM) contactImageSrc = CONTACT_TABLET_SM;
   else if (isTabletLG) contactImageSrc = CONTACT_TABLET_LG;
-  else if (isDesktopSM) contactImageSrc = CONTACT_DESKTOP_SM;
-  else if (isDesktopLG) contactImageSrc = CONTACT_DESKTOP_LG;
-  else contactImageSrc = CONTACT_MOBILE_MD; // fallback
+  else if (isScreenXS) contactImageSrc = CONTACT_SCREEN_XS;
+  else if (isScreenM) contactImageSrc = CONTACT_SCREEN_M;
+  else if (isScreenLG) contactImageSrc = CONTACT_SCREEN_LG;
+  else contactImageSrc = CONTACT_MOBILE_XL;
+
+  console.log(bioImageSrc, contactImageSrc);
 
   return { bioImageSrc, contactImageSrc };
 };
