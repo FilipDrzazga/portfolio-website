@@ -28,6 +28,7 @@ body {
 @theme {
   --breakpoint-mobile-sm: 22rem; /* 352px */
   --breakpoint-mobile-md: 25.75rem; /* 412px */
+  --breakpoint-tablet-md: 51rem; /* 820px */
 
   --font-oswald-l: "Oswald-light", "sans-serif";
   --font-oswald-r: "Oswald-regular", "sans-serif";
@@ -44,10 +45,12 @@ body {
   --text-white: var(--color-white);
 
   --text-tiny: 0.625rem;
-  /* --text-small: 1rem; */
-  --text-huge: 2rem;
-  --text-xl: 2.3rem;
-  --text-2xl:2.75rem;
+}
+
+@layer base {
+  html, body {
+    @apply overflow-x-hidden w-full;
+  }
 }
 
 @layer components {
@@ -72,6 +75,7 @@ body {
     padding-right: 0.75rem;
     background-color: var(--color-black);
     color: var(--color-white);
+    
   }
   .coordinates-after-content::after {
     content: attr(data-content);
@@ -134,3 +138,7 @@ body {
 /* 412 ok */
 
 /* Tablet */
+/* 768 ok */
+/* 820 ok */
+/* 1024 ok */
+

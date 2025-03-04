@@ -45,7 +45,7 @@ const ImageShaderMaterial = () => {
   });
 
   const uniforms = useMemo(() => ({
-    u_resolution: { value: new THREE.Vector2(viewport.width, viewport.height) },
+    u_resolution: { value: new THREE.Vector2(window.innerWidth, viewport.height) },
     u_bioImgTexture: { value: bioImgTexture },
     u_conactImgTexture: { value: contactImgTexture },
     u_bioTextureDimensions: { value: new THREE.Vector2(1, 1) },
@@ -54,7 +54,7 @@ const ImageShaderMaterial = () => {
     u_scroll: { value: 0 },
     u_time: { value: 0 },
     u_progress: { value: 0 },
-  }), [bioImgTexture, contactImgTexture, viewport.width, viewport.height]);
+  }), [bioImgTexture, contactImgTexture, window.innerWidth, viewport.height]);
 
   useFrame((state) => {
     if (materialRef.current) {
@@ -89,22 +89,24 @@ const ImageShaderMaterial = () => {
           materialRef.current.uniforms.u_progress.value = latest;
         }
       },
+      
     });
 
     const size = new THREE.Vector3();
     new THREE.Box3().setFromObject(mesh.current).getSize(size);
-    const scale = Math.min(viewport.width / size.x, viewport.height / size.y);
+    const scale = Math.min(window.innerWidth / size.x, viewport.height / size.y);
     mesh.current.scale.set(scale, scale, scale);
 
     return () => {
       clearTimeout(timer);
       animationControls.current?.stop();
     };
-  }, [viewport.width, viewport.height, isCanvasLoaded, bioImgTexture, contactImgTexture, uniforms]);
+  }, [window.innerWidth, viewport.height, isCanvasLoaded, bioImgTexture, contactImgTexture, uniforms]);
+  
 
   return (
     <mesh ref={mesh} position={[0, 0, 0]}>
-      <planeGeometry attach="geometry" args={[viewport.width, viewport.height, 1]} />
+      <planeGeometry attach="geometry" args={[window.innerWidth, viewport.height, 1]} />
       <shaderMaterial 
         fragmentShader={Fragment} 
         vertexShader={Vertex} 

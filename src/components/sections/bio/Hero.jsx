@@ -42,7 +42,7 @@ const Bio = () => {
               return (
                 <motion.span
                   key={j}
-                  className="coordinates-after-content relative font-oswald-r text-tiny text-black inline-block mobile-md:text-xs"
+                  className="coordinates-after-content relative font-oswald-r text-tiny text-black inline-block mobile-md:text-xs md:text-base tablet-md:text-lg lg:text-xl"
                   variants={ItemVariants}
                   data-content={getRandomSign}
                 >
