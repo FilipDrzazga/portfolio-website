@@ -27,7 +27,7 @@ const Navbar = () => {
 
   return (
     <nav className="fixed top-0 left-0 flex justify-center items-center w-full h-25 xl:w-[calc(100vw-45vw)] xl:h-[10vh] navbar-mask-blur p-8 pt-0 bg-transparent backdrop-blur-sm z-1">
-      <ul ref={ref} className="flex justify-between items-center w-full h-1/2">
+      <ul ref={ref} className="flex justify-between items-center w-full h-1/2 laptop:w-3/5">
         {NAVIGATION_LINKS.map((text, i) => {
           return (
             <li

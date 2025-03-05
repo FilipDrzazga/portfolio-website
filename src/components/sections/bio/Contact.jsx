@@ -23,7 +23,7 @@ const Contact = () => {
   const isInViewFooter = useInView(footerRef, { once: true, amount: 0.4 });
 
   return (
-    <section className="wrapper flex flex-col justify-between xl:w-[calc(100vw-45vw)] xl:justify-evenly">
+    <section className="wrapper flex flex-col justify-between xl:w-[calc(100vw-45vw)] xl:justify-center xl:gap-10">
       {/* <div className="absolute top-0 left-0 w-full h-full">
         <picture className="w-full h-full">
           <source srcSet={CONTACT_MOBILE} type="image/webp" media="(max-width: 480px)" />
@@ -32,10 +32,10 @@ const Contact = () => {
           <img className="w-full h-full object-cover" src={CONTACT_MOBILE} alt="A portrait of me" />
         </picture>
       </div> */}
-      <header className="w-full h-auto mt-13 md:mt-16">
+      <header className="w-full h-auto mt-13 md:mt-16 xl:mt-0">
         <motion.h2
           ref={titleRef}
-          className="w-full h-auto flex flex-col font-oswald-m text-3xl text-white leading-7 tracking-tighter mobile-sm:text-4xl mobile-sm:leading-8 mobile-md:text-[2.5rem] mobile-md:leading-9 md:text-6xl md:leading-13 tablet-md:text-7xl tablet-md:leading-16 lg:text-8xl lg:leading-21 xl:flex-row xl:flex-wrap xl:justify-center xl:items-center xl:text-black xl:text-[3.3rem] xl:leading-12"
+          className="w-full h-auto flex flex-col font-oswald-m text-3xl text-white leading-7 tracking-tighter mobile-sm:text-4xl mobile-sm:leading-8 mobile-md:text-[2.5rem] mobile-md:leading-9 md:text-6xl md:leading-13 tablet-md:text-7xl tablet-md:leading-16 lg:text-8xl lg:leading-21 xl:flex-row xl:flex-wrap xl:justify-center xl:items-center xl:text-black xl:text-[3.3rem] xl:leading-12 laptop:flex-row laptop:flex-wrap laptop:justify-center laptop:items-center"
         >
           {CONTACT_TITLE_ARR.map((text, i) => (
             <p className="relative w-full overflow-hidden xl:w-auto xl:mr-1" key={i}>
@@ -60,7 +60,7 @@ const Contact = () => {
           {SOCIAL_LINKS.map((text, i) => (
             <li
               key={i}
-              className="font-oswald-r text-base text-white mobile-sm:text-lg md:text-2xl tablet-md:text-2xl lg:text-3xl xl:font-oswald-r xl:text-2xl xl:text-black"
+              className="font-oswald-r text-base text-white mobile-sm:text-lg md:text-2xl tablet-md:text-2xl lg:text-3xl xl:font-oswald-l xl:text-sm xl:text-black laptop:text-sm"
             >
               {text}
             </li>

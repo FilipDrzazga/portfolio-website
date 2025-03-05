@@ -20,7 +20,7 @@ const Bio = () => {
   const y = useTransform(scrollY, [0, 110], [0, -15]);
 
   return (
-    <section className="wrapper flex flex-col justify-end xl:w-[calc(100vw-45vw)]">
+    <section className="wrapper flex flex-col justify-end xl:w-[calc(100vw-45vw)] laptop:items-center">
       {/* <div className="absolute top-0 left-0 w-full h-full">
         <picture className="w-full h-full">
           <source srcSet={BIO_MOBILE} type="image/webp" media="(max-width: 480px)" />
@@ -35,7 +35,7 @@ const Bio = () => {
           <div className="w-2 h-2 rounded-full bg-green"></div>
         </div>
       )}
-      <div className="relative flex justify-between w-full h-auto">
+      <div className="relative flex justify-between w-full h-auto laptop:w-3/5">
         {COORDINATES_ARR.map((text, i) => (
           <motion.div
             key={i}
@@ -43,7 +43,7 @@ const Bio = () => {
             variants={ContainerVariants}
             initial="initial"
             animate="animate"
-            className="flex"
+            className="flex laptop:justify-center laptop:items-center"
           >
             {text.split("").map((letter, j) => {
               const getRandomSign = SPECIAL_SIGNS_ARR[Math.floor(Math.random() * SPECIAL_SIGNS_ARR.length)];

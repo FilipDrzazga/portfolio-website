@@ -29,6 +29,8 @@ body {
   --breakpoint-mobile-sm: 22rem; /* 352px */
   --breakpoint-mobile-md: 25.75rem; /* 412px */
   --breakpoint-tablet-md: 51rem; /* 820px */
+  --breakpoint-laptop: 90rem; /* 1440px */
+  --breakpoint-desktop: 120rem; /* 1920px */
 
   --font-oswald-l: "Oswald-light", "sans-serif";
   --font-oswald-r: "Oswald-regular", "sans-serif";
