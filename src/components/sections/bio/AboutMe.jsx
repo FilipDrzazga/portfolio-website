@@ -49,17 +49,17 @@ const AboutMe = () => {
           ))}
         </motion.h1>
       </header>
-      <div className="text-justify flex flex-col w-full h-auto mt-10 md:w-4/5 md:mt-14 lg:mt-20 xl:mt-14 laptop:w-full">
+      <div className=" text-justify flex flex-col w-full h-auto mt-8 mobile-md:w-4/5 md:w-2/4 tablet-md:mt-10 tablet-md:w-2/4 xl:mt-6 xl:w-3/5 laptop:w-3/4 laptop:mt-14">
         {SUBTITLE_ARR.map((text, i) => (
           <p
             key={i}
-            className="font-oswald-r text-base text-black leading-4 mobile-sm:text-lg md:text-2xl md:leading-6 tablet-md:text-3xl tablet-md:leading-7 lg:text-4xl lg:leading-9 xl:text-2xl xl:leading-6 laptop:w-3/5"
+            className="font-oswald-r text-base text-black leading-4 mobile-sm:text-lg md:text-2xl md:leading-6 tablet-md:text-3xl tablet-md:leading-7 lg:text-4xl lg:leading-9 xl:text-2xl xl:leading-6"
           >
             {text}
           </p>
         ))}
       </div>
-      <div className=" text-justify flex flex-col w-full h-auto mt-8 mobile-md:w-4/5 md:w-2/4 tablet-md:mt-10 tablet-md:w-2/4 xl:mt-6 xl:w-3/5 laptop:w-1/2">
+      <div className=" text-justify flex flex-col w-full h-auto mt-8 mobile-md:w-4/5 md:w-2/4 tablet-md:mt-10 tablet-md:w-2/4 xl:mt-6 xl:w-3/5 laptop:w-1/2 laptop:mt-8">
         <p className="font-oswald-l text-tiny text-black mobile-sm:text-xs md:text-sm tablet-md:text-sm lg:text-xl xl:text-base laptop:text-sm">
           {PARAGRAPH_TEXT1_ARR.map((text, i) => (
             <span key={i}>{text}</span>
@@ -85,7 +85,7 @@ const AboutMe = () => {
         {TECH_STACK.map((text, i) => (
           <p
             key={i}
-            className="font-oswald-m text-base text-black leading-4 mobile-sm:text-lg md:text-2xl md:leading-6 tablet-md:text-3xl tablet-md:leading-7 lg:text-4xl lg:leading-9 xl:text-2xl xl:leading-6"
+            className="font-oswald-r text-base text-black leading-4 mobile-sm:text-lg md:text-2xl md:leading-6 tablet-md:text-3xl tablet-md:leading-7 lg:text-4xl lg:leading-9 xl:text-2xl xl:leading-6"
           >
             {text}
           </p>
