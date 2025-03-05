@@ -37,9 +37,11 @@ body {
 
   --color-black: #1e1e1e;
   --color-white: #d1d1d1;
+  --color-green: #77DD99;
 
   --bg-black: var(--color-black);
   --bg-white: var(--color-white);
+  --bg-green: var(--color-green);
 
   --text-black: var(--color-black);
   --text-white: var(--color-white);

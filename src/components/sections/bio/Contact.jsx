@@ -23,7 +23,7 @@ const Contact = () => {
   const isInViewFooter = useInView(footerRef, { once: true, amount: 0.4 });
 
   return (
-    <section className="wrapper flex flex-col justify-between">
+    <section className="wrapper flex flex-col justify-between xl:w-[calc(100vw-45vw)] xl:justify-evenly">
       {/* <div className="absolute top-0 left-0 w-full h-full">
         <picture className="w-full h-full">
           <source srcSet={CONTACT_MOBILE} type="image/webp" media="(max-width: 480px)" />
@@ -35,10 +35,10 @@ const Contact = () => {
       <header className="w-full h-auto mt-13 md:mt-16">
         <motion.h2
           ref={titleRef}
-          className="w-full h-auto flex flex-col font-oswald-m text-3xl text-white leading-7 tracking-tighter mobile-sm:text-4xl mobile-sm:leading-8 mobile-md:text-[2.5rem] mobile-md:leading-9 md:text-6xl md:leading-13 tablet-md:text-7xl tablet-md:leading-16 lg:text-8xl lg:leading-21"
+          className="w-full h-auto flex flex-col font-oswald-m text-3xl text-white leading-7 tracking-tighter mobile-sm:text-4xl mobile-sm:leading-8 mobile-md:text-[2.5rem] mobile-md:leading-9 md:text-6xl md:leading-13 tablet-md:text-7xl tablet-md:leading-16 lg:text-8xl lg:leading-21 xl:flex-row xl:flex-wrap xl:justify-center xl:items-center xl:text-black xl:text-[3.3rem] xl:leading-12"
         >
           {CONTACT_TITLE_ARR.map((text, i) => (
-            <p className="relative w-full overflow-hidden" key={i}>
+            <p className="relative w-full overflow-hidden xl:w-auto xl:mr-1" key={i}>
               <span className="invisible">{text}</span>
               <motion.span
                 custom={i}
@@ -55,12 +55,12 @@ const Contact = () => {
           ))}
         </motion.h2>
       </header>
-      <div className="w-full h-auto mb-6 tablet-md:-mt-20">
+      <div className="w-full h-auto mb-6 tablet-md:-mt-20 xl:mt-0">
         <ul className="flex justify-between w-full h-auto md:justify-evenly">
           {SOCIAL_LINKS.map((text, i) => (
             <li
               key={i}
-              className="font-oswald-r text-base text-white mobile-sm:text-lg md:text-2xl tablet-md:text-2xl lg:text-3xl"
+              className="font-oswald-r text-base text-white mobile-sm:text-lg md:text-2xl tablet-md:text-2xl lg:text-3xl xl:font-oswald-r xl:text-2xl xl:text-black"
             >
               {text}
             </li>
@@ -70,7 +70,7 @@ const Contact = () => {
       <motion.footer
         ref={footerRef}
         variants={FooterItemVariants}
-        className="flex flex-col justify-center items-center w-full h-auto mb-4"
+        className="flex flex-col justify-center items-center w-full h-auto mb-4 xl:absolute xl:bottom-3 xl:right-0 xl:mb-0"
       >
         {FOOTER_TEXT1_ARR.map((text, i) => (
           <motion.p
@@ -78,7 +78,7 @@ const Contact = () => {
             variants={FooterVariants}
             initial="initial"
             animate={isInViewFooter ? "animate" : "initial"}
-            className="-mb-1 font-oswald-l text-tiny text-black mobile-md:text-xs lg:text-sm"
+            className="-mb-1 font-oswald-l text-tiny text-black mobile-md:text-xs lg:text-sm xl:text-tiny"
           >
             {text.split("").map((letter, j) => {
               const getRandomSign = SPECIAL_SIGNS_ARR[Math.floor(Math.random() * SPECIAL_SIGNS_ARR.length)];
@@ -101,7 +101,7 @@ const Contact = () => {
             variants={FooterVariants}
             initial="initial"
             animate={isInViewFooter ? "animate" : "initial"}
-            className="font-oswald-l text-tiny text-black mobile-md:text-xs lg:text-sm"
+            className="font-oswald-l text-tiny text-black mobile-md:text-xs lg:text-sm xl:text-tiny"
           >
             {text.split("").map((letter, j) => {
               const getRandomSign = SPECIAL_SIGNS_ARR[Math.floor(Math.random() * SPECIAL_SIGNS_ARR.length)];

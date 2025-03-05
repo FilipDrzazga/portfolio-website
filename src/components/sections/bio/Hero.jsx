@@ -1,4 +1,5 @@
 import { motion, useScroll, useTransform } from "motion/react";
+import { useMediaQuery } from "react-responsive";
 // import { BIO_MOBILE, BIO_TABLET, BIO_DESKTOP } from "../../../assets/images/images";
 import { COORDINATES_ARR, SPECIAL_SIGNS_ARR } from "../../../utils/constants";
 
@@ -14,11 +15,12 @@ const ItemVariants = {
 
 const Bio = () => {
   const { scrollY } = useScroll();
+  const isScreen = useMediaQuery({ minWidth: 1280 });
   const opacity = useTransform(scrollY, [0, 100], [1, 0]);
   const y = useTransform(scrollY, [0, 110], [0, -15]);
 
   return (
-    <section className="wrapper flex flex-col justify-end">
+    <section className="wrapper flex flex-col justify-end xl:w-[calc(100vw-45vw)]">
       {/* <div className="absolute top-0 left-0 w-full h-full">
         <picture className="w-full h-full">
           <source srcSet={BIO_MOBILE} type="image/webp" media="(max-width: 480px)" />
@@ -27,6 +29,12 @@ const Bio = () => {
           <img className="w-full h-full object-cover" src={BIO_MOBILE} alt="A portrait of me" />
         </picture>
       </div> */}
+      {isScreen && (
+        <div className="absolute top-1/2 left-1/2 -translate-x-2/4 -translate-y-2/4 flex flex-col justify-center items-center gap-1">
+          <span className="font-oswald-l text-tiny text-black">OPEN TO NEW OPPORTUNITIES</span>
+          <div className="w-2 h-2 rounded-full bg-green"></div>
+        </div>
+      )}
       <div className="relative flex justify-between w-full h-auto">
         {COORDINATES_ARR.map((text, i) => (
           <motion.div
@@ -42,7 +50,7 @@ const Bio = () => {
               return (
                 <motion.span
                   key={j}
-                  className="coordinates-after-content relative font-oswald-r text-tiny text-black inline-block mobile-md:text-xs tablet-md:text-sm lg:text-lg"
+                  className="coordinates-after-content relative font-oswald-r text-tiny text-black inline-block mobile-md:text-xs tablet-md:text-sm lg:text-lg xl:text-tiny xl:font-oswald-l"
                   variants={ItemVariants}
                   data-content={getRandomSign}
                 >
