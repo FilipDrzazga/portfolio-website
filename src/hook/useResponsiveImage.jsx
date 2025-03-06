@@ -18,7 +18,7 @@ import {
   CONTACT_SCREEN_XS,
   CONTACT_SCREEN_M,
   CONTACT_SCREEN_LG,
-} from "../assets/images/images";
+} from "../../public/images/images";
 
 const useResponsiveImages = () => {
   const isMobileXS = useMediaQuery({ maxWidth: 320 });
