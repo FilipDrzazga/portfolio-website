@@ -13,7 +13,11 @@ import Fragment from "./shaders/Fragment.glsl?raw";
 
 const ImageShaderMaterial = () => {
   const isCanvasLoaded = usePageStore((state) => state.isCanvasLoaded);
-  const isScreen = useMediaQuery({ minWidth: 1280 });
+  const isScreen = useMediaQuery({ minWidth: 1024 });
+  const isCustomRange = useMediaQuery({
+    width: 1024,
+    height: 1366,
+  });
   const { bioImageSrc, contactImageSrc } = useResponsiveImages();
 
   const mesh = useRef(null);
@@ -24,7 +28,7 @@ const ImageShaderMaterial = () => {
 
   const { viewport } = useThree();
   const { scrollY } = useScroll();
-  const planeWidth = isScreen ? window.innerWidth * 0.45 : window.innerWidth;
+  const planeWidth = isScreen && !isCustomRange ? window.innerWidth * 0.45 : window.innerWidth;
 
   const textureSettings = useMemo(
     () => ({
