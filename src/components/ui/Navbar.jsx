@@ -43,7 +43,7 @@ const Navbar = () => {
                 variants={ContainerVariants}
                 initial="initial"
                 animate="animate"
-                className="text-tiny font-oswald-l mobile-md:text-xs tablet-md:text-sm lg:text-xs xl:text-tiny 2xl:text-sm"
+                className="text-tiny font-oswald-l mobile-md:text-xs tablet-md:text-sm lg:text-xs xl:text-tiny 2xl:text-sm screen-lg:text-xs"
               >
                 {text.split("").map((letter, j) => {
                   const getRandomSign = SPECIAL_SIGNS_ARR[Math.floor(Math.random() * SPECIAL_SIGNS_ARR.length)];

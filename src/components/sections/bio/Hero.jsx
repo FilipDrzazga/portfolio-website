@@ -35,7 +35,7 @@ const Bio = () => {
       </div> */}
       {isScreen && !isCustomRange && (
         <div className="absolute top-1/2 left-1/2 -translate-x-2/4 -translate-y-2/4 flex flex-col justify-center items-center gap-1">
-          <span className="font-oswald-l text-tiny text-black lg:text-xs xl:text-tiny 2xl:text-sm">
+          <span className="font-oswald-l text-tiny text-black lg:text-xs xl:text-tiny 2xl:text-sm screen-lg:text-xs">
             OPEN TO NEW OPPORTUNITIES
           </span>
           <div className="w-2 h-2 rounded-full bg-green"></div>
@@ -56,7 +56,7 @@ const Bio = () => {
               return (
                 <motion.span
                   key={j}
-                  className="coordinates-after-content relative font-oswald-r text-tiny text-black inline-block mobile-md:text-xs tablet-md:text-xs lg:font-oswald-l xl:text-tiny 2xl:text-sm"
+                  className="coordinates-after-content relative font-oswald-r text-tiny text-black inline-block mobile-md:text-xs tablet-md:text-xs lg:font-oswald-l xl:text-tiny 2xl:text-sm screen-lg:text-xs"
                   variants={ItemVariants}
                   data-content={getRandomSign}
                 >
