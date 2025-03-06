@@ -18,10 +18,9 @@ const ItemVariants = {
 const AboutMe = () => {
   const ref = useRef();
   const isInView = useInView(ref, { once: true, amount: "all" });
-  console.log(window.innerWidth)
 
   return (
-    <section className="wrapper flex flex-col custom-tablet:w-full lg:w-[calc(100vw-45vw)] lg:pl-[calc((100vw-45vw)-43%)]">
+    <section className="wrapper flex flex-col custom-tablet:w-full lg:w-[calc(100vw-45vw)] lg:pl-[calc((100vw-45vw)-43%)] screen-md:pl-[calc((100vw-45vw)-41%)]">
       <header className="w-full h-auto">
         <motion.h1
           ref={ref}
@@ -55,7 +54,7 @@ const AboutMe = () => {
           </p>
         ))}
       </div>
-      <div className=" text-justify flex flex-col w-full h-auto mt-6 mobile-sm:w-[90%] mobile-md:w-4/5 mobile-lg:mt-8 mobile-lg:w-[90%] md:w-2/4 tablet-md:mt-10 tablet-md:w-2/4 custom-tablet:w-[43%] custom-tablet:mt-10 lg:mt-6 lg:w-[75%] xl:w-[67%] laptop:w-[60%] laptop:mt-8 2xl:w-[50%]">
+      <div className=" text-justify flex flex-col w-full h-auto mt-6 mobile-sm:w-[90%] mobile-md:w-4/5 mobile-lg:mt-8 mobile-lg:w-[90%] md:w-2/4 tablet-md:mt-10 tablet-md:w-2/4 custom-tablet:w-[43%] custom-tablet:mt-10 lg:mt-6 lg:w-[75%] xl:w-[67%] laptop:w-[60%] laptop:mt-8 2xl:w-[60%] screen-sm:w-[55%] screen-md:w-[50%]">
         <p className="font-oswald-l text-tiny text-black mobile-sm:text-xs mobile-lg:text-sm xl:text-sm">
           {PARAGRAPH_TEXT1_ARR.map((text, i) => (
             <span key={i}>{text}</span>

@@ -12,6 +12,7 @@ uniform vec3 u_backgroundColor;
 uniform float u_scroll;
 uniform float u_time;
 uniform float u_progress;
+uniform float u_isScreen;
 
 vec4 mod289(vec4 x) {
   return x - floor(x * (1.0 / 289.0)) * 289.0;
@@ -69,50 +70,53 @@ float cnoise(vec2 P) {
 }
 
 void main() {
-    // Get screen aspect ratio
     float screenAspect = u_resolution.x / u_resolution.y;
-    
-    // Calculate texture aspect ratios from actual dimensions
     float bioTextureAspect = u_bioTextureDimensions.x / u_bioTextureDimensions.y;
     float contactTextureAspect = u_contactTextureDimensions.x / u_contactTextureDimensions.y;
-    
-    // Calculate the current texture aspect based on scroll blend
     float currentTextureAspect = mix(bioTextureAspect, contactTextureAspect, u_scroll);
     float ratio = screenAspect / currentTextureAspect;
+    vec2 coverScale = (ratio > 1.0) ? vec2(1.0, ratio) : vec2(1.0 / ratio, 1.0);
     
-    // Create cover scaled UVs that work on all device types
-    vec2 uv = vUv;
+    vec2 globalUv = (vUv - 0.5) / coverScale + 0.5;
+    vec2 noiseInput = globalUv + u_scroll * 0.1;
     
-    // Calculate scaling factors to fully cover the screen
-    vec2 coverScale;
-    coverScale = (ratio > 1.0) ? vec2(1.0, ratio) : vec2(1.0 / ratio, 1.0);
-    
-    // Apply the cover scaling centered on the texture
-    uv = (uv - 0.5) / coverScale + 0.5;
-    
-    // Cache smoothstep calculations to avoid redundancy
     float s0 = smoothstep(0.0, 0.6, u_scroll);
     float s1 = smoothstep(0.7, 1.0, u_scroll);
     float amplitudeScroll = s0 * (1.0 - s1);
     float amplitude = u_progress * (1.0 - u_progress + amplitudeScroll);
-
-    // Precompute the time factor once
     float t = u_time * 0.15;
-    // Combine noise calculations
-    float baseNoise = abs(cnoise(uv + t) * amplitude + cnoise(uv * 2.0 + t) * amplitude * 5.0);
-    // Add a sharp threshold effect
+    
+    float baseNoise = abs(cnoise(noiseInput + t) * amplitude + cnoise(noiseInput * 2.0 + t) * amplitude * 5.0);
     float n = baseNoise + step(0.4, baseNoise);
-
-    // Distort UV coordinates based on the computed noise
-    vec2 distortedUv = (1.0 - n) * uv;
-
-    // Sample textures and blend them using the scroll value
-    vec4 bioTexture = texture2D(u_bioImgTexture, distortedUv);
-    vec4 contactTexture = texture2D(u_conactImgTexture, distortedUv);
-    vec4 textureMix = mix(bioTexture, contactTexture, u_scroll);
-
-    // Fade in from the background color based on u_progress
-    vec4 finalColor = mix(vec4(u_backgroundColor, 1.0), textureMix, u_progress);
-    gl_FragColor = finalColor;
+    
+    vec3 lighterBackground = clamp(u_backgroundColor + vec3(0.18), 0.0, 1.0);
+    
+    float mode = step(0.5, u_isScreen);
+    
+    vec2 uv_nonScreen = (1.0 - n) * globalUv;
+    vec4 bioTex_nonScreen = texture2D(u_bioImgTexture, uv_nonScreen);
+    vec4 contactTex_nonScreen = texture2D(u_conactImgTexture, uv_nonScreen);
+    vec4 mixTex_nonScreen = mix(bioTex_nonScreen, contactTex_nonScreen, u_scroll);
+    vec4 finalTex_nonScreen = mix(vec4(lighterBackground, 1.0), mixTex_nonScreen, u_progress);
+    finalTex_nonScreen.rgb += n * 0.5;
+    
+    vec2 textureUv_screen = vec2((vUv.x - 0.55) / 0.45, vUv.y);
+    textureUv_screen = (textureUv_screen - 0.5) / coverScale + 0.5;
+    textureUv_screen = ((textureUv_screen - 0.5) * 1.02) + 0.5;
+    vec2 uv_screen = (1.0 - n) * textureUv_screen;
+    vec4 bioTex_screen = texture2D(u_bioImgTexture, uv_screen);
+    vec4 contactTex_screen = texture2D(u_conactImgTexture, uv_screen);
+    vec4 mixTex_screen = mix(bioTex_screen, contactTex_screen, u_scroll);
+    vec4 finalTex_screen = mix(vec4(lighterBackground, 1.0), mixTex_screen, u_progress);
+    finalTex_screen.rgb += n * 0.5;
+    
+    float leftBlend = smoothstep(0.5, 0.8, vUv.x);
+    float rightBlend = 1.0 - smoothstep(0.88, 1.0, vUv.x);
+    float blendFactor = leftBlend * rightBlend;
+    vec3 finalColor_screen = mix(lighterBackground + n * 0.5, finalTex_screen.rgb, blendFactor);
+    
+    vec3 finalColor_nonScreen = finalTex_nonScreen.rgb;
+    
+    vec3 finalColor = mix(finalColor_nonScreen, finalColor_screen, mode);
+    gl_FragColor = vec4(finalColor, 1.0);
 }
-

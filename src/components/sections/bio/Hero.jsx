@@ -17,9 +17,9 @@ const Bio = () => {
   const { scrollY } = useScroll();
   const isScreen = useMediaQuery({ minWidth: 1024 });
   const isCustomRange = useMediaQuery({
-      width: 1024,
-      height: 1366,
-    });
+    width: 1024,
+    height: 1366,
+  });
   const opacity = useTransform(scrollY, [0, 100], [1, 0]);
   const y = useTransform(scrollY, [0, 110], [0, -15]);
 
@@ -35,7 +35,9 @@ const Bio = () => {
       </div> */}
       {isScreen && !isCustomRange && (
         <div className="absolute top-1/2 left-1/2 -translate-x-2/4 -translate-y-2/4 flex flex-col justify-center items-center gap-1">
-          <span className="font-oswald-l text-tiny text-black lg:text-xs xl:text-tiny">OPEN TO NEW OPPORTUNITIES</span>
+          <span className="font-oswald-l text-tiny text-black lg:text-xs xl:text-tiny 2xl:text-sm">
+            OPEN TO NEW OPPORTUNITIES
+          </span>
           <div className="w-2 h-2 rounded-full bg-green"></div>
         </div>
       )}
@@ -54,7 +56,7 @@ const Bio = () => {
               return (
                 <motion.span
                   key={j}
-                  className="coordinates-after-content relative font-oswald-r text-tiny text-black inline-block mobile-md:text-xs tablet-md:text-xs lg:font-oswald-l xl:text-tiny"
+                  className="coordinates-after-content relative font-oswald-r text-tiny text-black inline-block mobile-md:text-xs tablet-md:text-xs lg:font-oswald-l xl:text-tiny 2xl:text-sm"
                   variants={ItemVariants}
                   data-content={getRandomSign}
                 >

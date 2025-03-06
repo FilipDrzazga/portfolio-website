@@ -15,13 +15,13 @@ const Navbar = () => {
   const [ref, animate] = useAnimate();
   const { scrollYProgress } = useScroll();
   const isScreen = useMediaQuery({ minWidth: 1024 });
-    const isCustomRange = useMediaQuery({
-      width: 1024,
-      height: 1366,
-    });
+  const isCustomRange = useMediaQuery({
+    width: 1024,
+    height: 1366,
+  });
 
   useMotionValueEvent(scrollYProgress, "change", (latestScrollY) => {
-    if(isScreen && !isCustomRange) return;
+    if (isScreen && !isCustomRange) return;
     if (latestScrollY === 1) {
       animate(ref.current, { color: "#d1d1d1", duration: 0.1 });
     } else {
@@ -37,13 +37,13 @@ const Navbar = () => {
             <li
               key={i}
               data-tab-name={text}
-              className="data-[tab-name=LET'S TALK] flex justify-center items-center w-auto h-6 tracking-wide tablet-md:w-28 tablet-md:h-10 lg:w-auto lg:h-5 xl:h-6"
+              className="data-[tab-name=LET'S TALK] flex justify-center items-center w-auto h-6 tracking-wide cursor-pointer tablet-md:w-28 tablet-md:h-10 lg:w-auto lg:h-5 xl:h-6"
             >
               <motion.a
                 variants={ContainerVariants}
                 initial="initial"
                 animate="animate"
-                className="text-tiny font-oswald-l mobile-md:text-xs tablet-md:text-sm lg:text-xs xl:text-tiny"
+                className="text-tiny font-oswald-l mobile-md:text-xs tablet-md:text-sm lg:text-xs xl:text-tiny 2xl:text-sm"
               >
                 {text.split("").map((letter, j) => {
                   const getRandomSign = SPECIAL_SIGNS_ARR[Math.floor(Math.random() * SPECIAL_SIGNS_ARR.length)];

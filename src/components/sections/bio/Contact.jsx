@@ -35,7 +35,7 @@ const Contact = () => {
       <header className="w-full h-auto mt-13 md:mt-16 custom-tablet:-mt-20 lg:mt-0 2xl:w-[90%] 2xl:mx-auto">
         <motion.h2
           ref={titleRef}
-          className="w-full h-auto flex flex-col font-oswald-m text-[2rem] text-white  tracking-tighter mobile-sm:text-4xl mobile-sm:leading-8 mobile-sm-plus:text-[2.5rem] mobile-sm-plus:leading-9 mobile-md:text-[2.7rem] mobile-md:leading-9 mobile-lg:text-[2.8rem] mobile-lg:leading-10 md:text-6xl md:leading-13 tablet-md:text-7xl tablet-md:leading-16 custom-tablet:flex-col custom-tablet:justify-start custom-tablet:items-start custom-tablet:text-8xl custom-tablet:leading-22 custom-tablet:text-white leading-7 lg:text-black lg:text-[2.5rem] lg:leading-11 lg:flex-row lg:flex-wrap lg:justify-center lg:items-center xl:text-[3.3rem] xl:leading-12"
+          className="w-full h-auto flex flex-col font-oswald-m text-[2rem] text-white  tracking-tighter mobile-sm:text-4xl mobile-sm:leading-8 mobile-sm-plus:text-[2.5rem] mobile-sm-plus:leading-9 mobile-md:text-[2.7rem] mobile-md:leading-10 mobile-lg:text-[2.8rem] mobile-lg:leading-10 md:text-6xl md:leading-13 tablet-md:text-7xl tablet-md:leading-16 custom-tablet:flex-col custom-tablet:justify-start custom-tablet:items-start custom-tablet:text-8xl custom-tablet:leading-22 custom-tablet:text-white leading-7 lg:text-black lg:text-[2.5rem] lg:leading-11 lg:flex-row lg:flex-wrap lg:justify-center lg:items-center xl:text-[3.3rem] xl:leading-12"
         >
           {CONTACT_TITLE_ARR.map((text, i) => (
             <p className="relative w-full overflow-hidden lg:w-auto lg:mr-1" key={i}>
@@ -55,12 +55,12 @@ const Contact = () => {
           ))}
         </motion.h2>
       </header>
-      <div className="w-full h-auto mb-6 tablet-md:-mt-20 custom-tablet:-mt-40  lg:mt-0">
+      <div className="w-full h-auto mb-6 tablet-md:-mt-20 custom-tablet:-mt-40 lg:mt-0">
         <ul className="flex justify-between w-full h-auto md:justify-evenly">
           {SOCIAL_LINKS.map((text, i) => (
             <li
               key={i}
-              className="font-oswald-r text-base text-white mobile-sm:text-lg md:text-2xl custom-tablet:font-oswald-r custom-tablet:text-white custom-tablet:text-3xl lg:font-oswald-l lg:text-black lg:text-base xl:text-sm laptop:text-sm"
+              className="font-oswald-r text-base text-white cursor-pointer mobile-sm:text-lg md:text-2xl custom-tablet:font-oswald-r custom-tablet:text-white custom-tablet:text-3xl lg:font-oswald-l lg:text-black lg:text-base xl:text-sm laptop:text-sm"
             >
               {text}
             </li>

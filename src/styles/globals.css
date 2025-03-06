@@ -31,13 +31,13 @@ body {
   --breakpoint-mobile-sm: 22rem; /* 352px */
   --breakpoint-mobile-sm-plus: 24.375rem; /* 390px */
   --breakpoint-mobile-md: 25.75rem; /* 412px */
-  --breakpoint-mobile-lg: 26.875rem;  /* 430px */
+  --breakpoint-mobile-lg: 26.875rem; /* 430px */
   --breakpoint-tablet-md: 51rem; /* 820px */
   --breakpoint-laptop: 90rem; /* 1440px */
   --breakpoint-screen-sm: 100.625rem; /* 1610px */
   --breakpoint-screen-md: 113.125rem; /* 1810px */
-  --breakpoint-desktop: 120rem; /* 1920px */
-/*  md	48rem (768px)  @media (width >= 48rem) { ... }
+  --breakpoint-screen-lg: 120rem; /* 1920px */
+  /*  md	48rem (768px)  @media (width >= 48rem) { ... }
     lg	64rem (1024px)	@media (width >= 64rem) { ... }
     xl	80rem (1280px)	@media (width >= 80rem) { ... }
     2xl	96rem (1536px)	@media (width >= 96rem) { ... } */
@@ -49,7 +49,7 @@ body {
 
   --color-black: #1e1e1e;
   --color-white: #d1d1d1;
-  --color-green: #77DD99;
+  --color-green: #77dd99;
 
   --bg-black: var(--color-black);
   --bg-white: var(--color-white);
@@ -77,8 +77,8 @@ body {
     background-color: transparent;
   }
   .navbar-mask-blur {
-    mask-image: linear-gradient(to bottom, black 55%, transparent 100%);
-    -webkit-mask-image: linear-gradient(to bottom, black 55%, transparent 100%);
+    mask-image: linear-gradient(to bottom, var(--color-black) 65%, rgba(0, 0, 0, 0.1) 100%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, var(--color-black) 65%, rgba(0, 0, 0, 0.1) 100%, transparent 100%);
   }
   [data-tab-name="LET'S TALK"] {
     display: flex;

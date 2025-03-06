@@ -63,8 +63,9 @@ const ImageShaderMaterial = () => {
       u_scroll: { value: 0 },
       u_time: { value: 0 },
       u_progress: { value: 0 },
+      u_isScreen: { value: isScreen ? 1 : 0 },
     }),
-    [bioImgTexture, contactImgTexture, planeWidth, viewport.height]
+    [bioImgTexture, contactImgTexture, planeWidth, viewport.height, isScreen]
   );
 
   useFrame((state) => {
@@ -107,8 +108,8 @@ const ImageShaderMaterial = () => {
   }, [viewport.height, isCanvasLoaded, bioImgTexture, contactImgTexture, uniforms]);
 
   return (
-    <mesh ref={mesh} position={[isScreen ? (viewport.width - planeWidth) / 2 : 0, 0, 0]}>
-      <planeGeometry attach="geometry" args={[planeWidth, viewport.height, 1]} />
+    <mesh ref={mesh} position={[0, 0, 0, 0]}>
+      <planeGeometry attach="geometry" args={[viewport.width, viewport.height, 1]} />
       <shaderMaterial fragmentShader={Fragment} vertexShader={Vertex} uniforms={uniforms} />
     </mesh>
   );
