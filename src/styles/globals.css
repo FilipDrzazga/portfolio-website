@@ -23,6 +23,7 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
 }
 
 @custom-variant custom-tablet (@media (width: 1024px) and (height: 1366px));
