@@ -1,12 +1,12 @@
 /* eslint-disable react/no-unknown-property */
 import { useEffect, useRef, useMemo } from "react";
 import { usePageStore } from "../../../store/useStore";
-import { useThree, useFrame } from "@react-three/fiber";
-import { useTexture } from "@react-three/drei";
+import { useFrame } from "@react-three/fiber";
+import { useKTX2 } from "@react-three/drei";
 import * as THREE from "three";
 import { useScroll, useMotionValueEvent, animate } from "motion/react";
 import { useMediaQuery } from "react-responsive";
-import useResponsiveImages from "../../../hook/useResponsiveImage";
+import useResponsiveImages from "../../../hook/useResponsiveKtx2";
 
 import Vertex from "./shaders/Vertex.glsl?raw";
 import Fragment from "./shaders/Fragment.glsl?raw";
@@ -29,21 +29,22 @@ const ImageShaderMaterial = () => {
   const { scrollY } = useScroll();
   const planeWidth = isScreen && !isCustomRange ? window.innerWidth * 0.45 : window.innerWidth;
 
-  const textureSettings = useMemo(
-    () => ({
-      minFilter: THREE.LinearFilter,
-      magFilter: THREE.LinearFilter,
-      generateMipmaps: false,
-    }),
-    []
-  );
+  // const textureSettings = useMemo(
+  //   () => ({
+  //     minFilter: THREE.LinearFilter,
+  //     magFilter: THREE.LinearFilter,
+  //     generateMipmaps: false,
+  //   }),
+  //   []
+  // );
 
-  const [bioImgTexture, contactImgTexture] = useTexture([bioImageSrc, contactImageSrc], (textures) => {
-    textures.forEach((texture) => {
-      Object.assign(texture, textureSettings);
-      texture.needsUpdate = true;
-    });
-  });
+  const [bioImgTexture, contactImgTexture] = useKTX2([bioImageSrc, contactImageSrc], { transcoderPath: "/basis/" });
+  // const [bioImgTexture, contactImgTexture] = useTexture([bioImageSrc, contactImageSrc], (textures) => {
+  //   textures.forEach((texture) => {
+  //     Object.assign(texture, textureSettings);
+  //     texture.needsUpdate = true;
+  //   });
+  // });
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     if (!documentScrollHeight.current) return;
@@ -54,10 +55,7 @@ const ImageShaderMaterial = () => {
   const uniforms = useMemo(
     () => ({
       u_resolution: {
-        value: new THREE.Vector2(
-          planeWidth * window.devicePixelRatio,
-          window.innerHeight * window.devicePixelRatio
-        )
+        value: new THREE.Vector2(planeWidth * window.devicePixelRatio, window.innerHeight * window.devicePixelRatio),
       },
       u_bioImgTexture: { value: bioImgTexture },
       u_conactImgTexture: { value: contactImgTexture },
