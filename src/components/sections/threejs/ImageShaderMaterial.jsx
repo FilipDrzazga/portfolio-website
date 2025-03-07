@@ -26,7 +26,6 @@ const ImageShaderMaterial = () => {
   const normalizedScroll = useRef(0);
   const animationControls = useRef(null);
 
-  const { viewport } = useThree();
   const { scrollY } = useScroll();
   const planeWidth = isScreen && !isCustomRange ? window.innerWidth * 0.45 : window.innerWidth;
 
@@ -48,13 +47,18 @@ const ImageShaderMaterial = () => {
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     if (!documentScrollHeight.current) return;
-    const maxScroll = documentScrollHeight.current - viewport.height;
+    const maxScroll = documentScrollHeight.current - window.innerHeight;
     normalizedScroll.current = maxScroll > 0 ? latest / maxScroll : 0;
   });
 
   const uniforms = useMemo(
     () => ({
-      u_resolution: { value: new THREE.Vector2(planeWidth, viewport.height) },
+      u_resolution: {
+        value: new THREE.Vector2(
+          planeWidth * window.devicePixelRatio,
+          window.innerHeight * window.devicePixelRatio
+        )
+      },
       u_bioImgTexture: { value: bioImgTexture },
       u_conactImgTexture: { value: contactImgTexture },
       u_bioTextureDimensions: { value: new THREE.Vector2(1, 1) },
@@ -63,9 +67,9 @@ const ImageShaderMaterial = () => {
       u_scroll: { value: 0 },
       u_time: { value: 0 },
       u_progress: { value: 0 },
-      u_isScreen: { value: isScreen ? 1 : 0 },
+      u_isScreen: { value: isScreen && !isCustomRange ? 1 : 0 },
     }),
-    [bioImgTexture, contactImgTexture, planeWidth, viewport.height, isScreen]
+    [bioImgTexture, contactImgTexture, isScreen, isCustomRange, planeWidth]
   );
 
   useFrame((state) => {
@@ -82,6 +86,7 @@ const ImageShaderMaterial = () => {
 
     uniforms.u_bioTextureDimensions.value.set(bioImgTexture.image.width, bioImgTexture.image.height);
     uniforms.u_contactTextureDimensions.value.set(contactImgTexture.image.width, contactImgTexture.image.height);
+    uniforms.u_resolution.value.set(window.innerWidth * window.devicePixelRatio, window.innerHeight * window.devicePixelRatio);
 
     const timer = setTimeout(() => {
       documentScrollHeight.current = document.body.scrollHeight;
@@ -98,18 +103,18 @@ const ImageShaderMaterial = () => {
 
     const size = new THREE.Vector3();
     new THREE.Box3().setFromObject(mesh.current).getSize(size);
-    const scale = Math.min(window.innerWidth / size.x, viewport.height / size.y);
+    const scale = Math.min(window.innerWidth / size.x, window.innerHeight / size.y);
     mesh.current.scale.set(scale, scale, scale);
 
     return () => {
       clearTimeout(timer);
       animationControls.current?.stop();
     };
-  }, [viewport.height, isCanvasLoaded, bioImgTexture, contactImgTexture, uniforms]);
+  }, [isCanvasLoaded, bioImgTexture, contactImgTexture, uniforms]);
 
   return (
     <mesh ref={mesh} position={[0, 0, 0, 0]}>
-      <planeGeometry attach="geometry" args={[viewport.width, viewport.height, 1]} />
+      <planeGeometry attach="geometry" args={[window.innerWidth, window.innerHeight, 1]} />
       <shaderMaterial fragmentShader={Fragment} vertexShader={Vertex} uniforms={uniforms} />
     </mesh>
   );
