@@ -70,7 +70,9 @@ float cnoise(vec2 P) {
 }
 
 void main() {
-    float screenAspect = u_resolution.x / u_resolution.y;
+
+
+   float screenAspect = u_resolution.x / u_resolution.y;
     float bioTextureAspect = u_bioTextureDimensions.x / u_bioTextureDimensions.y;
     float contactTextureAspect = u_contactTextureDimensions.x / u_contactTextureDimensions.y;
     float currentTextureAspect = mix(bioTextureAspect, contactTextureAspect, u_scroll);
@@ -78,16 +80,18 @@ void main() {
     vec2 coverScale = (ratio > 1.0) ? vec2(1.0, ratio) : vec2(1.0 / ratio, 1.0);
     
     vec2 globalUv = (vUv - 0.5) / coverScale + 0.5;
-    vec2 noiseInput = globalUv + u_scroll * 0.1;
+
+
+    vec2 noiseInput = globalUv + u_scroll * 0.5;
     
     float s0 = smoothstep(0.0, 0.6, u_scroll);
     float s1 = smoothstep(0.7, 1.0, u_scroll);
     float amplitudeScroll = s0 * (1.0 - s1);
     float amplitude = u_progress * (1.0 - u_progress + amplitudeScroll);
-    float t = u_time * 0.15;
+    float t = u_time * 0.1;
     
     float baseNoise = abs(cnoise(noiseInput + t) * amplitude + cnoise(noiseInput * 2.0 + t) * amplitude * 5.0);
-    float n = baseNoise + step(0.4, baseNoise);
+    float n = baseNoise;
     
     vec3 lighterBackground = clamp(u_backgroundColor + vec3(0.18), 0.0, 1.0);
     
@@ -98,7 +102,7 @@ void main() {
     vec4 contactTex_nonScreen = texture2D(u_conactImgTexture, uv_nonScreen);
     vec4 mixTex_nonScreen = mix(bioTex_nonScreen, contactTex_nonScreen, u_scroll);
     vec4 finalTex_nonScreen = mix(vec4(lighterBackground, 1.0), mixTex_nonScreen, u_progress);
-    finalTex_nonScreen.rgb += n * 0.5;
+    finalTex_nonScreen.rgb += n;
     
     vec2 textureUv_screen = vec2((vUv.x - 0.55) / 0.45, vUv.y);
     textureUv_screen = (textureUv_screen - 0.5) / coverScale + 0.5;
@@ -120,3 +124,22 @@ void main() {
     vec3 finalColor = mix(finalColor_nonScreen, finalColor_screen, mode);
     gl_FragColor = vec4(finalColor, 1.0);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
