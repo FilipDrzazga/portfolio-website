@@ -53,7 +53,7 @@ const Bio = () => {
                 <motion.span
                 variants={ItemVariants}
                 key={j}
-                className="relative coordinates-after-content font-oswald-l text-tiny text-black lg:text-xs xl:text-tiny 2xl:text-sm screen-lg:text-xs"
+                className="relative availability-after-content font-oswald-l text-tiny text-black lg:text-xs xl:text-tiny 2xl:text-sm screen-lg:text-xs"
                 data-content={getRandomSign}
                 >{letter}</motion.span>
               )
