@@ -1,10 +1,12 @@
 import { BrowserRouter, Routes, Route } from "react-router";
+import Navbar from "./components/ui/Navbar";
 import BioPage from "./pages/BioPage";
 import PlaygroundPage from "./pages/PlaygroundPage";
 
 const App = () => {
   return (
     <BrowserRouter basename="/portfolio-website">
+      <Navbar />
       <Routes>
         <Route path="/" element={<BioPage />} />
         <Route path="/bio" element={<BioPage />} />

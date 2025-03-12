@@ -1,5 +1,4 @@
 import { usePageStore } from "../store/useStore";
-import Navbar from "../components/ui/Navbar";
 import Bio from "../components/sections/bio/Hero";
 import AboutMe from "../components/sections/bio/AboutMe";
 import Contact from "../components/sections/bio/Contact";
@@ -12,7 +11,6 @@ const BioPage = () => {
       <SceneCanvas />
       {isCanvasLoaded && (
         <>
-          <Navbar />
           <Bio />
           <AboutMe />
           <Contact />
