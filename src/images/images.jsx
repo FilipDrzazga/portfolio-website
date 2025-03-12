@@ -1,4 +1,4 @@
-import BIO_MOBILE_XS from "./bio_mobile_img_xs.webp";
+import BIO_MOBILE_XS_REDUCE from "./bio_mobile_img_xs_reduce.webp";
 import BIO_MOBILE_M from "./bio_mobile_img_m.webp";
 import BIO_MOBILE_LG from "./bio_mobile_img_lg.webp";
 import BIO_MOBILE_XL from "./bio_mobile_img_xl.webp";
@@ -19,7 +19,7 @@ import CONTACT_SCREEN_M from "./contact_screen_img_m.webp";
 import CONTACT_SCREEN_LG from "./contact_screen_img_lg.webp";
 
 export {
-  BIO_MOBILE_XS,
+  BIO_MOBILE_XS_REDUCE,
   BIO_MOBILE_M,
   BIO_MOBILE_LG,
   BIO_MOBILE_XL,

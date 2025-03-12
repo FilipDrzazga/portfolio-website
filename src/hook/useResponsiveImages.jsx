@@ -1,5 +1,5 @@
 import {
-  BIO_MOBILE_XS,
+  BIO_MOBILE_XS_REDUCE,
   BIO_MOBILE_M,
   BIO_MOBILE_LG,
   BIO_MOBILE_XL,
@@ -35,7 +35,7 @@ const useResponsiveImages = () => {
   const isScreenLG = useMediaQuery({ minWidth: 1440 });
 
   let bioImageSrc;
-  if (isMobileXS) bioImageSrc = BIO_MOBILE_XS;
+  if (isMobileXS) bioImageSrc = BIO_MOBILE_XS_REDUCE;
   else if (isMobileM) bioImageSrc = BIO_MOBILE_M;
   else if (isMobileLG) bioImageSrc = BIO_MOBILE_LG;
   else if (isMobileXL) bioImageSrc = BIO_MOBILE_XL;
