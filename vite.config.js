@@ -7,6 +7,6 @@ export default defineConfig({
   server: {
     host: true,
   },
-  base: "/portfolio-website/",
+  base: "/portfolio-website/bio",
   plugins: [react(), tailwindcss()],
 });

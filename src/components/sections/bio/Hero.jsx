@@ -1,7 +1,6 @@
 import { motion, useScroll, useTransform } from "motion/react";
 import { useMediaQuery } from "react-responsive";
-// import { BIO_MOBILE, BIO_TABLET, BIO_DESKTOP } from "../../../assets/images/images";
-import { COORDINATES_ARR, SPECIAL_SIGNS_ARR } from "../../../utils/constants";
+import { AVAILABILITY_TEXT, COORDINATES_ARR, SPECIAL_SIGNS_ARR } from "../../../utils/constants";
 
 const ContainerVariants = {
   initial: { opacity: 0 },
@@ -11,6 +10,25 @@ const ContainerVariants = {
 const ItemVariants = {
   initial: { opacity: 0, "--after-opacity": 1 },
   animate: { opacity: 1, "--after-opacity": 0 },
+};
+
+const CircleVariants = {
+  initial: {
+    scale: 0,
+  },
+  animate: {
+    scale: 1,
+    transition: { duration: 1, type: "spring", stiffness: 100, damping: 5, repeat: Infinity, repeatType: "reverse" },
+  }
+};
+
+const CircleBorderVariants = {
+  initial: { scale: 0, opacity: 0 },
+  animate: {
+    scale: 1,
+    opacity: [0, 1, 0],
+    transition: { duration: 1, repeat: Infinity, repeatDelay: 3.5 },
+  }
 };
 
 const Bio = () => {
@@ -25,20 +43,27 @@ const Bio = () => {
 
   return (
     <section className="wrapper flex flex-col justify-end custom-tablet:w-full lg:w-[calc(100vw-45vw)] laptop:items-center">
-      {/* <div className="absolute top-0 left-0 w-full h-full">
-        <picture className="w-full h-full">
-          <source srcSet={BIO_MOBILE} type="image/webp" media="(max-width: 480px)" />
-          <source srcSet={BIO_TABLET} type="image/webp" media="(min-width: 768px)" />
-          <source srcSet={BIO_DESKTOP} type="image/webp" media="(min-width: 1200px)" />
-          <img className="w-full h-full object-cover" src={BIO_MOBILE} alt="A portrait of me" />
-        </picture>
-      </div> */}
       {isScreen && !isCustomRange && (
         <div className="absolute top-1/2 left-1/2 -translate-x-2/4 -translate-y-2/4 flex flex-col justify-center items-center gap-1">
-          <span className="font-oswald-l text-tiny text-black lg:text-xs xl:text-tiny 2xl:text-sm screen-lg:text-xs">
-            OPEN TO NEW OPPORTUNITIES
-          </span>
-          <div className="w-2 h-2 rounded-full bg-green"></div>
+          <div className="flex justify-center items-center gap-0.5"> 
+          {AVAILABILITY_TEXT.map((text,i)=>(
+            <motion.div className="flex justify-center items-center" variants={ContainerVariants} initial='initial' animate='animate' key={i}>{text.split('').map((letter,j)=>{
+              const getRandomSign = SPECIAL_SIGNS_ARR[Math.floor(Math.random() * SPECIAL_SIGNS_ARR.length)];
+              return (
+                <motion.span
+                variants={ItemVariants}
+                key={j}
+                className="relative coordinates-after-content font-oswald-l text-tiny text-black lg:text-xs xl:text-tiny 2xl:text-sm screen-lg:text-xs"
+                data-content={getRandomSign}
+                >{letter}</motion.span>
+              )
+            })}</motion.div>
+          ))}
+          </div>
+          <div className="relative flex justify-center items-center w-4 h-4">
+            <motion.div variants={CircleVariants} initial='initial' animate='animate' className="w-2 h-2 rounded-full bg-green"></motion.div>
+            <motion.div variants={CircleBorderVariants} initial='initial' animate='animate' className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full w-5 h-5 border border-green bg-transparent"></motion.div>
+          </div>
         </div>
       )}
       <div className="relative flex justify-between w-full h-auto laptop:w-3/5">

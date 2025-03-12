@@ -1,4 +1,4 @@
-import { Link, Outlet } from "react-router";
+import { Link } from "react-router";
 import { motion, useScroll, useAnimate, useMotionValueEvent } from "motion/react";
 import { useMediaQuery } from "react-responsive";
 import { NAVIGATION_LINKS, SPECIAL_SIGNS_ARR } from "../../utils/constants";
@@ -12,7 +12,7 @@ const ItemVariants = {
   animate: { opacity: 1, "--after-opacity": 0 },
 };
 
-const Layout = () => {
+const Navbar = () => {
   const [ref, animate] = useAnimate();
   const { scrollYProgress } = useScroll();
   const isScreen = useMediaQuery({ minWidth: 1024 });
@@ -31,7 +31,6 @@ const Layout = () => {
   });
 
   return (
-    <>
       <nav className="fixed top-0 left-0 flex justify-center items-center w-full h-25 custom-tablet:w-full lg:w-[calc(100vw-45vw)] lg:h-[10vh] lg:p-8 2xl:w-[calc(100vw-46vw)] navbar-mask-blur p-8 pt-0 bg-transparent backdrop-blur-sm z-1">
         <ul ref={ref} className="flex justify-between items-center w-full h-1/2 laptop:w-3/5">
           {NAVIGATION_LINKS.map((text, i) => {
@@ -46,17 +45,8 @@ const Layout = () => {
                   variants={ContainerVariants}
                   initial="initial"
                   animate="animate"
-                  className="text-tiny font-oswald-l mobile-md:text-xs tablet-md:text-sm lg:text-xs xl:text-tiny 2xl:text-sm screen-lg:text-xs"
                 >
-                  <Link to={`/portfolio-website/${text.toLowerCase()}`}>{text}</Link>
-                </motion.div>
-                {/* <motion.a
-                variants={ContainerVariants}
-                initial="initial"
-                animate="animate"
-                className="text-tiny font-oswald-l mobile-md:text-xs tablet-md:text-sm lg:text-xs xl:text-tiny 2xl:text-sm screen-lg:text-xs"
-              >
-                {text.split("").map((letter, j) => {
+                  <Link className="text-tiny font-oswald-l mobile-md:text-xs tablet-md:text-sm lg:text-xs xl:text-tiny 2xl:text-sm screen-lg:text-xs" to={`/${text.toLowerCase()}`}>{text.split("").map((letter, j) => {
                   const getRandomSign = SPECIAL_SIGNS_ARR[Math.floor(Math.random() * SPECIAL_SIGNS_ARR.length)];
                   return (
                     <motion.span
@@ -68,16 +58,14 @@ const Layout = () => {
                       {letter}
                     </motion.span>
                   );
-                })}
-              </motion.a> */}
+                })}</Link>
+                </motion.div>
               </motion.li>
             );
           })}
         </ul>
       </nav>
-      <Outlet />
-    </>
   );
 };
 
-export default Layout;
+export default Navbar;

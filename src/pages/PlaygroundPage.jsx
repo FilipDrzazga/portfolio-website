@@ -1,10 +1,13 @@
 import * as THREE from "three";
+import Navbar from "../components/ui/Navbar";
 
 const PlaygroundPage = () => {
   const renderer = new THREE.WebGLRenderer();
   const caps = renderer.capabilities;
   console.log(caps);
   return (
+    <>
+    <Navbar />
     <div className="w-full h-full flex flex-col items-center justify-center mt-50">
       <h3 className="text-black">WebGL Capabilities</h3>
       <ul className="w-full">
@@ -19,6 +22,7 @@ const PlaygroundPage = () => {
         <li className="text-black text-xs">textureTypeReadable: {caps.textureTypeReadable()}</li>
       </ul>
     </div>
+    </>
   );
 };
 

@@ -28,8 +28,8 @@ const ImageShaderMaterial = () => {
 
   const { scrollY } = useScroll();
   const { viewport } = useThree();
-  // const devicePixelRatio = Math.min(window.devicePixelRatio, 2);
-  const planeWidth = isScreen && !isCustomRange ? window.innerWidth * 0.45 : window.innerWidth;
+
+  const planeWidth = isScreen && !isCustomRange ? window.innerWidth * 0.45 : window.innerWidth ;
 
   const textureSettings = useMemo(
     () => ({
@@ -49,7 +49,7 @@ const ImageShaderMaterial = () => {
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     if (!documentScrollHeight.current) return;
-    const maxScroll = documentScrollHeight.current - viewport.height;
+    const maxScroll = documentScrollHeight.current - window.innerHeight;
     normalizedScroll.current = maxScroll > 0 ? latest / maxScroll : 0;
   });
 
@@ -99,18 +99,18 @@ const ImageShaderMaterial = () => {
 
     const size = new THREE.Vector3();
     new THREE.Box3().setFromObject(mesh.current).getSize(size);
-    const scale = Math.min(window.innerWidth / size.x, viewport.height / size.y);
+    const scale = Math.min(window.innerWidth / size.x, window.innerHeight / size.y);
     mesh.current.scale.set(scale, scale, scale);
 
     return () => {
       clearTimeout(timer);
       animationControls.current?.stop();
     };
-  }, [isCanvasLoaded, bioImgTexture, contactImgTexture, uniforms, viewport.height]);
+  }, [isCanvasLoaded, bioImgTexture, contactImgTexture, uniforms, window.innerHeight, window.innerWidth]);
 
   return (
     <mesh ref={mesh} position={[0, 0, 0, 0]}>
-      <planeGeometry attach="geometry" args={[viewport.width, viewport.height, 1]} />
+      <planeGeometry attach="geometry" args={[window.innerWidth, window.innerHeight, 1]} />
       <shaderMaterial fragmentShader={Fragment} vertexShader={Vertex} uniforms={uniforms} />
     </mesh>
   );

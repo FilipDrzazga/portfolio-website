@@ -50,7 +50,7 @@ body {
 
   --color-black: #1e1e1e;
   --color-white: #d1d1d1;
-  --color-green: #77dd99;
+  --color-green: #3E7B27;
 
   --bg-black: var(--color-black);
   --bg-white: var(--color-white);
@@ -97,8 +97,9 @@ body {
     width: 100%;
     height: auto;
     position: absolute;
-    top: 0;
-    left: 0;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     background-color: var(--color-black);
     font-size: var(--text-tiny);
     font-family: var(--font-oswald-l);
