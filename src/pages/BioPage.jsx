@@ -1,8 +1,8 @@
 import { usePageStore } from "../store/useStore";
-import Bio from "../components/sections/bio/Hero";
-import AboutMe from "../components/sections/bio/AboutMe";
-import Contact from "../components/sections/bio/Contact";
 import SceneCanvas from "../components/sections/threejs/SceneCanvas";
+import Hero from "../components/sections/bio/Hero/Hero";
+import AboutMe from "../components/sections/bio/AboutMe/AboutMe";
+import Contact from "../components/sections/bio/Contact/Contact";
 
 const BioPage = () => {
   const isCanvasLoaded = usePageStore((state) => state.isCanvasLoaded);
@@ -11,7 +11,7 @@ const BioPage = () => {
       <SceneCanvas />
       {isCanvasLoaded && (
         <>
-          <Bio />
+          <Hero />
           <AboutMe />
           <Contact />
         </>

@@ -1,8 +1,8 @@
-import { usePageStore } from "../../store/useStore";
+import { usePageStore } from "../../../store/useStore";
 import { Link } from "react-router";
-import { motion, useScroll, useAnimate, useMotionValueEvent } from "motion/react";
+import { motion, useAnimate, useMotionValueEvent, useScroll  } from "motion/react";
 import { useMediaQuery } from "react-responsive";
-import { NAVIGATION_LINKS, SPECIAL_SIGNS_ARR } from "../../utils/constants";
+import { NAVIGATION_LINKS, SPECIAL_SIGNS_ARR } from "../../../utils/constants";
 
 const ContainerVariants = {
   initial: { opacity: 0 },
@@ -28,7 +28,8 @@ const Navbar = () => {
   });
 
   useMotionValueEvent(scrollYProgress, "change", (latestScrollY) => {
-    if (isScreen && !isCustomRange) return;
+    if (isScreen && !isCustomRange || !list.current) return;
+
     if (latestScrollY === 1) {
       animateList(list.current, { color: "#d1d1d1", duration: 0.1 });
     } else {

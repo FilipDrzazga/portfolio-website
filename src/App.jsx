@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router";
-import Navbar from "./components/ui/Navbar";
+import Navbar from "./components/sections/navigation/Navbar";
 import BioPage from "./pages/BioPage";
 import PlaygroundPage from "./pages/PlaygroundPage";
 

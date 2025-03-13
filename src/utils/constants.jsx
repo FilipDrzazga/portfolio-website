@@ -1,3 +1,6 @@
+import { FaGithubAlt,FaLinkedinIn } from "react-icons/fa";
+import { MdAlternateEmail } from "react-icons/md";
+
 const TITLE_TEXT_ARR = ["HI. I’M FILIP, CREATIVE", "FRONTEND DEVELOPER", "BASED IN WATFORD."];
 const AVAILABILITY_TEXT = ['OPEN','TO', 'NEW', 'OPPORTUNITIES'];
 const COORDINATES_ARR = ["51.6611°N", "WATFORD", "0.3970°W"];
@@ -40,7 +43,8 @@ const CONTACT_TITLE_ARR = [
 ];
 const FOOTER_TEXT1_ARR = ["DESIGNED & DEVELOPED BY FILIP DRZAZGA"];
 const FOOTER_TEXT2_ARR = ["2@25 ALL RIGHTS RESERVED"];
-const SOCIAL_LINKS = ["EMAIL", "GITHUB", "LINKEDIN"];
+const SOCIAL_LINKS = [{name: "GITHUB", 
+  icon:{screen:<FaGithubAlt size={'2rem'} color="#1e1e1e"/>, mobile:<FaGithubAlt size={'2rem'} color="#d1d1d1"/>}},{name: "FILIP.DRZAZGA@GMAIL.COM",icon:{screen:<MdAlternateEmail size={'2rem'} color="#1e1e1e"/>, mobile:<MdAlternateEmail size={'2rem'} color="#d1d1d1"/>}}, {name: "LINKEDIN", icon:{screen:<FaLinkedinIn size={'2rem'} color="#1e1e1e"/>, mobile:<FaLinkedinIn size={'2rem'} color="#d1d1d1"/>}}];
 
 const SPECIAL_SIGNS_ARR = ["&", "<", ">", "=", "+", "*", "/", "%", "$", "#", "@", "!", "?"];
 const NAVIGATION_LINKS = ["BIO", "PLAYGROUND", "WORK", "LET'S TALK"];
