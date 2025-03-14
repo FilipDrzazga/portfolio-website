@@ -73,7 +73,8 @@ body {
   .wrapper {
     position: relative;
     width: 100vw;
-    height: 100vh;
+    min-height: 100vh;
+    max-height:auto;
     padding: 2rem;
     background-color: transparent;
   }

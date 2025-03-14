@@ -43,8 +43,10 @@ const CONTACT_TITLE_ARR = [
 ];
 const FOOTER_TEXT1_ARR = ["DESIGNED & DEVELOPED BY FILIP DRZAZGA"];
 const FOOTER_TEXT2_ARR = ["2@25 ALL RIGHTS RESERVED"];
-const SOCIAL_LINKS = [{name: "GITHUB", 
-  icon:{screen:<FaGithubAlt size={'2rem'} color="#1e1e1e"/>, mobile:<FaGithubAlt size={'2rem'} color="#d1d1d1"/>}},{name: "FILIP.DRZAZGA@GMAIL.COM",icon:{screen:<MdAlternateEmail size={'2rem'} color="#1e1e1e"/>, mobile:<MdAlternateEmail size={'2rem'} color="#d1d1d1"/>}}, {name: "LINKEDIN", icon:{screen:<FaLinkedinIn size={'2rem'} color="#1e1e1e"/>, mobile:<FaLinkedinIn size={'2rem'} color="#d1d1d1"/>}}];
+const SOCIAL_LINKS = [
+  {name: "GITHUB", href:'https://github.com/FilipDrzazga', icon:{screen:<FaGithubAlt size={'2rem'} color="#1e1e1e"/>, mobile:<FaGithubAlt size={'2rem'} color="#d1d1d1"/>}},
+  {name: "FILIP.DRZAZGA@GMAIL.COM",href: 'mailto:filip.drzazga@gmail.com', icon:{screen:<MdAlternateEmail size={'2rem'} color="#1e1e1e"/>, mobile:<MdAlternateEmail size={'2rem'} color="#d1d1d1"/>}},
+  {name: "LINKEDIN", href:'https://www.linkedin.com/in/filip-drzazga-b33435231/', icon:{screen:<FaLinkedinIn size={'2rem'} color="#1e1e1e"/>, mobile:<FaLinkedinIn size={'2rem'} color="#d1d1d1"/>}}];
 
 const SPECIAL_SIGNS_ARR = ["&", "<", ">", "=", "+", "*", "/", "%", "$", "#", "@", "!", "?"];
 const NAVIGATION_LINKS = ["BIO", "PLAYGROUND", "WORK", "LET'S TALK"];
