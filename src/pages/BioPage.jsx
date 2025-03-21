@@ -8,14 +8,17 @@ const BioPage = () => {
   const isCanvasLoaded = usePageStore((state) => state.isCanvasLoaded);
   return (
     <>
-      <SceneCanvas />
+    <Hero />
+    <AboutMe />
+    <Contact />
+      {/* <SceneCanvas />
       {isCanvasLoaded && (
         <>
           <Hero />
           <AboutMe />
           <Contact />
         </>
-      )}
+      )} */}
     </>
   );
 };

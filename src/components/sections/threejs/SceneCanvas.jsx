@@ -37,7 +37,7 @@ const SceneCanvas = () => {
           gl={{ antialias: true, alpha: true }}
           dpr={[1, Math.min(window.devicePixelRatio, 2)]}
           camera={{ fov: fovPosition, position: [0, 0, 600] }}>
-          <color attach="background" args={["#d1d1d1"]} />
+          <color attach="background" args={["#e5e4e2"]} />
           <ImageShaderMaterial />
         </Canvas>
     </>

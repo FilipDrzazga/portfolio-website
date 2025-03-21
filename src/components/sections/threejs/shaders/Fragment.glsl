@@ -70,18 +70,24 @@ float cnoise(vec2 P) {
 }
 
 void main() {
-
-
-   float screenAspect = u_resolution.x / u_resolution.y;
+    // Calculate aspect ratios
+    float screenAspect = u_resolution.x / u_resolution.y;
     float bioTextureAspect = u_bioTextureDimensions.x / u_bioTextureDimensions.y;
     float contactTextureAspect = u_contactTextureDimensions.x / u_contactTextureDimensions.y;
     float currentTextureAspect = mix(bioTextureAspect, contactTextureAspect, u_scroll);
-    float ratio = screenAspect / currentTextureAspect;
-    vec2 coverScale = (ratio > 1.0) ? vec2(1.0, ratio) : vec2(1.0 / ratio, 1.0);
     
-    vec2 globalUv = (vUv - 0.5) / coverScale + 0.5;
-
-
+    // Compute a horizontal shrink factor:
+    // If the screen is wider than the texture, reduce horizontal scale.
+    // 'extraShrink' controls how aggressively to shrink horizontally.
+    float extraShrink = 2.5; // Try lower values for more shrink (e.g., 0.3), or higher for less.
+    float scaleX = 1.0;
+    if (screenAspect > currentTextureAspect) {
+        scaleX = (currentTextureAspect / screenAspect) * extraShrink;
+    }
+    
+    // Remap the UVs for non-screen mode by only shrinking horizontally.
+    vec2 globalUv = vec2((vUv.x - 0.5) * scaleX + 0.5, vUv.y);
+    
     vec2 noiseInput = globalUv + u_scroll * 0.5;
     
     float s0 = smoothstep(0.0, 0.6, u_scroll);
@@ -97,6 +103,7 @@ void main() {
     
     float mode = step(0.5, u_isScreen);
     
+    // Non-screen mode texture mapping
     vec2 uv_nonScreen = (1.0 - n) * globalUv;
     vec4 bioTex_nonScreen = texture2D(u_bioImgTexture, uv_nonScreen);
     vec4 contactTex_nonScreen = texture2D(u_conactImgTexture, uv_nonScreen);
@@ -104,9 +111,11 @@ void main() {
     vec4 finalTex_nonScreen = mix(vec4(lighterBackground, 1.0), mixTex_nonScreen, u_progress);
     finalTex_nonScreen.rgb += n;
     
+    // Screen mode texture mapping: apply the same horizontal shrink to the x-component.
     vec2 textureUv_screen = vec2((vUv.x - 0.55) / 0.45, vUv.y);
-    textureUv_screen = (textureUv_screen - 0.5) / coverScale + 0.5;
+    textureUv_screen = vec2((textureUv_screen.x - 0.5) * scaleX + 0.5, textureUv_screen.y);
     textureUv_screen = ((textureUv_screen - 0.5) * 1.02) + 0.5;
+    
     vec2 uv_screen = (1.0 - n) * textureUv_screen;
     vec4 bioTex_screen = texture2D(u_bioImgTexture, uv_screen);
     vec4 contactTex_screen = texture2D(u_conactImgTexture, uv_screen);
@@ -115,12 +124,13 @@ void main() {
     finalTex_screen.rgb += n * 0.5;
     
     float leftBlend = smoothstep(0.5, 0.8, vUv.x);
-    float rightBlend = 1.0 - smoothstep(0.88, 1.0, vUv.x);
+    float rightBlend = 1.0 - smoothstep(0.75, 1.0, vUv.x);
     float blendFactor = leftBlend * rightBlend;
     vec3 finalColor_screen = mix(lighterBackground + n * 0.5, finalTex_screen.rgb, blendFactor);
     
     vec3 finalColor_nonScreen = finalTex_nonScreen.rgb;
     
+    // Choose between screen and non-screen output based on the mode.
     vec3 finalColor = mix(finalColor_nonScreen, finalColor_screen, mode);
     gl_FragColor = vec4(finalColor, 1.0);
 }

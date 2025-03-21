@@ -27,7 +27,6 @@ const ImageShaderMaterial = () => {
   const animationControls = useRef(null);
 
   const { scrollY } = useScroll();
-  const { viewport } = useThree();
 
   const planeWidth = isScreen && !isCustomRange ? window.innerWidth * 0.45 : window.innerWidth ;
 
@@ -60,7 +59,7 @@ const ImageShaderMaterial = () => {
       u_conactImgTexture: { value: contactImgTexture },
       u_bioTextureDimensions: { value: new THREE.Vector2(1, 1) },
       u_contactTextureDimensions: { value: new THREE.Vector2(1, 1) },
-      u_backgroundColor: { value: new THREE.Color("#d1d1d1") },
+      u_backgroundColor: { value: new THREE.Color("#e5e4e2") },
       u_scroll: { value: 0 },
       u_time: { value: 0 },
       u_progress: { value: 0 },

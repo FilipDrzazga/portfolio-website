@@ -2,7 +2,6 @@
 
 @font-face {
   font-family: "Oswald-light";
-
   src: url("../assets/font/Oswald-Light.woff2") format("woff2");
 }
 @font-face {
@@ -49,7 +48,7 @@ body {
   --font-oswald-b: "Oswald-bold", "sans-serif";
 
   --color-black: #1e1e1e;
-  --color-white: #d1d1d1;
+  --color-white: #e5e4e2;
   --color-green: #3E7B27;
 
   --bg-black: var(--color-black);
