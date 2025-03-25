@@ -1,3 +1,4 @@
+import {motion} from 'motion/react'
 import styled from "styled-components";
 
 const SocialLinksContainer = styled.div`
@@ -10,10 +11,10 @@ const SocialLinksList = styled.ul`
     align-items: center;
     gap: 1rem;
 `;
-const SocialLinksListItem = styled.li`
+const SocialLinksListItem = styled(motion.li)`
     list-style: none;
 `;
-const SocialLinksLink = styled.a`
+const SocialLinksLink = styled(motion.a)`
     font-family: 'Oswald-regular';
     font-size: ${({theme}) => theme.fontSizes.small};
     color: ${({theme}) => theme.colors.primary};

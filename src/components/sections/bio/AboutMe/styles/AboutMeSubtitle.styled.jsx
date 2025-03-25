@@ -1,6 +1,7 @@
+import {motion} from 'motion/react'
 import styled from 'styled-components';
 
-const Subtitle = styled.h2`
+const Subtitle = styled(motion.h2)`
 margin-bottom: ${({theme}) => theme.spacing.medium};
     font-family:'Oswald-medium';
     font-size: ${({theme}) => theme.fontSizes.medium};

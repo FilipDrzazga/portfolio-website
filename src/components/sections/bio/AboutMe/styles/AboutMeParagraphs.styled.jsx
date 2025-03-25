@@ -23,16 +23,6 @@ const Text = styled(motion.p)`
 const Letter = styled(motion.span)`
 position: relative;
 color: ${({theme}) => theme.colors.primary};
-// &::after {
-//     content: "";
-//     position: absolute;
-//     top: 0;
-//     left: 100%;
-//     width: 5px;
-//     height: 100%;
-//     background-color: ${({theme}) => theme.colors.primary};
-//     opacity: var(--after-opacity);
-// }
 `;
 
 export {ParagraphsContainer, Text, Letter};
