@@ -7,7 +7,7 @@ const TechStackContainer = styled.div`
     width: 90%;
 }
 @media ${DEVICE.MOBILE_S} {
-    width: 80%;
+    width: 100%;
 }
 `;
 const TechStackTitle = styled(motion.h3)`
@@ -18,6 +18,10 @@ const TechStackTitle = styled(motion.h3)`
     line-height: 1rem;
     text-align: justify;
     text-justify: inter-word;
+        @media ${DEVICE.MOBILE_S} {
+        font-size:1.2rem;
+        line-height: 1.3rem;
+}
 `;
 
 export { TechStackContainer, TechStackTitle };

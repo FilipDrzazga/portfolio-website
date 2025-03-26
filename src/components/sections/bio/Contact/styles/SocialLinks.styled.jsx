@@ -1,5 +1,6 @@
 import {motion} from 'motion/react'
 import styled from "styled-components";
+import {DEVICE} from '../../../../../styles/theme';
 
 const SocialLinksContainer = styled.div`
     width: 100%;
@@ -18,6 +19,9 @@ const SocialLinksLink = styled(motion.a)`
     font-family: 'Oswald-regular';
     font-size: ${({theme}) => theme.fontSizes.small};
     color: ${({theme}) => theme.colors.primary};
+    @media ${DEVICE.MOBILE_S} {
+        font-size: 0.8rem;
+    }
 
 `;
 

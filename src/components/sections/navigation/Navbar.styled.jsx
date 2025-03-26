@@ -1,5 +1,6 @@
 import { Link } from "react-router";
 import styled from 'styled-components';
+import {DEVICE} from '../../../styles/theme';
 
 const NavbarContainer = styled.nav`
     position: fixed;
@@ -48,6 +49,9 @@ const NavLink = styled(Link)`
     color:${({ theme }) => theme.colors.primary};
     text-decoration:none;
     outline:none;
+    @media ${DEVICE.MOBILE_S} {
+        font-size: 0.8rem;
+    }
 `;
 
 export { NavbarContainer,NavbarMask, List, ListItem, NavLink };

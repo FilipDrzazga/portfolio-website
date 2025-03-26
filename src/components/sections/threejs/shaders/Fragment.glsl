@@ -76,7 +76,7 @@ void main() {
 
     float noiseVal = cnoise(scaledUV * noiseFrequency + slowTime);
 
-    vec2 dir = scaledUV - center + vec2(5.0) * clamp(u_scroll, 0.0, 1.0);  // smoothly move on scroll
+    vec2 dir = scaledUV - center + vec2(0.0, -5.0) * clamp(u_scroll, 0.0, 1.0);  // smoothly move on scroll
 
     vec2 stretchedDir = dir * (1.0 + clamp(u_scroll, 0.0, 1.0) * 20.0 * noiseVal);
     vec2 distortedUV = center + stretchedDir;

@@ -15,7 +15,9 @@ const Subtitle = styled(motion.h2)`
         width: 89%;
     }
     @media ${DEVICE.MOBILE_S} {
-    width: 80%;
+        width: 100%;
+        font-size:1.2rem;
+        line-height: 1.3rem;
 }
 `;
 

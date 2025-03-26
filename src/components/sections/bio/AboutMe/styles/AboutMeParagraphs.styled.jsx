@@ -14,16 +14,18 @@ const ParagraphsContainer = styled(motion.div)`
     width: 90%;
 }
 @media ${DEVICE.MOBILE_S} {
-    width: 80%;
+    width: 100%;
 }
 `;
 const Text = styled(motion.p)`
     font-family: 'Oswald-regular';
     font-size: ${({theme}) => theme.fontSizes.small};
     color: ${({theme}) => theme.colors.primary};
-    line-height: 1rem;
     text-align: justify;
     text-justify: inter-word;
+@media ${DEVICE.MOBILE_S} {
+    font-size: 0.8rem;
+}
 `;
 const Letter = styled(motion.span)`
 position: relative;
