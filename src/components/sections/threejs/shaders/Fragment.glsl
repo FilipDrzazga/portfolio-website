@@ -1,5 +1,5 @@
 #ifdef GL_ES
-precision mediump float;
+precision highp float;
 #endif
 varying vec2 vUv;
 
@@ -66,29 +66,31 @@ float cnoise(vec2 P) {
 }
 
 void main() {
-    vec4 backgroundColor = vec4(1.0, 1.0, 1.0, 1.0);
+    vec4 backgroundColor = vec4(1.0,1.0,1.0, 1.0);
 
-    vec2 center = vec2(0.5, 0.5);
+    vec2 center = vec2(0.5);
     vec2 scaledUV = (vUv - center) / 0.65 + center;
 
-    float noiseFrequency = 2.0;
+    float noiseFrequency = 0.95;
     float slowTime = u_time * 0.1;
 
     float noiseVal = cnoise(scaledUV * noiseFrequency + slowTime);
 
-    // Smooth scroll-based movement of dir
-    vec2 dir = scaledUV - center + vec2(0.0, -5.0) * u_scroll;
+    vec2 dir = scaledUV - center + vec2(5.0) * clamp(u_scroll, 0.0, 1.0);  // smoothly move on scroll
 
-    vec2 stretchedDir = dir * (1.0 + u_scroll * 20.0 * noiseVal);
+    vec2 stretchedDir = dir * (1.0 + clamp(u_scroll, 0.0, 1.0) * 20.0 * noiseVal);
     vec2 distortedUV = center + stretchedDir;
 
-    vec4 texture = texture2D(u_bioImgTexture, distortedUV);
+    // Clamp UV to safe bounds before sampling
+    vec2 safeUV = clamp(distortedUV, vec2(0.0), vec2(1.0));
+    vec4 texColor = texture2D(u_bioImgTexture, safeUV);
 
+    // Optional: use background if UV too far out (mobile precision fallback)
     if (distortedUV.x < 0.0 || distortedUV.x > 1.0 ||
         distortedUV.y < 0.0 || distortedUV.y > 1.0) {
         gl_FragColor = backgroundColor;
     } else {
-        gl_FragColor = texture;
+        gl_FragColor = texColor;
     }
 }
 
