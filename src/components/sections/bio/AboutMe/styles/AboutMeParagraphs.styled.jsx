@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 import {motion} from 'motion/react';
+import {DEVICE} from '../../../../../styles/theme';
 
 const ParagraphsContainer = styled(motion.div)`
-    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -10,7 +10,12 @@ const ParagraphsContainer = styled(motion.div)`
     gap: 1rem;
     margin-bottom: ${({theme}) => theme.spacing.medium};
     z-index:-1;
-
+@media ${DEVICE.MOBILE_XS} {
+    width: 90%;
+}
+@media ${DEVICE.MOBILE_S} {
+    width: 80%;
+}
 `;
 const Text = styled(motion.p)`
     font-family: 'Oswald-regular';

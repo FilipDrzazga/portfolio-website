@@ -2,10 +2,14 @@ import {motion} from 'motion/react';
 import styled from "styled-components";
 
 const Header = styled.header`
+display: flex;
+flex-direction: column;
+align-items: center;
 width: 100%;
 margin-bottom: ${({theme}) => theme.spacing.medium};
 `
 const Title = styled(motion.h1)`
+    width:98%;
     font-family:'Oswald-medium';
     font-size: ${({theme}) => theme.fontSizes.medium};
     color: ${({theme}) => theme.colors.primary};

@@ -5,14 +5,10 @@ varying vec2 vUv;
 
 uniform vec2 u_resolution;
 uniform sampler2D u_bioImgTexture;
-uniform sampler2D u_conactImgTexture;
 uniform vec2 u_bioTextureDimensions;
-uniform vec2 u_contactTextureDimensions;
-uniform vec3 u_backgroundColor;
 uniform float u_scroll;
 uniform float u_time;
 uniform float u_progress;
-uniform float u_isScreen;
 
 vec4 mod289(vec4 x) {
   return x - floor(x * (1.0 / 289.0)) * 289.0;
@@ -70,69 +66,30 @@ float cnoise(vec2 P) {
 }
 
 void main() {
-    // Calculate aspect ratios
-    float screenAspect = u_resolution.x / u_resolution.y;
-    float bioTextureAspect = u_bioTextureDimensions.x / u_bioTextureDimensions.y;
-    float contactTextureAspect = u_contactTextureDimensions.x / u_contactTextureDimensions.y;
-    float currentTextureAspect = mix(bioTextureAspect, contactTextureAspect, u_scroll);
-    
-    // Compute a horizontal shrink factor:
-    // If the screen is wider than the texture, reduce horizontal scale.
-    // 'extraShrink' controls how aggressively to shrink horizontally.
-    float extraShrink = 2.5; // Try lower values for more shrink (e.g., 0.3), or higher for less.
-    float scaleX = 1.0;
-    if (screenAspect > currentTextureAspect) {
-        scaleX = (currentTextureAspect / screenAspect) * extraShrink;
+    vec4 backgroundColor = vec4(1.0, 1.0, 1.0, 1.0);
+
+    vec2 center = vec2(0.5, 0.5);
+    vec2 scaledUV = (vUv - center) / 0.65 + center;
+
+    float noiseFrequency = 2.0;
+    float slowTime = u_time * 0.1;
+
+    float noiseVal = cnoise(scaledUV * noiseFrequency + slowTime);
+
+    // Smooth scroll-based movement of dir
+    vec2 dir = scaledUV - center + vec2(0.0, -5.0) * u_scroll;
+
+    vec2 stretchedDir = dir * (1.0 + u_scroll * 20.0 * noiseVal);
+    vec2 distortedUV = center + stretchedDir;
+
+    vec4 texture = texture2D(u_bioImgTexture, distortedUV);
+
+    if (distortedUV.x < 0.0 || distortedUV.x > 1.0 ||
+        distortedUV.y < 0.0 || distortedUV.y > 1.0) {
+        gl_FragColor = backgroundColor;
+    } else {
+        gl_FragColor = texture;
     }
-    
-    // Remap the UVs for non-screen mode by only shrinking horizontally.
-    vec2 globalUv = vec2((vUv.x - 0.5) * scaleX + 0.5, vUv.y);
-    
-    vec2 noiseInput = globalUv + u_scroll * 0.5;
-    
-    float s0 = smoothstep(0.0, 0.6, u_scroll);
-    float s1 = smoothstep(0.7, 1.0, u_scroll);
-    float amplitudeScroll = s0 * (1.0 - s1);
-    float amplitude = u_progress * (1.0 - u_progress + amplitudeScroll);
-    float t = u_time * 0.1;
-    
-    float baseNoise = abs(cnoise(noiseInput + t) * amplitude + cnoise(noiseInput * 2.0 + t) * amplitude * 5.0);
-    float n = baseNoise;
-    
-    vec3 lighterBackground = clamp(u_backgroundColor + vec3(0.18), 0.0, 1.0);
-    
-    float mode = step(0.5, u_isScreen);
-    
-    // Non-screen mode texture mapping
-    vec2 uv_nonScreen = (1.0 - n) * globalUv;
-    vec4 bioTex_nonScreen = texture2D(u_bioImgTexture, uv_nonScreen);
-    vec4 contactTex_nonScreen = texture2D(u_conactImgTexture, uv_nonScreen);
-    vec4 mixTex_nonScreen = mix(bioTex_nonScreen, contactTex_nonScreen, u_scroll);
-    vec4 finalTex_nonScreen = mix(vec4(lighterBackground, 1.0), mixTex_nonScreen, u_progress);
-    finalTex_nonScreen.rgb += n;
-    
-    // Screen mode texture mapping: apply the same horizontal shrink to the x-component.
-    vec2 textureUv_screen = vec2((vUv.x - 0.55) / 0.45, vUv.y);
-    textureUv_screen = vec2((textureUv_screen.x - 0.5) * scaleX + 0.5, textureUv_screen.y);
-    textureUv_screen = ((textureUv_screen - 0.5) * 1.02) + 0.5;
-    
-    vec2 uv_screen = (1.0 - n) * textureUv_screen;
-    vec4 bioTex_screen = texture2D(u_bioImgTexture, uv_screen);
-    vec4 contactTex_screen = texture2D(u_conactImgTexture, uv_screen);
-    vec4 mixTex_screen = mix(bioTex_screen, contactTex_screen, u_scroll);
-    vec4 finalTex_screen = mix(vec4(lighterBackground, 1.0), mixTex_screen, u_progress);
-    finalTex_screen.rgb += n * 0.5;
-    
-    float leftBlend = smoothstep(0.5, 0.8, vUv.x);
-    float rightBlend = 1.0 - smoothstep(0.75, 1.0, vUv.x);
-    float blendFactor = leftBlend * rightBlend;
-    vec3 finalColor_screen = mix(lighterBackground + n * 0.5, finalTex_screen.rgb, blendFactor);
-    
-    vec3 finalColor_nonScreen = finalTex_nonScreen.rgb;
-    
-    // Choose between screen and non-screen output based on the mode.
-    vec3 finalColor = mix(finalColor_nonScreen, finalColor_screen, mode);
-    gl_FragColor = vec4(finalColor, 1.0);
 }
 
 

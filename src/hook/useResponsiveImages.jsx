@@ -8,15 +8,6 @@ import {
   BIO_SCREEN_XS,
   BIO_SCREEN_M,
   BIO_SCREEN_LG,
-  CONTACT_MOBILE_XS,
-  CONTACT_MOBILE_M,
-  CONTACT_MOBILE_LG,
-  CONTACT_MOBILE_XL,
-  CONTACT_TABLET_SM,
-  CONTACT_TABLET_LG,
-  CONTACT_SCREEN_XS,
-  CONTACT_SCREEN_M,
-  CONTACT_SCREEN_LG,
 } from "../images/images";
 
 import { useMediaQuery } from "react-responsive";
@@ -46,19 +37,7 @@ const useResponsiveImages = () => {
   else if (isScreenLG) bioImageSrc = BIO_SCREEN_LG;
   else bioImageSrc = BIO_MOBILE_XL;
 
-  let contactImageSrc;
-  if (isMobileXS) contactImageSrc = CONTACT_MOBILE_XS;
-  else if (isMobileM) contactImageSrc = CONTACT_MOBILE_M;
-  else if (isMobileLG) contactImageSrc = CONTACT_MOBILE_LG;
-  else if (isMobileXL) contactImageSrc = CONTACT_MOBILE_XL;
-  else if (isTabletSM) contactImageSrc = CONTACT_TABLET_SM;
-  else if (isTabletLG) contactImageSrc = CONTACT_TABLET_LG;
-  else if (isScreenXS) contactImageSrc = CONTACT_SCREEN_XS;
-  else if (isScreenM) contactImageSrc = CONTACT_SCREEN_M;
-  else if (isScreenLG) contactImageSrc = CONTACT_SCREEN_LG;
-  else contactImageSrc = CONTACT_MOBILE_XL;
-
-  return { bioImageSrc, contactImageSrc };
+  return { bioImageSrc };
 };
 
 export default useResponsiveImages;

@@ -12,4 +12,13 @@ export const globalTheme = {
         medium:'1.5rem',
         large:'2.125rem',
     }
-}
+};
+
+const SIZE = {
+    MOBILE_XS: '360px',
+    MOBILE_S: '390px',
+  };
+export const DEVICE = {
+    MOBILE_XS: `(min-width: ${SIZE.MOBILE_XS})`,
+    MOBILE_S: `(min-width: ${SIZE.MOBILE_S})`,
+  };

@@ -1,10 +1,17 @@
 import {motion} from "motion/react"
 import styled from "styled-components"
+import {DEVICE} from "../../../../../styles/theme"
 
 const Header = styled.header`
-    width: 100%;
+width:100%;
     margin-bottom:${({theme}) => theme.spacing.large};
     z-index:-1;
+    @media ${DEVICE.MOBILE_XS} {
+        width: 90%;
+    }
+    @media ${DEVICE.MOBILE_S} {
+    width: 80%;
+}
 `;
 const Title = styled(motion.h1)`
     position:relative;

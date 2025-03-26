@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unknown-property */
 import { useEffect, useRef, useMemo } from "react";
 import { usePageStore } from "../../../store/useStore";
-import { useThree, useFrame } from "@react-three/fiber";
+import { useFrame } from "@react-three/fiber";
 import { useTexture } from "@react-three/drei";
 import * as THREE from "three";
 import { useScroll, useMotionValueEvent, animate } from "motion/react";
@@ -18,7 +18,7 @@ const ImageShaderMaterial = () => {
     width: 1024,
     height: 1366,
   });
-  const { bioImageSrc, contactImageSrc } = useResponsiveImages();
+  const { bioImageSrc } = useResponsiveImages();
 
   const mesh = useRef(null);
   const materialRef = useRef(null);
@@ -39,7 +39,7 @@ const ImageShaderMaterial = () => {
     []
   );
 
-  const [bioImgTexture, contactImgTexture] = useTexture([bioImageSrc, contactImageSrc], (textures) => {
+  const [bioImgTexture] = useTexture([bioImageSrc], (textures) => {
     textures.forEach((texture) => {
       Object.assign(texture, textureSettings);
       texture.needsUpdate = true;
@@ -56,16 +56,13 @@ const ImageShaderMaterial = () => {
     () => ({
       u_resolution: { value: new THREE.Vector2(planeWidth, window.innerHeight) },
       u_bioImgTexture: { value: bioImgTexture },
-      u_conactImgTexture: { value: contactImgTexture },
       u_bioTextureDimensions: { value: new THREE.Vector2(1, 1) },
-      u_contactTextureDimensions: { value: new THREE.Vector2(1, 1) },
-      u_backgroundColor: { value: new THREE.Color("#e5e4e2") },
       u_scroll: { value: 0 },
       u_time: { value: 0 },
       u_progress: { value: 0 },
       u_isScreen: { value: isScreen ? 1 : 0 },
     }),
-    [bioImgTexture, contactImgTexture, isScreen, planeWidth]
+    [bioImgTexture, isScreen, planeWidth]
   );
 
   useFrame((state) => {
@@ -76,12 +73,11 @@ const ImageShaderMaterial = () => {
   });
 
   useEffect(() => {
-    if (!mesh.current || !isCanvasLoaded || !bioImgTexture?.image || !contactImgTexture?.image) return;
+    if (!mesh.current || !isCanvasLoaded || !bioImgTexture?.image) return;
 
     materialRef.current = mesh.current.material;
 
     uniforms.u_bioTextureDimensions.value.set(bioImgTexture.image.width, bioImgTexture.image.height);
-    uniforms.u_contactTextureDimensions.value.set(contactImgTexture.image.width, contactImgTexture.image.height);
 
     const timer = setTimeout(() => {
       documentScrollHeight.current = document.body.scrollHeight;
@@ -105,7 +101,7 @@ const ImageShaderMaterial = () => {
       clearTimeout(timer);
       animationControls.current?.stop();
     };
-  }, [isCanvasLoaded, bioImgTexture, contactImgTexture, uniforms, window.innerHeight, window.innerWidth]);
+  }, [isCanvasLoaded, bioImgTexture, uniforms, window.innerHeight, window.innerWidth]);
 
   return (
     <mesh ref={mesh} position={[0, 0, 0, 0]}>
