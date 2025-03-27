@@ -28,7 +28,7 @@ const ImageShaderMaterial = () => {
 
   const { scrollY } = useScroll();
 
-  const planeWidth = isScreen && !isCustomRange ? window.innerWidth * 0.45 : window.innerWidth ;
+  const planeWidth = isScreen && !isCustomRange ? window.innerWidth * 0.45 : window.innerWidth;
 
   const textureSettings = useMemo(
     () => ({
@@ -101,7 +101,7 @@ const ImageShaderMaterial = () => {
       clearTimeout(timer);
       animationControls.current?.stop();
     };
-  }, [isCanvasLoaded, bioImgTexture, uniforms, window.innerHeight, window.innerWidth]);
+  }, [isCanvasLoaded, bioImgTexture, uniforms]);
 
   return (
     <mesh ref={mesh} position={[0, 0, 0, 0]}>

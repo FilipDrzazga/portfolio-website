@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 const FooterContainer = styled.footer`
-position: absolute;
-    bottom: 1rem;
+  position: absolute;
+  bottom: 1rem;
 
   width: 100%;
   display: flex;
@@ -10,9 +10,9 @@ position: absolute;
   align-items: center;
 `;
 const Text = styled.p`
-  font-family: 'Oswald-regular';
-  font-size: ${({theme}) => theme.fontSizes.small};
-  color: ${({theme}) => theme.colors.primary};
+  font-family: "Oswald-regular";
+  font-size: ${({ theme }) => theme.fontSizes.small};
+  color: ${({ theme }) => theme.colors.primary};
 `;
 
 export { FooterContainer, Text };

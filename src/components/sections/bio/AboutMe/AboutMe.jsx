@@ -1,5 +1,5 @@
 import { AboutMeTitle, AboutMeSubtitle, AboutMeParagraphs, TechStack } from "./ui";
-import {Container, Content} from './styles/AboutMe.styled';
+import { Container, Content } from "./styles/AboutMe.styled";
 
 const AboutMeContainer = () => {
   return (

@@ -49,7 +49,7 @@ body {
 
   --color-black: #1e1e1e;
   --color-white: #e5e4e2;
-  --color-green: #3E7B27;
+  --color-green: #3e7b27;
 
   --bg-black: var(--color-black);
   --bg-white: var(--color-white);
@@ -73,7 +73,7 @@ body {
     position: relative;
     width: 100vw;
     min-height: 100vh;
-    max-height:auto;
+    max-height: auto;
     padding: 2rem;
     background-color: transparent;
   }
@@ -146,7 +146,7 @@ body {
     font-size: var(--text-tiny);
     font-family: var(--font-oswald-l);
     color: var(--color-white);
-    opacity: var(--after-opacity,0);
+    opacity: var(--after-opacity, 0);
   }
 }
 

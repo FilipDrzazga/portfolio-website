@@ -1,10 +1,10 @@
-import {  CoordinatesDisplay } from "./ui";
+import { CoordinatesDisplay } from "./ui";
 import { Container } from "./styles/Hero.styled";
 
 const Hero = () => {
   return (
     <Container>
-      <CoordinatesDisplay/>
+      <CoordinatesDisplay />
     </Container>
   );
 };
