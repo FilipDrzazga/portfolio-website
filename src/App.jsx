@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router";
-import Navbar from "./components/sections/navigation/Navbar";
-import BioPage from "./pages/BioPage";
-import PlaygroundPage from "./pages/PlaygroundPage";
+import Navbar from "./components/Navigation/Navbar";
+import BioPage from "./pages/BioPage/BioPage";
+import PlaygroundPage from "./pages/PlaygroundPage/PlaygroundPage";
 
 const App = () => {
   return (
@@ -10,7 +10,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<BioPage />} />
         <Route path="/bio" element={<BioPage />} />
-        <Route path="/playground" element={<PlaygroundPage />} />
+        {/* <Route path="/playground" element={<PlaygroundPage />} /> */}
       </Routes>
     </BrowserRouter>
   );

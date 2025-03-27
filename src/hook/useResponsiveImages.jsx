@@ -8,7 +8,7 @@ import {
   BIO_SCREEN_XS,
   BIO_SCREEN_M,
   BIO_SCREEN_LG,
-} from "../images/images";
+} from "../assets/images/images";
 
 import { useMediaQuery } from "react-responsive";
 
