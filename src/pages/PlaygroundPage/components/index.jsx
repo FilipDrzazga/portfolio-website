@@ -1,4 +1,4 @@
 import PlaygroundList from "./PlaygroundList/PlaygroundList";
-import PlaygroundTitle from "./PlaygroundTitle/PlaygroundTitle";
+import PlaygroundHero from "./PlaygroundHero/PlaygroundHero";
 
-export { PlaygroundList, PlaygroundTitle };
+export { PlaygroundList, PlaygroundHero };

@@ -10,7 +10,7 @@ export const GLOBAL_THEME = {
   spacing: {
     normal: "1rem",
     medium: "1.5rem",
-    large: "2.125rem",
+    large: "3rem",
   },
 };
 

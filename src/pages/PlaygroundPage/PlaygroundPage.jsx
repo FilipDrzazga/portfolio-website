@@ -1,11 +1,12 @@
-import { PlaygroundTitle, PlaygroundList } from "./components";
+import { Container } from "./PlaygroundPage.styled";
+import { PlaygroundHero, PlaygroundList } from "./components";
 
 const PlaygroundPage = () => {
   return (
-    <>
-      <PlaygroundTitle />
+    <Container>
+      <PlaygroundHero />
       <PlaygroundList />
-    </>
+    </Container>
   );
 };
 
