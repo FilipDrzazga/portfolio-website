@@ -26,9 +26,10 @@ const CONTENT_VARIANTS = {
 
 const PlaygroundList = () => {
   const [clickedId, setIsClickedId] = useState(null);
+
   const handleClick = (id)=>{
     setIsClickedId((prev)=>prev===id?null:id);
-  }
+  };
 
   return (
     <Container>

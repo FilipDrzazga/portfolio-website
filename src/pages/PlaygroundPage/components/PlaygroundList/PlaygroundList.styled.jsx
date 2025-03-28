@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import {motion} from 'motion/react';
+import { DEVICE } from "../../../../styles/theme";
 
 const Container = styled.div`
 display: flex;
@@ -34,11 +35,17 @@ const ItemTitle = styled(motion.h2)`
     font-family: 'Oswald-regular';
     font-weight: 400;
     color: ${({ theme }) => theme.colors.primary};
+      @media ${DEVICE.MOBILE_S} {
+        font-size: 0.8rem;
+      }
 `;
 const ItemNumber = styled(motion.span)`
     font-size: ${({ theme }) => theme.fontSizes.small};
     font-family: 'Oswald-regular';
     color: ${({ theme }) => theme.colors.primary};
+      @media ${DEVICE.MOBILE_S} {
+        font-size: 0.8rem;
+      }
 `;
 const ImgContainer = styled(motion.div)`
     display: flex;
@@ -59,6 +66,9 @@ const ItemTechStack = styled(motion.p)`
     font-size: ${({ theme }) => theme.fontSizes.small};
     font-family: 'Oswald-regular';
     color: ${({ theme }) => theme.colors.primary};
+      @media ${DEVICE.MOBILE_S} {
+        font-size: 0.8rem;
+      }
 `;
 
 export { Container, List, ListItem, ItemHeader,ItemTitle,ItemNumber, ImgContainer, ItemDescriptionContainer, ItemTechStack };
