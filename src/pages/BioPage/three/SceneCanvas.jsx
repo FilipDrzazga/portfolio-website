@@ -3,13 +3,10 @@ import { useEffect, useMemo } from "react";
 import { usePageStore } from "../../../store/useStore";
 import { useProgress } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
-import { AnimatePresence } from "motion/react";
 import ImageShaderMaterial from "./ImageShaderMaterial";
-import Loader from '../../../components/Loader/Loader';
 
 const SceneCanvas = () => {
   const { progress } = useProgress();
-  const isCanvasLoaded = usePageStore((state) => state.isCanvasLoaded);
   const setIsCanvasLoaded = usePageStore((state) => state.setIsCanvasLoaded);
 
   const fovPosition = useMemo(() => {
@@ -20,23 +17,22 @@ const SceneCanvas = () => {
 
   useEffect(() => {
     if (progress === 100) {
+      console.log("im loaded CANVAS");
       const timer = setTimeout(() => {
         setIsCanvasLoaded(true);
       }, 3000);
       return () => clearTimeout(timer);
     }
-  }, [progress]);
+  }, [progress, setIsCanvasLoaded]);
 
   return (
     <>
-      <AnimatePresence>{!isCanvasLoaded && <Loader />}</AnimatePresence>
       <Canvas
         style={{ position: "fixed", top: 0, left: 0, maxWidth: "100%", height: "100vh", zIndex: -1 }}
         gl={{ antialias: true, alpha: true }}
         dpr={[1, Math.min(window.devicePixelRatio, 2)]}
         camera={{ fov: fovPosition, position: [0, 0, 600] }}
       >
-        <color attach="background" args={["#e5e4e2"]} />
         <ImageShaderMaterial />
       </Canvas>
     </>

@@ -2,6 +2,8 @@ import { BrowserRouter, Routes, Route } from "react-router";
 import Navbar from "./components/Navigation/Navbar";
 import BioPage from "./pages/BioPage/BioPage";
 import PlaygroundPage from "./pages/PlaygroundPage/PlaygroundPage";
+import Loader from "./components/Loader/Loader";
+import { usePageStore } from "./store/useStore";
 
 const App = () => {
   return (
