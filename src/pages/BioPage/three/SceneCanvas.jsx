@@ -1,4 +1,3 @@
-/* eslint-disable react/no-unknown-property */
 import { useEffect, useMemo } from "react";
 import { usePageStore } from "../../../store/useStore";
 import { useProgress } from "@react-three/drei";
@@ -17,7 +16,6 @@ const SceneCanvas = () => {
 
   useEffect(() => {
     if (progress === 100) {
-      console.log("im loaded CANVAS");
       const timer = setTimeout(() => {
         setIsCanvasLoaded(true);
       }, 3000);

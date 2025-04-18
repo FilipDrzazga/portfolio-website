@@ -22,16 +22,17 @@ const Title = styled(motion.h1)`
     line-height: 1.3rem;
   }
 `;
-const Subtitle = styled(motion.h2)`
+const EmailHeading = styled(motion.h2)`
   font-family: "Oswald-medium";
   font-size: ${({ theme }) => theme.fontSizes.large};
   color: ${({ theme }) => theme.colors.primary};
   word-spacing: -0.2rem;
   line-height: ${({ theme }) => theme.fontSizes.large};
+  cursor: pointer;
   @media ${DEVICE.MOBILE_S} {
     font-size: 4rem;
     line-height: 4rem;
   }
 `;
 const Letter = styled(motion.span)``;
-export { Header, Title, Subtitle, Letter };
+export { Header, Title, EmailHeading, Letter };

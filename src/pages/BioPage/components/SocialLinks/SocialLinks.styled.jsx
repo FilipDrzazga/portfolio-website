@@ -19,6 +19,7 @@ const SocialLinksLink = styled(motion.a)`
   font-family: "Oswald-regular";
   font-size: ${({ theme }) => theme.fontSizes.small};
   color: ${({ theme }) => theme.colors.primary};
+  text-decoration: none;
   @media ${DEVICE.MOBILE_S} {
     font-size: 0.8rem;
   }

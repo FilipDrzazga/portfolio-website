@@ -25,7 +25,9 @@ const SocialLinks = () => {
             viewport={{ once: true }}
             key={i}
           >
-            <SocialLinksLink variants={LINK_VARIANTS}>{link}</SocialLinksLink>
+            <SocialLinksLink variants={LINK_VARIANTS} href={link.url} target={link.target} rel={link.rel}>
+              {link.name}
+            </SocialLinksLink>
           </SocialLinksListItem>
         ))}
       </SocialLinksList>

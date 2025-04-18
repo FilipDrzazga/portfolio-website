@@ -9,6 +9,7 @@ const NavbarContainer = styled.nav`
   width: 100vw;
   height: clamp(10vh, 15vh, 20vh);
   padding: ${({ theme }) => theme.spacing.normal};
+  z-index: 1;
 `;
 const NavbarMask = styled.div`
   width: 100%;
@@ -31,13 +32,33 @@ const List = styled.ul`
   padding: 0;
   margin: 0;
 `;
-const ListItem = styled.li``;
+const ListItem = styled.li`
+  cursor: pointer;
+  &[data-progress="WORK"] {
+    position: relative;
+    pointer-events: none;
+    cursor: not-allowed;
+    &::after {
+      content: "INPROGRESS INPROGRESS INPROGRESS";
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: -50%;
+      left: -40%;
+      // opacity: 0.9;
+      font-family: "Oswald-regular";
+      font-size: 0.5rem;
+      color: #ff6961;
+    }
+  }
+`;
 const NavLink = styled(Link)`
   font-family: "Oswald-regular";
   font-size: ${({ theme }) => theme.fontSizes.small};
   color: ${({ theme }) => theme.colors.primary};
   text-decoration: none;
   outline: none;
+  cursor: pointer;
   @media ${DEVICE.MOBILE_S} {
     font-size: 0.8rem;
   }
