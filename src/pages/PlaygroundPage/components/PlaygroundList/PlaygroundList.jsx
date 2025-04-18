@@ -13,14 +13,12 @@ const CONTENT_VARIANTS = {
   animate: {
     opacity: 1,
     height: "auto",
-    y: 0,
-    transition: { duration: 0.3, ease: "easeInOut" },
+    transition: { duration: 0.5, ease: "easeInOut" },
   },
   exit: {
     opacity: 0,
     height: 0,
-    y: -10,
-    transition: { duration: 0.3, ease: "easeInOut" },
+    transition: { duration: 0.5, ease: "easeInOut" },
   },
 };
 
@@ -53,11 +51,9 @@ const PlaygroundList = () => {
               </ImgContainer>
               <AnimatePresence mode="wait">
                 {isClicked && 
-                <AnimatePresence mode="wait">
                   <ItemDescriptionContainer layout key={`desc-${item.id}`} variants={CONTENT_VARIANTS} initial="initial" animate="animate" exit="exit">
                     <ItemTechStack>{item.technologies.join(" / ")}</ItemTechStack>
                   </ItemDescriptionContainer>
-                </AnimatePresence>
                 }
               </AnimatePresence>
             </ListItem>
