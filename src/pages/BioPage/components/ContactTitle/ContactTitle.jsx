@@ -30,7 +30,7 @@ const ContactTitle = () => {
         </Title>
       ))}
       <Subtitle variants={SUBTITLE_VARIANTS} initial="initial" whileInView="animate" viewport={{ once: true }}>
-        GET IN TOUCH
+        <a href="mailto:filip.drzazga@gmail.com">GET IN TOUCH</a>
       </Subtitle>
     </Header>
   );

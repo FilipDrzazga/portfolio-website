@@ -34,7 +34,17 @@ const List = styled.ul`
 `;
 const ListItem = styled.li`
   cursor: pointer;
-  &[data-progress="WORK"] {
+  a {
+    font-family: "Oswald-regular";
+    font-size: ${({ theme }) => theme.fontSizes.small};
+    color: ${({ theme }) => theme.colors.primary};
+    text-decoration: none;
+    outline: none;
+  }
+  @media ${DEVICE.MOBILE_S} {
+    font-size: 0.8rem;
+  }
+  &[data-tabname="WORK"] {
     position: relative;
     pointer-events: none;
     cursor: not-allowed;
@@ -45,7 +55,6 @@ const ListItem = styled.li`
       height: 100%;
       top: -50%;
       left: -40%;
-      // opacity: 0.9;
       font-family: "Oswald-regular";
       font-size: 0.5rem;
       color: #ff6961;
@@ -53,12 +62,6 @@ const ListItem = styled.li`
   }
 `;
 const NavLink = styled(Link)`
-  font-family: "Oswald-regular";
-  font-size: ${({ theme }) => theme.fontSizes.small};
-  color: ${({ theme }) => theme.colors.primary};
-  text-decoration: none;
-  outline: none;
-  cursor: pointer;
   @media ${DEVICE.MOBILE_S} {
     font-size: 0.8rem;
   }

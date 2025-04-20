@@ -6,10 +6,13 @@ const Navbar = () => {
     <NavbarContainer>
       <List>
         {NAVIGATION_LINKS.map((text, i) => (
-          <ListItem key={i} data-progress={text}>
+          <ListItem key={i} data-tabname={text}>
             <NavLink to={`/${text.toLowerCase()}`}>{text}</NavLink>
           </ListItem>
         ))}
+        <ListItem>
+          <a href="mailto:filip.drzazga@gmail.com">LET&apos;S TALK</a>
+        </ListItem>
       </List>
       <NavbarMask />
     </NavbarContainer>

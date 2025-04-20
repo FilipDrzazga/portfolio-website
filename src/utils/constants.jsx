@@ -16,13 +16,12 @@ const TECH_STACK = ["JAVASCRIPT / REACT / REACT NATIVE", "R3F / THREEJS / MOTION
 const CONTACT_TITLE = ["FOR INQUIRIES, COLLABORATIONS, OR JOB"];
 const FOOTER_TEXT1_ARR = ["DESIGNED & DEVELOPED BY FILIP DRZAZGA"];
 const FOOTER_TEXT2_ARR = ["2@25 ALL RIGHTS RESERVED"];
-// const SOCIAL_LINKS = ["GITHUB", "LINKEDIN"];
 const SOCIAL_LINKS = [
   { name: "GITHUB", url: "https://github.com/FilipDrzazga", target: "_blank", rel: "noopener noreferrer" },
   { name: "LINKEDIN", url: "https://www.linkedin.com/in/filip-drzazga-b33435231/", target: "_blank", rel: "noopener noreferrer" },
 ];
 
-const NAVIGATION_LINKS = ["BIO", "PLAYGROUND", "WORK", "LET'S TALK"];
+const NAVIGATION_LINKS = ["BIO", "PLAYGROUND", "WORK"];
 
 const ANIMATIONS_LIST = [
   {
