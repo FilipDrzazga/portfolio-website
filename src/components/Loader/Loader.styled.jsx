@@ -10,6 +10,7 @@ const Container = styled.section`
   justify-content: center;
   align-items: center;
   background-color: white;
+  z-index: 1000;
 `;
 const Content = styled.div`
   width: 100%;
