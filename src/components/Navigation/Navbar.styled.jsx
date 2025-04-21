@@ -39,6 +39,15 @@ const ListItem = styled.li`
   align-items: center;
   cursor: pointer;
   overflow: hidden;
+  .processing {
+    position: absolute;
+    top: 5%;
+    left: 10%;
+    font-family: "Oswald-regular";
+    font-size: 0.5rem;
+    color: #ff6961;
+    pointer-events: none;
+  }
   a {
     display: inline-block;
     font-family: "Oswald-regular";
@@ -55,17 +64,17 @@ const ListItem = styled.li`
     width: 15%;
     pointer-events: none;
     cursor: not-allowed;
-    &::after {
-      content: "PROCESSING";
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      top: 5%;
-      left: 10%;
-      font-family: "Oswald-regular";
-      font-size: 0.5rem;
-      color: #ff6961;
-    }
+    // &::after {
+    //   content: "PROCESSING";
+    //   position: absolute;
+    //   width: 100%;
+    //   height: 100%;
+    //   top: 5%;
+    //   left: 10%;
+    //   font-family: "Oswald-regular";
+    //   font-size: 0.5rem;
+    //   color: #ff6961;
+    // }
   }
 `;
 const NavLink = styled(motion(Link))`

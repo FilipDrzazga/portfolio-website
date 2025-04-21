@@ -24,6 +24,16 @@ const Navbar = () => {
             >
               {text}
             </NavLink>
+            {text === "WORK" && (
+              <motion.span
+                className="processing"
+                initial={{ y: 15 }}
+                animate={{ y: 0 }}
+                transition={{ duration: 1, ease: "easeInOut", type: "spring" }}
+              >
+                PROCESSING
+              </motion.span>
+            )}
           </ListItem>
         ))}
         <ListItem>
