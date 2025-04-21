@@ -14,12 +14,10 @@ const CoordinatesDisplay = () => {
       {COORDINATES_ARR.map((coordinate, i) => (
         <CoordinatesDisplayItem style={{ opacity, y }} key={i}>
           <CoordinatesDisplayItemSpan
-            initial={!hasAnimated ? { y: 15 } : undefined}
-            animate={!hasAnimated ? { y: 0 } : undefined}
+            initial={!hasAnimated && { y: 15 }}
+            animate={!hasAnimated && { y: 0 }}
             transition={{ duration: 1, ease: "easeInOut", type: "spring" }}
-            onAnimationComplete={() => {
-              hasAnimated = true;
-            }}
+            onAnimationComplete={() => (hasAnimated = true)}
             key={i}
           >
             {coordinate}

@@ -1,5 +1,6 @@
 import { Link } from "react-router";
 import styled from "styled-components";
+import { motion } from "motion/react";
 import { DEVICE } from "../../styles/theme";
 
 const NavbarContainer = styled.nav`
@@ -33,8 +34,13 @@ const List = styled.ul`
   margin: 0;
 `;
 const ListItem = styled.li`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   cursor: pointer;
+  overflow: hidden;
   a {
+    display: inline-block;
     font-family: "Oswald-regular";
     font-size: ${({ theme }) => theme.fontSizes.small};
     color: ${({ theme }) => theme.colors.primary};
@@ -46,22 +52,24 @@ const ListItem = styled.li`
   }
   &[data-tabname="WORK"] {
     position: relative;
+    width: 15%;
     pointer-events: none;
     cursor: not-allowed;
     &::after {
-      content: "INPROGRESS INPROGRESS INPROGRESS";
+      content: "PROCESSING";
       position: absolute;
       width: 100%;
       height: 100%;
-      top: -50%;
-      left: -40%;
+      top: 5%;
+      left: 10%;
       font-family: "Oswald-regular";
       font-size: 0.5rem;
       color: #ff6961;
     }
   }
 `;
-const NavLink = styled(Link)`
+const NavLink = styled(motion(Link))`
+  display: inline-block;
   @media ${DEVICE.MOBILE_S} {
     font-size: 0.8rem;
   }
