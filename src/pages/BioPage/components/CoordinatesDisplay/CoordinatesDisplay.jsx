@@ -1,6 +1,8 @@
 import { useTransform, useScroll } from "motion/react";
 import { COORDINATES_ARR } from "../../../../utils/constants";
-import { CoordinatesDisplayContainer, CoordinatesDisplayItem } from "./CoordinatesDisplay.styled";
+import { CoordinatesDisplayContainer, CoordinatesDisplayItem, CoordinatesDisplayItemSpan } from "./CoordinatesDisplay.styled";
+
+let hasAnimated = false;
 
 const CoordinatesDisplay = () => {
   const { scrollY } = useScroll();
@@ -11,7 +13,17 @@ const CoordinatesDisplay = () => {
     <CoordinatesDisplayContainer>
       {COORDINATES_ARR.map((coordinate, i) => (
         <CoordinatesDisplayItem style={{ opacity, y }} key={i}>
-          <span key={i}>{coordinate}</span>
+          <CoordinatesDisplayItemSpan
+            initial={!hasAnimated ? { y: 15 } : undefined}
+            animate={!hasAnimated ? { y: 0 } : undefined}
+            transition={{ duration: 1, ease: "easeInOut", type: "spring" }}
+            onAnimationComplete={() => {
+              hasAnimated = true;
+            }}
+            key={i}
+          >
+            {coordinate}
+          </CoordinatesDisplayItemSpan>
         </CoordinatesDisplayItem>
       ))}
     </CoordinatesDisplayContainer>

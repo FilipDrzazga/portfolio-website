@@ -14,9 +14,19 @@ const CoordinatesDisplayItem = styled(motion.div)`
   font-family: "Oswald-regular";
   font-size: ${({ theme }) => theme.fontSizes.small};
   color: ${({ theme }) => theme.colors.primary};
+  overflow: hidden;
+  @media ${DEVICE.MOBILE_S} {
+    font-size: 0.8rem;
+  }
+`;
+const CoordinatesDisplayItemSpan = styled(motion.span)`
+  display: inline-block;
+  font-family: "Oswald-regular";
+  font-size: ${({ theme }) => theme.fontSizes.small};
+  color: ${({ theme }) => theme.colors.primary};
   @media ${DEVICE.MOBILE_S} {
     font-size: 0.8rem;
   }
 `;
 
-export { CoordinatesDisplayContainer, CoordinatesDisplayItem };
+export { CoordinatesDisplayContainer, CoordinatesDisplayItem, CoordinatesDisplayItemSpan };

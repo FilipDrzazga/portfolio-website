@@ -8,9 +8,9 @@ const App = () => {
     <BrowserRouter basename="/portfolio-website">
       <Navbar />
       <Routes>
-        <Route path="/" element={<BioPage />} />
-        <Route path="/bio" element={<BioPage />} />
-        <Route path="/playground" element={<PlaygroundPage />} />
+        <Route index element={<BioPage />} />
+        <Route path="bio" element={<BioPage />} />
+        <Route path="playground" element={<PlaygroundPage />} />
       </Routes>
     </BrowserRouter>
   );
