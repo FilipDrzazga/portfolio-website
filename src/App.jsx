@@ -1,17 +1,13 @@
-import { BrowserRouter, Routes, Route } from "react-router";
+import { BrowserRouter } from "react-router";
 import Navbar from "./components/Navigation/Navbar";
-import BioPage from "./pages/BioPage/BioPage";
-import PlaygroundPage from "./pages/PlaygroundPage/PlaygroundPage";
+
+import PageRoutes from "./routes/PageRoutes";
 
 const App = () => {
   return (
     <BrowserRouter basename="/portfolio-website">
       <Navbar />
-      <Routes>
-        <Route index element={<BioPage />} />
-        <Route path="bio" element={<BioPage />} />
-        <Route path="playground" element={<PlaygroundPage />} />
-      </Routes>
+      <PageRoutes />
     </BrowserRouter>
   );
 };

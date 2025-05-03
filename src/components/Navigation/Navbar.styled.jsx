@@ -19,9 +19,9 @@ const NavbarMask = styled.div`
   top: 0;
   left: 0;
   z-index: -1;
-  backdrop-filter: blur(10px);
-  -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 20%, rgba(0, 0, 0, 0.3) 80%, rgba(0, 0, 0, 0) 100%);
-  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 20%, rgba(0, 0, 0, 0.3) 80%, rgba(0, 0, 0, 0) 100%);
+  // backdrop-filter: blur(10px);
+  // -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 20%, rgba(0, 0, 0, 0.3) 80%, rgba(0, 0, 0, 0) 100%);
+  // mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 20%, rgba(0, 0, 0, 0.3) 80%, rgba(0, 0, 0, 0) 100%);
 `;
 const List = styled.ul`
   display: flex;
@@ -55,26 +55,15 @@ const ListItem = styled.li`
     color: ${({ theme }) => theme.colors.primary};
     text-decoration: none;
     outline: none;
-  }
-  @media ${DEVICE.MOBILE_S} {
-    font-size: 0.8rem;
+    @media ${DEVICE.MOBILE_S} {
+      font-size: 0.8rem;
+    }
   }
   &[data-tabname="WORK"] {
     position: relative;
     width: 15%;
     pointer-events: none;
     cursor: not-allowed;
-    // &::after {
-    //   content: "PROCESSING";
-    //   position: absolute;
-    //   width: 100%;
-    //   height: 100%;
-    //   top: 5%;
-    //   left: 10%;
-    //   font-family: "Oswald-regular";
-    //   font-size: 0.5rem;
-    //   color: #ff6961;
-    // }
   }
 `;
 const NavLink = styled(motion(Link))`

@@ -9,6 +9,7 @@ const HeroContainer = styled.section`
   justify-content: flex-end;
   align-items: center;
   padding: ${({ theme }) => theme.spacing.normal};
+  background-color: ${({ $backgroundColor }) => $backgroundColor};
 `;
 const AboutMeContainer = styled.section`
   display: flex;

@@ -29,7 +29,7 @@ const GlobalStyle = createGlobalStyle`
 }
 
 body {
-    background-color: #ffffff;
+    background-color: #1e1e1e;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
