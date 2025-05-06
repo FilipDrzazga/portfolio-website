@@ -7,9 +7,9 @@ const CoordinatesDisplayContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  height: clamp(5vh, 10vh, 15vh);
-  // padding-top: 2rem; */ added to get same position as nav on mobile */
-  padding-bottom: 2rem;
+  height: clamp(5vh, 15vh, 20vh);
+  padding-top: 2rem; */ added to get same position as nav on mobile */
+  // padding-bottom: 2rem;
 `;
 const CoordinatesDisplayItem = styled(motion.div)`
   font-family: "Oswald-regular";

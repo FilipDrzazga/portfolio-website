@@ -8,7 +8,7 @@ const NavbarContainer = styled.nav`
   top: 0;
   left: 0;
   width: 100vw;
-  height: clamp(5vh, 10vh, 15vh);
+  height: clamp(5vh, 15vh, 15vh);
   padding: ${({ theme }) => theme.spacing.normal};
   z-index: 1;
 `;

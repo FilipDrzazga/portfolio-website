@@ -66,10 +66,21 @@ float cnoise(vec2 P) {
 }
 
 void main() {
+    float screenAspect = u_resolution.x / u_resolution.y;
+    float textureAspect = u_bioTextureDimensions.x / u_bioTextureDimensions.y;
+
     vec4 backgroundColor = vec4(1.0,1.0,1.0, 1.0);
 
     vec2 center = vec2(0.5);
     vec2 scaledUV = (vUv - center) / 0.65 + center;
+
+    if (screenAspect > textureAspect) {
+    float scale = textureAspect / screenAspect;
+    scaledUV.y = (scaledUV.y - 0.5) * scale + 0.5;
+} else {
+    float scale = screenAspect / textureAspect;
+    scaledUV.x = (scaledUV.x - 0.5) * scale + 0.5;
+}
 
     float noiseFrequency = 0.95;
     float slowTime = u_time * 0.1;
@@ -93,22 +104,3 @@ void main() {
         gl_FragColor = texColor;
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
