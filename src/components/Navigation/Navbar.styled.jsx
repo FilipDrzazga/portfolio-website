@@ -8,21 +8,21 @@ const NavbarContainer = styled.nav`
   top: 0;
   left: 0;
   width: 100vw;
-  height: clamp(10vh, 15vh, 20vh);
+  height: clamp(5vh, 10vh, 15vh);
   padding: ${({ theme }) => theme.spacing.normal};
   z-index: 1;
 `;
-const NavbarMask = styled.div`
-  width: 100%;
-  height: 20vh;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: -1;
-  // backdrop-filter: blur(10px);
-  // -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 20%, rgba(0, 0, 0, 0.3) 80%, rgba(0, 0, 0, 0) 100%);
-  // mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 20%, rgba(0, 0, 0, 0.3) 80%, rgba(0, 0, 0, 0) 100%);
-`;
+// const NavbarMask = styled.div`
+//   width: 100%;
+//   height: 20vh;
+//   position: absolute;
+//   top: 0;
+//   left: 0;
+//   z-index: -1;
+//   backdrop-filter: blur(10px);
+//   -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 20%, rgba(0, 0, 0, 0.3) 80%, rgba(0, 0, 0, 0) 100%);
+//   mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 20%, rgba(0, 0, 0, 0.3) 80%, rgba(0, 0, 0, 0) 100%);
+// `;
 const List = styled.ul`
   display: flex;
   justify-content: space-between;
@@ -73,4 +73,4 @@ const NavLink = styled(motion(Link))`
   }
 `;
 
-export { NavbarContainer, NavbarMask, List, ListItem, NavLink };
+export { NavbarContainer, List, ListItem, NavLink };

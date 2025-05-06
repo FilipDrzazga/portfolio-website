@@ -3,12 +3,13 @@ import { motion } from "motion/react";
 import { DEVICE } from "../../../../styles/theme";
 
 const CoordinatesDisplayContainer = styled.div`
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    height: clamp(10vh, 15vh, 20vh);
-    padding-top: 2rem; */ added to get same position as nav on mobile */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: clamp(5vh, 10vh, 15vh);
+  // padding-top: 2rem; */ added to get same position as nav on mobile */
+  padding-bottom: 2rem;
 `;
 const CoordinatesDisplayItem = styled(motion.div)`
   font-family: "Oswald-regular";

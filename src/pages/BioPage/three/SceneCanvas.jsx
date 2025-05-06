@@ -18,7 +18,7 @@ const SceneCanvas = () => {
     if (progress === 100) {
       const timer = setTimeout(() => {
         setIsCanvasLoaded(true);
-      }, 3000);
+      }, 4000);
       return () => clearTimeout(timer);
     }
   }, [progress, setIsCanvasLoaded]);

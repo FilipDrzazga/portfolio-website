@@ -35,7 +35,7 @@ const AnimatedRoutes = ({ children, locationPathName }) => {
 
   return (
     <>
-      <AnimatePresence mode="wait">
+      <AnimatePresence initial={false} mode="wait">
         {isPageTransitionStart && (
           <AnimatedBackground
             variants={AnimatedBackgroundVariants}
@@ -55,7 +55,7 @@ const AnimatedRoutes = ({ children, locationPathName }) => {
           </AnimatedBackground>
         )}
       </AnimatePresence>
-      <AnimatePresence mode="wait" onExitComplete={() => window.scrollTo(0, 0)}>
+      <AnimatePresence initial={false} mode="wait" onExitComplete={() => window.scrollTo(0, 0)}>
         <PageAnimatedContainer
           ref={pageAnimatedContainerRef}
           key={locationPathName}
