@@ -1,65 +1,73 @@
 /* eslint-disable react/prop-types */
-import { useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { AnimatePresence } from "motion/react";
-import { AnimatedContainer, AnimatedBackground, AnimatedTextContainer, AnimatedText } from "./AnimatedRoutes.styled";
+import { PageAnimatedContainer, AnimatedBackground, AnimatedTextContainer, AnimatedText } from "./AnimatedRoutes.styled";
 
-const AnimatedContainerVariants = {
-  initial: { scale: 1 },
-  animate: { scale: 1, transition: { duration: 2, delay: 0.2, ease: "easeIn" } },
-  exit: { scale: [1, 0.9, 0.9, 1], transition: { duration: 2, delay: 0.2, ease: "easeOut" } },
+const PageAnimatedContainerVariants = {
+  initial: { opacity: 1 },
+  animate: { opacity: 1, transition: { duration: 2, ease: "easeIn" } },
+  exit: { opacity: [1, 0, 0, 0], transition: { duration: 4, ease: "easeOut" } },
 };
 const AnimatedBackgroundVariants = {
-  initial: { opacity: 0 },
-  animate: { opacity: 0, transition: { duration: 0.2, ease: "easeIn" } },
-  exit: { opacity: 1, transition: { duration: 0.2, ease: "easeOut" } },
+  initial: { opacity: 0.95, scale: 1 },
+  animate: { opacity: 1, scale: [1, 0.9, 0.9], transition: { duration: 2, ease: "easeIn" } },
+  exit: { opacity: 1, scale: [0.9, 0.9, 1], transition: { duration: 2, ease: "easeOut" } },
 };
 const AnimatedTextVariants = {
   initial: { y: 20 },
-  animate: { y: 20, transition: { duration: 2, ease: "easeIn" } },
-  exit: { y: [20, 0, 0, -20], transition: { duration: 2, ease: "easeOut" } },
+  animate: { y: 0, transition: { delay: 0.8, duration: 1, type: "spring", bounce: 0.5 } },
+  exit: { y: -20, transition: { delay: 1, duration: 1, ease: "easeOut" } },
 };
 
 const AnimatedRoutes = ({ children, locationPathName }) => {
   const locationName = useRef("PLAYGROUND"); // change when you add more pages
-  const animationControls = useRef(null);
+
+  const pageAnimatedContainerRef = useRef(null);
+  const [isPageTransitionStart, setIsPageTransitionStart] = useState(false);
 
   useEffect(() => {
-    let timer;
     locationName.current = locationPathName.split("/")[1].toUpperCase();
-
-    if (animationControls.current && locationPathName !== locationName.current) {
-      animationControls.current.style.overflow = "hidden";
-
-      timer = setTimeout(() => {
-        animationControls.current.style.overflow = "";
-      }, 3000);
+    if (locationPathName !== locationName.current) {
+      document.body.style.overflow = "hidden";
+      setIsPageTransitionStart(true);
     }
-
-    return () => {
-      clearTimeout(timer);
-    };
   }, [locationPathName]);
 
   return (
-    <AnimatePresence mode="wait" onExitComplete={() => window.scrollTo(0, 0)}>
-      <AnimatedContainer
-        ref={animationControls}
-        key={locationPathName}
-        variants={AnimatedContainerVariants}
-        initial="initial"
-        animate="animate"
-        exit="exit"
-      >
-        <AnimatedBackground variants={AnimatedBackgroundVariants} initial="initial" animate="animate" exit="exit">
-          <AnimatedTextContainer>
-            <AnimatedText variants={AnimatedTextVariants} initial="initial" animate="animate" exit="exit">
-              {locationName.current}
-            </AnimatedText>
-          </AnimatedTextContainer>
-        </AnimatedBackground>
-        {children}
-      </AnimatedContainer>
-    </AnimatePresence>
+    <>
+      <AnimatePresence mode="wait">
+        {isPageTransitionStart && (
+          <AnimatedBackground
+            variants={AnimatedBackgroundVariants}
+            initial="initial"
+            animate="animate"
+            exit="exit"
+            onAnimationComplete={() => {
+              setIsPageTransitionStart(false);
+              document.body.style.overflow = "auto";
+            }}
+          >
+            <AnimatedTextContainer>
+              <AnimatedText variants={AnimatedTextVariants} initial="initial" animate="animate" exit="exit">
+                {locationName.current}
+              </AnimatedText>
+            </AnimatedTextContainer>
+          </AnimatedBackground>
+        )}
+      </AnimatePresence>
+      <AnimatePresence mode="wait" onExitComplete={() => window.scrollTo(0, 0)}>
+        <PageAnimatedContainer
+          ref={pageAnimatedContainerRef}
+          key={locationPathName}
+          variants={PageAnimatedContainerVariants}
+          initial="initial"
+          animate="animate"
+          exit="exit"
+        >
+          {children}
+        </PageAnimatedContainer>
+      </AnimatePresence>
+    </>
   );
 };
 

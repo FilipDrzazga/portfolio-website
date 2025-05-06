@@ -2,18 +2,19 @@ import styled from "styled-components";
 import { motion } from "motion/react";
 import { DEVICE } from "../../styles/theme";
 
-const AnimatedContainer = styled(motion.div)`
+const PageAnimatedContainer = styled(motion.div)`
   position: relative;
   width: 100%;
   height: 100vh;
 `;
 const AnimatedBackground = styled(motion.div)`
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   background-color: white;
+  overflow: hidden;
 `;
 const AnimatedTextContainer = styled.div`
   position: absolute;
@@ -34,4 +35,4 @@ const AnimatedText = styled(motion.span)`
   }
 `;
 
-export { AnimatedContainer, AnimatedBackground, AnimatedTextContainer, AnimatedText };
+export { PageAnimatedContainer, AnimatedBackground, AnimatedTextContainer, AnimatedText };
