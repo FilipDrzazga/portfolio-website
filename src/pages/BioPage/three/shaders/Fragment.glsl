@@ -71,7 +71,7 @@ void main() {
 
     vec4 backgroundColor = vec4(1.0,1.0,1.0, 1.0);
 
-    vec2 center = vec2(0.5);
+    vec2 center = vec2(0.5, 0.63);
     vec2 scaledUV = (vUv - center) / 0.65 + center;
 
     if (screenAspect > textureAspect) {
@@ -94,7 +94,13 @@ void main() {
 
     // Clamp UV to safe bounds before sampling
     vec2 safeUV = clamp(distortedUV, vec2(0.0), vec2(1.0));
-    vec4 texColor = texture2D(u_bioImgTexture, safeUV);
+
+    // Texture-only scale from 1.2 to 1.0 over first 2 seconds
+    float textureScale = mix(1.2, 1.0, clamp(u_time /1.0, 0.0, 1.0));
+
+    vec2 scaledSampleUV = (safeUV - center) / textureScale + center;
+
+    vec4 texColor = texture2D(u_bioImgTexture, scaledSampleUV);
 
     // Optional: use background if UV too far out (mobile precision fallback)
     if (distortedUV.x < 0.0 || distortedUV.x > 1.0 ||

@@ -2,11 +2,9 @@ import { useTransform, useScroll } from "motion/react";
 import { COORDINATES_ARR } from "../../../../utils/constants";
 import { CoordinatesDisplayContainer, CoordinatesDisplayItem, CoordinatesDisplayItemSpan } from "./CoordinatesDisplay.styled";
 
-let hasAnimated = false;
-
 const CoordinatesDisplay = () => {
   const { scrollY } = useScroll();
-  const y = useTransform(scrollY, [0, 100], [0, -100]);
+  const y = useTransform(scrollY, [0, 100], [0, 100]);
   const opacity = useTransform(scrollY, [0, 100], [1, 0]);
 
   return (
@@ -14,10 +12,9 @@ const CoordinatesDisplay = () => {
       {COORDINATES_ARR.map((coordinate, i) => (
         <CoordinatesDisplayItem style={{ opacity, y }} key={i}>
           <CoordinatesDisplayItemSpan
-            initial={!hasAnimated && { y: 15 }}
-            animate={!hasAnimated && { y: 0 }}
-            transition={{ duration: 1, ease: "easeInOut", type: "spring" }}
-            onAnimationComplete={() => (hasAnimated = true)}
+            initial={{ y: 15 }}
+            animate={{ y: 0 }}
+            transition={{ delay: 0.3, duration: 1.8, ease: "easeOut", type: "spring" }}
             key={i}
           >
             {coordinate}

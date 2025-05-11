@@ -11,6 +11,8 @@ import {
   ContactTitle,
   SocialLinks,
   FooterText,
+  TextureMask,
+  ScrollToExplore,
 } from "./components";
 import { HeroContainer, AboutMeContainer, AboutMeContent, ContactContainer, ContactContent } from "./BioPage.styled";
 
@@ -36,7 +38,9 @@ const BioPage = () => {
       ) : (
         <>
           <HeroContainer $backgroundColor={isPageLoaded ? "transparent" : "white"}>
+            <TextureMask />
             <CoordinatesDisplay />
+            <ScrollToExplore />
           </HeroContainer>
           <AboutMeContainer>
             <AboutMeContent>

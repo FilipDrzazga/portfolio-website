@@ -16,7 +16,7 @@ const Navbar = () => {
             <NavLink
               initial={{ y: -15 }}
               animate={{ y: 0 }}
-              transition={{ duration: 1, ease: "easeInOut", type: "spring" }}
+              transition={{ delay: 0.3, duration: 1.8, ease: "easeOut", type: "spring" }}
               to={`/${text.toLowerCase()}`}
             >
               {text}
@@ -26,7 +26,7 @@ const Navbar = () => {
                 className="processing"
                 initial={{ y: 15 }}
                 animate={{ y: 0 }}
-                transition={{ duration: 1, ease: "easeInOut", type: "spring" }}
+                transition={{ delay: 0.3, duration: 1.8, ease: "easeOut", type: "spring" }}
               >
                 PROCESSING
               </motion.span>
@@ -38,7 +38,7 @@ const Navbar = () => {
             href="mailto:filip.drzazga@gmail.com"
             initial={{ y: -15 }}
             animate={{ y: 0 }}
-            transition={{ duration: 1, ease: "easeInOut", type: "spring" }}
+            transition={{ delay: 0.3, duration: 1.8, ease: "easeOut", type: "spring" }}
           >
             LET&apos;S TALK
           </motion.a>

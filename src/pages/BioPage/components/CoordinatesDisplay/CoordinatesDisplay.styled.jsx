@@ -6,10 +6,9 @@ const CoordinatesDisplayContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
-  height: clamp(5vh, 15vh, 20vh);
-  padding-top: 2rem; */ added to get same position as nav on mobile */
-  // padding-bottom: 2rem;
+  width: 83%;
+  gap: 0.5rem;
+  height: auto;
 `;
 const CoordinatesDisplayItem = styled(motion.div)`
   font-family: "Oswald-regular";

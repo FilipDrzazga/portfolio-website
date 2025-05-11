@@ -2,13 +2,16 @@ import styled from "styled-components";
 import { DEVICE } from "../../styles/theme";
 
 const HeroContainer = styled.section`
+  position: relative;
   width: 100%;
   height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   align-items: center;
+  gap: 6rem;
   padding: ${({ theme }) => theme.spacing.normal};
+  padding-bottom: 5rem;
   background-color: ${({ $backgroundColor }) => $backgroundColor};
 `;
 const AboutMeContainer = styled.section`

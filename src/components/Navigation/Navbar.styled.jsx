@@ -8,7 +8,7 @@ const NavbarContainer = styled.nav`
   top: 0;
   left: 0;
   width: 100vw;
-  height: clamp(5vh, 15vh, 15vh);
+  height: clamp(5vh, 10vh, 15vh);
   padding: ${({ theme }) => theme.spacing.normal};
   z-index: 1;
 `;
@@ -34,6 +34,7 @@ const List = styled.ul`
   margin: 0;
 `;
 const ListItem = styled.li`
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -41,10 +42,11 @@ const ListItem = styled.li`
   overflow: hidden;
   .processing {
     position: absolute;
-    top: 5%;
-    left: 10%;
+    top: 50;
+    left: 50;
+    transform: translate(-50%, -60%);
     font-family: "Oswald-regular";
-    font-size: 0.5rem;
+    font-size: 0.6rem;
     color: #ff6961;
     pointer-events: none;
   }
