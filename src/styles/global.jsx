@@ -1,25 +1,46 @@
 import { createGlobalStyle } from "styled-components";
-import OswaldLight from "../assets/font/Oswald-Light.woff2";
-import OswaldRegular from "../assets/font/Oswald-Regular.woff2";
-import OswaldMedium from "../assets/font/Oswald-Medium.woff2";
-import OswaldBold from "../assets/font/Oswald-Bold.woff2";
+
+import JetBrainsMonoLight from "../assets/font/JetBrainsMono-Light.woff2";
+import JetBrainsMonoRegular from "../assets/font/JetBrainsMono-Regular.woff2";
+import JetBrainsMonoMedium from "../assets/font/JetBrainsMono-Medium.woff2";
+import JetBrainsMonoBold from "../assets/font/JetBrainsMono-Bold.woff2";
+import JetBrainsMonoExtraBold from "../assets/font/JetBrainsMono-ExtraBold.woff2";
+import InterRegular from "../assets/font/Inter-Regular.woff2";
+import InterBold from "../assets/font/Inter-Bold.woff2";
+import InterExtraBold from "../assets/font/Inter-ExtraBold.woff2";
 
 const GlobalStyle = createGlobalStyle`
 @font-face {
-  font-family: "Oswald-light";
-  src: url(${OswaldLight}) format("woff2");
+  font-family: "JetBrainsMonoLight";
+  src: url(${JetBrainsMonoLight}) format("woff2");
 }
 @font-face {
-  font-family: "Oswald-regular";
-  src: url(${OswaldRegular}) format("woff2");
+  font-family: "JetBrainsMonoRegular";
+  src: url(${JetBrainsMonoRegular}) format("woff2");
 }
 @font-face {
-  font-family: "Oswald-medium";
-  src: url(${OswaldMedium}) format("woff2");
+  font-family: "JetBrainsMonoMedium";
+  src: url(${JetBrainsMonoMedium}) format("woff2");
 }
 @font-face {
-  font-family: "Oswald-bold";
-  src: url(${OswaldBold}) format("woff2");
+  font-family: "JetBrainsMonoBold";
+  src: url(${JetBrainsMonoBold}) format("woff2");
+}
+@font-face {
+  font-family: "JetBrainsMonoExtraBold";
+  src: url(${JetBrainsMonoExtraBold}) format("woff2");
+}
+@font-face {
+  font-family: "InterRegular";
+  src: url(${InterRegular}) format("woff2");
+}
+@font-face {
+  font-family: "InterBold";
+  src: url(${InterBold}) format("woff2");
+}
+@font-face {
+  font-family: "InterExtraBold";
+  src: url(${InterExtraBold}) format("woff2");
 }
 
 * {
@@ -29,7 +50,7 @@ const GlobalStyle = createGlobalStyle`
 }
 
 body {
-    background-color: #1e1e1e;
+    background-color:rgb(199, 19, 19);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;

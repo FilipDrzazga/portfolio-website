@@ -15,40 +15,39 @@ const Header = styled.header`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   width: 100%;
   margin-bottom: ${({ theme }) => theme.spacing.medium};
 `;
 const Subtitle = styled.h2`
-  width: 98%;
-  font-family: "Oswald-medium";
-  font-size: ${({ theme }) => theme.fontSizes.medium};
+  width: 100%;
+  font-family: "JetBrainsMonoMedium";
+  font-weight: 400;
+  font-size: ${({ theme }) => theme.fontSizes.small};
   color: ${({ theme }) => theme.colors.primary};
-  line-height: 1rem;
-  text-align: justify;
-  text-align-last: justify;
-    @media ${DEVICE.MOBILE_S} {
+  @media ${DEVICE.MOBILE_S} {
     font-size: 4rem;
     line-height: 4rem;
   }
 `;
 const Title = styled.h1`
-  font-family: "Oswald-medium";
+  width: 100%;
+  font-family: "InterRegular";
   font-size: ${({ theme }) => theme.fontSizes.large};
   color: ${({ theme }) => theme.colors.primary};
-  word-spacing: -0.2rem;
-  line-height: ${({ theme }) => theme.fontSizes.large};
   cursor: pointer;
-    a {
+  text-align: center;
+  a {
     text-decoration: none;
     color: inherit;
   }
-    @media ${DEVICE.MOBILE_S} {
+  @media ${DEVICE.MOBILE_S} {
     font-size: 1.2rem;
     line-height: 1.3rem;
   }
 `;
-const SocialLinksContainer = styled.div`
-width: 100%;
+const SocialLinksWrapper = styled.div`
+  width: 100%;
 `;
 const SocialLinksList = styled.ul`
   width: 100%;
@@ -61,7 +60,7 @@ const SocialLinksListItem = styled.li`
   list-style: none;
 `;
 const SocialLinksLink = styled.a`
-  font-family: "Oswald-regular";
+  font-family: "JetBrainsMonoMedium";
   font-size: ${({ theme }) => theme.fontSizes.small};
   color: ${({ theme }) => theme.colors.primary};
   text-decoration: none;
@@ -78,11 +77,20 @@ const Footer = styled.footer`
   align-items: center;
 `;
 const FooterText = styled.p`
-  font-family: "Oswald-regular";
-  font-size: ${({ theme }) => theme.fontSizes.small};
+  font-family: "JetBrainsMonoMedium";
+  font-size: 0.5rem;
   color: ${({ theme }) => theme.colors.primary};
 `;
 
-
-
-export {ContactWrapper, Header, Title, Subtitle, SocialLinksContainer,SocialLinksList,SocialLinksListItem, SocialLinksLink, Footer, FooterText};
+export {
+  ContactWrapper,
+  Header,
+  Title,
+  Subtitle,
+  SocialLinksWrapper,
+  SocialLinksList,
+  SocialLinksListItem,
+  SocialLinksLink,
+  Footer,
+  FooterText,
+};

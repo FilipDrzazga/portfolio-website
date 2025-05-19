@@ -1,14 +1,6 @@
 import styled from "styled-components";
 import { DEVICE } from "../../../../styles/theme";
 
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   width: 100%;
-//   height: auto;
-//   padding: ${({ theme }) => theme.spacing.normal};
-//   overflow: hidden;
-
 const AboutMeWrapper = styled.section`
   position: relative;
   width: 100%;
@@ -18,14 +10,14 @@ const AboutMeWrapper = styled.section`
   justify-content: center;
   align-items: center;
   padding: ${({ theme }) => theme.spacing.normal};
-`
+`;
 const Header = styled.header`
-display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-width: 100%;
-z-index: -1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  z-index: -1;
   @media ${DEVICE.MOBILE_XS} {
     width: 90%;
   }
@@ -35,8 +27,8 @@ z-index: -1;
 `;
 const Title = styled.h1`
   width: 100%;
-  margin-bottom: ${({ theme }) => theme.spacing.normal};
-  font-family: "Oswald-medium";
+  margin-bottom: ${({ theme }) => theme.spacing.medium};
+  font-family: "InterRegular";
   font-size: ${({ theme }) => theme.fontSizes.large};
   color: ${({ theme }) => theme.colors.primary};
   @media ${DEVICE.MOBILE_S} {
@@ -45,13 +37,14 @@ const Title = styled.h1`
   }
 `;
 const Subtitle = styled.h2`
-  margin-bottom: ${({ theme }) => theme.spacing.medium};
-  font-family: "Oswald-medium";
-  font-size: ${({ theme }) => theme.fontSizes.medium};
+  margin-bottom: ${({ theme }) => theme.spacing.normal};
+  font-family: "JetBrainsMonoMedium";
+  font-weight: 400;
+  font-size: ${({ theme }) => theme.fontSizes.small};
   color: ${({ theme }) => theme.colors.primary};
   text-align: justify;
   text-justify: inter-word;
-  text-align-last: center;
+
   @media ${DEVICE.MOBILE_XS} {
     width: 89%;
   }
@@ -61,7 +54,7 @@ const Subtitle = styled.h2`
     line-height: 1.3rem;
   }
 `;
-const ParagraphsContainer = styled.div`
+const ParagraphsWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -77,7 +70,7 @@ const ParagraphsContainer = styled.div`
   }
 `;
 const Text = styled.p`
-  font-family: "Oswald-regular";
+  font-family: "JetBrainsMonoMedium";
   font-size: ${({ theme }) => theme.fontSizes.small};
   color: ${({ theme }) => theme.colors.primary};
   text-align: justify;
@@ -86,7 +79,7 @@ const Text = styled.p`
     font-size: 0.8rem;
   }
 `;
-const TechStackContainer = styled.div`
+const TechStackWrapper = styled.div`
   @media ${DEVICE.MOBILE_XS} {
     width: 90%;
   }
@@ -95,16 +88,13 @@ const TechStackContainer = styled.div`
   }
 `;
 const TechStack = styled.h3`
-  font-family: "Oswald-medium";
+  font-family: "JetBrainsMonoMedium";
   font-size: ${({ theme }) => theme.fontSizes.medium};
   color: ${({ theme }) => theme.colors.primary};
-  line-height: 1rem;
-  text-align: justify;
-  text-justify: inter-word;
   @media ${DEVICE.MOBILE_S} {
     font-size: 1.2rem;
     line-height: 1.3rem;
   }
 `;
 
-export { AboutMeWrapper, Header, Title, Subtitle, ParagraphsContainer, Text, TechStackContainer, TechStack };
+export { AboutMeWrapper, Header, Title, Subtitle, ParagraphsWrapper, Text, TechStackWrapper, TechStack };

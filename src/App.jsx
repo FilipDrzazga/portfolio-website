@@ -1,11 +1,12 @@
-import { BrowserRouter } from "react-router";
-import PageRoutes from "./routes/PageRoutes";
+import Navigation from "./components/Navigation/Navigation";
+import BioPage from "./pages/BioPage/BioPage";
 
 const App = () => {
   return (
-    <BrowserRouter basename="/portfolio-website">
-      <PageRoutes />
-    </BrowserRouter>
+    <>
+      <Navigation />
+      <BioPage />
+    </>
   );
 };
 

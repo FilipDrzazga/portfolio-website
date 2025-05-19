@@ -14,6 +14,7 @@ const SceneCanvas = () => {
     return newFovPosition;
   }, []);
 
+  // Set the canvas loaded state to true after a delay when progress is 100
   useEffect(() => {
     if (progress === 100) {
       const timer = setTimeout(() => {

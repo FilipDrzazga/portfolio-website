@@ -4,12 +4,12 @@ export const GLOBAL_THEME = {
   },
   fontSizes: {
     small: "0.6rem",
-    medium: "0.9rem",
-    large: "3.4rem",
+    medium: "0.8rem",
+    large: "3rem",
   },
   spacing: {
     normal: "1rem",
-    medium: "1.5rem",
+    medium: "2rem",
     large: "3rem",
   },
 };
