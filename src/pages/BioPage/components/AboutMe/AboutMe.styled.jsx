@@ -4,7 +4,7 @@ import { DEVICE } from "../../../../styles/theme";
 const AboutMeWrapper = styled.section`
   position: relative;
   width: 100%;
-  height: 100vh;
+  height: auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -16,7 +16,9 @@ const Header = styled.header`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 1rem;
   width: 100%;
+  margin-bottom: ${({ theme }) => theme.spacing.medium};
   z-index: -1;
   @media ${DEVICE.MOBILE_XS} {
     width: 90%;
@@ -27,7 +29,6 @@ const Header = styled.header`
 `;
 const Title = styled.h1`
   width: 100%;
-  margin-bottom: ${({ theme }) => theme.spacing.medium};
   font-family: "InterRegular";
   font-size: ${({ theme }) => theme.fontSizes.large};
   color: ${({ theme }) => theme.colors.primary};
@@ -37,10 +38,8 @@ const Title = styled.h1`
   }
 `;
 const Subtitle = styled.h2`
-  margin-bottom: ${({ theme }) => theme.spacing.normal};
-  font-family: "JetBrainsMonoMedium";
-  font-weight: 400;
-  font-size: ${({ theme }) => theme.fontSizes.small};
+  font-family: "JetBrainsMonoBold";
+  font-size: ${({ theme }) => theme.fontSizes.medium};
   color: ${({ theme }) => theme.colors.primary};
   text-align: justify;
   text-justify: inter-word;
@@ -59,7 +58,7 @@ const ParagraphsWrapper = styled.div`
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
-  gap: 1rem;
+  gap: 1.5rem;
   margin-bottom: ${({ theme }) => theme.spacing.medium};
   z-index: -1;
   @media ${DEVICE.MOBILE_XS} {
@@ -73,6 +72,7 @@ const Text = styled.p`
   font-family: "JetBrainsMonoMedium";
   font-size: ${({ theme }) => theme.fontSizes.small};
   color: ${({ theme }) => theme.colors.primary};
+  line-height: 1.6;
   text-align: justify;
   text-justify: inter-word;
   @media ${DEVICE.MOBILE_S} {

@@ -28,6 +28,17 @@ const NavigationItem = styled.li`
 const NavigationLink = styled.a`
   text-decoration: none;
   color: inherit;
+  span {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    font-size: ${({ theme }) => theme.fontSizes.small};
+    color: white;
+    background-color: ${({ theme }) => theme.colors.primary};
+  }
 `;
 
 export { NavigationWrapper, NavigationList, NavigationItem, NavigationLink };

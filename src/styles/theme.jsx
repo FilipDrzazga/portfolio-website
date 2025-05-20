@@ -9,7 +9,7 @@ export const GLOBAL_THEME = {
   },
   spacing: {
     normal: "1rem",
-    medium: "2rem",
+    medium: "2.5rem",
     large: "3rem",
   },
 };

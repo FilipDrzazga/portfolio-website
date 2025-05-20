@@ -50,7 +50,7 @@ const GlobalStyle = createGlobalStyle`
 }
 
 body {
-    background-color:rgb(199, 19, 19);
+    // background-color:rgb(199, 19, 19);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;

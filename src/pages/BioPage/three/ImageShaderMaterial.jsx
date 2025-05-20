@@ -1,23 +1,15 @@
 /* eslint-disable react/no-unknown-property */
 import { useEffect, useRef, useMemo } from "react";
-import { usePageStore } from "../../../store/useStore";
 import { useFrame } from "@react-three/fiber";
 import { useTexture } from "@react-three/drei";
 import * as THREE from "three";
 import { useScroll, useMotionValueEvent, animate } from "motion/react";
-import { useMediaQuery } from "react-responsive";
 import useResponsiveImages from "../../../hook/useResponsiveImages";
 
 import Vertex from "./shaders/Vertex.glsl?raw";
 import Fragment from "./shaders/Fragment.glsl?raw";
 
 const ImageShaderMaterial = () => {
-  const isCanvasLoaded = usePageStore((state) => state.isCanvasLoaded);
-  const isScreen = useMediaQuery({ minWidth: 1024 });
-  const isCustomRange = useMediaQuery({
-    width: 1024,
-    height: 1366,
-  });
   const { bioImageSrc } = useResponsiveImages();
 
   const mesh = useRef(null);
@@ -27,8 +19,6 @@ const ImageShaderMaterial = () => {
   const animationControls = useRef(null);
 
   const { scrollY } = useScroll();
-
-  const planeWidth = isScreen && !isCustomRange ? window.innerWidth * 0.45 : window.innerWidth;
 
   const textureSettings = useMemo(
     () => ({
@@ -54,15 +44,14 @@ const ImageShaderMaterial = () => {
 
   const uniforms = useMemo(
     () => ({
-      u_resolution: { value: new THREE.Vector2(planeWidth, window.innerHeight) },
+      u_resolution: { value: new THREE.Vector2(window.innerWidth, window.innerHeight) },
       u_bioImgTexture: { value: bioImgTexture },
       u_bioTextureDimensions: { value: new THREE.Vector2(1, 1) },
       u_scroll: { value: 0 },
       u_time: { value: 0 },
       u_progress: { value: 0 },
-      u_isScreen: { value: isScreen ? 1 : 0 },
     }),
-    [bioImgTexture, isScreen, planeWidth]
+    [bioImgTexture]
   );
 
   useFrame((state) => {
@@ -73,7 +62,7 @@ const ImageShaderMaterial = () => {
   });
 
   useEffect(() => {
-    if (!mesh.current || !isCanvasLoaded || !bioImgTexture?.image) return;
+    if (!mesh.current || !bioImgTexture?.image) return;
 
     materialRef.current = mesh.current.material;
 
@@ -101,7 +90,7 @@ const ImageShaderMaterial = () => {
       clearTimeout(timer);
       animationControls.current?.stop();
     };
-  }, [isCanvasLoaded, bioImgTexture, uniforms]);
+  }, [bioImgTexture, uniforms]);
 
   return (
     <mesh ref={mesh} position={[0, 0, 0, 0]}>
