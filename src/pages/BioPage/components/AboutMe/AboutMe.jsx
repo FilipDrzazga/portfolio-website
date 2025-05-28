@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { SplitText } from "gsap/SplitText";
@@ -16,6 +17,7 @@ import {
 gsap.registerPlugin(useGSAP, SplitText, ScrollTrigger);
 
 const AboutMe = () => {
+  useGSAP(() => {});
   return (
     <AboutMeWrapper>
       <Header>

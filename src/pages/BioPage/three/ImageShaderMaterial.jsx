@@ -20,21 +20,7 @@ const ImageShaderMaterial = () => {
 
   const { scrollY } = useScroll();
 
-  const textureSettings = useMemo(
-    () => ({
-      minFilter: THREE.LinearFilter,
-      magFilter: THREE.LinearFilter,
-      generateMipmaps: false,
-    }),
-    []
-  );
-
-  const [bioImgTexture] = useTexture([bioImageSrc], (textures) => {
-    textures.forEach((texture) => {
-      Object.assign(texture, textureSettings);
-      texture.needsUpdate = true;
-    });
-  });
+  const bioImgTexture = useTexture(bioImageSrc);
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     if (!documentScrollHeight.current) return;

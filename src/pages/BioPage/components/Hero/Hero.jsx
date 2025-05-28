@@ -85,8 +85,8 @@ const Hero = () => {
             ">-80%"
           );
 
-          // Loop spans animation
-          const loop = gsap.timeline({ repeat: -1, repeatDelay: 3, delay: 3 });
+          // Loop ScrollText spans animation
+          let loop = gsap.timeline({ repeat: -1, repeatDelay: 3, delay: 3 });
           loop
             .to(spans, {
               visibility: "visible",

@@ -68,45 +68,47 @@ float cnoise(vec2 P) {
 void main() {
     float screenAspect = u_resolution.x / u_resolution.y;
     float textureAspect = u_bioTextureDimensions.x / u_bioTextureDimensions.y;
+    vec4 whiteBg = vec4(1.0, 1.0, 1.0, 1.0);
 
-    vec4 backgroundColor = vec4(1.0,1.0,1.0, 1.0);
+    vec2 center = vec2(0.5, 0.5);
 
-    vec2 center = vec2(0.5, 0.63);
-    vec2 scaledUV = (vUv - center) / 0.65 + center;
+    vec2 uv = vUv;
+    uv = gl_FragCoord.xy / u_resolution; // normalize coordinates
+    uv -= center; // center the UV coordinates
 
-    if (screenAspect > textureAspect) {
-    float scale = textureAspect / screenAspect;
-    scaledUV.y = (scaledUV.y - 0.5) * scale + 0.5;
-} else {
+    vec2 scaledUV = uv;
+
+    if (textureAspect > screenAspect) {
     float scale = screenAspect / textureAspect;
-    scaledUV.x = (scaledUV.x - 0.5) * scale + 0.5;
-}
-
-    float noiseFrequency = 0.95;
-    float slowTime = u_time * 0.1;
-
-    float noiseVal = cnoise(scaledUV * noiseFrequency + slowTime);
-
-    vec2 dir = scaledUV - center + vec2(0.0, -5.0) * clamp(u_scroll, 0.0, 1.0);  // smoothly move on scroll
-
-    vec2 stretchedDir = dir * (1.0 + clamp(u_scroll, 0.0, 1.0) * 20.0 * noiseVal);
-    vec2 distortedUV = center + stretchedDir;
-
-    // Clamp UV to safe bounds before sampling
-    vec2 safeUV = clamp(distortedUV, vec2(0.0), vec2(1.0));
-
-    // Texture-only scale from 1.2 to 1.0 over first 2 seconds
-    float textureScale = mix(1.2, 1.0, clamp(u_time /1.0, 0.0, 1.0));
-
-    vec2 scaledSampleUV = (safeUV - center) / textureScale + center;
-
-    vec4 texColor = texture2D(u_bioImgTexture, scaledSampleUV);
-
-    // Optional: use background if UV too far out (mobile precision fallback)
-    if (distortedUV.x < 0.0 || distortedUV.x > 1.0 ||
-        distortedUV.y < 0.0 || distortedUV.y > 1.0) {
-        gl_FragColor = backgroundColor;
+    scaledUV.x *= scale;
+    scaledUV.x += (1.0 - scale) / 2.0;
     } else {
-        gl_FragColor = texColor;
+    float scale = textureAspect / screenAspect;
+    scaledUV.y *= scale;
+    scaledUV.y += (1.0 - scale) / 2.0;
     }
+
+    scaledUV -= center; 
+    scaledUV /= 1.3; // zoom
+    scaledUV += center; // re-center
+    scaledUV -= vec2(0.0, 0.1); // move up a bit
+
+    float thickness = 10.; // thickness of noise effect
+    float intensity = 2.; // intensity of noise effect
+    float speed = 0.03; // speed of noise animation
+
+    
+    float cnoise = cnoise(scaledUV.yx * intensity + u_time * speed) * thickness; // apply noise function
+    vec2 distortedUV = scaledUV + vec2(cnoise, cnoise); // distort UVs with noise
+
+    vec2 mixedUV = mix(scaledUV, distortedUV, u_scroll); // mix original and distorted UVs
+
+    vec4 texColor = texture2D(u_bioImgTexture, mixedUV);
+
+    bool isInside = all(greaterThanEqual(mixedUV, vec2(0.0))) &&
+                all(lessThanEqual(mixedUV, vec2(1.0)));
+
+    vec4 texColorOutput = isInside ? texColor : whiteBg;
+
+    gl_FragColor = texColorOutput;
 }

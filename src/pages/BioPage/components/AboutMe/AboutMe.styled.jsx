@@ -43,7 +43,7 @@ const Subtitle = styled.h2`
   color: ${({ theme }) => theme.colors.primary};
   text-align: justify;
   text-justify: inter-word;
-
+  line-height: 1.6;
   @media ${DEVICE.MOBILE_XS} {
     width: 89%;
   }
@@ -88,8 +88,9 @@ const TechStackWrapper = styled.div`
   }
 `;
 const TechStack = styled.h3`
-  font-family: "JetBrainsMonoMedium";
+  font-family: "JetBrainsMonoBold";
   font-size: ${({ theme }) => theme.fontSizes.medium};
+  line-height: 1.6;
   color: ${({ theme }) => theme.colors.primary};
   @media ${DEVICE.MOBILE_S} {
     font-size: 1.2rem;
