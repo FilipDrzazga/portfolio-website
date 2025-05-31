@@ -44,6 +44,17 @@ const Subtitle = styled.h2`
   text-align: justify;
   text-justify: inter-word;
   line-height: 1.6;
+  span {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    font-size: ${({ theme }) => theme.fontSizes.medium};
+    color: white;
+    background-color: ${({ theme }) => theme.colors.primary};
+  }
   @media ${DEVICE.MOBILE_XS} {
     width: 89%;
   }

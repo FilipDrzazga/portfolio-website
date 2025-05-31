@@ -17,10 +17,89 @@ import {
 gsap.registerPlugin(useGSAP, SplitText, ScrollTrigger);
 
 const AboutMe = () => {
-  useGSAP(() => {});
+  const headerRef = useRef(null);
+  // const paragraphsWrapperRef = useRef(null);
+  // const techStackWrapperRef = useRef(null);
+
+  useGSAP(() => {
+    SplitText.create(headerRef.current.querySelector("h1"), {
+      type: "chars",
+      autoSplit: true,
+      mask: "chars",
+      onSplit: (self) => {
+        return gsap.from(self.chars, {
+          x: -50,
+          stagger: { each: 0.05, from: "start", ease: "power2.out" },
+          scrollTrigger: {
+            trigger: headerRef.current.querySelector("h1"),
+            markers: true,
+            start: "top 80%",
+            end: "bottom 80%",
+          },
+        });
+      },
+    });
+
+    // ScrollTrigger animation on Subtitle text
+    SplitText.create(headerRef.current.querySelector("h2"), {
+      type: "lines chars",
+      autoSplit: true,
+      onSplit: (self) => {
+        self.chars.forEach((char) => {
+          const square = document.createElement("span");
+          square.textContent = gsap.utils.random(["%", "&", "*", "$"]);
+          char.appendChild(square);
+        });
+        const line1 = gsap.utils.toArray(self.lines[0].querySelectorAll("div"));
+        const line2 = gsap.utils.toArray(self.lines[1].querySelectorAll("div"));
+        const spansLine1 = gsap.utils.toArray(self.lines[0].querySelectorAll("span"));
+        const spansLine2 = gsap.utils.toArray(self.lines[1].querySelectorAll("span"));
+
+        let tlSubtitle = gsap.timeline({
+          paused: true,
+          scrollTrigger: {
+            trigger: headerRef.current.querySelector("h1"),
+            start: "top 80%",
+            end: "bottom 80%",
+            onEnter: () => tlSubtitle.play(),
+          },
+        });
+        tlSubtitle
+          .from(line1, {
+            visibility: "hidden",
+            stagger: { each: 0.05, from: "start" },
+          })
+          .to(
+            spansLine1,
+            {
+              visibility: "hidden",
+              stagger: { each: 0.05, from: "start" },
+            },
+            ">-1.25"
+          )
+          .from(
+            line2,
+            {
+              visibility: "hidden",
+              stagger: { each: 0.05, from: "start" },
+            },
+            ">-2.3"
+          )
+          .to(
+            spansLine2,
+            {
+              visibility: "hidden",
+              stagger: { each: 0.05, from: "start" },
+            },
+            ">-1.5"
+          );
+      },
+    });
+  });
+
   return (
     <AboutMeWrapper>
-      <Header>
+      <Header ref={headerRef}>
         <Title>about me</Title>
         <Subtitle>HI. I’M FILIP, (MAYBE) CREATIVE FRONTEND DEVELOPER BASED IN WATFORD.</Subtitle>
       </Header>
@@ -30,18 +109,13 @@ const AboutMe = () => {
           TO ENSURE EVERYTHING IS FLAWLESS. CONSTANTLY HONING SKILLS TO CREATE SMOOTH AND ENGAGING EXPERIENCES.
         </Text>
         <Text>
-          FOR THE PAST FOUR YEARS, I’VE BEEN DIVING INTO THE WORLD OF WEB/APP DEVELOPMENT, MASTERING JAVASCRIPT, REACT,
-          AND RANGE OF OTHERS LIBRARIES ESSENTIAL FOR CREATING DYNAMIC AND FUNCTIONAL WEBSITES OR APPLICATIONS.
+          FOR THE PAST FOUR YEARS, I’VE BEEN DIVING INTO THE WORLD OF WEB/APP DEVELOPMENT, MASTERING JAVASCRIPT, REACT
+          ENVIRONMENT, AND RANGE OF OTHERS LIBRARIES ESSENTIAL FOR CREATING DYNAMIC AND FUNCTIONAL WEBSITES OR
+          APPLICATIONS.
         </Text>
         <Text>
-          I ALSO TRYING TO UNDERSTAND THE MAGIC OF WEBGL AND SHADERS WORLDS, EXPLORING HOW FAR I CAN PUSH VISUALS IN THE
-          BROWSER. FROM BUILDING DYNAMIC 3D SCENES WITH THREE.JS & R3F TO ADDING SMOOTH INTERACTIONS WITH MOTION AND
-          REANIMATED.
-        </Text>
-        <Text>
-          I CURRENTLY WORKING IN REACT & REACT NATIVE, USING EXPO FOR QUICK DEVELOPMENT AND REDUX OR ZUSTAND FOR STATE
-          MANAGEMENT. STYLED COMPONENTS & TAILWIND KEEP MY STYLES CLEAN AND MODULAR, WHILE FIREBASE HELPS ME HANDLE
-          BACKEND TASKS WITH EASY.
+          EXPLORING THE MAGIC OF SHADERS AND WEBGL IS MY FAVORITE PLAYGROUND - COMBINING THREJS + R3F WITH SILKY-SMOOTH
+          MOTION USING GSAP/MOTION AND REANIMATED TO MAKE THE BROWSER/APP FEEL ALIVE.
         </Text>
         <Text>CONSTANTLY REFINING MY CRAFT AND EXPLORING NEW POSSIBILITIES.</Text>
       </ParagraphsWrapper>

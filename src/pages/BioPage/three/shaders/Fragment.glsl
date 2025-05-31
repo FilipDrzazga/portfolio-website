@@ -93,13 +93,14 @@ void main() {
     scaledUV += center; // re-center
     scaledUV -= vec2(0.0, 0.1); // move up a bit
 
-    float thickness = 10.; // thickness of noise effect
-    float intensity = 2.; // intensity of noise effect
-    float speed = 0.03; // speed of noise animation
+    float thickness = 250.; // thickness of noise effect
+    float intensity = 1.2; // intensity of noise effect
+    float speed = 0.1; // speed of noise animation
 
     
     float cnoise = cnoise(scaledUV.yx * intensity + u_time * speed) * thickness; // apply noise function
-    vec2 distortedUV = scaledUV + vec2(cnoise, cnoise); // distort UVs with noise
+    vec2 distortedUV = scaledUV + vec2(cnoise); // distort UVs with noise
+    distortedUV /= 25.; // zoom out distorted UVs
 
     vec2 mixedUV = mix(scaledUV, distortedUV, u_scroll); // mix original and distorted UVs
 
