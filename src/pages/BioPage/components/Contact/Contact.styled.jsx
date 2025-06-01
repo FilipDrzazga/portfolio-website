@@ -17,7 +17,7 @@ const Header = styled.header`
   align-items: center;
   justify-content: center;
   width: 100%;
-  margin-bottom: ${({ theme }) => theme.spacing.medium};
+  margin-bottom: ${({ theme }) => theme.spacing.normal};
 `;
 const Subtitle = styled.h2`
   width: 100%;
@@ -25,6 +25,19 @@ const Subtitle = styled.h2`
   font-weight: 400;
   font-size: ${({ theme }) => theme.fontSizes.small};
   color: ${({ theme }) => theme.colors.primary};
+  text-align: center;
+  text-justify: inter-word;
+  span {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    font-size: ${({ theme }) => theme.fontSizes.medium};
+    color: white;
+    background-color: ${({ theme }) => theme.colors.primary};
+  }
   @media ${DEVICE.MOBILE_S} {
     font-size: 4rem;
     line-height: 4rem;
@@ -64,6 +77,17 @@ const SocialLinksLink = styled.a`
   font-size: ${({ theme }) => theme.fontSizes.small};
   color: ${({ theme }) => theme.colors.primary};
   text-decoration: none;
+  span {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    font-size: ${({ theme }) => theme.fontSizes.medium};
+    color: white;
+    background-color: ${({ theme }) => theme.colors.primary};
+  }
   @media ${DEVICE.MOBILE_S} {
     font-size: 0.8rem;
   }
@@ -80,6 +104,17 @@ const FooterText = styled.p`
   font-family: "JetBrainsMonoMedium";
   font-size: 0.5rem;
   color: ${({ theme }) => theme.colors.primary};
+  span {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    font-size: ${({ theme }) => theme.fontSizes.medium};
+    color: white;
+    background-color: ${({ theme }) => theme.colors.primary};
+  }
 `;
 
 export {

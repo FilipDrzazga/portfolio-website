@@ -18,8 +18,6 @@ gsap.registerPlugin(useGSAP, SplitText, ScrollTrigger);
 
 const AboutMe = () => {
   const headerRef = useRef(null);
-  // const paragraphsWrapperRef = useRef(null);
-  // const techStackWrapperRef = useRef(null);
 
   useGSAP(() => {
     SplitText.create(headerRef.current.querySelector("h1"), {
@@ -32,7 +30,7 @@ const AboutMe = () => {
           stagger: { each: 0.05, from: "start", ease: "power2.out" },
           scrollTrigger: {
             trigger: headerRef.current.querySelector("h1"),
-            markers: true,
+            markers: false,
             start: "top 80%",
             end: "bottom 80%",
           },
@@ -64,7 +62,7 @@ const AboutMe = () => {
             onEnter: () => tlSubtitle.play(),
           },
         });
-        tlSubtitle
+        return tlSubtitle
           .from(line1, {
             visibility: "hidden",
             stagger: { each: 0.05, from: "start" },
