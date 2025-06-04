@@ -79,7 +79,7 @@ const ImageShaderMaterial = () => {
   }, [bioImgTexture, uniforms]);
 
   return (
-    <mesh ref={mesh} position={[0, 0, 0, 0]}>
+    <mesh ref={mesh} position={[0, 0, 0]}>
       <planeGeometry attach="geometry" args={[window.innerWidth, window.innerHeight, 1]} />
       <shaderMaterial fragmentShader={Fragment} vertexShader={Vertex} uniforms={uniforms} />
     </mesh>
