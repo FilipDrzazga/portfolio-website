@@ -26,7 +26,7 @@ const Hero = () => {
         autoAlpha: 0,
       });
 
-      // CoordinatesText animation
+      // terminal typing animation on CoordinatesText
       gsap.utils.toArray(coordinatesWrapperRef.current.querySelectorAll("p")).forEach((el) => {
         SplitText.create(el, {
           type: "chars",
@@ -56,7 +56,7 @@ const Hero = () => {
         });
       });
 
-      // ScrollText animation
+      // terminal typing animation on ScrollText, repeated infinitely
       SplitText.create(scrollTextWrapperRef.current, {
         type: "chars",
         autoSplit: true,
@@ -85,7 +85,7 @@ const Hero = () => {
             ">-80%"
           );
 
-          // Loop ScrollText spans animation
+          // Create a loop for the ScrollText animation
           let loop = gsap.timeline({ repeat: -1, repeatDelay: 3, delay: 3 });
           loop
             .to(spans, {

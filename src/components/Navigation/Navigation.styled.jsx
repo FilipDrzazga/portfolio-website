@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { DEVICE } from "../../styles/theme";
 
 const NavigationWrapper = styled.nav`
   width: 100%;
@@ -20,6 +21,9 @@ const NavigationList = styled.ul`
   list-style: none;
   margin: 0;
   padding: 0;
+  @media ${DEVICE.MOBILE_S} {
+    font-size: 0.8rem;
+  }
 `;
 const NavigationItem = styled.li`
   margin: 0 1rem;

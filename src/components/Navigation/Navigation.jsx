@@ -10,6 +10,7 @@ const Navigation = () => {
   const navigationRef = useRef(null);
 
   useGSAP(() => {
+    // Terminal typing animation on navigation links
     gsap.utils.toArray(navigationRef.current.querySelectorAll("a")).forEach((el) => {
       SplitText.create(el, {
         type: "chars",

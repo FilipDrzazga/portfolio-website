@@ -20,6 +20,7 @@ const AboutMe = () => {
   const headerRef = useRef(null);
 
   useGSAP(() => {
+    // ScrollTrigger animation on Header title, fade in from left, activated by ScrollTrigger
     SplitText.create(headerRef.current.querySelector("h1"), {
       type: "chars",
       autoSplit: true,
@@ -38,7 +39,7 @@ const AboutMe = () => {
       },
     });
 
-    // ScrollTrigger animation on Subtitle text
+    // Terminal typing animation on Header subtitle, activated by ScrollTrigger
     SplitText.create(headerRef.current.querySelector("h2"), {
       type: "lines chars",
       autoSplit: true,
@@ -48,6 +49,8 @@ const AboutMe = () => {
           square.textContent = gsap.utils.random(["%", "&", "*", "$"]);
           char.appendChild(square);
         });
+
+        // Get the lines and spans for the subtitle animation, terminal typing effect by the lines
         const line1 = gsap.utils.toArray(self.lines[0].querySelectorAll("div"));
         const line2 = gsap.utils.toArray(self.lines[1].querySelectorAll("div"));
         const spansLine1 = gsap.utils.toArray(self.lines[0].querySelectorAll("span"));

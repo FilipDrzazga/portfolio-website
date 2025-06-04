@@ -24,6 +24,7 @@ const Contact = () => {
   const footerRef = useRef(null);
 
   useGSAP(() => {
+    // ScrollTrigger animation on Header title, fade in from left, activated by ScrollTrigger
     SplitText.create(headerRef.current.querySelector("h1"), {
       type: "chars",
       autoSplit: true,
@@ -42,6 +43,7 @@ const Contact = () => {
       },
     });
 
+    // Terminal typing animation on Header subtitle, activated by ScrollTrigger
     SplitText.create(headerRef.current.querySelector("h2"), {
       type: "chars",
       autoSplit: true,
@@ -83,6 +85,7 @@ const Contact = () => {
       },
     });
 
+    // Terminal typing animation on SocialLinks, activated by ScrollTrigger
     SplitText.create(SocialLinksWrapperRef.current.querySelectorAll("a"), {
       type: "words, chars",
       autoSplit: true,
@@ -104,7 +107,7 @@ const Contact = () => {
             trigger: headerRef.current.querySelector("h2"),
             start: "-100px 80%",
             end: "bottom 80%",
-            markers: true,
+            markers: false,
           },
           onEnter: () => {
             tlSocialLinks.play();
@@ -143,6 +146,7 @@ const Contact = () => {
       },
     });
 
+    // Terminal typing animation on Footer, activated by ScrollTrigger
     SplitText.create(footerRef.current.querySelector("p"), {
       type: "words chars",
       wordsClass: "footer-words++",
@@ -156,8 +160,8 @@ const Contact = () => {
 
         const spans = self.chars.map((el) => el.querySelector("span"));
         const spansRepeat = self.words.slice(2, 4).map((el) => el.querySelectorAll("span"));
-        // const surenameSpans = gsap.utils.toArray(self.words[3].querySelectorAll("span"));
 
+        // Timeline for Footer text animation, repeated infinitely just name
         let tlNameRepeat = gsap.timeline({
           paused: true,
           repeat: -1,
