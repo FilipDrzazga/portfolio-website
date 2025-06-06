@@ -1,11 +1,11 @@
-import SceneCanvas from "./three/SceneCanvas";
+import ThreeCanvas from "./three/ThreeCanvas";
 import { BioPageWrapper } from "./BioPage.styled";
 import { Hero, AboutMe, Contact } from "./components";
 
 const BioPage = () => {
   return (
     <>
-      <SceneCanvas />
+      <ThreeCanvas />
       <BioPageWrapper>
         <Hero />
         <AboutMe />

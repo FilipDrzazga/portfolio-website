@@ -4,11 +4,11 @@ precision highp float;
 varying vec2 vUv;
 
 uniform vec2 u_resolution;
-uniform sampler2D u_bioImgTexture;
-uniform vec2 u_bioTextureDimensions;
+uniform float u_screenRatio;
+uniform sampler2D u_texture;
+uniform float u_textureRatio;
 uniform float u_scroll;
 uniform float u_time;
-uniform float u_progress;
 
 vec4 mod289(vec4 x) {
   return x - floor(x * (1.0 / 289.0)) * 289.0;
@@ -66,8 +66,6 @@ float cnoise(vec2 P) {
 }
 
 void main() {
-    float screenAspect = u_resolution.x / u_resolution.y;
-    float textureAspect = u_bioTextureDimensions.x / u_bioTextureDimensions.y;
     vec4 whiteBg = vec4(1.0, 1.0, 1.0, 1.0);
 
     vec2 center = vec2(0.5, 0.5);
@@ -78,12 +76,12 @@ void main() {
 
     vec2 scaledUV = uv;
 
-    if (textureAspect > screenAspect) {
-    float scale = screenAspect / textureAspect;
+    if (u_textureRatio > u_screenRatio) {
+    float scale = u_screenRatio / u_textureRatio;
     scaledUV.x *= scale;
     scaledUV.x += (1.0 - scale) / 2.0;
     } else {
-    float scale = textureAspect / screenAspect;
+    float scale = u_textureRatio / u_screenRatio;
     scaledUV.y *= scale;
     scaledUV.y += (1.0 - scale) / 2.0;
     }
@@ -104,7 +102,7 @@ void main() {
 
     vec2 mixedUV = mix(scaledUV, distortedUV, u_scroll); // mix original and distorted UVs
 
-    vec4 texColor = texture2D(u_bioImgTexture, mixedUV);
+    vec4 texColor = texture2D(u_texture, mixedUV);
 
     bool isInside = all(greaterThanEqual(mixedUV, vec2(0.0))) &&
                 all(lessThanEqual(mixedUV, vec2(1.0)));
