@@ -34,6 +34,7 @@ const Subtitle = styled.h2`
     display: inline-block;
     width: 100%;
     height: 100%;
+    align-items: center;
     font-size: ${({ theme }) => theme.fontSizes.medium};
     color: white;
     background-color: ${({ theme }) => theme.colors.primary};

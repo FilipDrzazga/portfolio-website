@@ -40,6 +40,7 @@ const CoordinatesText = styled.p`
     display: inline-block;
     width: 100%;
     height: 100%;
+    align-items: center;
     font-size: ${({ theme }) => theme.fontSizes.small};
     color: white;
     background-color: ${({ theme }) => theme.colors.primary};
@@ -64,6 +65,7 @@ const ScrollText = styled.p`
     display: inline-block;
     width: 100%;
     height: 100%;
+    align-items: center;
     font-size: ${({ theme }) => theme.fontSizes.small};
     color: white;
     background-color: ${({ theme }) => theme.colors.primary};

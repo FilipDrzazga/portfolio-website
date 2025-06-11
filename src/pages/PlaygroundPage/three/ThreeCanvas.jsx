@@ -1,26 +1,19 @@
-import { useMemo, useEffect } from "react";
+/* eslint-disable react/no-unknown-property */
 import { Canvas } from "@react-three/fiber";
-// import { OrbitControls } from "@react-three/drei";
+import Camera from "./Camera";
 import Scene from "./Scene";
+import { OrbitControls } from "@react-three/drei";
 
 const ThreeCanvas = () => {
-  const fovPosition = useMemo(() => {
-    const cameraZPosition = 600;
-    const newFovPosition = 2 * Math.atan(window.innerHeight / 2 / cameraZPosition) * (180 / Math.PI);
-    return newFovPosition;
-  }, []);
-
-  useEffect(() => {}, []);
-
   return (
     <Canvas
-      style={{ width: "100%", height: "80vh" }}
+      style={{ width: "100%", height: "60vh" }}
       gl={{ antialias: true, alpha: true }}
       dpr={[1, Math.min(window.devicePixelRatio, 2)]}
-      camera={{ fov: fovPosition, position: [0, 0, 600] }}
     >
-      {/* <OrbitControls enableZoom={false} /> */}
+      <Camera />
       <Scene />
+      <OrbitControls enableZoom={true} />
     </Canvas>
   );
 };

@@ -4,15 +4,13 @@ precision highp float;
 
 varying vec2 vUv;
 
-uniform sampler2D u_bioImgTexture;
-uniform float u_time;
+uniform sampler2D uTexture;
+uniform float utime;
 
 void main() {
-    
-    vec2 center = vec2(0.5, 0.5);
     vec2 uv = vUv;
-
-    vec4 texColor = texture2D(u_bioImgTexture, uv);
+    
+    vec4 texColor = texture2D(uTexture, uv);
 
     gl_FragColor = texColor;
 }

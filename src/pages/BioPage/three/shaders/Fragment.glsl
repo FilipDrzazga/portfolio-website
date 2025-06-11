@@ -83,7 +83,7 @@ void main() {
     } else {
     float scale = u_textureRatio / u_screenRatio;
     scaledUV.y *= scale;
-    scaledUV.y += (1.0 - scale) / 2.0;
+    scaledUV.y += (1.0 - scale) / 1.0;
     }
 
     scaledUV -= center; 

@@ -7,7 +7,7 @@ const ThreeCanvas = () => {
     <Canvas
       style={{ position: "fixed", top: 0, left: 0, width: "100%", height: "100vh", zIndex: -1 }}
       gl={{ antialias: true, alpha: true }}
-      dpr={window.devicePixelRatio}
+      dpr={[1, Math.min(window.devicePixelRatio, 2)]}
     >
       <Camera />
       <Scene />
