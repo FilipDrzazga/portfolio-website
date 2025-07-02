@@ -1,5 +1,5 @@
 /* eslint-disable react/no-unknown-property */
-import { useRef, useMemo, useCallback } from "react";
+import { useRef, useMemo } from "react";
 import * as THREE from "three";
 import { useFrame } from "@react-three/fiber";
 import { useTexture } from "@react-three/drei";
@@ -9,8 +9,12 @@ import Vertex from "./shaders/Vertex.glsl?raw";
 import Fragment from "./shaders/Fragment.glsl?raw";
 
 const Scene = () => {
-  const worldCenterPos = new THREE.Vector3(0, 0, 0);
+  const DUMMY_MESH_COUNT = 4;
   const meshRef = useRef(null);
+  const meshWidth = useMemo(() => window.innerWidth * 0.5, []);
+  const meshHeight = useMemo(() => window.innerHeight * 0.5, []);
+  const meshSpacing = useMemo(() => 1.02, []);
+
   const { bioImageSrc } = useResponsiveImages();
   const bioImgTexture = useTexture(bioImageSrc);
 
@@ -19,14 +23,13 @@ const Scene = () => {
       uTime: { value: 0 },
       uTexture: { value: bioImgTexture },
     }),
-    []
+    [bioImgTexture]
   );
 
   const meshes = useMemo(() => {
-    const COUNT = 10; // Number of meshes to create
     const meshesArray = [];
-    for (let i = 0; i < COUNT; i++) {
-      const geometry = new THREE.PlaneGeometry(window.innerWidth * 0.45, window.innerHeight * 0.4, 100, 100);
+    for (let i = 0; i < DUMMY_MESH_COUNT; i++) {
+      const geometry = new THREE.PlaneGeometry(meshWidth, meshHeight, 100, 100);
 
       const material = new THREE.ShaderMaterial({
         vertexShader: Vertex,
@@ -38,28 +41,15 @@ const Scene = () => {
       mesh.frustumCulled = false; // Disable frustum culling for all meshes
       meshesArray.push(mesh);
     }
-    console.log(meshesArray);
     return meshesArray;
-  }, []);
-
-  const meshScaleInterpolation = useCallback((mesh) => {
-    const targetScale = 1.02;
-    const initialScale = 1.0;
-    let direction = 1;
-
-    const distance = mesh.position.distanceTo(worldCenterPos);
-    const scaleFactor = THREE.MathUtils.lerp(
-      initialScale,
-      targetScale,
-      direction - distance / (window.innerWidth * 0.45)
-    );
-    mesh.scale.set(scaleFactor, scaleFactor, scaleFactor);
   }, []);
 
   useFrame((state, delta) => {
     meshes.forEach((mesh) => {
-      meshScaleInterpolation(mesh);
-      mesh.position.x -= delta * 20;
+      mesh.position.x -= delta * 50;
+      if (mesh.position.x < -meshWidth * 2) {
+        mesh.position.x += DUMMY_MESH_COUNT * meshWidth * meshSpacing; // Reset position to the right
+      }
     });
   });
 
@@ -70,7 +60,7 @@ const Scene = () => {
           ref={meshRef}
           key={i}
           object={mesh}
-          position={[i * window.innerWidth * 0.48, 0, 0]}
+          position={[i * meshWidth * meshSpacing, 0, 0]}
           material={mesh.material}
         />
       ))}
