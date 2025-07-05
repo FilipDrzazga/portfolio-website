@@ -1,21 +1,23 @@
 varying vec2 vUv;
 varying vec3 worldPosition;
 
-uniform float u_time;
+uniform float utime;
 
 void main() {
     vec3 pos = position;
-
-
     vec4 modelPosition = modelMatrix * vec4(pos, 1.0);
 
-    float frequencyX = 15.0;
-    float frequencyY = 8.0;
-    float amplitude = 125.0;
-    float shift = 100.0;
+    float edgeStart = 0.0;
+    float edgeWidth = 200.0;
+    float edgeEnd = edgeStart + edgeWidth;
 
-    float wave = sin((modelPosition.x + shift) * frequencyX * 0.001) * cos(modelPosition.y * frequencyY * 0.001);
-    modelPosition.z += wave * amplitude;
+    float vShape = abs(modelPosition.x) * 0.004;
+    float uShape = pow(vShape,2.0) * 1.5;
+    
+    float edgeFactor = smoothstep(edgeStart, edgeEnd, abs(modelPosition.x));
+
+    float blend = mix(uShape, vShape, edgeFactor);
+    modelPosition.z += 1.0 - (blend * 200.0);
 
     vec4 viewPosition = viewMatrix * modelPosition;
     vec4 projectedPosition = projectionMatrix * viewPosition;
@@ -23,5 +25,4 @@ void main() {
     gl_Position = projectedPosition;
 
     vUv = uv;
-    worldPosition = modelPosition.xyz;
 }

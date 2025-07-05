@@ -1,6 +1,9 @@
 /* eslint-disable react/no-unknown-property */
 import { useRef, useMemo } from "react";
 import * as THREE from "three";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useFrame } from "@react-three/fiber";
 import { useTexture } from "@react-three/drei";
 import useResponsiveImages from "../../../hook/useResponsiveImages";
@@ -8,12 +11,14 @@ import useResponsiveImages from "../../../hook/useResponsiveImages";
 import Vertex from "./shaders/Vertex.glsl?raw";
 import Fragment from "./shaders/Fragment.glsl?raw";
 
+gsap.registerPlugin(useGSAP, ScrollTrigger);
+
 const Scene = () => {
-  const DUMMY_MESH_COUNT = 4;
+  const DUMMY_MESH_COUNT = 10;
   const meshRef = useRef(null);
   const meshWidth = useMemo(() => window.innerWidth * 0.5, []);
-  const meshHeight = useMemo(() => window.innerHeight * 0.5, []);
-  const meshSpacing = useMemo(() => 1.02, []);
+  const meshHeight = useMemo(() => window.innerHeight * 0.45, []);
+  const meshSpacing = useMemo(() => 1.05, []);
 
   const { bioImageSrc } = useResponsiveImages();
   const bioImgTexture = useTexture(bioImageSrc);
@@ -38,7 +43,7 @@ const Scene = () => {
       });
 
       const mesh = new THREE.Mesh(geometry, material);
-      mesh.frustumCulled = false; // Disable frustum culling for all meshes
+      mesh.frustumCulled = false;
       meshesArray.push(mesh);
     }
     return meshesArray;
@@ -46,8 +51,8 @@ const Scene = () => {
 
   useFrame((state, delta) => {
     meshes.forEach((mesh) => {
-      mesh.position.x -= delta * 50;
-      if (mesh.position.x < -meshWidth * 2) {
+      mesh.position.x -= delta * 30;
+      if (mesh.position.x < -meshWidth * 2.5) {
         mesh.position.x += DUMMY_MESH_COUNT * meshWidth * meshSpacing; // Reset position to the right
       }
     });

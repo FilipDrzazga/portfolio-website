@@ -4,7 +4,7 @@ const HeroWrapper = styled.section`
   position: relative;
   width: 100%;
   height: auto;
-  padding-top: 15vh;
+  padding-top: 12vh;
 `;
 const Header = styled.header`
   display: flex;

@@ -8,6 +8,7 @@ const ShowcaseCardWrapper = styled.section`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 0.8rem;
 `;
 const Title = styled.h2`
   width: 100%;

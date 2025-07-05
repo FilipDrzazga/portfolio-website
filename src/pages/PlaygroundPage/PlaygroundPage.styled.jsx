@@ -7,7 +7,7 @@ const PlaygroundPageWrapper = styled.section`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 25rem;
+  gap: 26rem;
   padding: ${({ theme }) => theme.spacing.normal};
 `;
 
