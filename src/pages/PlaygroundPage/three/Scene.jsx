@@ -1,5 +1,5 @@
 /* eslint-disable react/no-unknown-property */
-import { useRef, useMemo } from "react";
+import { useRef, useMemo, useCallback } from "react";
 import * as THREE from "three";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
@@ -50,6 +50,13 @@ const Scene = () => {
     return meshesArray;
   }, [uniforms]);
 
+  const infinitySlider = useCallback((value) => {
+    const totalWidth = DUMMY_MESH_COUNT * meshStateRef.current.width * meshStateRef.current.spacing;
+    const halfWidth = totalWidth / 2;
+    let v = (((value + halfWidth) % totalWidth) + totalWidth) % totalWidth;
+    return v - halfWidth;
+  }, []);
+
   useGSAP(() => {
     const canvas = gl.domElement;
 
@@ -75,9 +82,9 @@ const Scene = () => {
   useFrame(() => {
     if (meshes.length === 0) return;
     meshes.forEach((mesh, i) => {
-      mesh.position.x =
-        (i - DUMMY_MESH_COUNT / 2) * meshStateRef.current.width * meshStateRef.current.spacing +
-        scrollStateRef.current.target;
+      const base = (i - DUMMY_MESH_COUNT / 2) * meshStateRef.current.width * meshStateRef.current.spacing;
+      const x = infinitySlider(base + scrollStateRef.current.target);
+      mesh.position.set(x, 0, 0);
     });
   });
 
