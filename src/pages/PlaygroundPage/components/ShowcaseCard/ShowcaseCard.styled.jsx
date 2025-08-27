@@ -9,6 +9,7 @@ const ShowcaseCardWrapper = styled.section`
   justify-content: center;
   align-items: center;
   gap: 0.8rem;
+  margin-bottom: ${({ theme }) => theme.spacing.normal};
 `;
 const Title = styled.h2`
   width: 100%;
