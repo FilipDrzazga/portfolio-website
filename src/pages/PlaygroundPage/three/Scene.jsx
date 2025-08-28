@@ -62,15 +62,33 @@ const Scene = () => {
 
     const observer = Observer.create({
       target: canvas,
-      type: "wheel",
+      type: "wheel, pointer",
       preventDefault: true,
       onWheel: (self) => {
+        console.log(self.deltaY);
         const dy = self.deltaY;
         gsap.to(scrollStateRef.current, {
           target: scrollStateRef.current.target + dy,
           inertia: { target: { velocity: dy * 2, resistance: 100 } },
           duration: 1,
           ease: "power3.out",
+        });
+      },
+      onPress: () => {
+        gsap.killTweensOf(scrollStateRef.current);
+      },
+      onDrag: (self) => {
+        const dx = self.deltaX * 0.2;
+        scrollStateRef.current.target += dx;
+      },
+      onRelease(self) {
+        const clampedV = gsap.utils.clamp(-50, 50, self.velocityX);
+
+        gsap.to(scrollStateRef.current, {
+          target: scrollStateRef.current.target + clampedV,
+          duration: 1,
+          ease: "power3.out",
+          inertia: { target: { velocity: clampedV * 2, resistance: 100 } },
         });
       },
     });
