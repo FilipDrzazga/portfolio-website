@@ -62,16 +62,31 @@ const Scene = () => {
 
     const observer = Observer.create({
       target: canvas,
-      type: "wheel, pointer",
+      type: "wheel,pointer",
       preventDefault: true,
       onWheel: (self) => {
-        console.log(self.deltaY);
+        gsap.killTweensOf(scrollStateRef.current);
         const dy = self.deltaY;
         gsap.to(scrollStateRef.current, {
           target: scrollStateRef.current.target + dy,
           inertia: { target: { velocity: dy * 2, resistance: 100 } },
           duration: 1,
           ease: "power3.out",
+          onComplete: () => {
+            const slotPx = meshStateRef.current.width * meshStateRef.current.spacing;
+            let snapped = gsap.utils.snap(slotPx, scrollStateRef.current.target);
+
+            gsap.to(scrollStateRef.current, {
+              target: snapped,
+              duration: 1,
+              ease: "power3.out",
+              // IF I WANT TO DO SOMETHING WITH THE ACTIVE INDEX WHEN SNAP COMPLETE, UNCOMMENT BELOW
+              // onComplete: () => {
+              //   const k = Math.round(snapped / slotPx);
+              //   const activeIndex = ((k % DUMMY_MESH_COUNT) + DUMMY_MESH_COUNT) % DUMMY_MESH_COUNT;
+              // },
+            });
+          },
         });
       },
       onPress: () => {
@@ -88,10 +103,31 @@ const Scene = () => {
           target: scrollStateRef.current.target + clampedV,
           duration: 1,
           ease: "power3.out",
-          inertia: { target: { velocity: clampedV * 2, resistance: 100 } },
+          inertia: {
+            target: {
+              velocity: clampedV * 2,
+              resistance: 100,
+            },
+          },
+          onComplete: () => {
+            const slotPx = meshStateRef.current.width * meshStateRef.current.spacing;
+            let snapped = gsap.utils.snap(slotPx, scrollStateRef.current.target);
+
+            gsap.to(scrollStateRef.current, {
+              target: snapped,
+              duration: 1,
+              ease: "power3.out",
+              // IF I WANT TO DO SOMETHING WITH THE ACTIVE INDEX WHEN SNAP COMPLETE, UNCOMMENT BELOW
+              // onComplete: () => {
+              //   const k = Math.round(snapped / slotPx);
+              //   const activeIndex = ((k % DUMMY_MESH_COUNT) + DUMMY_MESH_COUNT) % DUMMY_MESH_COUNT;
+              // },
+            });
+          },
         });
       },
     });
+
     return () => {
       observer.kill();
     };
