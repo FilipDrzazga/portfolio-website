@@ -2,6 +2,7 @@ varying vec2 vUv;
 varying vec3 worldPosition;
 
 uniform float utime;
+uniform float uShapeActivation;
 
 void main() {
     vec3 pos = position;
@@ -17,7 +18,10 @@ void main() {
     float edgeFactor = smoothstep(edgeStart, edgeEnd, abs(modelPosition.x));
 
     float blend = mix(uShape, vShape, edgeFactor);
-    modelPosition.z += 1.0 - (blend * 200.0);
+    float shapeModel = modelPosition.z + (1.0 - (blend * 200.0));
+
+    modelPosition.z = mix(modelPosition.z, shapeModel, uShapeActivation);
+
 
     vec4 viewPosition = viewMatrix * modelPosition;
     vec4 projectedPosition = projectionMatrix * viewPosition;

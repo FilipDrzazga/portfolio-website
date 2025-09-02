@@ -19,7 +19,7 @@ const Scene = () => {
   const DUMMY_MESH_COUNT = 10;
   const meshRef = useRef(null);
   const meshStateRef = useRef({ width: window.innerWidth * 0.5, height: window.innerHeight * 0.45, spacing: 1.05 });
-  const scrollStateRef = useRef({ target: 0 });
+  const scrollStateRef = useRef({ target: 0, lastScroll: 0, velocity: 0 });
 
   const { bioImageSrc } = useResponsiveImages();
   const bioImgTexture = useTexture(bioImageSrc);
@@ -28,11 +28,12 @@ const Scene = () => {
     () => ({
       uTime: { value: 0 },
       uTexture: { value: bioImgTexture },
+      uShapeActivation: { value: 0 },
     }),
     [bioImgTexture]
   );
 
-  const meshes = useMemo(() => {
+  const meshesFactory = useMemo(() => {
     const meshesArray = [];
     for (let i = 0; i < DUMMY_MESH_COUNT; i++) {
       const geometry = new THREE.PlaneGeometry(meshStateRef.current.width, meshStateRef.current.height, 100, 100);
@@ -66,7 +67,15 @@ const Scene = () => {
       preventDefault: true,
       onWheel: (self) => {
         gsap.killTweensOf(scrollStateRef.current);
+
         const dy = self.deltaY;
+
+        const now = performance.now();
+        const dt = now - scrollStateRef.current.lastTime;
+        scrollStateRef.current.lastTime = now;
+        scrollStateRef.current.velocity = 1 / (dt || 1);
+        const scrollPower = gsap.utils.clamp(0, 1, scrollStateRef.current.velocity * 15);
+
         gsap.to(scrollStateRef.current, {
           target: scrollStateRef.current.target + dy,
           inertia: { target: { velocity: dy * 2, resistance: 100 } },
@@ -75,7 +84,6 @@ const Scene = () => {
           onComplete: () => {
             const slotPx = meshStateRef.current.width * meshStateRef.current.spacing;
             let snapped = gsap.utils.snap(slotPx, scrollStateRef.current.target);
-
             gsap.to(scrollStateRef.current, {
               target: snapped,
               duration: 1,
@@ -88,24 +96,61 @@ const Scene = () => {
             });
           },
         });
+
+        if (scrollPower > uniforms.uShapeActivation.value) {
+          gsap.killTweensOf(uniforms.uShapeActivation);
+
+          gsap.to(uniforms.uShapeActivation, {
+            value: scrollPower,
+            duration: 0.9,
+            ease: "power3.out",
+            onComplete: () => {
+              gsap.killTweensOf(uniforms.uShapeActivation);
+              gsap.to(uniforms.uShapeActivation, {
+                value: 0,
+                duration: 0.5,
+                ease: "power3.out",
+              });
+            },
+          });
+        }
       },
       onPress: () => {
         gsap.killTweensOf(scrollStateRef.current);
+        gsap.killTweensOf(uniforms.uShapeActivation);
       },
       onDrag: (self) => {
         const dx = self.deltaX * 0.2;
         scrollStateRef.current.target += dx;
+        const scrollPower = gsap.utils.clamp(0, 1, Math.abs(dx) * 0.1);
+
+        if (scrollPower > uniforms.uShapeActivation.value) {
+          gsap.killTweensOf(uniforms.uShapeActivation);
+          gsap.to(uniforms.uShapeActivation, {
+            value: scrollPower,
+            duration: 0.5,
+            ease: "power3.out",
+            onComplete: () => {
+              gsap.killTweensOf(uniforms.uShapeActivation);
+              gsap.to(uniforms.uShapeActivation, {
+                value: 0,
+                duration: 0.3,
+                ease: "power3.out",
+              });
+            },
+          });
+        }
       },
       onRelease(self) {
-        const clampedV = gsap.utils.clamp(-50, 50, self.velocityX);
+        const clampedVelocity = gsap.utils.clamp(-50, 50, self.velocityX);
 
         gsap.to(scrollStateRef.current, {
-          target: scrollStateRef.current.target + clampedV,
+          target: scrollStateRef.current.target + clampedVelocity,
           duration: 1,
           ease: "power3.out",
           inertia: {
             target: {
-              velocity: clampedV * 2,
+              velocity: clampedVelocity * 2,
               resistance: 100,
             },
           },
@@ -134,8 +179,8 @@ const Scene = () => {
   }, []);
 
   useFrame(() => {
-    if (meshes.length === 0) return;
-    meshes.forEach((mesh, i) => {
+    if (meshesFactory.length === 0) return;
+    meshesFactory.forEach((mesh, i) => {
       const base = (i - DUMMY_MESH_COUNT / 2) * meshStateRef.current.width * meshStateRef.current.spacing;
       const x = infinitySlider(base + scrollStateRef.current.target);
       mesh.position.set(x, 0, 0);
@@ -144,7 +189,7 @@ const Scene = () => {
 
   return (
     <>
-      {meshes.map((mesh, i) => (
+      {meshesFactory.map((mesh, i) => (
         <primitive
           ref={meshRef}
           key={i}
