@@ -8,22 +8,15 @@ const ShowcaseCardWrapper = styled.section`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 0.8rem;
   margin-bottom: ${({ theme }) => theme.spacing.normal};
 `;
 const Title = styled.h2`
   width: 100%;
-  font-family: "InterRegular";
-  font-size: ${({ theme }) => theme.fontSizes.medium};
-  color: ${({ theme }) => theme.colors.primary};
-`;
-const Text = styled.p`
   font-family: "JetBrainsMonoMedium";
   font-size: ${({ theme }) => theme.fontSizes.small};
+  font-weight: 400;
+  text-align: center;
   color: ${({ theme }) => theme.colors.primary};
-  line-height: 1.6;
-  text-align: justify;
-  text-justify: inter-word;
 `;
 
-export { ShowcaseCardWrapper, Title, Text };
+export { ShowcaseCardWrapper, Title };

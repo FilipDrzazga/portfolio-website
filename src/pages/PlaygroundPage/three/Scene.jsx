@@ -16,9 +16,14 @@ gsap.registerPlugin(useGSAP, Observer, InertiaPlugin);
 
 const Scene = () => {
   const { gl } = useThree();
-  const DUMMY_MESH_COUNT = 10;
+
+  const DUMMY_MESH_COUNT = 4;
   const meshRef = useRef(null);
-  const meshStateRef = useRef({ width: window.innerWidth * 0.5, height: window.innerHeight * 0.45, spacing: 1.05 });
+  const meshStateRef = useRef({
+    width: window.innerWidth * 0.5,
+    height: window.innerHeight * 0.45,
+    spacing: 1.05,
+  });
   const scrollStateRef = useRef({ target: 0, lastScroll: 0, velocity: 0 });
 
   const { bioImageSrc } = useResponsiveImages();
@@ -45,7 +50,9 @@ const Scene = () => {
       });
 
       const mesh = new THREE.Mesh(geometry, material);
+      mesh.userData = { isExpanded: false };
       mesh.frustumCulled = false;
+
       meshesArray.push(mesh);
     }
     return meshesArray;
@@ -82,17 +89,14 @@ const Scene = () => {
           duration: 1,
           ease: "power3.out",
           onComplete: () => {
+            gsap.killTweensOf(uniforms.uShapeActivation);
             const slotPx = meshStateRef.current.width * meshStateRef.current.spacing;
             let snapped = gsap.utils.snap(slotPx, scrollStateRef.current.target);
+
             gsap.to(scrollStateRef.current, {
               target: snapped,
               duration: 1,
               ease: "power3.out",
-              // IF I WANT TO DO SOMETHING WITH THE ACTIVE INDEX WHEN SNAP COMPLETE, UNCOMMENT BELOW
-              // onComplete: () => {
-              //   const k = Math.round(snapped / slotPx);
-              //   const activeIndex = ((k % DUMMY_MESH_COUNT) + DUMMY_MESH_COUNT) % DUMMY_MESH_COUNT;
-              // },
             });
           },
         });
@@ -102,7 +106,7 @@ const Scene = () => {
 
           gsap.to(uniforms.uShapeActivation, {
             value: scrollPower,
-            duration: 0.9,
+            duration: 0.7,
             ease: "power3.out",
             onComplete: () => {
               gsap.killTweensOf(uniforms.uShapeActivation);
@@ -141,7 +145,7 @@ const Scene = () => {
           });
         }
       },
-      onRelease(self) {
+      onRelease: (self) => {
         const clampedVelocity = gsap.utils.clamp(-50, 50, self.velocityX);
 
         gsap.to(scrollStateRef.current, {
@@ -162,11 +166,6 @@ const Scene = () => {
               target: snapped,
               duration: 1,
               ease: "power3.out",
-              // IF I WANT TO DO SOMETHING WITH THE ACTIVE INDEX WHEN SNAP COMPLETE, UNCOMMENT BELOW
-              // onComplete: () => {
-              //   const k = Math.round(snapped / slotPx);
-              //   const activeIndex = ((k % DUMMY_MESH_COUNT) + DUMMY_MESH_COUNT) % DUMMY_MESH_COUNT;
-              // },
             });
           },
         });
@@ -180,12 +179,54 @@ const Scene = () => {
 
   useFrame(() => {
     if (meshesFactory.length === 0) return;
+
     meshesFactory.forEach((mesh, i) => {
       const base = (i - DUMMY_MESH_COUNT / 2) * meshStateRef.current.width * meshStateRef.current.spacing;
       const x = infinitySlider(base + scrollStateRef.current.target);
       mesh.position.set(x, 0, 0);
     });
   });
+
+  const handleClick = (mesh, i) => {
+    if (!mesh) return;
+    if (!mesh.userData.isExpanded && mesh.position.x === 0) {
+      mesh.userData.isExpanded = true;
+
+      gsap.to(mesh.scale, { x: 1.2, y: 1.2, duration: 0.5 });
+      meshesFactory.forEach((otherMesh, j) => {
+        if (j !== i) {
+          gsap.to(otherMesh.scale, { x: 0.8, y: 0.8, duration: 0.5, ease: "power3.out" });
+          gsap.to(uniforms.uShapeActivation, {
+            value: 0.3,
+            duration: 0.5,
+          });
+          gsap.to(uniforms.uShapeActivation, {
+            value: 0,
+            duration: 0.5,
+            delay: 0.5,
+          });
+        }
+      });
+    } else {
+      mesh.userData.isExpanded = false;
+
+      gsap.to(mesh.scale, { x: 1, y: 1, duration: 0.5 });
+      meshesFactory.forEach((otherMesh, j) => {
+        if (j !== i) {
+          gsap.to(otherMesh.scale, { x: 1, y: 1, duration: 0.5, ease: "power3.out" });
+          gsap.to(uniforms.uShapeActivation, {
+            value: -0.3,
+            duration: 0.5,
+          });
+          gsap.to(uniforms.uShapeActivation, {
+            value: 0,
+            duration: 0.5,
+            delay: 0.5,
+          });
+        }
+      });
+    }
+  };
 
   return (
     <>
@@ -194,8 +235,9 @@ const Scene = () => {
           ref={meshRef}
           key={i}
           object={mesh}
-          position={[(i - DUMMY_MESH_COUNT / 2) * meshStateRef.current.width * meshStateRef.current.spacing, 0, 0]}
           material={mesh.material}
+          geometry={mesh.geometry}
+          onClick={() => handleClick(mesh, i)}
         />
       ))}
     </>
