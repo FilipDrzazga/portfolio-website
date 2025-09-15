@@ -5,4 +5,6 @@ export const usePageStore = create((set) => ({
   setIsCanvasLoaded: (isLoaded) => {
     set({ isCanvasLoaded: isLoaded });
   },
+  playgroundAnimationName: "",
+  setPlaygroundAnimationName: (name) => set({ playgroundAnimationName: name }),
 }));

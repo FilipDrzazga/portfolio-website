@@ -1,7 +1,6 @@
 import { Canvas } from "@react-three/fiber";
 import Camera from "./Camera";
 import Scene from "./Scene";
-// import { OrbitControls } from "@react-three/drei";
 
 const ThreeCanvas = () => {
   return (
@@ -12,7 +11,6 @@ const ThreeCanvas = () => {
     >
       <Camera />
       <Scene />
-      {/* <OrbitControls enableZoom={true} /> */}
     </Canvas>
   );
 };

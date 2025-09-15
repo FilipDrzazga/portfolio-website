@@ -1,9 +1,12 @@
 import { ShowcaseCardWrapper, Title } from "./ShowcaseCard.styled";
+import { usePageStore } from "../../../../store/useStore";
 
 const ShowcaseCard = () => {
+  const playgroundAnimationName = usePageStore((state) => state.playgroundAnimationName);
+
   return (
     <ShowcaseCardWrapper>
-      <Title>Image distortion</Title>
+      <Title>{playgroundAnimationName}</Title>
     </ShowcaseCardWrapper>
   );
 };

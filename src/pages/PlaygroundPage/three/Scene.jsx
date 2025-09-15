@@ -1,5 +1,6 @@
 /* eslint-disable react/no-unknown-property */
 import { useRef, useMemo, useCallback } from "react";
+import { usePageStore } from "../../../store/useStore";
 import * as THREE from "three";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
@@ -17,6 +18,7 @@ gsap.registerPlugin(useGSAP, Observer, InertiaPlugin);
 const Scene = () => {
   const { gl } = useThree();
 
+  const useStore = usePageStore();
   const DUMMY_MESH_COUNT = 4;
   const meshRef = useRef(null);
   const meshStateRef = useRef({
@@ -89,6 +91,7 @@ const Scene = () => {
           duration: 1,
           ease: "power3.out",
           onComplete: () => {
+            // Snap to closest
             gsap.killTweensOf(uniforms.uShapeActivation);
             const slotPx = meshStateRef.current.width * meshStateRef.current.spacing;
             let snapped = gsap.utils.snap(slotPx, scrollStateRef.current.target);
@@ -98,6 +101,22 @@ const Scene = () => {
               duration: 1,
               ease: "power3.out",
             });
+
+            // Find closest mesh index to center
+            let closestIndex = null;
+            let prevDist = Infinity;
+
+            meshesFactory.forEach((mesh, i) => {
+              const dist = Math.abs(mesh.position.x);
+              if (dist < prevDist) {
+                prevDist = dist;
+                closestIndex = i;
+              }
+            });
+            // Set animation name in the store
+            if (closestIndex !== null) {
+              useStore.setPlaygroundAnimationName(`animation_${closestIndex}`);
+            }
           },
         });
 
@@ -190,6 +209,7 @@ const Scene = () => {
   const handleClick = (mesh, i) => {
     if (!mesh) return;
     if (!mesh.userData.isExpanded && mesh.position.x === 0) {
+      console.log("index:", i);
       mesh.userData.isExpanded = true;
 
       gsap.to(mesh.scale, { x: 1.2, y: 1.2, duration: 0.5 });
@@ -207,7 +227,7 @@ const Scene = () => {
           });
         }
       });
-    } else {
+    } else if (mesh.userData.isExpanded && mesh.position.x === 0) {
       mesh.userData.isExpanded = false;
 
       gsap.to(mesh.scale, { x: 1, y: 1, duration: 0.5 });

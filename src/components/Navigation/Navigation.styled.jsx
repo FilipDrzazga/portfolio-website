@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from "react-router";
 import { DEVICE } from "../../styles/theme";
 
 const NavigationWrapper = styled.nav`
@@ -29,7 +30,7 @@ const NavigationItem = styled.li`
   margin: 0 1rem;
   cursor: pointer;
 `;
-const NavigationLink = styled.a`
+const NavigationLink = styled(Link)`
   text-decoration: none;
   color: inherit;
   span {
