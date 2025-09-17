@@ -3,6 +3,7 @@ import { useEffect, useRef, useMemo } from "react";
 import * as THREE from "three";
 import { useThree, useFrame } from "@react-three/fiber";
 import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import useResponsiveImages from "../../../hook/useResponsiveImages";
 
@@ -17,12 +18,6 @@ const Scene = () => {
   const { size } = useThree();
   const { bioImageSrc } = useResponsiveImages();
 
-  ScrollTrigger.create({
-    onUpdate: (self) => {
-      uniforms.u_scroll.value = self.progress;
-    },
-  });
-
   const uniforms = useMemo(
     () => ({
       u_resolution: { value: new THREE.Vector2(size.width, size.height) },
@@ -34,6 +29,14 @@ const Scene = () => {
     }),
     []
   );
+
+  useGSAP(() => {
+    ScrollTrigger.create({
+      onUpdate: (self) => {
+        uniforms.u_scroll.value = self.progress;
+      },
+    });
+  });
 
   useFrame((state) => {
     uniforms.u_time.value = state.clock.getElapsedTime();
