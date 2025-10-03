@@ -3,9 +3,10 @@ export const GLOBAL_THEME = {
     primary: "#1e1e1e",
   },
   fontSizes: {
-    small: "0.6rem",
-    medium: "0.8rem",
-    large: "3rem",
+    small: "clamp(0.65rem, 0.9vw, 0.95rem)",
+    smallPlus: "clamp(0.75rem, 1.2vw, 1.1rem)",
+    medium: "clamp(0.80rem, 1.5vw, 1.5rem)",
+    large: "clamp(3.5rem, 4vw, 5rem)",
   },
   spacing: {
     normal: "1rem",
@@ -14,25 +15,15 @@ export const GLOBAL_THEME = {
   },
 };
 
-const SIZE = {
-  MOBILE_XS: "360px",
-  MOBILE_S: "390px",
-};
 export const DEVICE = {
-  MOBILE_XS: `(min-width: ${SIZE.MOBILE_XS})`,
-  MOBILE_S: `(min-width: ${SIZE.MOBILE_S})`,
-};
+  // MOBILE DEVICES
+  ["360"]: `(min-width: ${360}px)`,
+  ["375"]: `(min-width: ${375}px)`,
+  ["390"]: `(min-width: ${390}px)`,
+  // ['393']: `(min-width: ${393}px)`, pixel 6a w chrome//
+  ["412"]: `(min-width: ${412}px)`,
+  // ['430']: `(min-width: ${430}px)`, iphon 14 pro max w chrome//
 
-// --breakpoint-mobile-sm: 22rem; /* 352px */
-// --breakpoint-mobile-sm-plus: 24.375rem; /* 390px */
-// --breakpoint-mobile-md: 25.75rem; /* 412px */
-// --breakpoint-mobile-lg: 26.875rem; /* 430px */
-// --breakpoint-tablet-md: 51rem; /* 820px */
-// --breakpoint-laptop: 90rem; /* 1440px */
-// --breakpoint-screen-sm: 100.625rem; /* 1610px */
-// --breakpoint-screen-md: 113.125rem; /* 1810px */
-// --breakpoint-screen-lg: 120rem; /* 1920px */
-/*  md	48rem (768px)  @media (width >= 48rem) { ... }
-  lg	64rem (1024px)	@media (width >= 64rem) { ... }
-  xl	80rem (1280px)	@media (width >= 80rem) { ... }
-  2xl	96rem (1536px)	@media (width >= 96rem) { ... } */
+  // TABLET DEVICES
+  ["768"]: `(min-width: ${768}px)`,
+};

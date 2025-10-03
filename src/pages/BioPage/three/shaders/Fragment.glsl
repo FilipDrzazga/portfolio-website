@@ -3,12 +3,11 @@ precision highp float;
 #endif
 varying vec2 vUv;
 
-uniform vec2 u_resolution;
 uniform float u_screenRatio;
 uniform sampler2D u_texture;
-uniform float u_textureRatio;
 uniform float u_scroll;
 uniform float u_time;
+uniform vec2 u_scale;
 
 vec4 mod289(vec4 x) {
   return x - floor(x * (1.0 / 289.0)) * 289.0;
@@ -66,48 +65,27 @@ float cnoise(vec2 P) {
 }
 
 void main() {
-    vec4 whiteBg = vec4(1.0, 1.0, 1.0, 1.0);
+  vec4 whiteBg = vec4(1.0);
+  vec2 uv = vUv;
 
-    vec2 center = vec2(0.5, 0.5);
+  float frameAspect = (u_scale.x * u_screenRatio) / u_scale.y;
 
-    vec2 uv = vUv;
-    uv = gl_FragCoord.xy / u_resolution; // normalize coordinates
-    uv -= center; // center the UV coordinates
+  vec2 uvFrame = (uv - 0.5) / u_scale + 0.5;
+  uvFrame.y -= 0.1; 
 
-    vec2 scaledUV = uv;
+  float noise =  0.5 * cnoise(vec2(uvFrame.x * 2.0 + u_time * 0.05,uvFrame.y * 2.0 + u_time * 0.05));
+  noise +=  0.35 * cnoise(vec2(uvFrame.x * 3.0 - u_time * 0.05,uvFrame.y * 2.0 + u_time * 0.1));
+  noise = noise * 0.5 + 0.5; // normalize to [0,1]
 
-    if (u_textureRatio > u_screenRatio) {
-    float scale = u_screenRatio / u_textureRatio;
-    scaledUV.x *= scale;
-    scaledUV.x += (1.0 - scale) / 2.0;
-    } else {
-    float scale = u_textureRatio / u_screenRatio;
-    scaledUV.y *= scale;
-    scaledUV.y += (1.0 - scale) / 1.0;
-    }
+  vec2 distortion = uvFrame + 0.05 * (vec2(noise) - 0.5) * 300.0;
 
-    scaledUV -= center; 
-    scaledUV /= 1.3; // zoom
-    scaledUV += center; // re-center
-    scaledUV -= vec2(0.0, 0.1); // move up a bit
+  vec2 mixedUV = mix(uvFrame, distortion, u_scroll);
+  vec4 texColor = texture2D(u_texture, mixedUV);
 
-    float thickness = 250.; // thickness of noise effect
-    float intensity = 1.2; // intensity of noise effect
-    float speed = 0.1; // speed of noise animation
-
-    
-    float noiseVal = cnoise(scaledUV.yx * intensity + u_time * speed) * thickness; // apply noise function
-    vec2 distortedUV = scaledUV + vec2(noiseVal); // distort UVs with noise
-    distortedUV /= 25.; // zoom out distorted UVs
-
-    vec2 mixedUV = mix(scaledUV, distortedUV, u_scroll); // mix original and distorted UVs
-
-    vec4 texColor = texture2D(u_texture, mixedUV);
-
-    bool isInside = all(greaterThanEqual(mixedUV, vec2(0.0))) &&
+  bool inside = all(greaterThanEqual(mixedUV, vec2(0.0))) &&
                 all(lessThanEqual(mixedUV, vec2(1.0)));
 
-    vec4 texColorOutput = isInside ? texColor : whiteBg;
+  vec3 finalColor = inside ? texColor.rgb : whiteBg.rgb;
 
-    gl_FragColor = texColorOutput;
+  gl_FragColor = vec4(finalColor, 1.0);
 }

@@ -20,12 +20,11 @@ const Scene = () => {
 
   const uniforms = useMemo(
     () => ({
-      u_resolution: { value: new THREE.Vector2(size.width, size.height) },
-      u_texture: { value: null },
-      u_textureRatio: { value: 1 },
       u_screenRatio: { value: size.width / size.height },
+      u_texture: { value: null },
       u_scroll: { value: 0 },
       u_time: { value: 0 },
+      u_scale: { value: new THREE.Vector2(1.0, 1.0) },
     }),
     []
   );
@@ -46,23 +45,16 @@ const Scene = () => {
     new THREE.TextureLoader().load(bioImageSrc, (loadedTexture) => {
       loadedTexture.needsUpdate = true;
       uniforms.u_texture.value = loadedTexture;
-      uniforms.u_textureRatio.value = loadedTexture.image.width / loadedTexture.image.height;
-      uniforms.u_resolution.value.set(size.width, size.height);
-      uniforms.u_screenRatio.value = size.width / size.height;
       textureRef.current = loadedTexture;
     });
-  }, [bioImageSrc]);
 
-  useEffect(() => {
     const handleResize = () => {
-      uniforms.u_resolution.value.set(size.width, size.height);
       uniforms.u_screenRatio.value = size.width / size.height;
 
-      if (textureRef.current) {
-        uniforms.u_textureRatio.value = textureRef.current.image.width / textureRef.current.image.height; // Update the
-      }
-      if (meshRef.current) {
-        meshRef.current.geometry.scale(size.width, size.height, 1);
+      if (uniforms.u_screenRatio.value < 0.75) {
+        uniforms.u_scale.value = new THREE.Vector2(0.75, 0.65);
+      } else if (uniforms.u_screenRatio.value > 0.74) {
+        uniforms.u_scale.value = new THREE.Vector2(0.5, 0.65);
       }
     };
 
@@ -72,11 +64,11 @@ const Scene = () => {
     return () => {
       window.removeEventListener("resize", handleResize);
     };
-  }, [size, uniforms]);
+  }, [size, uniforms, bioImageSrc]);
 
   return (
     <mesh ref={meshRef} position={[0, 0, 0]}>
-      <planeGeometry args={[window.innerWidth, window.innerHeight, 1, 1]} />
+      <planeGeometry args={[size.width, size.height, 1, 1]} />
       <shaderMaterial wireframe={false} fragmentShader={Fragment} vertexShader={Vertex} uniforms={uniforms} />
     </mesh>
   );

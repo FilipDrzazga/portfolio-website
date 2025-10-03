@@ -32,7 +32,7 @@ const Contact = () => {
       onSplit: (self) => {
         return gsap.from(self.chars, {
           x: -50,
-          stagger: { each: 0.05, from: "start", ease: "power2.out" },
+          stagger: { each: 0.05, from: "start" },
           scrollTrigger: {
             trigger: headerRef.current.querySelector("h1"),
             markers: false,
@@ -54,34 +54,22 @@ const Contact = () => {
           char.appendChild(square);
         });
 
-        const spans = self.chars.map((el) => el.querySelector("span"));
+        const spans = gsap.utils.toArray(self.chars.map((el) => el.querySelector("span")));
 
         let tlSubtitle = gsap.timeline({
           paused: true,
           scrollTrigger: {
             trigger: headerRef.current.querySelector("h2"),
-            start: "-150px 80%", // why px??
+            start: "-150px 80%",
             end: "bottom 80%",
             markers: false,
           },
-          onEnter: () => {
-            tlSubtitle.play();
-          },
+          onEnter: () => tlSubtitle.play(),
         });
 
         return tlSubtitle
-          .from(self.chars, {
-            visibility: "hidden",
-            stagger: { each: 0.05, from: "start" },
-          })
-          .to(
-            spans,
-            {
-              visibility: "hidden",
-              stagger: { each: 0.05, from: "start" },
-            },
-            ">-1.55"
-          );
+          .from(self.chars, { visibility: "hidden", stagger: 0.05 })
+          .to(spans, { visibility: "hidden", stagger: 0.05 }, ">-1.55");
       },
     });
 
@@ -98,8 +86,10 @@ const Contact = () => {
 
         const word1 = gsap.utils.toArray(self.words[0].querySelectorAll("div"));
         const word2 = gsap.utils.toArray(self.words[1].querySelectorAll("div"));
+        const word3 = gsap.utils.toArray(self.words[2].querySelectorAll("div"));
         const spans1 = gsap.utils.toArray(self.words[0].querySelectorAll("span"));
         const spans2 = gsap.utils.toArray(self.words[1].querySelectorAll("span"));
+        const spans3 = gsap.utils.toArray(self.words[2].querySelectorAll("span"));
 
         let tlSocialLinks = gsap.timeline({
           paused: true,
@@ -109,40 +99,16 @@ const Contact = () => {
             end: "bottom 80%",
             markers: false,
           },
-          onEnter: () => {
-            tlSocialLinks.play();
-          },
+          onEnter: () => tlSocialLinks.play(),
         });
 
         return tlSocialLinks
-          .from(word1, {
-            visibility: "hidden",
-            stagger: { each: 0.05, from: "start" },
-          })
-          .to(
-            spans1,
-            {
-              visibility: "hidden",
-              stagger: { each: 0.05, from: "start" },
-            },
-            ">-0.3"
-          )
-          .from(
-            word2,
-            {
-              visibility: "hidden",
-              stagger: { each: 0.05, from: "start" },
-            },
-            ">-1.5"
-          )
-          .to(
-            spans2,
-            {
-              visibility: "hidden",
-              stagger: { each: 0.05, from: "start" },
-            },
-            ">-0.2"
-          );
+          .from(word1, { visibility: "hidden", stagger: 0.05 })
+          .to(spans1, { visibility: "hidden", stagger: 0.05 }, `<+0.55`)
+          .from(word2, { visibility: "hidden", stagger: 0.05 }, 0)
+          .to(spans2, { visibility: "hidden", stagger: 0.05 }, `<+0.55`)
+          .from(word3, { visibility: "hidden", stagger: 0.05 }, 0)
+          .to(spans3, { visibility: "hidden", stagger: 0.05 }, `<+0.55`);
       },
     });
 
@@ -162,55 +128,27 @@ const Contact = () => {
         const spansRepeat = self.words.slice(2, 4).map((el) => el.querySelectorAll("span"));
 
         // Timeline for Footer text animation, repeated infinitely just name
-        let tlNameRepeat = gsap.timeline({
-          paused: true,
-          repeat: -1,
-          repeatDelay: 3,
-        });
+        let tlNameRepeat = gsap.timeline({ paused: true, repeat: -1, repeatDelay: 3 });
 
         let tlFooter = gsap.timeline({
           paused: true,
           scrollTrigger: {
             trigger: footerRef.current.querySelector("p"),
-            start: "-100px 80%",
-            end: "bottom 80%",
+            start: "top bottom",
+            end: "bottom bottom",
             markers: false,
           },
-          onEnter: () => {
-            tlFooter.play();
-          },
-          onComplete: () => {
-            tlNameRepeat.play();
-          },
+          onEnter: () => tlFooter.play(),
+          onComplete: () => tlNameRepeat.play(),
         });
 
         tlFooter
-          .from(self.chars, {
-            visibility: "hidden",
-            stagger: { each: 0.05, from: "start" },
-          })
-          .to(
-            spans,
-            {
-              visibility: "hidden",
-              stagger: { each: 0.05, from: "start" },
-            },
-            ">-1.75"
-          );
+          .from(self.chars, { visibility: "hidden", stagger: { each: 0.05, from: "start" } })
+          .to(spans, { visibility: "hidden", stagger: { each: 0.05, from: "start" } }, ">-1.75");
 
         tlNameRepeat
-          .to(spansRepeat, {
-            visibility: "visible",
-            stagger: { each: 0.05, from: "start" },
-          })
-          .to(
-            spansRepeat,
-            {
-              visibility: "hidden",
-              stagger: { each: 0.05, from: "start" },
-            },
-            "-=95%"
-          );
+          .to(spansRepeat, { visibility: "visible", stagger: { each: 0.05, from: "start" } })
+          .to(spansRepeat, { visibility: "hidden", stagger: { each: 0.05, from: "start" } }, "-=95%");
       },
     });
   });
@@ -232,6 +170,11 @@ const Contact = () => {
               rel="noopener noreferrer"
             >
               LINKEDIN
+            </SocialLinksLink>
+          </SocialLinksListItem>
+          <SocialLinksListItem>
+            <SocialLinksLink href="https://github.com/FilipDrzazga" target="_blank" rel="noopener noreferrer">
+              EMAIL
             </SocialLinksLink>
           </SocialLinksListItem>
           <SocialLinksListItem>

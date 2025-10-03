@@ -23,37 +23,30 @@ const Navigation = () => {
             char.appendChild(square);
           });
           const spans = self.chars.map((el) => el.querySelector("span"));
-          tl.from(self.chars, {
-            visibility: "hidden",
-            delay: 0.5,
-            stagger: { each: 0.05, from: "start" },
-          }).to(
+          tl.from(self.chars, { visibility: "hidden", delay: 0.5, stagger: { each: 0.05, from: "start" } }).to(
             spans,
-            {
-              visibility: "hidden",
-              delay: 0.5,
-              stagger: { each: 0.05, from: "start" },
-            },
+            { visibility: "hidden", delay: 0.5, stagger: { each: 0.05, from: "start" } },
             ">-95%"
           );
         },
       });
     });
   });
+
   return (
     <NavigationWrapper ref={navigationRef}>
       <NavigationList>
         <NavigationItem>
-          <NavigationLink to="/portfolio-website/bio">BIO</NavigationLink>
+          <NavigationLink to="/bio">BIO</NavigationLink>
         </NavigationItem>
         <NavigationItem>
-          <NavigationLink to="/portfolio-website/playground">PLAYGROUND</NavigationLink>
+          <NavigationLink to="/playground">PLAYGROUND</NavigationLink>
         </NavigationItem>
         <NavigationItem>
-          <NavigationLink to="/portfolio-website/work">WORK</NavigationLink>
+          <NavigationLink to="/work">WORK</NavigationLink>
         </NavigationItem>
         <NavigationItem>
-          <NavigationLink to="/portfolio-website/mail">MAIL</NavigationLink>
+          <NavigationLink to="/mail">MAIL</NavigationLink>
         </NavigationItem>
       </NavigationList>
     </NavigationWrapper>

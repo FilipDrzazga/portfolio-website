@@ -11,17 +11,24 @@ const HeroWrapper = styled.section`
   align-items: center;
   gap: 2rem;
   padding: ${({ theme }) => theme.spacing.normal};
+
+  @media ${DEVICE["360"]} {
+    gap: 3rem;
+  }
+  @media ${DEVICE["375"]} {
+    gap: 2.8rem;
+  }
+  @media ${DEVICE["390"]} {
+    gap: 3.5rem;
+  }
+  @media ${DEVICE["412"]} {
+    gap: 3.8rem;
+  }
+  @media ${DEVICE["768"]} {
+    gap: 4.5rem;
+  }
 `;
-const TextureMask = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: white;
-  pointer-events: none;
-  z-index: -1;
-`;
+
 const CoordinatesWrapper = styled.div`
   display: flex;
   justify-content: space-between;
@@ -33,6 +40,13 @@ const CoordinatesText = styled.p`
   font-family: "JetBrainsMonoMedium";
   font-size: ${({ theme }) => theme.fontSizes.small};
   color: ${({ theme }) => theme.colors.primary};
+
+  @media ${DEVICE["412"]} {
+    font-size: ${({ theme }) => theme.fontSizes.smallPlus};
+  }
+  @media ${DEVICE["768"]} {
+    font-size: ${({ theme }) => theme.fontSizes.medium};
+  }
   span {
     position: absolute;
     top: 0;
@@ -44,20 +58,46 @@ const CoordinatesText = styled.p`
     font-size: ${({ theme }) => theme.fontSizes.small};
     color: white;
     background-color: ${({ theme }) => theme.colors.primary};
-  }
-  @media ${DEVICE.MOBILE_S} {
-    font-size: 0.8rem;
+
+    @media ${DEVICE["412"]} {
+      font-size: ${({ theme }) => theme.fontSizes.smallPlus};
+    }
+    @media ${DEVICE["768"]} {
+      font-size: ${({ theme }) => theme.fontSizes.medium};
+    }
   }
 `;
 const ScrollTextWrapper = styled.div`
   width: 100%;
   margin-bottom: 2rem;
   text-align: center;
+
+  @media ${DEVICE["360"]} {
+    margin-bottom: 3rem;
+  }
+  @media ${DEVICE["375"]} {
+    margin-bottom: 2.2rem;
+  }
+  @media ${DEVICE["390"]} {
+    margin-bottom: 3rem;
+  }
+  @media ${DEVICE["412"]} {
+    margin-bottom: 3.8rem;
+  }
+  @media ${DEVICE["768"]} {
+    margin-bottom: 2rem;
+  }
 `;
 const ScrollText = styled.p`
   font-family: "JetBrainsMonoMedium";
   font-size: ${({ theme }) => theme.fontSizes.small};
   color: ${({ theme }) => theme.colors.primary};
+  @media ${DEVICE["412"]} {
+    font-size: ${({ theme }) => theme.fontSizes.smallPlus};
+  }
+  @media ${DEVICE["768"]} {
+    font-size: ${({ theme }) => theme.fontSizes.medium};
+  }
   span {
     position: absolute;
     top: 0;
@@ -69,10 +109,11 @@ const ScrollText = styled.p`
     font-size: ${({ theme }) => theme.fontSizes.small};
     color: white;
     background-color: ${({ theme }) => theme.colors.primary};
-  }
-  @media ${DEVICE.MOBILE_S} {
-    font-size: 0.8rem;
+
+    @media ${DEVICE["768"]} {
+      font-size: ${({ theme }) => theme.fontSizes.medium};
+    }
   }
 `;
 
-export { HeroWrapper, TextureMask, CoordinatesWrapper, CoordinatesText, ScrollTextWrapper, ScrollText };
+export { HeroWrapper, CoordinatesWrapper, CoordinatesText, ScrollTextWrapper, ScrollText };

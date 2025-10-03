@@ -20,10 +20,11 @@ const NavigationList = styled.ul`
   font-size: ${({ theme }) => theme.fontSizes.small};
   color: ${({ theme }) => theme.colors.primary};
   list-style: none;
-  margin: 0;
-  padding: 0;
-  @media ${DEVICE.MOBILE_S} {
-    font-size: 0.8rem;
+  @media ${DEVICE["412"]} {
+    font-size: ${({ theme }) => theme.fontSizes.smallPlus};
+  }
+  @media ${DEVICE["768"]} {
+    font-size: ${({ theme }) => theme.fontSizes.medium};
   }
 `;
 const NavigationItem = styled.li`
@@ -43,6 +44,13 @@ const NavigationLink = styled(Link)`
     font-size: ${({ theme }) => theme.fontSizes.small};
     color: white;
     background-color: ${({ theme }) => theme.colors.primary};
+
+    @media ${DEVICE["412"]} {
+      font-size: ${({ theme }) => theme.fontSizes.smallPlus};
+    }
+    @media ${DEVICE["768"]} {
+      font-size: ${({ theme }) => theme.fontSizes.medium};
+    }
   }
 `;
 

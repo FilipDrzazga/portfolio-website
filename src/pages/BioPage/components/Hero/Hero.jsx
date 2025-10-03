@@ -39,18 +39,14 @@ const Hero = () => {
               char.appendChild(square);
             });
             const spans = self.chars.map((el) => el.querySelector("span"));
-            tl.from(self.chars, {
-              visibility: "hidden",
-              delay: 0.3,
-              stagger: { each: 0.05, from: "start" },
-            }).to(
+            tl.from(self.chars, { visibility: "hidden", delay: 0.3, stagger: 0.05 }).to(
               spans,
               {
                 visibility: "hidden",
                 delay: 0.3,
-                stagger: { each: 0.05, from: "start" },
+                stagger: 0.05,
               },
-              ">-73%"
+              "<+0.25"
             );
           },
         });
@@ -67,45 +63,19 @@ const Hero = () => {
             square.textContent = gsap.utils.random(["%", "&", "*", "$"]);
             el.appendChild(square);
           });
+
           const spans = self.chars.map((el) => el.querySelector("span"));
-          tl.from(self.chars, {
-            visibility: "hidden",
-            delay: 0.3,
-            stagger: { each: 0.05, from: "start" },
-          }).to(
+          tl.from(self.chars, { visibility: "hidden", delay: 0.3, stagger: { each: 0.05, from: "start" } }).to(
             spans,
-            {
-              visibility: "hidden",
-              delay: 0.3,
-              stagger: {
-                each: 0.05,
-                from: "start",
-              },
-            },
+            { visibility: "hidden", delay: 0.3, stagger: { each: 0.05, from: "start" } },
             ">-80%"
           );
 
           // Create a loop for the ScrollText animation
           let loop = gsap.timeline({ repeat: -1, repeatDelay: 3, delay: 3 });
           loop
-            .to(spans, {
-              visibility: "visible",
-              stagger: {
-                each: 0.05,
-                from: "start",
-              },
-            })
-            .to(
-              spans,
-              {
-                visibility: "hidden",
-                stagger: {
-                  each: 0.05,
-                  from: "start",
-                },
-              },
-              "-=95%"
-            );
+            .to(spans, { visibility: "visible", stagger: { each: 0.05, from: "start" } })
+            .to(spans, { visibility: "hidden", stagger: { each: 0.05, from: "start" } }, "-=95%");
         },
       });
     },

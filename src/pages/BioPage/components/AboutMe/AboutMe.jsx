@@ -28,9 +28,9 @@ const AboutMe = () => {
       onSplit: (self) => {
         return gsap.from(self.chars, {
           x: -50,
-          stagger: { each: 0.05, from: "start", ease: "power2.out" },
+          stagger: { each: 0.05, from: "start" },
           scrollTrigger: {
-            trigger: headerRef.current.querySelector("h1"),
+            trigger: headerRef.current && headerRef.current.querySelector("h1"),
             markers: false,
             start: "top 80%",
             end: "bottom 80%",
@@ -50,50 +50,25 @@ const AboutMe = () => {
           char.appendChild(square);
         });
 
-        // Get the lines and spans for the subtitle animation, terminal typing effect by the lines
-        const line1 = gsap.utils.toArray(self.lines[0].querySelectorAll("div"));
-        const line2 = gsap.utils.toArray(self.lines[1].querySelectorAll("div"));
-        const spansLine1 = gsap.utils.toArray(self.lines[0].querySelectorAll("span"));
-        const spansLine2 = gsap.utils.toArray(self.lines[1].querySelectorAll("span"));
-
         let tlSubtitle = gsap.timeline({
           paused: true,
           scrollTrigger: {
             trigger: headerRef.current.querySelector("h1"),
             start: "top 80%",
             end: "bottom 80%",
+            markers: false,
             onEnter: () => tlSubtitle.play(),
           },
         });
-        return tlSubtitle
-          .from(line1, {
-            visibility: "hidden",
-            stagger: { each: 0.05, from: "start" },
-          })
-          .to(
-            spansLine1,
-            {
-              visibility: "hidden",
-              stagger: { each: 0.05, from: "start" },
-            },
-            ">-1.25"
-          )
-          .from(
-            line2,
-            {
-              visibility: "hidden",
-              stagger: { each: 0.05, from: "start" },
-            },
-            ">-2.3"
-          )
-          .to(
-            spansLine2,
-            {
-              visibility: "hidden",
-              stagger: { each: 0.05, from: "start" },
-            },
-            ">-1.5"
-          );
+
+        self.lines.forEach((line, i) => {
+          const divs = gsap.utils.toArray(line.querySelectorAll("div"));
+          const spans = gsap.utils.toArray(line.querySelectorAll("span"));
+
+          tlSubtitle
+            .from(divs, { visibility: "hidden", stagger: 0.05 }, i * 0.5)
+            .to(spans, { visibility: "hidden", stagger: 0.05 }, `<+0.55`);
+        });
       },
     });
   });

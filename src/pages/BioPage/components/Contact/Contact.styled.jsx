@@ -27,6 +27,9 @@ const Subtitle = styled.h2`
   color: ${({ theme }) => theme.colors.primary};
   text-align: center;
   text-justify: inter-word;
+  @media ${DEVICE["412"]} {
+    font-size: ${({ theme }) => theme.fontSizes.smallPlus};
+  }
   span {
     position: absolute;
     top: 0;
@@ -39,10 +42,6 @@ const Subtitle = styled.h2`
     color: white;
     background-color: ${({ theme }) => theme.colors.primary};
   }
-  @media ${DEVICE.MOBILE_S} {
-    font-size: 4rem;
-    line-height: 4rem;
-  }
 `;
 const Title = styled.h1`
   width: 100%;
@@ -51,24 +50,22 @@ const Title = styled.h1`
   color: ${({ theme }) => theme.colors.primary};
   cursor: pointer;
   text-align: center;
+  word-spacing: -0.1rem;
   a {
     text-decoration: none;
     color: inherit;
   }
-  @media ${DEVICE.MOBILE_S} {
-    font-size: 1.2rem;
-    line-height: 1.3rem;
-  }
 `;
 const SocialLinksWrapper = styled.div`
   width: 100%;
+  margin-top: ${({ theme }) => theme.spacing.normal};
 `;
 const SocialLinksList = styled.ul`
   width: 100%;
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
-  gap: 1rem;
+  gap: 3rem;
 `;
 const SocialLinksListItem = styled.li`
   list-style: none;
@@ -78,6 +75,9 @@ const SocialLinksLink = styled.a`
   font-size: ${({ theme }) => theme.fontSizes.small};
   color: ${({ theme }) => theme.colors.primary};
   text-decoration: none;
+  @media ${DEVICE["412"]} {
+    font-size: ${({ theme }) => theme.fontSizes.smallPlus};
+  }
   span {
     position: absolute;
     top: 0;
@@ -89,13 +89,10 @@ const SocialLinksLink = styled.a`
     color: white;
     background-color: ${({ theme }) => theme.colors.primary};
   }
-  @media ${DEVICE.MOBILE_S} {
-    font-size: 0.8rem;
-  }
 `;
 const Footer = styled.footer`
   position: absolute;
-  bottom: 1rem;
+  bottom: ${({ theme }) => theme.spacing.normal};
   width: 100%;
   display: flex;
   justify-content: center;
@@ -103,8 +100,11 @@ const Footer = styled.footer`
 `;
 const FooterText = styled.p`
   font-family: "JetBrainsMonoMedium";
-  font-size: 0.5rem;
+  font-size: ${({ theme }) => theme.fontSizes.small};
   color: ${({ theme }) => theme.colors.primary};
+  @media ${DEVICE["412"]} {
+    font-size: ${({ theme }) => theme.fontSizes.smallPlus};
+  }
   span {
     position: absolute;
     top: 0;
