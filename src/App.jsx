@@ -12,8 +12,9 @@ const App = () => {
       <PageTransition pathName={location.pathname}>
         <Routes location={location}>
           <Route path="/" element={<Navigate to="/bio" replace />} />
-          <Route index path="/bio" element={<BioPage />} />
+          <Route path="/bio" element={<BioPage />} />
           <Route path="playground" element={<PlaygroundPage />} />
+          <Route path="*" element={<Navigate to="/bio" replace />} />
         </Routes>
       </PageTransition>
     </>
