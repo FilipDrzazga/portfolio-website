@@ -9,31 +9,47 @@ const AboutMeWrapper = styled.section`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: ${({ theme }) => theme.spacing.normal};
+  padding: ${({ theme }) => theme.spacing.pagePadding};
+  @media ${DEVICE["768"]} {
+    padding: ${({ theme }) => theme.spacing.xxl};
+  }
+  @media ${DEVICE["1024"]} {
+    padding: ${({ theme }) => theme.spacing.xxxl};
+  }
 `;
 const Header = styled.header`
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-start;
+  align-items: flex-start;
   gap: 1rem;
   width: 100%;
-  margin-bottom: ${({ theme }) => theme.spacing.medium};
+  margin-bottom: ${({ theme }) => theme.spacing.xl};
   z-index: -1;
+  @media ${DEVICE["768"]} {
+    margin-bottom: ${({ theme }) => theme.spacing.xxl};
+  }
 `;
 const Title = styled.h1`
   width: 100%;
   font-family: "InterRegular";
-  font-size: ${({ theme }) => theme.fontSizes.large};
+  font-size: ${({ theme }) => theme.fontSizes.xxl};
   color: ${({ theme }) => theme.colors.primary};
+  @media ${DEVICE["768"]} {
+    font-size: ${({ theme }) => theme.fontSizes.ipad};
+  }
 `;
 const Subtitle = styled.h2`
   width: 100%;
   font-family: "JetBrainsMonoBold";
-  font-size: ${({ theme }) => theme.fontSizes.medium};
+  font-size: ${({ theme }) => theme.fontSizes.sm};
   color: ${({ theme }) => theme.colors.primary};
   text-align: left;
   line-height: 1.4;
+  @media ${DEVICE["768"]} {
+    width: 80%;
+    font-size: ${({ theme }) => theme.fontSizes.lg};
+  }
   span {
     position: absolute;
     top: 0;
@@ -42,9 +58,13 @@ const Subtitle = styled.h2`
     width: 100%;
     height: 100%;
     align-items: center;
-    font-size: ${({ theme }) => theme.fontSizes.medium};
+    font-size: ${({ theme }) => theme.fontSizes.md};
     color: white;
     background-color: ${({ theme }) => theme.colors.primary};
+    @media ${DEVICE["768"]} {
+      width: 80%;
+      font-size: ${({ theme }) => theme.fontSizes.lg};
+    }
   }
 `;
 const ParagraphsWrapper = styled.div`
@@ -53,26 +73,45 @@ const ParagraphsWrapper = styled.div`
   align-items: flex-start;
   justify-content: flex-start;
   gap: 1.5rem;
-  margin-bottom: ${({ theme }) => theme.spacing.medium};
+  margin-bottom: ${({ theme }) => theme.spacing.xl};
   z-index: -1;
+  @media ${DEVICE["768"]} {
+    margin-bottom: ${({ theme }) => theme.spacing.xxl};
+  }
+  @media ${DEVICE["768"]} {
+    gap: 2.5rem;
+  }
+  @media ${DEVICE["820"]} {
+    gap: 3rem;
 `;
 const Text = styled.p`
   font-family: "JetBrainsMonoMedium";
-  font-size: ${({ theme }) => theme.fontSizes.small};
+  font-size: ${({ theme }) => theme.fontSizes.xs};
   color: ${({ theme }) => theme.colors.primary};
   line-height: 1.6;
   text-align: justify;
   text-justify: inter-word;
   @media ${DEVICE["412"]} {
-    font-size: ${({ theme }) => theme.fontSizes.smallPlus};
+    font-size: ${({ theme }) => theme.fontSizes.sm};
+  }
+  @media ${DEVICE["768"]} {
+    font-size: ${({ theme }) => theme.fontSizes.md};
   }
 `;
-const TechStackWrapper = styled.div``;
+const TechStackWrapper = styled.div`
+  @media ${DEVICE["768"]} {
+    width: 100%;
+  }
+`;
 const TechStack = styled.h3`
   font-family: "JetBrainsMonoBold";
-  font-size: ${({ theme }) => theme.fontSizes.medium};
+  font-size: ${({ theme }) => theme.fontSizes.sm};
   line-height: 1.6;
   color: ${({ theme }) => theme.colors.primary};
+  @media ${DEVICE["768"]} {
+    text-align: center;
+    font-size: ${({ theme }) => theme.fontSizes.lg};
+  }
 `;
 
 export { AboutMeWrapper, Header, Title, Subtitle, ParagraphsWrapper, Text, TechStackWrapper, TechStack };

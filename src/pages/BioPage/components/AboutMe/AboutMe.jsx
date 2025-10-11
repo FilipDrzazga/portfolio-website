@@ -27,7 +27,7 @@ const AboutMe = () => {
       mask: "chars",
       onSplit: (self) => {
         return gsap.from(self.chars, {
-          x: -50,
+          x: -70,
           stagger: { each: 0.05, from: "start" },
           scrollTrigger: {
             trigger: headerRef.current && headerRef.current.querySelector("h1"),

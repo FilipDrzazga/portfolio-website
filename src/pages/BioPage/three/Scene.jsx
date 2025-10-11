@@ -24,7 +24,7 @@ const Scene = () => {
       u_texture: { value: null },
       u_scroll: { value: 0 },
       u_time: { value: 0 },
-      u_scale: { value: new THREE.Vector2(1.0, 1.0) },
+      u_scale: { value: new THREE.Vector2(0.75, 0.65) },
     }),
     []
   );
@@ -50,11 +50,24 @@ const Scene = () => {
 
     const handleResize = () => {
       uniforms.u_screenRatio.value = size.width / size.height;
-
-      if (uniforms.u_screenRatio.value < 0.75) {
+      console.log(size.width);
+      // to refactor later with DEVICE breakpoints
+      if (size.width <= 359) {
+        uniforms.u_scale.value = new THREE.Vector2(0.65, 0.63);
+      } else if (size.width >= 360 && size.width <= 374) {
         uniforms.u_scale.value = new THREE.Vector2(0.75, 0.65);
-      } else if (uniforms.u_screenRatio.value > 0.74) {
+      } else if (size.width >= 375 && size.width <= 389) {
+        uniforms.u_scale.value = new THREE.Vector2(0.65, 0.65);
+      } else if (size.width >= 390 && size.width <= 430) {
+        uniforms.u_scale.value = new THREE.Vector2(0.75, 0.6);
+      } else if (size.width >= 431 && size.width <= 767) {
+        uniforms.u_scale.value = new THREE.Vector2(0.8, 0.65);
+      } else if (size.width >= 768 && size.width <= 819) {
         uniforms.u_scale.value = new THREE.Vector2(0.5, 0.65);
+      } else if (size.width >= 820 && size.width <= 1023) {
+        uniforms.u_scale.value = new THREE.Vector2(0.5, 0.64);
+      } else if (size.width >= 1024 && size.width <= 1366) {
+        uniforms.u_scale.value = new THREE.Vector2(0.5, 0.66);
       }
     };
 
@@ -64,6 +77,7 @@ const Scene = () => {
     return () => {
       window.removeEventListener("resize", handleResize);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [size, uniforms, bioImageSrc]);
 
   return (

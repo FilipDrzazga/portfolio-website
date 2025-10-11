@@ -9,7 +9,7 @@ const ContactWrapper = styled.section`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: ${({ theme }) => theme.spacing.normal};
+  padding: ${({ theme }) => theme.spacing.pagePadding};
 `;
 const Header = styled.header`
   display: flex;
@@ -17,18 +17,24 @@ const Header = styled.header`
   align-items: center;
   justify-content: center;
   width: 100%;
-  margin-bottom: ${({ theme }) => theme.spacing.normal};
+  margin-bottom: ${({ theme }) => theme.spacing.lg};
+  @media ${DEVICE["768"]} {
+    margin-bottom: ${({ theme }) => theme.spacing.xxl};
+  }
 `;
 const Subtitle = styled.h2`
   width: 100%;
   font-family: "JetBrainsMonoMedium";
   font-weight: 400;
-  font-size: ${({ theme }) => theme.fontSizes.small};
+  font-size: ${({ theme }) => theme.fontSizes.xs};
   color: ${({ theme }) => theme.colors.primary};
   text-align: center;
   text-justify: inter-word;
   @media ${DEVICE["412"]} {
-    font-size: ${({ theme }) => theme.fontSizes.smallPlus};
+    font-size: ${({ theme }) => theme.fontSizes.sm};
+  }
+  @media ${DEVICE["768"]} {
+    font-size: ${({ theme }) => theme.fontSizes.md};
   }
   span {
     position: absolute;
@@ -38,15 +44,21 @@ const Subtitle = styled.h2`
     width: 100%;
     height: 100%;
     align-items: center;
-    font-size: ${({ theme }) => theme.fontSizes.medium};
+    font-size: ${({ theme }) => theme.fontSizes.md};
     color: white;
     background-color: ${({ theme }) => theme.colors.primary};
+    @media ${DEVICE["412"]} {
+      font-size: ${({ theme }) => theme.fontSizes.sm};
+    }
+    @media ${DEVICE["768"]} {
+      font-size: ${({ theme }) => theme.fontSizes.md};
+    }
   }
 `;
 const Title = styled.h1`
   width: 100%;
   font-family: "InterRegular";
-  font-size: ${({ theme }) => theme.fontSizes.large};
+  font-size: ${({ theme }) => theme.fontSizes.xxl};
   color: ${({ theme }) => theme.colors.primary};
   cursor: pointer;
   text-align: center;
@@ -55,10 +67,12 @@ const Title = styled.h1`
     text-decoration: none;
     color: inherit;
   }
+  @media ${DEVICE["768"]} {
+    font-size: ${({ theme }) => theme.fontSizes.ipad};
+  }
 `;
 const SocialLinksWrapper = styled.div`
   width: 100%;
-  margin-top: ${({ theme }) => theme.spacing.normal};
 `;
 const SocialLinksList = styled.ul`
   width: 100%;
@@ -66,17 +80,23 @@ const SocialLinksList = styled.ul`
   justify-content: center;
   align-items: center;
   gap: 3rem;
+  @media ${DEVICE["768"]} {
+    gap: 7rem;
+  }
 `;
 const SocialLinksListItem = styled.li`
   list-style: none;
 `;
 const SocialLinksLink = styled.a`
   font-family: "JetBrainsMonoMedium";
-  font-size: ${({ theme }) => theme.fontSizes.small};
+  font-size: ${({ theme }) => theme.fontSizes.xs};
   color: ${({ theme }) => theme.colors.primary};
   text-decoration: none;
   @media ${DEVICE["412"]} {
-    font-size: ${({ theme }) => theme.fontSizes.smallPlus};
+    font-size: ${({ theme }) => theme.fontSizes.sm};
+  }
+  @media ${DEVICE["768"]} {
+    font-size: ${({ theme }) => theme.fontSizes.md};
   }
   span {
     position: absolute;
@@ -85,14 +105,20 @@ const SocialLinksLink = styled.a`
     display: inline-block;
     width: 100%;
     height: 100%;
-    font-size: ${({ theme }) => theme.fontSizes.medium};
+    font-size: ${({ theme }) => theme.fontSizes.md};
     color: white;
     background-color: ${({ theme }) => theme.colors.primary};
+    @media ${DEVICE["412"]} {
+      font-size: ${({ theme }) => theme.fontSizes.sm};
+    }
+    @media ${DEVICE["768"]} {
+      font-size: ${({ theme }) => theme.fontSizes.md};
+    }
   }
 `;
 const Footer = styled.footer`
   position: absolute;
-  bottom: ${({ theme }) => theme.spacing.normal};
+  bottom: ${({ theme }) => theme.spacing.md};
   width: 100%;
   display: flex;
   justify-content: center;
@@ -100,10 +126,13 @@ const Footer = styled.footer`
 `;
 const FooterText = styled.p`
   font-family: "JetBrainsMonoMedium";
-  font-size: ${({ theme }) => theme.fontSizes.small};
+  font-size: ${({ theme }) => theme.fontSizes.xs};
   color: ${({ theme }) => theme.colors.primary};
   @media ${DEVICE["412"]} {
-    font-size: ${({ theme }) => theme.fontSizes.smallPlus};
+    font-size: ${({ theme }) => theme.fontSizes.sm};
+  }
+  @media ${DEVICE["768"]} {
+    font-size: ${({ theme }) => theme.fontSizes.md};
   }
   span {
     position: absolute;
@@ -112,9 +141,15 @@ const FooterText = styled.p`
     display: inline-block;
     width: 100%;
     height: 100%;
-    font-size: ${({ theme }) => theme.fontSizes.medium};
+    font-size: ${({ theme }) => theme.fontSizes.md};
     color: white;
     background-color: ${({ theme }) => theme.colors.primary};
+    @media ${DEVICE["412"]} {
+      font-size: ${({ theme }) => theme.fontSizes.sm};
+    }
+    @media ${DEVICE["768"]} {
+      font-size: ${({ theme }) => theme.fontSizes.md};
+    }
   }
 `;
 

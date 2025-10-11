@@ -9,7 +9,7 @@ const NavigationWrapper = styled.nav`
   top: 0;
   left: 0;
   z-index: 100;
-  padding: ${({ theme }) => theme.spacing.normal};
+  padding: ${({ theme }) => theme.spacing.pagePadding};
 `;
 const NavigationList = styled.ul`
   display: flex;
@@ -17,14 +17,14 @@ const NavigationList = styled.ul`
   align-items: center;
   height: 100%;
   font-family: "JetBrainsMonoMedium";
-  font-size: ${({ theme }) => theme.fontSizes.small};
+  font-size: ${({ theme }) => theme.fontSizes.xs};
   color: ${({ theme }) => theme.colors.primary};
   list-style: none;
   @media ${DEVICE["412"]} {
-    font-size: ${({ theme }) => theme.fontSizes.smallPlus};
+    font-size: ${({ theme }) => theme.fontSizes.sm};
   }
   @media ${DEVICE["768"]} {
-    font-size: ${({ theme }) => theme.fontSizes.medium};
+    font-size: ${({ theme }) => theme.fontSizes.md};
   }
 `;
 const NavigationItem = styled.li`
@@ -41,15 +41,15 @@ const NavigationLink = styled(Link)`
     display: inline-block;
     width: 100%;
     height: 100%;
-    font-size: ${({ theme }) => theme.fontSizes.small};
+    font-size: ${({ theme }) => theme.fontSizes.xs};
     color: white;
     background-color: ${({ theme }) => theme.colors.primary};
 
     @media ${DEVICE["412"]} {
-      font-size: ${({ theme }) => theme.fontSizes.smallPlus};
+      font-size: ${({ theme }) => theme.fontSizes.sm};
     }
     @media ${DEVICE["768"]} {
-      font-size: ${({ theme }) => theme.fontSizes.medium};
+      font-size: ${({ theme }) => theme.fontSizes.md};
     }
   }
 `;
