@@ -73,6 +73,9 @@ const CoordinatesText = styled.p`
   @media ${DEVICE["1366"]} {
     font-size: ${({ theme }) => theme.fontSizes.sm};
   }
+  @media ${DEVICE["1920"]} {
+    font-size: ${({ theme }) => theme.fontSizes.xs};
+  }
   span {
     position: absolute;
     top: 0;
@@ -93,6 +96,9 @@ const CoordinatesText = styled.p`
     }
     @media ${DEVICE["1366"]} {
       font-size: ${({ theme }) => theme.fontSizes.sm};
+    }
+    @media ${DEVICE["1920"]} {
+      font-size: ${({ theme }) => theme.fontSizes.xs};
     }
   }
 `;
@@ -139,6 +145,9 @@ const ScrollText = styled.p`
   @media ${DEVICE["1366"]} {
     font-size: ${({ theme }) => theme.fontSizes.sm};
   }
+      @media ${DEVICE["1920"]} {
+    font-size: ${({ theme }) => theme.fontSizes.xs};
+  }
   span {
     position: absolute;
     top: 0;
@@ -156,6 +165,9 @@ const ScrollText = styled.p`
     }
     @media ${DEVICE["1366"]} {
       font-size: ${({ theme }) => theme.fontSizes.sm};
+  }
+        @media ${DEVICE["1920"]} {
+    font-size: ${({ theme }) => theme.fontSizes.xs};
   }
 `;
 

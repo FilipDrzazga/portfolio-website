@@ -60,7 +60,7 @@ const Scene = () => {
       } else if (size.width >= 375 && size.width <= 389) {
         uniforms.u_scale.value = new THREE.Vector2(0.65, 0.65);
       } else if (size.width >= 390 && size.width <= 430) {
-        uniforms.u_scale.value = new THREE.Vector2(0.75, 0.6);
+        uniforms.u_scale.value = new THREE.Vector2(0.7, 0.58);
       } else if (size.width >= 431 && size.width <= 767) {
         uniforms.u_scale.value = new THREE.Vector2(0.8, 0.65);
       } else if (size.width >= 768 && size.width <= 819) {
@@ -69,9 +69,18 @@ const Scene = () => {
         uniforms.u_scale.value = new THREE.Vector2(0.5, 0.64);
       } else if (size.width >= 1024 && size.width <= 1350) {
         uniforms.u_scale.value = new THREE.Vector2(0.5, 0.66);
-      } else if (size.width >= 1351 && size.width <= 1919) {
+      } else if (size.width >= 1351 && size.width <= 1439) {
         uniforms.u_scale.value = new THREE.Vector2(0.23, 0.7);
         uniforms.u_yAdjust.value = 0.06;
+      } else if (size.width >= 1440 && size.width <= 1727) {
+        uniforms.u_scale.value = new THREE.Vector2(0.25, 0.7);
+        uniforms.u_yAdjust.value = 0.05;
+      } else if (size.width >= 1728 && size.width <= 1900) {
+        uniforms.u_scale.value = new THREE.Vector2(0.2, 0.7);
+        uniforms.u_yAdjust.value = 0.04;
+      } else if (size.width >= 1905) {
+        uniforms.u_scale.value = new THREE.Vector2(0.21, 0.7);
+        uniforms.u_yAdjust.value = 0.05;
       }
     };
 

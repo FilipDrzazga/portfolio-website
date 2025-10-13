@@ -31,6 +31,9 @@ const NavigationList = styled.ul`
     gap: 10rem;
     font-size: ${({ theme }) => theme.fontSizes.sm};
   }
+  @media ${DEVICE["1920"]} {
+    font-size: ${({ theme }) => theme.fontSizes.xs};
+  }
 `;
 const NavigationItem = styled.li`
   margin: 0 1rem;
@@ -57,6 +60,9 @@ const NavigationLink = styled(Link)`
       font-size: ${({ theme }) => theme.fontSizes.md};
     }
     @media ${DEVICE["1366"]} {
+      font-size: ${({ theme }) => theme.fontSizes.xs};
+    }
+    @media ${DEVICE["1920"]} {
       font-size: ${({ theme }) => theme.fontSizes.xs};
     }
   }

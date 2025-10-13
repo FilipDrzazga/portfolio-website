@@ -68,6 +68,7 @@ float cnoise(vec2 P) {
 void main() {
   vec4 whiteBg = vec4(1.0);
   vec2 uv = vUv;
+  vec3 ambient = vec3(0.05);
 
   float frameAspect = (u_scale.x * u_screenRatio) / u_scale.y;
 
@@ -86,7 +87,7 @@ void main() {
   bool inside = all(greaterThanEqual(mixedUV, vec2(0.0))) &&
                 all(lessThanEqual(mixedUV, vec2(1.0)));
 
-  vec3 finalColor = inside ? texColor.rgb : whiteBg.rgb;
+  vec3 finalColor = inside ? texColor.rgb + ambient : whiteBg.rgb;
 
   gl_FragColor = vec4(finalColor, 1.0);
 }

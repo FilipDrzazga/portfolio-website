@@ -21,6 +21,9 @@ const Header = styled.header`
   @media ${DEVICE["768"]} {
     margin-bottom: ${({ theme }) => theme.spacing.xxl};
   }
+  @media ${DEVICE["1920"]} {
+    margin-bottom: ${({ theme }) => theme.spacing.lg};
+  }
 `;
 const Subtitle = styled.h2`
   width: 100%;
@@ -38,6 +41,9 @@ const Subtitle = styled.h2`
   }
   @media ${DEVICE["1366"]} {
     font-size: ${({ theme }) => theme.fontSizes.sm};
+  }
+  @media ${DEVICE["1920"]} {
+    font-size: ${({ theme }) => theme.fontSizes.xs};
   }
   span {
     position: absolute;
@@ -58,6 +64,9 @@ const Subtitle = styled.h2`
     }
     @media ${DEVICE["1366"]} {
       font-size: ${({ theme }) => theme.fontSizes.sm};
+    }
+    @media ${DEVICE["1920"]} {
+      font-size: ${({ theme }) => theme.fontSizes.xs};
     }
   }
 `;
@@ -110,6 +119,9 @@ const SocialLinksLink = styled.a`
   @media ${DEVICE["1366"]} {
     font-size: ${({ theme }) => theme.fontSizes.sm};
   }
+  @media ${DEVICE["1920"]} {
+    font-size: ${({ theme }) => theme.fontSizes.xs};
+  }
   span {
     position: absolute;
     top: 0;
@@ -128,6 +140,9 @@ const SocialLinksLink = styled.a`
     }
     @media ${DEVICE["1366"]} {
       font-size: ${({ theme }) => theme.fontSizes.sm};
+    }
+    @media ${DEVICE["1920"]} {
+      font-size: ${({ theme }) => theme.fontSizes.xs};
     }
   }
 `;
@@ -152,6 +167,9 @@ const FooterText = styled.p`
   @media ${DEVICE["1366"]} {
     font-size: ${({ theme }) => theme.fontSizes.xs};
   }
+  @media ${DEVICE["1920"]} {
+    font-size: 0.7rem;
+  }
   span {
     position: absolute;
     top: 0;
@@ -170,6 +188,9 @@ const FooterText = styled.p`
     }
     @media ${DEVICE["1366"]} {
       font-size: ${({ theme }) => theme.fontSizes.xs};
+    }
+    @media ${DEVICE["1920"]} {
+      font-size: 0.7rem;
     }
   }
 `;

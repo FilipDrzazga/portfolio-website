@@ -19,6 +19,12 @@ const AboutMeWrapper = styled.section`
   @media ${DEVICE["1366"]} {
     padding: 20rem;
   }
+  @media ${DEVICE["1728"]} {
+    padding: 25rem;
+  }
+  @media ${DEVICE["1920"]} {
+    padding: 35rem;
+  }
 `;
 const Header = styled.header`
   display: flex;
@@ -59,6 +65,9 @@ const Subtitle = styled.h2`
   @media ${DEVICE["1366"]} {
     font-size: ${({ theme }) => theme.fontSizes.md};
   }
+  @media ${DEVICE["1920"]} {
+    font-size: ${({ theme }) => theme.fontSizes.md};
+  }
   span {
     position: absolute;
     top: 0;
@@ -87,6 +96,9 @@ const ParagraphsWrapper = styled.div`
   gap: 1.5rem;
   margin-bottom: ${({ theme }) => theme.spacing.xl};
   z-index: -1;
+  @media ${DEVICE["412"]} {
+    gap: 4rem;
+  }
   @media ${DEVICE["768"]} {
     margin-bottom: ${({ theme }) => theme.spacing.xxl};
   }
@@ -116,6 +128,9 @@ const Text = styled.p`
   @media ${DEVICE["1366"]} {
     font-size: ${({ theme }) => theme.fontSizes.sm};
   }
+  @media ${DEVICE["1920"]} {
+    font-size: ${({ theme }) => theme.fontSizes.xs};
+  }
 `;
 const TechStackWrapper = styled.div`
   @media ${DEVICE["768"]} {
@@ -126,13 +141,16 @@ const TechStack = styled.h3`
   font-family: "JetBrainsMonoBold";
   font-size: ${({ theme }) => theme.fontSizes.sm};
   line-height: 1.6;
+  text-align: center;
   color: ${({ theme }) => theme.colors.primary};
   @media ${DEVICE["768"]} {
-    text-align: center;
     font-size: ${({ theme }) => theme.fontSizes.lg};
   }
   @media ${DEVICE["1366"]} {
     width: 100%;
+    font-size: ${({ theme }) => theme.fontSizes.md};
+  }
+  @media ${DEVICE["1920"]} {
     font-size: ${({ theme }) => theme.fontSizes.md};
   }
 `;
