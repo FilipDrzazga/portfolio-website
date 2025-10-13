@@ -25,6 +25,7 @@ const Scene = () => {
       u_scroll: { value: 0 },
       u_time: { value: 0 },
       u_scale: { value: new THREE.Vector2(0.75, 0.65) },
+      u_yAdjust: { value: 0.1 },
     }),
     []
   );
@@ -66,8 +67,11 @@ const Scene = () => {
         uniforms.u_scale.value = new THREE.Vector2(0.5, 0.65);
       } else if (size.width >= 820 && size.width <= 1023) {
         uniforms.u_scale.value = new THREE.Vector2(0.5, 0.64);
-      } else if (size.width >= 1024 && size.width <= 1366) {
+      } else if (size.width >= 1024 && size.width <= 1350) {
         uniforms.u_scale.value = new THREE.Vector2(0.5, 0.66);
+      } else if (size.width >= 1351 && size.width <= 1919) {
+        uniforms.u_scale.value = new THREE.Vector2(0.23, 0.7);
+        uniforms.u_yAdjust.value = 0.06;
       }
     };
 

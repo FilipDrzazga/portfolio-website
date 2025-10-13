@@ -16,6 +16,9 @@ const AboutMeWrapper = styled.section`
   @media ${DEVICE["1024"]} {
     padding: ${({ theme }) => theme.spacing.xxxl};
   }
+  @media ${DEVICE["1366"]} {
+    padding: 20rem;
+  }
 `;
 const Header = styled.header`
   display: flex;
@@ -38,6 +41,9 @@ const Title = styled.h1`
   @media ${DEVICE["768"]} {
     font-size: ${({ theme }) => theme.fontSizes.ipad};
   }
+  @media ${DEVICE["1366"]} {
+    font-size: 5rem;
+  }
 `;
 const Subtitle = styled.h2`
   width: 100%;
@@ -49,6 +55,9 @@ const Subtitle = styled.h2`
   @media ${DEVICE["768"]} {
     width: 80%;
     font-size: ${({ theme }) => theme.fontSizes.lg};
+  }
+  @media ${DEVICE["1366"]} {
+    font-size: ${({ theme }) => theme.fontSizes.md};
   }
   span {
     position: absolute;
@@ -64,6 +73,9 @@ const Subtitle = styled.h2`
     @media ${DEVICE["768"]} {
       width: 80%;
       font-size: ${({ theme }) => theme.fontSizes.lg};
+    }
+    @media ${DEVICE["1366"]} {
+      font-size: ${({ theme }) => theme.fontSizes.md};
     }
   }
 `;
@@ -83,6 +95,10 @@ const ParagraphsWrapper = styled.div`
   }
   @media ${DEVICE["820"]} {
     gap: 3rem;
+  }
+  @media ${DEVICE["1366"]} {
+    gap: 3.5rem;
+  }
 `;
 const Text = styled.p`
   font-family: "JetBrainsMonoMedium";
@@ -96,6 +112,9 @@ const Text = styled.p`
   }
   @media ${DEVICE["768"]} {
     font-size: ${({ theme }) => theme.fontSizes.md};
+  }
+  @media ${DEVICE["1366"]} {
+    font-size: ${({ theme }) => theme.fontSizes.sm};
   }
 `;
 const TechStackWrapper = styled.div`
@@ -111,6 +130,10 @@ const TechStack = styled.h3`
   @media ${DEVICE["768"]} {
     text-align: center;
     font-size: ${({ theme }) => theme.fontSizes.lg};
+  }
+  @media ${DEVICE["1366"]} {
+    width: 100%;
+    font-size: ${({ theme }) => theme.fontSizes.md};
   }
 `;
 

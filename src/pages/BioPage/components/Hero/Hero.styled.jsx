@@ -33,6 +33,9 @@ const HeroWrapper = styled.section`
   @media ${DEVICE["1024"]} {
     gap: 6rem;
   }
+  @media ${DEVICE["1366"]} {
+    gap: 2.8rem;
+  }
 `;
 
 const CoordinatesWrapper = styled.div`
@@ -50,6 +53,10 @@ const CoordinatesWrapper = styled.div`
   @media ${DEVICE["1024"]} {
     gap: 8.5rem;
   }
+  @media ${DEVICE["1366"]} {
+    width: 100%;
+    gap: 10rem;
+  }
 `;
 const CoordinatesText = styled.p`
   position: relative;
@@ -62,6 +69,9 @@ const CoordinatesText = styled.p`
   }
   @media ${DEVICE["768"]} {
     font-size: ${({ theme }) => theme.fontSizes.md};
+  }
+  @media ${DEVICE["1366"]} {
+    font-size: ${({ theme }) => theme.fontSizes.sm};
   }
   span {
     position: absolute;
@@ -80,6 +90,9 @@ const CoordinatesText = styled.p`
     }
     @media ${DEVICE["768"]} {
       font-size: ${({ theme }) => theme.fontSizes.md};
+    }
+    @media ${DEVICE["1366"]} {
+      font-size: ${({ theme }) => theme.fontSizes.sm};
     }
   }
 `;
@@ -109,6 +122,9 @@ const ScrollTextWrapper = styled.div`
   @media ${DEVICE["1024"]} {
     margin-bottom: 5rem;
   }
+  @media ${DEVICE["1366"]} {
+    margin-bottom: -1rem;
+  }
 `;
 const ScrollText = styled.p`
   font-family: "JetBrainsMonoMedium";
@@ -119,6 +135,9 @@ const ScrollText = styled.p`
   }
   @media ${DEVICE["768"]} {
     font-size: ${({ theme }) => theme.fontSizes.md};
+  }
+  @media ${DEVICE["1366"]} {
+    font-size: ${({ theme }) => theme.fontSizes.sm};
   }
   span {
     position: absolute;
@@ -135,6 +154,8 @@ const ScrollText = styled.p`
     @media ${DEVICE["768"]} {
       font-size: ${({ theme }) => theme.fontSizes.md};
     }
+    @media ${DEVICE["1366"]} {
+      font-size: ${({ theme }) => theme.fontSizes.sm};
   }
 `;
 

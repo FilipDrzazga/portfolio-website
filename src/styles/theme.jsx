@@ -36,4 +36,7 @@ export const DEVICE = {
   ["768"]: `(min-width: ${768}px)`,
   ["820"]: `(min-width: ${820}px)`,
   ["1024"]: `(min-width: ${1024}px)`,
+
+  // LAPTOP DEVICES
+  ["1366"]: `(min-width: ${1366}px)`,
 };

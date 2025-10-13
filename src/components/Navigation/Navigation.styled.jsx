@@ -26,6 +26,11 @@ const NavigationList = styled.ul`
   @media ${DEVICE["768"]} {
     font-size: ${({ theme }) => theme.fontSizes.md};
   }
+  @media ${DEVICE["1366"]} {
+    justify-content: center;
+    gap: 10rem;
+    font-size: ${({ theme }) => theme.fontSizes.sm};
+  }
 `;
 const NavigationItem = styled.li`
   margin: 0 1rem;
@@ -50,6 +55,9 @@ const NavigationLink = styled(Link)`
     }
     @media ${DEVICE["768"]} {
       font-size: ${({ theme }) => theme.fontSizes.md};
+    }
+    @media ${DEVICE["1366"]} {
+      font-size: ${({ theme }) => theme.fontSizes.xs};
     }
   }
 `;

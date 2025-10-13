@@ -8,6 +8,7 @@ uniform sampler2D u_texture;
 uniform float u_scroll;
 uniform float u_time;
 uniform vec2 u_scale;
+uniform float u_yAdjust; //move uv up/down
 
 vec4 mod289(vec4 x) {
   return x - floor(x * (1.0 / 289.0)) * 289.0;
@@ -71,7 +72,7 @@ void main() {
   float frameAspect = (u_scale.x * u_screenRatio) / u_scale.y;
 
   vec2 uvFrame = (uv - 0.5) / u_scale + 0.5;
-  uvFrame.y -= 0.1; 
+  uvFrame.y -= u_yAdjust; 
 
   float noise =  0.5 * cnoise(vec2(uvFrame.x * 2.0 + u_time * 0.05,uvFrame.y * 2.0 + u_time * 0.05));
   noise +=  0.35 * cnoise(vec2(uvFrame.x * 3.0 - u_time * 0.05,uvFrame.y * 2.0 + u_time * 0.1));
