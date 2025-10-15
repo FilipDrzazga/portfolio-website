@@ -1,25 +1,33 @@
 export const GLOBAL_THEME = {
   colors: {
     primary: "#1e1e1e",
+    secondary: "#e5e3ff",
   },
   fontSizes: {
-    xs: "clamp(0.65rem, 0.9vw, 0.95rem)",
-    sm: "clamp(0.75rem, 1.2vw, 1.1rem)",
-    md: "clamp(0.9rem, 1.5vw, 1.5rem)",
-    lg: "clamp(1.2rem, 2vw, 2rem)",
-    xl: "clamp(1.5rem, 3vw, 2.5rem)",
-    xxl: "clamp(3rem, 4vw, 3rem)",
-    ipad: "clamp(5rem, 5vw, 5rem)",
+    h1: "clamp(1.7rem, 5vw + 0.5rem, 3rem)",
+    h1Special: "clamp(2rem, 18vw, 10rem)",
+    h2: "clamp(0.84rem, 3vw + 0.3rem, 1.5rem)",
+    paragraph: "clamp(0.95rem, 1.5vw + 0.2rem, 1.1rem)",
+  },
+  lineHeights: {
+    h1: 1.1,
+    h2: 1.3,
+    paragraph: 1.6,
+  },
+  margins: {
+    h1: "0.5rem",
+    h2: "1rem",
+    paragraph: "1rem",
   },
   spacing: {
-    pagePadding: "clamp(1rem, 3vw, 4rem)",
-    xs: "clamp(0.5rem, 0.8vw, 1rem)",
-    sm: "clamp(1rem, 1.2vw, 1.5rem)",
-    md: "clamp(1.5rem, 2vw, 2.5rem)",
-    lg: "clamp(2rem, 3vw, 3rem)",
-    xl: "clamp(3rem, 4vw, 4rem)",
-    xxl: "clamp(4rem, 5vw, 5rem)",
-    xxxl: "clamp(7rem, 6vw, 8rem)",
+    sm: "0.5rem",
+    md: "1rem",
+    lg: "2rem",
+  },
+  lettersSpacing: {
+    h1: "0.02em",
+    h2: "0.015em",
+    paragraph: "0.05em",
   },
 };
 

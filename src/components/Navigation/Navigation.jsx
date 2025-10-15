@@ -37,16 +37,16 @@ const Navigation = () => {
     <NavigationWrapper ref={navigationRef}>
       <NavigationList>
         <NavigationItem>
-          <NavigationLink to="/bio">BIO</NavigationLink>
+          <NavigationLink to="/bio">Bio</NavigationLink>
         </NavigationItem>
         <NavigationItem>
-          <NavigationLink to="/playground">PLAYGROUND</NavigationLink>
+          <NavigationLink to="/playground">Playground</NavigationLink>
         </NavigationItem>
         <NavigationItem>
-          <NavigationLink to="/work">WORK</NavigationLink>
+          <NavigationLink to="/work">Work</NavigationLink>
         </NavigationItem>
         <NavigationItem>
-          <NavigationLink to="/mail">MAIL</NavigationLink>
+          <NavigationLink to="/mail">Mail</NavigationLink>
         </NavigationItem>
       </NavigationList>
     </NavigationWrapper>

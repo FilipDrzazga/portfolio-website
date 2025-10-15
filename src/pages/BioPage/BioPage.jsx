@@ -5,11 +5,11 @@ import { Hero, AboutMe, Contact } from "./components";
 const BioPage = () => {
   return (
     <>
-      <ThreeCanvas />
+      {/* <ThreeCanvas /> */}
       <BioPageWrapper>
         <Hero />
-        <AboutMe />
-        <Contact />
+        {/* <AboutMe /> */}
+        {/* <Contact /> */}
       </BioPageWrapper>
     </>
   );

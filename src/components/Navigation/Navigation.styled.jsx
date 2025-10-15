@@ -1,70 +1,51 @@
 import styled from "styled-components";
 import { Link } from "react-router";
-import { DEVICE } from "../../styles/theme";
 
 const NavigationWrapper = styled.nav`
   width: 100%;
+  max-width: 1440px;
   height: 10vh;
   position: fixed;
   top: 0;
-  left: 0;
+  left: 50%;
+  transform: translate(-50%, 0%);
   z-index: 100;
-  padding: ${({ theme }) => theme.spacing.pagePadding};
+  background-color: ${({ theme }) => theme.colors.primary};
+  padding: clamp(2rem, 5vw, 3rem); // same as global padding
 `;
 const NavigationList = styled.ul`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 100%;
   height: 100%;
-  font-family: "JetBrainsMonoMedium";
-  font-size: ${({ theme }) => theme.fontSizes.xs};
   color: ${({ theme }) => theme.colors.primary};
   list-style: none;
-  @media ${DEVICE["412"]} {
-    font-size: ${({ theme }) => theme.fontSizes.sm};
-  }
-  @media ${DEVICE["768"]} {
-    font-size: ${({ theme }) => theme.fontSizes.md};
-  }
-  @media ${DEVICE["1366"]} {
-    justify-content: center;
-    gap: 10rem;
-    font-size: ${({ theme }) => theme.fontSizes.sm};
-  }
-  @media ${DEVICE["1920"]} {
-    font-size: ${({ theme }) => theme.fontSizes.xs};
-  }
 `;
 const NavigationItem = styled.li`
-  margin: 0 1rem;
   cursor: pointer;
 `;
 const NavigationLink = styled(Link)`
   text-decoration: none;
   color: inherit;
+  font-family: "InterRegular";
+  font-size: ${({ theme }) => theme.fontSizes.paragraph};
+  line-height: ${({ theme }) => theme.lineHeights.paragraph};
+  font-weight: 400;
+  color: ${({ theme }) => theme.colors.secondary};
+  letter-spacing: ${({ theme }) => theme.lettersSpacing.paragraph};
   span {
     position: absolute;
     top: 0;
-    left: 0;
+    left: 50%;
+    transform: translate(-50%, 0%);
     display: inline-block;
+    font-family: "InterRegular";
+    font-size: ${({ theme }) => theme.fontSizes.paragraph};
     width: 100%;
     height: 100%;
-    font-size: ${({ theme }) => theme.fontSizes.xs};
-    color: white;
-    background-color: ${({ theme }) => theme.colors.primary};
-
-    @media ${DEVICE["412"]} {
-      font-size: ${({ theme }) => theme.fontSizes.sm};
-    }
-    @media ${DEVICE["768"]} {
-      font-size: ${({ theme }) => theme.fontSizes.md};
-    }
-    @media ${DEVICE["1366"]} {
-      font-size: ${({ theme }) => theme.fontSizes.xs};
-    }
-    @media ${DEVICE["1920"]} {
-      font-size: ${({ theme }) => theme.fontSizes.xs};
-    }
+    background-color: ${({ theme }) => theme.colors.secondary};
+    color: ${({ theme }) => theme.colors.primary};
   }
 `;
 

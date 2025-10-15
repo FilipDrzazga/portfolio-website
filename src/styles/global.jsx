@@ -44,17 +44,22 @@ const GlobalStyle = createGlobalStyle`
 }
 
 * {
+
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+    html {
+    scroll-beha16px;
 }
 
 body {
-    // background-color:rgb(199, 19, 19);
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
+    background-color: ${({ theme }) => theme.colors.primary};
 }
+
 `;
 
 export default GlobalStyle;

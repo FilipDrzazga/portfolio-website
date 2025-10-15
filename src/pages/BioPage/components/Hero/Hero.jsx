@@ -3,7 +3,8 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { SplitText } from "gsap/SplitText";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { HeroWrapper, CoordinatesWrapper, CoordinatesText, ScrollTextWrapper, ScrollText } from "./Hero.styled";
+import { HeroWrapper, Title, Subtitle, Location, ImageWrapper, Image } from "./Hero.styled";
+import image from "../../../../assets/images/bio_tablet_img_lg.webp";
 
 gsap.registerPlugin(useGSAP, SplitText, ScrollTrigger);
 
@@ -11,87 +12,16 @@ const Hero = () => {
   const coordinatesWrapperRef = useRef(null);
   const scrollTextWrapperRef = useRef(null);
 
-  useGSAP(
-    () => {
-      // ScrollTriger animation on CoordinatesWrapper
-      gsap.to(coordinatesWrapperRef.current, {
-        scrollTrigger: {
-          trigger: coordinatesWrapperRef.current,
-          markers: false,
-          start: "-60px 70%",
-          end: "bottom 70%",
-          scrub: true,
-        },
-        y: -20,
-        autoAlpha: 0,
-      });
-
-      // terminal typing animation on CoordinatesText
-      gsap.utils.toArray(coordinatesWrapperRef.current.querySelectorAll("p")).forEach((el) => {
-        SplitText.create(el, {
-          type: "chars",
-          autoSplit: true,
-          onSplit: (self) => {
-            let tl = gsap.timeline();
-            self.chars.forEach((char) => {
-              const square = document.createElement("span");
-              square.textContent = gsap.utils.random(["%", "&", "*", "$"]);
-              char.appendChild(square);
-            });
-            const spans = self.chars.map((el) => el.querySelector("span"));
-            tl.from(self.chars, { visibility: "hidden", delay: 0.3, stagger: 0.05 }).to(
-              spans,
-              {
-                visibility: "hidden",
-                delay: 0.3,
-                stagger: 0.05,
-              },
-              "<+0.25"
-            );
-          },
-        });
-      });
-
-      // terminal typing animation on ScrollText, repeated infinitely
-      SplitText.create(scrollTextWrapperRef.current, {
-        type: "chars",
-        autoSplit: true,
-        onSplit: (self) => {
-          let tl = gsap.timeline();
-          self.chars.forEach((el) => {
-            const square = document.createElement("span");
-            square.textContent = gsap.utils.random(["%", "&", "*", "$"]);
-            el.appendChild(square);
-          });
-
-          const spans = self.chars.map((el) => el.querySelector("span"));
-          tl.from(self.chars, { visibility: "hidden", delay: 0.3, stagger: { each: 0.05, from: "start" } }).to(
-            spans,
-            { visibility: "hidden", delay: 0.3, stagger: { each: 0.05, from: "start" } },
-            ">-80%"
-          );
-
-          // Create a loop for the ScrollText animation
-          let loop = gsap.timeline({ repeat: -1, repeatDelay: 3, delay: 3 });
-          loop
-            .to(spans, { visibility: "visible", stagger: { each: 0.05, from: "start" } })
-            .to(spans, { visibility: "hidden", stagger: { each: 0.05, from: "start" } }, "-=95%");
-        },
-      });
-    },
-    { dependencies: [] }
-  );
-
   return (
     <HeroWrapper>
-      <CoordinatesWrapper ref={coordinatesWrapperRef}>
-        <CoordinatesText>51.6611°N</CoordinatesText>
-        <CoordinatesText>WATFORD</CoordinatesText>
-        <CoordinatesText>00.3970°W</CoordinatesText>
-      </CoordinatesWrapper>
-      <ScrollTextWrapper ref={scrollTextWrapperRef}>
-        <ScrollText>SCROLL TO EXPLORE</ScrollText>
-      </ScrollTextWrapper>
+      <Title>Creative Developer</Title>
+      <Location>based in watford</Location>
+      <ImageWrapper>
+        <Image src={image} alt="Just myself" />
+      </ImageWrapper>
+      <Subtitle>
+        More than visuals — I design meaningful digital encounters that resonate with curiosity, intention, and flow.
+      </Subtitle>
     </HeroWrapper>
   );
 };
