@@ -8,8 +8,8 @@ const App = () => {
   const location = useLocation();
   return (
     <>
-      <Navigation />
       <PageTransition pathName={location.pathname}>
+        <Navigation />
         <Routes location={location}>
           <Route path="/" element={<Navigate to="/bio" replace />} />
           <Route path="/bio" element={<BioPage />} />

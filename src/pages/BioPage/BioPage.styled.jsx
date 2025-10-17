@@ -8,8 +8,8 @@ const BioPageWrapper = styled.section`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding-left: clamp(2rem, 5vw, 3rem);
-  padding-right: clamp(2rem, 5vw, 3rem);
+  padding-left: clamp(1rem, 5vw, 3rem);
+  padding-right: clamp(1rem, 5vw, 3rem);
 `;
 
 export { BioPageWrapper };

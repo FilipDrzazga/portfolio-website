@@ -7,7 +7,7 @@ export const GLOBAL_THEME = {
     h1: "clamp(1.7rem, 5vw + 0.5rem, 3rem)",
     h1Special: "clamp(2rem, 18vw, 10rem)",
     h2: "clamp(0.84rem, 3vw + 0.3rem, 1.5rem)",
-    paragraph: "clamp(0.95rem, 1.5vw + 0.2rem, 1.1rem)",
+    paragraph: "clamp(1rem, 1.5vw + 0.2rem, 2rem)",
   },
   lineHeights: {
     h1: 1.1,
@@ -15,14 +15,9 @@ export const GLOBAL_THEME = {
     paragraph: 1.6,
   },
   margins: {
-    h1: "0.5rem",
+    h1: "0.56rem",
     h2: "1rem",
     paragraph: "1rem",
-  },
-  spacing: {
-    sm: "0.5rem",
-    md: "1rem",
-    lg: "2rem",
   },
   lettersSpacing: {
     h1: "0.02em",

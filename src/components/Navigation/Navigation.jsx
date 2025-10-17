@@ -15,15 +15,15 @@ const Navigation = () => {
       SplitText.create(el, {
         type: "chars",
         autoSplit: true,
-        onSplit: (self) => {
+        onSplit: (split) => {
           let tl = gsap.timeline();
-          self.chars.forEach((char) => {
+          split.chars.forEach((char) => {
             const square = document.createElement("span");
             square.textContent = gsap.utils.random(["%", "&", "*", "$"]);
             char.appendChild(square);
           });
-          const spans = self.chars.map((el) => el.querySelector("span"));
-          tl.from(self.chars, { visibility: "hidden", delay: 0.5, stagger: { each: 0.05, from: "start" } }).to(
+          const spans = split.chars.map((el) => el.querySelector("span"));
+          tl.from(split.chars, { visibility: "hidden", delay: 0.5, stagger: { each: 0.05, from: "start" } }).to(
             spans,
             { visibility: "hidden", delay: 0.5, stagger: { each: 0.05, from: "start" } },
             ">-95%"

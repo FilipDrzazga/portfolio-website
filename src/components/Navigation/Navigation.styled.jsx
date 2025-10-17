@@ -11,7 +11,7 @@ const NavigationWrapper = styled.nav`
   transform: translate(-50%, 0%);
   z-index: 100;
   background-color: ${({ theme }) => theme.colors.primary};
-  padding: clamp(2rem, 5vw, 3rem); // same as global padding
+  padding: clamp(1rem, 5vw, 3rem); // same as global padding
 `;
 const NavigationList = styled.ul`
   display: flex;
@@ -27,8 +27,7 @@ const NavigationItem = styled.li`
 `;
 const NavigationLink = styled(Link)`
   text-decoration: none;
-  color: inherit;
-  font-family: "InterRegular";
+  font-family: "JetBrainsMonoRegular", sans-serif;
   font-size: ${({ theme }) => theme.fontSizes.paragraph};
   line-height: ${({ theme }) => theme.lineHeights.paragraph};
   font-weight: 400;
@@ -40,8 +39,9 @@ const NavigationLink = styled(Link)`
     left: 50%;
     transform: translate(-50%, 0%);
     display: inline-block;
-    font-family: "InterRegular";
+    font-family: "JetBrainsMonoBold", sans-serif;
     font-size: ${({ theme }) => theme.fontSizes.paragraph};
+    font-weight: 400;
     width: 100%;
     height: 100%;
     background-color: ${({ theme }) => theme.colors.secondary};
