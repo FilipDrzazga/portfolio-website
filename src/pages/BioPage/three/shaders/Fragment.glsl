@@ -8,7 +8,7 @@ uniform sampler2D u_texture;
 uniform float u_scroll;
 uniform float u_time;
 uniform vec2 u_scale;
-uniform float u_yAdjust; //move uv up/down
+uniform float u_textureRatio;
 
 vec4 mod289(vec4 x) {
   return x - floor(x * (1.0 / 289.0)) * 289.0;
@@ -64,30 +64,34 @@ float cnoise(vec2 P) {
   float n_xy = mix(n_x.x, n_x.y, fade_xy.y);
   return 2.3 * n_xy;
 }
+vec2 coverUV(vec2 uv,  float screenAspect, float textureAspect) {
+
+    vec2 newUV = uv - 0.5;
+
+    if (screenAspect > textureAspect) {
+        newUV.x *= screenAspect / textureAspect;
+    } else {
+        newUV.y *= textureAspect / screenAspect;
+    }
+
+    newUV += 0.5;
+    return newUV;
+}
 
 void main() {
-  vec4 whiteBg = vec4(1.0);
-  vec2 uv = vUv;
-  vec3 ambient = vec3(0.05);
+  // vec4 whiteBg = vec4(1.0);
+  vec2 uv = coverUV(vUv, u_screenRatio, u_textureRatio);
+  vec3 ambient = vec3(0.2);
 
-  float frameAspect = (u_scale.x * u_screenRatio) / u_scale.y;
-
-  vec2 uvFrame = (uv - 0.5) / u_scale + 0.5;
-  uvFrame.y -= u_yAdjust; 
-
-  float noise =  0.5 * cnoise(vec2(uvFrame.x * 2.0 + u_time * 0.05,uvFrame.y * 2.0 + u_time * 0.05));
-  noise +=  0.35 * cnoise(vec2(uvFrame.x * 3.0 - u_time * 0.05,uvFrame.y * 2.0 + u_time * 0.1));
+  float noise =  0.5 * cnoise(vec2(uv.x * 2.0 + u_time * 0.05,uv.y * 2.0 + u_time * 0.05));
+  noise +=  0.35 * cnoise(vec2(uv.x * 3.0 - u_time * 0.05,uv.y * 2.0 + u_time * 0.1));
   noise = noise * 0.5 + 0.5; // normalize to [0,1]
 
-  vec2 distortion = uvFrame + 0.05 * (vec2(noise) - 0.5) * 300.0;
+  vec2 distortion = uv + 0.05 * (vec2(noise) - 0.5) * 300.0;
 
-  vec2 mixedUV = mix(uvFrame, distortion, u_scroll);
-  vec4 texColor = texture2D(u_texture, mixedUV);
+  vec2 mixedUV = mix(uv, distortion, u_scroll);
 
-  bool inside = all(greaterThanEqual(mixedUV, vec2(0.0))) &&
-                all(lessThanEqual(mixedUV, vec2(1.0)));
+  vec3 texture = texture2D(u_texture, mixedUV).rgb;
 
-  vec3 finalColor = inside ? texColor.rgb + ambient : whiteBg.rgb;
-
-  gl_FragColor = vec4(finalColor, 1.0);
+  gl_FragColor = vec4(texture, 1.0);
 }

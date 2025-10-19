@@ -9,7 +9,7 @@ const HeroWrapper = styled.section`
   flex-direction: column;
   justify-content: space-between;
   align-items: space-between;
-  background-color: ${({ theme }) => theme.colors.primary};
+  // background-color: ${({ theme }) => theme.colors.primary};
   padding-top: 11.5vh;
   z-index: 1;
 `;
@@ -21,18 +21,28 @@ const TitleWrapper = styled.div`
   align-items: flex-start;
   justify-content: flex-start;
 `;
-const Title = styled.h1`
+const Title1 = styled.h1`
   width: 100%;
   height: auto;
-  font-family: "InterRegular", sans-serif;
+  margin-bottom: clamp(-1.5rem, -2vw, -3rem);
+  font-family: "InterExtraBold", sans-serif;
   color: ${({ theme }) => theme.colors.secondary};
-  font-size: ${({ theme }) => theme.fontSizes.h1Special};
-  margin-bottom: ${({ theme }) => theme.margins.h1};
-  line-height: 0.8;
+  font-size: ${({ theme }) => theme.fontSizes.h1};
+  font-weight: 700;
+  text-align: left;
+`;
+const Title2 = styled.h1`
+  width: 100%;
+  height: auto;
+  font-family: "InterExtraBold", sans-serif;
+  color: ${({ theme }) => theme.colors.secondary};
+  font-size: ${({ theme }) => theme.fontSizes.h1};
+  font-weight: 700;
   text-align: left;
 `;
 const Location = styled.p`
   width: 100%;
+  margin-top: -0.2rem;
   font-family: "JetBrainsMonoRegular", monospace;
   font-weight: 400;
   color: ${({ theme }) => theme.colors.secondary};
@@ -100,10 +110,10 @@ const ImageWrapper = styled.div`
   max-width: 600px;
   height: 70%;
   max-height: 1100px;
-  top: clamp(67%, 25vh, 75%);
-  left: 17%;
+  top: clamp(63%, 25vh, 75%);
+  right: 0;
   transform: translate(0%, -67%);
-  opacity: 0.25;
+  opacity: 0;
   z-index: -1;
 `;
 const Image = styled.img`
@@ -118,7 +128,8 @@ const Image = styled.img`
 export {
   HeroWrapper,
   TitleWrapper,
-  Title,
+  Title1,
+  Title2,
   Description,
   Location,
   ContactWrapper,

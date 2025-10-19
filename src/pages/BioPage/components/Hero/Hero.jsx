@@ -1,12 +1,12 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { SplitText } from "gsap/SplitText";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import {
   HeroWrapper,
   TitleWrapper,
-  Title,
+  Title1,
+  Title2,
   Description,
   Location,
   ContactWrapper,
@@ -16,18 +16,20 @@ import {
   Image,
 } from "./Hero.styled";
 import image from "../../../../assets/images/bio_tablet_img_lg.webp";
+import { usePageStore } from "../../../../store/useStore";
 
-gsap.registerPlugin(useGSAP, SplitText, ScrollTrigger);
+gsap.registerPlugin(useGSAP, SplitText);
 
 const Hero = () => {
+  const { setGetMeshPosition } = usePageStore();
   const titleRef = useRef(null);
-  const locationRef = useRef(null);
   const descriptionRef = useRef(null);
   const contactRef = useRef(null);
+  const imageRef = useRef(null);
 
   useGSAP(() => {
     // Title Animation
-    SplitText.create(titleRef.current, {
+    SplitText.create(titleRef.current.getElementsByTagName("h1"), {
       type: "words, chars",
       autoSplit: true,
       mask: "chars",
@@ -36,7 +38,7 @@ const Hero = () => {
       },
     });
     // Location Animation
-    SplitText.create(locationRef.current, {
+    SplitText.create(titleRef.current.getElementsByTagName("p"), {
       type: "chars",
       autoSplit: true,
       mask: "chars",
@@ -48,7 +50,7 @@ const Hero = () => {
         });
         const spans = gsap.utils.toArray(split.chars.map((el) => el.querySelector("span")));
 
-        const tl2 = gsap.timeline({ repeat: -1, repeatDelay: 5 });
+        const tl2 = gsap.timeline({ repeat: -1, repeatDelay: 3 });
         const tl = gsap.timeline({
           onComplete: () => {
             tl2
@@ -107,13 +109,27 @@ const Hero = () => {
     });
   }, []);
 
+  useEffect(() => {
+    const getImgPosition = () => {
+      const img = imageRef.current;
+      if (!img) return;
+      const rect = img.getBoundingClientRect();
+      return setGetMeshPosition(rect);
+    };
+
+    window.addEventListener("resize", getImgPosition);
+    getImgPosition();
+    return () => window.removeEventListener("resize", getImgPosition);
+  }, [setGetMeshPosition]);
+
   return (
     <HeroWrapper>
-      <TitleWrapper>
-        <Title ref={titleRef}>Creative Developer</Title>
-        <Location ref={locationRef}>based in watford</Location>
+      <TitleWrapper ref={titleRef}>
+        <Title1>Creative</Title1>
+        <Title2>Developer</Title2>
+        <Location>based in watford</Location>
       </TitleWrapper>
-      <ImageWrapper>
+      <ImageWrapper ref={imageRef}>
         <Image src={image} alt="Just myself" />
       </ImageWrapper>
       <ContactWrapper ref={contactRef}>

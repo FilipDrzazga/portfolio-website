@@ -44,7 +44,7 @@ const Contact = () => {
     });
 
     // Terminal typing animation on Header subtitle, activated by ScrollTrigger
-    SplitText.create(headerRef.current.querySelector("h2"), {
+    SplitText.create(headerRef.current.querySelector("p"), {
       type: "chars",
       autoSplit: true,
       onSplit: (self) => {
@@ -59,7 +59,7 @@ const Contact = () => {
         let tlSubtitle = gsap.timeline({
           paused: true,
           scrollTrigger: {
-            trigger: headerRef.current.querySelector("h2"),
+            trigger: headerRef.current.querySelector("p"),
             start: "-150px 80%",
             end: "bottom 80%",
             markers: false,
@@ -94,7 +94,7 @@ const Contact = () => {
         let tlSocialLinks = gsap.timeline({
           paused: true,
           scrollTrigger: {
-            trigger: headerRef.current.querySelector("h2"),
+            trigger: headerRef.current.querySelector("p"),
             start: "-100px 80%",
             end: "bottom 80%",
             markers: false,
@@ -156,7 +156,7 @@ const Contact = () => {
   return (
     <ContactWrapper>
       <Header ref={headerRef}>
-        <Subtitle>FOR INQUIRIES, COLLABORATIONS, OR JOB</Subtitle>
+        <Subtitle>For inquiries, collaborations, or job</Subtitle>
         <Title>
           <a href="mailto:filip.drzazga@gmail.com">get in touch</a>
         </Title>
@@ -169,23 +169,23 @@ const Contact = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              LINKEDIN
+              Linkedin
             </SocialLinksLink>
           </SocialLinksListItem>
           <SocialLinksListItem>
             <SocialLinksLink href="https://github.com/FilipDrzazga" target="_blank" rel="noopener noreferrer">
-              EMAIL
+              Email
             </SocialLinksLink>
           </SocialLinksListItem>
           <SocialLinksListItem>
             <SocialLinksLink href="https://github.com/FilipDrzazga" target="_blank" rel="noopener noreferrer">
-              GITHUB
+              Github
             </SocialLinksLink>
           </SocialLinksListItem>
         </SocialLinksList>
       </SocialLinksWrapper>
       <Footer ref={footerRef}>
-        <FooterText>2O25 BY FILIP DRZAZGA. ALL RIGHTS RESERVED.</FooterText>
+        <FooterText>2O25 by Filip Drzazga. All rights reserved.</FooterText>
       </Footer>
     </ContactWrapper>
   );

@@ -8,7 +8,7 @@ import { Observer } from "gsap/Observer";
 import { InertiaPlugin } from "gsap/all";
 import { useFrame, useThree } from "@react-three/fiber";
 import { useTexture } from "@react-three/drei";
-import useResponsiveImages from "../../../hook/useResponsiveImages";
+import { BIO_TABLET_LG as bioImageSrc } from "../../../assets/images/images";
 
 import Vertex from "./shaders/Vertex.glsl?raw";
 import Fragment from "./shaders/Fragment.glsl?raw";
@@ -28,7 +28,6 @@ const Scene = () => {
   });
   const scrollStateRef = useRef({ target: 0, lastScroll: 0, velocity: 0 });
 
-  const { bioImageSrc } = useResponsiveImages();
   const bioImgTexture = useTexture(bioImageSrc);
 
   const uniforms = useMemo(

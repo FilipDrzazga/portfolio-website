@@ -1,13 +1,14 @@
 export const GLOBAL_THEME = {
   colors: {
-    primary: "#1e1e1e",
-    secondary: "#e5e3ff",
+    // primary: "#1a1a1aff",
+    primary: "#f9fafa",
+    // secondary: "#e5e3ff",
+    secondary: "#2b2c2e",
   },
   fontSizes: {
-    h1: "clamp(1.7rem, 5vw + 0.5rem, 3rem)",
-    h1Special: "clamp(2rem, 18vw, 10rem)",
-    h2: "clamp(0.84rem, 3vw + 0.3rem, 1.5rem)",
-    paragraph: "clamp(1rem, 1.5vw + 0.2rem, 2rem)",
+    h1: "clamp(2rem, 16vw, 8rem)",
+    h2: "clamp(1.2rem, 3vw + 0.3rem, 3rem)",
+    paragraph: "clamp(0.95rem, 1.5vw, 2rem)",
   },
   lineHeights: {
     h1: 1.1,
@@ -16,8 +17,8 @@ export const GLOBAL_THEME = {
   },
   margins: {
     h1: "0.56rem",
-    h2: "1rem",
-    paragraph: "1rem",
+    h2: "4rem",
+    paragraph: "2rem",
   },
   lettersSpacing: {
     h1: "0.02em",
@@ -28,8 +29,8 @@ export const GLOBAL_THEME = {
 
 export const DEVICE = {
   // MOBILE DEVICES
-  ["360"]: `(min-width: ${360}px)`,
-  ["375"]: `(min-width: ${375}px)`,
+  ["360"]: `(max-width: ${360}px)`,
+  ["375"]: `(max-width: ${375}px)`,
   ["390"]: `(min-width: ${390}px)`,
   // ['393']: `(min-width: ${393}px)`, pixel 6a w chrome//
   ["412"]: `(min-width: ${412}px)`,

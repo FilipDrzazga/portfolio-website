@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unknown-property */
 import { Canvas } from "@react-three/fiber";
 import Camera from "./Camera";
 import Scene from "./Scene";
@@ -9,6 +10,7 @@ const ThreeCanvas = () => {
       gl={{ antialias: true, alpha: true }}
       dpr={[1, Math.min(window.devicePixelRatio, 2)]}
     >
+      <color attach="background" args={["#f9fafa"]} />
       <Camera />
       <Scene />
     </Canvas>

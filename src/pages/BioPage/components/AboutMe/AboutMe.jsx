@@ -18,6 +18,7 @@ gsap.registerPlugin(useGSAP, SplitText, ScrollTrigger);
 
 const AboutMe = () => {
   const headerRef = useRef(null);
+  const paragraphsWrapperRef = useRef(null);
 
   useGSAP(() => {
     // ScrollTrigger animation on Header title, fade in from left, activated by ScrollTrigger
@@ -28,11 +29,11 @@ const AboutMe = () => {
       onSplit: (self) => {
         return gsap.from(self.chars, {
           x: -70,
-          stagger: { each: 0.05, from: "start" },
+          stagger: { each: 0.02 },
           scrollTrigger: {
             trigger: headerRef.current && headerRef.current.querySelector("h1"),
             markers: false,
-            start: "top 80%",
+            start: "top 90%",
             end: "bottom 80%",
           },
         });
@@ -54,7 +55,7 @@ const AboutMe = () => {
           paused: true,
           scrollTrigger: {
             trigger: headerRef.current.querySelector("h1"),
-            start: "top 80%",
+            start: "top 90%",
             end: "bottom 80%",
             markers: false,
             onEnter: () => tlSubtitle.play(),
@@ -71,29 +72,30 @@ const AboutMe = () => {
         });
       },
     });
+    // Paragraphs animation
   });
 
   return (
     <AboutMeWrapper>
       <Header ref={headerRef}>
         <Title>about me</Title>
-        <Subtitle>HI. I’M FILIP, (MAYBE) CREATIVE FRONTEND DEVELOPER BASED IN WATFORD.</Subtitle>
+        <Subtitle>Hi. I’m Filip, a self-taught coder based in Watford.</Subtitle>
       </Header>
-      <ParagraphsWrapper>
+      <ParagraphsWrapper ref={paragraphsWrapperRef}>
         <Text>
-          A SELF-TAUGHT CODER, ENTHUSIASTIC ABOUT DYNAMIC AREAS OF MOTION AND ANIMATIONS. FOCUSING ON THE SMALLEST DETAILS
-          TO ENSURE EVERYTHING IS FLAWLESS. CONSTANTLY HONING SKILLS TO CREATE SMOOTH AND ENGAGING EXPERIENCES.
+          A self-taught coder, enthusiastic about dynamic areas of motion and animation. Focusing on the smallest details
+          to ensure everything is flawless. Constantly honing skills to create smooth and engaging experiences.
         </Text>
         <Text>
-          FOR THE PAST FOUR YEARS, I’VE BEEN DIVING INTO THE WORLD OF WEB/APP DEVELOPMENT, MASTERING JAVASCRIPT, REACT
-          ENVIRONMENT, AND RANGE OF OTHERS LIBRARIES ESSENTIAL FOR CREATING DYNAMIC AND FUNCTIONAL WEBSITES OR
-          APPLICATIONS.
+          For the past four years, I’ve been diving into the world of web/app development, mastering JavaScript, React
+          environment, and range of others libraries essential for creating dynamic and functional websites or
+          applications.
         </Text>
         <Text>
-          EXPLORING THE MAGIC OF SHADERS AND WEBGL IS MY FAVORITE PLAYGROUND - COMBINING THREJS + R3F WITH SILKY-SMOOTH
-          MOTION USING GSAP/MOTION AND REANIMATED TO MAKE THE BROWSER/APP FEEL ALIVE.
+          Exploring the magic of shaders and WebGL is my favorite playground - combining Three.js + R3F with silky-smooth
+          motion using GSAP/Motion and Reanimated to make the browser/app feel alive.
         </Text>
-        <Text>CONSTANTLY REFINING MY CRAFT AND EXPLORING NEW POSSIBILITIES.</Text>
+        <Text>Constantly refining my craft and exploring new possibilities.</Text>
       </ParagraphsWrapper>
       <TechStackWrapper>
         <TechStack>JAVASCRIPT / REACT / REACT NATIVE / R3F / THREEJS / MOTION / REANIMATED</TechStack>

@@ -1,10 +1,6 @@
 import { create } from "zustand";
 
 export const usePageStore = create((set) => ({
-  isCanvasLoaded: false,
-  setIsCanvasLoaded: (isLoaded) => {
-    set({ isCanvasLoaded: isLoaded });
-  },
-  playgroundAnimationName: "",
-  setPlaygroundAnimationName: (name) => set({ playgroundAnimationName: name }),
+  getMeshPosition: null,
+  setGetMeshPosition: (rect) => set({ getMeshPosition: rect }),
 }));

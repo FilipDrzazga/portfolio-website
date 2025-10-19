@@ -9,8 +9,7 @@ const NavigationWrapper = styled.nav`
   top: 0;
   left: 50%;
   transform: translate(-50%, 0%);
-  z-index: 100;
-  background-color: ${({ theme }) => theme.colors.primary};
+  z-index: 1000;
   padding: clamp(1rem, 5vw, 3rem); // same as global padding
 `;
 const NavigationList = styled.ul`
