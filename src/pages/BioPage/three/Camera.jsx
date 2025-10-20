@@ -1,4 +1,4 @@
-import { PerspectiveCamera } from "@react-three/drei";
+import { OrthographicCamera, PerspectiveCamera } from "@react-three/drei";
 import { useThree } from "@react-three/fiber";
 import { useCallback, useEffect, useRef, useState } from "react";
 
@@ -30,7 +30,12 @@ const Camera = () => {
     return () => window.removeEventListener("resize", updateCamera);
   }, [calculateFov, size]);
 
-  return <PerspectiveCamera ref={camRef} makeDefault position={[0, 0, cameraZ.current]} fov={fov} />;
+  return (
+    <>
+      <PerspectiveCamera ref={camRef} makeDefault={false} position={[0, 0, cameraZ.current]} fov={fov} layers={[0]} />
+      <OrthographicCamera makeDefault={true} position={[0, 0, 1]} near={1} far={10} layers={[1]} />
+    </>
+  );
 };
 
 export default Camera;

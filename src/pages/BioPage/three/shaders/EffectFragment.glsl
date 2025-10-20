@@ -3,29 +3,22 @@ precision highp float;
 #endif
 varying vec2 vUv;
 
-uniform float u_screenRatio;
-uniform sampler2D u_texture;
-uniform float u_scroll;
+uniform sampler2D u_fbo;
 uniform float u_time;
-uniform vec2 u_scale;
-uniform float u_textureRatio;
+uniform float u_scroll;
 
 vec4 mod289(vec4 x) {
   return x - floor(x * (1.0 / 289.0)) * 289.0;
 }
-
 vec4 permute(vec4 x) {
   return mod289(((x * 34.0) + 1.0) * x);
 }
-
 vec4 taylorInvSqrt(vec4 r) {
   return 1.79284291400159 - 0.85373472095314 * r;
 }
-
 vec2 fade(vec2 t) {
   return t * t * t * (t * (t * 6.0 - 15.0) + 10.0);
 }
-
 float cnoise(vec2 P) {
   vec4 Pi = floor(P.xyxy) + vec4(0.0, 0.0, 1.0, 1.0);
   vec4 Pf = fract(P.xyxy) - vec4(0.0, 0.0, 1.0, 1.0);
@@ -64,34 +57,20 @@ float cnoise(vec2 P) {
   float n_xy = mix(n_x.x, n_x.y, fade_xy.y);
   return 2.3 * n_xy;
 }
-vec2 coverUV(vec2 uv,  float screenAspect, float textureAspect) {
-
-    vec2 newUV = uv - 0.5;
-
-    if (screenAspect > textureAspect) {
-        newUV.x *= screenAspect / textureAspect;
-    } else {
-        newUV.y *= textureAspect / screenAspect;
-    }
-
-    newUV += 0.5;
-    return newUV;
-}
 
 void main() {
-  // vec4 whiteBg = vec4(1.0);
-  vec2 uv = coverUV(vUv, u_screenRatio, u_textureRatio);
-  vec3 ambient = vec3(0.2);
+    
+    vec2 uv = vUv;
 
-  float noise =  0.5 * cnoise(vec2(uv.x * 2.0 + u_time * 0.05,uv.y * 2.0 + u_time * 0.05));
-  noise +=  0.35 * cnoise(vec2(uv.x * 3.0 - u_time * 0.05,uv.y * 2.0 + u_time * 0.1));
-  noise = noise * 0.5 + 0.5; // normalize to [0,1]
+    float noise =  0.5 * cnoise(vec2(uv.x * 2.0 + u_time * 0.05,uv.y * 2.0 + u_time * 0.05));
+    noise +=  0.35 * cnoise(vec2(uv.x * 3.0 - u_time * 0.05,uv.y * 2.0 + u_time * 0.1));
+    noise = noise * 0.5 + 0.5; // normalize to [0,1]
 
-  vec2 distortion = uv + 0.05 * (vec2(noise) - 0.5) * 300.0;
+    vec2 distortion = uv + 0.05 * (vec2(noise) - 0.5) * 300.0;
 
-  vec2 mixedUV = mix(uv, distortion, u_scroll);
+    vec2 mixedUV = mix(uv, distortion, u_scroll);
 
-  vec3 texture = texture2D(u_texture, mixedUV).rgb;
+    vec3 FboTexture = texture2D(u_fbo, mixedUV).rgb;
 
-  gl_FragColor = vec4(texture, 1.0);
+    gl_FragColor = vec4(FboTexture, 1.0);
 }
