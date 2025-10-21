@@ -63,14 +63,18 @@ void main() {
     vec2 uv = vUv;
 
     float noise =  0.5 * cnoise(vec2(uv.x * 2.0 + u_time * 0.05,uv.y * 2.0 + u_time * 0.05));
-    noise +=  0.35 * cnoise(vec2(uv.x * 3.0 - u_time * 0.05,uv.y * 2.0 + u_time * 0.1));
+    noise +=  0.25 * cnoise(vec2(uv.x * 4.0 + u_time * 0.05,uv.y * 4.0 + u_time * 0.05));
+    noise +=  0.02 * cnoise(vec2(uv.x * 8.0 + u_time * 0.05,uv.y * 8.0 + u_time * 0.05));
+    
     noise = noise * 0.5 + 0.5; // normalize to [0,1]
 
-    vec2 distortion = uv + 0.05 * (vec2(noise) - 0.5) * 300.0;
+    vec2 distortion = uv * (vec2(noise));
 
     vec2 mixedUV = mix(uv, distortion, u_scroll);
+    vec2 finalUvMix = mix(mixedUV, vec2(noise), clamp(u_scroll, 0.0, 0.8));
 
-    vec3 FboTexture = texture2D(u_fbo, mixedUV).rgb;
+    vec3 FboTexture = texture2D(u_fbo, finalUvMix).rgb;
+    float alpha = mix(0.8, 0.70, u_scroll);
 
-    gl_FragColor = vec4(FboTexture, 1.0);
+    gl_FragColor = vec4(FboTexture, alpha);
 }
