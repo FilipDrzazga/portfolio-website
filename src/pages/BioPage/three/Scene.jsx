@@ -20,8 +20,8 @@ const Scene = () => {
   const effectMeshRef = useRef(null);
   const initialScreenSize = useRef({ width: window.innerWidth, height: window.innerHeight });
   const { getMeshPosition } = usePageStore();
-  const { size } = useThree();
-  const fbo = useFBO(size.width, size.height, {
+  const { size, gl } = useThree();
+  const fbo = useFBO(size.width * gl.getPixelRatio(), size.height * gl.getPixelRatio(), {
     depthBuffer: true,
   });
 
@@ -52,23 +52,16 @@ const Scene = () => {
 
   useFrame((state) => {
     const cameraMain = state.scene.children.find((obj) => obj.isPerspectiveCamera);
-    const cameraFx = state.scene.children.find((obj) => obj.isOrthographicCamera);
 
     // Render layer 0  to FBO
     state.gl.setRenderTarget(fbo);
     state.gl.clear();
-    cameraMain.layers.set(0);
     state.gl.render(state.scene, cameraMain);
     state.gl.setRenderTarget(null);
     state.gl.setClearColor("#f9fafa");
 
     effectUniforms.u_time.value = state.clock.getElapsedTime();
     effectUniforms.u_fbo.value = fbo.texture;
-
-    // Render layer 1 to screen
-    // cameraFx.layers.set(1);
-    // state.gl.clearDepth();
-    // state.gl.render(state.scene, cameraFx);
   });
 
   useEffect(() => {
@@ -110,7 +103,7 @@ const Scene = () => {
         <shaderMaterial fragmentShader={ImageFragment} vertexShader={Vertex} uniforms={imageUniforms} />
       </mesh>
       <mesh ref={effectMeshRef} layers={[1]}>
-        <planeGeometry args={[size.width, size.height, 1, 1]} />
+        <planeGeometry args={[2, 2, 1, 1]} />
         <shaderMaterial fragmentShader={EffectFragment} vertexShader={Vertex} uniforms={effectUniforms} />
       </mesh>
     </>

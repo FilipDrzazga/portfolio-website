@@ -17,7 +17,6 @@
     "@gsap/react": "^2.1.2",
     "@react-three/drei": "^10.7.6",
     "@react-three/fiber": "^9.0.2",
-    "@tailwindcss/vite": "^4.0.7",
     "@types/three": "^0.173.0",
     "gsap": "^3.13.0",
     "leva": "^0.10.0",

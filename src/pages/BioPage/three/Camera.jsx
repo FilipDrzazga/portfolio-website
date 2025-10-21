@@ -33,7 +33,17 @@ const Camera = () => {
   return (
     <>
       <PerspectiveCamera ref={camRef} makeDefault={false} position={[0, 0, cameraZ.current]} fov={fov} layers={[0]} />
-      <OrthographicCamera makeDefault={true} position={[0, 0, 1]} near={1} far={10} layers={[1]} />
+      <OrthographicCamera
+        makeDefault={true}
+        position={[0, 0, 1]}
+        near={1}
+        far={10}
+        left={-1}
+        right={1}
+        top={1}
+        bottom={-1}
+        layers={[1]}
+      />
     </>
   );
 };
