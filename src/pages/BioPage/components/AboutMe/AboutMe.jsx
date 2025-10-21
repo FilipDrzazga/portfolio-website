@@ -73,8 +73,25 @@ const AboutMe = () => {
       },
     });
     // Paragraphs animation
+    SplitText.create(paragraphsWrapperRef.current.querySelectorAll("p"), {
+      type: "chars",
+      autoSplit: true,
+      onSplit: (self) => {
+        return gsap.from(self.chars, {
+          autoAlpha: 0.2,
+          stagger: { each: 0.1, from: "start" },
+          scrollTrigger: {
+            trigger: paragraphsWrapperRef.current,
+            start: "top 80%",
+            end: "bottom 80%",
+            markers: false,
+            scrub: true,
+            once: true,
+          },
+        });
+      },
+    });
   });
-
   return (
     <AboutMeWrapper>
       <Header ref={headerRef}>
