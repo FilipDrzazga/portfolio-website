@@ -24,12 +24,14 @@ const TitleWrapper = styled.div`
 const Title1 = styled.h1`
   width: 100%;
   height: auto;
-  margin-bottom: clamp(-1.5rem, -2vw, -3rem);
+  margin-bottom: clamp(-0.9rem, -2vw, -3rem);
   font-family: "InterExtraBold", sans-serif;
   color: ${({ theme }) => theme.colors.secondary};
   font-size: ${({ theme }) => theme.fontSizes.h1};
   font-weight: 700;
   text-align: left;
+  line-height: 0.8;
+  -webkit-text-size-adjust: 100%;
 `;
 const Title2 = styled.h1`
   width: 100%;
@@ -39,6 +41,8 @@ const Title2 = styled.h1`
   font-size: ${({ theme }) => theme.fontSizes.h1};
   font-weight: 700;
   text-align: left;
+  line-height: 1.1;
+  -webkit-text-size-adjust: 100%;
 `;
 const Location = styled.p`
   width: 100%;
@@ -49,6 +53,7 @@ const Location = styled.p`
   font-size: ${({ theme }) => theme.fontSizes.paragraph};
   line-height: ${({ theme }) => theme.lineHeights.paragraph};
   letter-spacing: 0.4em;
+  margin-top: -0.4rem;
   span {
     position: absolute;
     top: 0;

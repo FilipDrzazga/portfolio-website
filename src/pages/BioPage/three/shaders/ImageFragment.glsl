@@ -24,9 +24,16 @@ vec2 coverUV(vec2 uv,  float screenAspect, float textureAspect) {
 void main() {
   vec3 ambient = vec3(0.1);
   vec2 uv = vUv;
+
+  vec2 uvMask = uv;
+  uvMask -= 0.5;
+  float textureTopMask = 1.0 - smoothstep(0.8, 0.2, uvMask.y + smoothstep(0.0, 2.5, abs(uvMask.x)));
+
   vec2 textureUV = coverUV(vUv, u_screenRatio, u_textureRatio);
   vec3 baseTexture = texture2D(u_texture, textureUV).rgb;
-  baseTexture += ambient;
+  vec3 finalTexture = baseTexture + textureTopMask + ambient;
 
-  gl_FragColor = vec4(baseTexture, 1.0);
+  vec3 test = vec3(finalTexture);
+
+  gl_FragColor = vec4(test, 1.0);
 }

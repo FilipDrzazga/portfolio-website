@@ -8,7 +8,7 @@ export const GLOBAL_THEME = {
   fontSizes: {
     h1: "clamp(2rem, 16vw, 8rem)",
     h2: "clamp(1.2rem, 3vw + 0.3rem, 3rem)",
-    paragraph: "clamp(0.95rem, 1.5vw, 2rem)",
+    paragraph: "clamp(0.9rem, 1.5vw, 2rem)",
   },
   lineHeights: {
     h1: 1.1,

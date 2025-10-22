@@ -73,7 +73,7 @@ const Text = styled.p`
   margin-bottom: ${({ theme }) => theme.margins.paragraph};
   line-height: ${({ theme }) => theme.lineHeights.paragraph};
   letter-spacing: ${({ theme }) => theme.lettersSpacing.paragraph};
-  white-space: no-wrap;
+  white-space: pre-wrap;
 `;
 const TechStackWrapper = styled.div`
   width: 100%;

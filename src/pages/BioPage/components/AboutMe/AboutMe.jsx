@@ -115,7 +115,9 @@ const AboutMe = () => {
         <Text>Constantly refining my craft and exploring new possibilities.</Text>
       </ParagraphsWrapper>
       <TechStackWrapper>
-        <TechStack>JAVASCRIPT / REACT / REACT NATIVE / R3F / THREEJS / MOTION / REANIMATED</TechStack>
+        <TechStack>
+          JAVASCRIPT / REACT / REACT NATIVE / R3F / THREEJS / WEBGL / GLSL / GSAP / MOTION / REANIMATED{" "}
+        </TechStack>
       </TechStackWrapper>
     </AboutMeWrapper>
   );
