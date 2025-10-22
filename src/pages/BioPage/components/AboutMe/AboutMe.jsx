@@ -82,7 +82,7 @@ const AboutMe = () => {
           stagger: { each: 0.1, from: "start" },
           scrollTrigger: {
             trigger: paragraphsWrapperRef.current,
-            start: "top 80%",
+            start: "top 60%",
             end: "bottom 80%",
             markers: false,
             scrub: true,

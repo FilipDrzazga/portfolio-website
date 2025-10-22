@@ -1,5 +1,5 @@
 /* eslint-disable react/no-unknown-property */
-import { useEffect, useRef, useMemo } from "react";
+import { useEffect, useRef, useMemo, useState } from "react";
 import * as THREE from "three";
 import { useThree, useFrame } from "@react-three/fiber";
 import gsap from "gsap";
@@ -18,6 +18,7 @@ gsap.registerPlugin(ScrollTrigger);
 const Scene = () => {
   const imageMeshRef = useRef(null);
   const effectMeshRef = useRef(null);
+  const [isTextureLoaded, setIsTextureLoaded] = useState(false);
   const initialScreenSize = useRef({ width: window.innerWidth, height: window.innerHeight });
   const { getMeshPosition } = usePageStore();
   const { size, gl } = useThree();
@@ -51,6 +52,7 @@ const Scene = () => {
   });
 
   useFrame((state) => {
+    if (!isTextureLoaded) return;
     const cameraMain = state.scene.children.find((obj) => obj.isPerspectiveCamera);
 
     // Render layer 0  to FBO
@@ -58,7 +60,6 @@ const Scene = () => {
     state.gl.clear();
     state.gl.render(state.scene, cameraMain);
     state.gl.setRenderTarget(null);
-    state.gl.setClearColor("#f9fafa");
 
     effectUniforms.u_time.value = state.clock.getElapsedTime();
     effectUniforms.u_fbo.value = fbo.texture;
@@ -79,6 +80,7 @@ const Scene = () => {
 
     // Load texture
     new THREE.TextureLoader().load(bioImageSrc, (loadedTexture) => {
+      setIsTextureLoaded(true);
       loadedTexture.needsUpdate = true;
       imageUniforms.u_texture.value = loadedTexture;
       imageUniforms.u_textureRatio.value = loadedTexture.image.width / loadedTexture.image.height;
@@ -94,7 +96,7 @@ const Scene = () => {
     return () => {
       window.removeEventListener("resize", handleResize);
     };
-  }, [size, imageUniforms]);
+  }, [size, imageUniforms, isTextureLoaded]);
 
   return (
     <>
@@ -102,7 +104,7 @@ const Scene = () => {
         <planeGeometry args={[getMeshPosition.width, getMeshPosition.height, 1, 1]} />
         <shaderMaterial fragmentShader={ImageFragment} vertexShader={Vertex} uniforms={imageUniforms} />
       </mesh>
-      <mesh ref={effectMeshRef} layers={[1]}>
+      <mesh ref={effectMeshRef} layers={[1]} visible={isTextureLoaded}>
         <planeGeometry args={[2, 2, 1, 1]} />
         <shaderMaterial fragmentShader={EffectFragment} vertexShader={Vertex} uniforms={effectUniforms} />
       </mesh>

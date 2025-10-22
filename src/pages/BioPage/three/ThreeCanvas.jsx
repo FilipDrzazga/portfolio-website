@@ -9,6 +9,7 @@ const ThreeCanvas = () => {
       gl={{ antialias: true, alpha: true }}
       dpr={[1, Math.min(window.devicePixelRatio, 2)]}
     >
+      <color attach="background" args={["#f9fafa"]} />
       <Camera />
       <Scene />
     </Canvas>
