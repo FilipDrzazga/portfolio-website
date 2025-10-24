@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { DEVICE } from "../../../../styles/theme";
 
 const AboutMeWrapper = styled.section`
   position: relative;
@@ -34,13 +35,17 @@ const Subtitle = styled.h2`
   max-width: 380px;
   font-family: "JetBrainsMonoRegular", monospace;
   color: ${({ theme }) => theme.colors.secondary};
-  font-size: ${({ theme }) => theme.fontSizes.paragraph};
+  font-size: ${({ theme }) => theme.fontSizes.h2};
   margin-bottom: ${({ theme }) => theme.margins.h2};
+  padding-left: clamp(0rem, 1vw, 0.5rem);
   line-height: ${({ theme }) => theme.lineHeights.h2};
   letter-spacing: ${({ theme }) => theme.lettersSpacing.h2};
   text-align: left;
   font-weight: 400;
-  opacity: 0.6;
+  @media ${DEVICE["768"]} {
+    max-width: 90%;
+    padding-left: clamp(0rem, 10vw, 0.5rem);
+  }
   span {
     position: absolute;
     width: 100%;
@@ -59,12 +64,14 @@ const Subtitle = styled.h2`
 `;
 const ParagraphsWrapper = styled.div`
   width: 100%;
-  max-width: 800px;
+  max-width: 1000px;
   height: auto;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
+  white-space: pre-wrap;
+  word-break: normal;
 `;
 const Text = styled.p`
   font-family: "JetBrainsMonoRegular", monospace;
@@ -73,7 +80,10 @@ const Text = styled.p`
   margin-bottom: ${({ theme }) => theme.margins.paragraph};
   line-height: ${({ theme }) => theme.lineHeights.paragraph};
   letter-spacing: ${({ theme }) => theme.lettersSpacing.paragraph};
-  white-space: pre-wrap;
+  @media ${DEVICE["768"]} {
+    width: 80%;
+    padding-left: clamp(0rem, 10vw, 0.5rem);
+  }
 `;
 const TechStackWrapper = styled.div`
   width: 100%;

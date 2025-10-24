@@ -5,9 +5,9 @@ import { useThree, useFrame } from "@react-three/fiber";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { BIO_TABLET_LG as bioImageSrc } from "../../../assets/images/images";
 import { usePageStore } from "../../../store/useStore";
 import { useFBO } from "@react-three/drei";
+import { BIO_TABLET_LG as bioImageSrc } from "../../../assets/images/images";
 
 import Vertex from "./shaders/Vertex.glsl?raw";
 import ImageFragment from "./shaders/ImageFragment.glsl?raw";
@@ -28,7 +28,7 @@ const Scene = () => {
 
   const imageUniforms = useMemo(
     () => ({
-      u_screenRatio: { value: size.width / size.height },
+      u_meshRatio: { value: 1.0 },
       u_texture: { value: null },
       u_textureRatio: { value: 1.0 },
     }),
@@ -36,16 +36,18 @@ const Scene = () => {
   );
   const effectUniforms = useMemo(
     () => ({
+      u_resolution: { value: new THREE.Vector2(size.width, size.height) },
       u_fbo: { value: fbo.texture },
       u_scroll: { value: 0 },
       u_time: { value: 0 },
     }),
-    []
+    [size, fbo]
   );
 
   useGSAP(() => {
     ScrollTrigger.create({
       onUpdate: (self) => {
+        console.log(self.progress);
         effectUniforms.u_scroll.value = self.progress;
       },
     });
@@ -87,7 +89,7 @@ const Scene = () => {
     });
 
     const handleResize = () => {
-      imageUniforms.u_screenRatio.value = size.width / size.height;
+      imageUniforms.u_meshRatio.value = width / height;
     };
 
     window.addEventListener("resize", handleResize);

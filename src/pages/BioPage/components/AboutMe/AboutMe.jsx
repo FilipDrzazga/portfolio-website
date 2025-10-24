@@ -28,7 +28,7 @@ const AboutMe = () => {
       mask: "chars",
       onSplit: (self) => {
         return gsap.from(self.chars, {
-          x: -70,
+          x: -80,
           stagger: { each: 0.02 },
           scrollTrigger: {
             trigger: headerRef.current && headerRef.current.querySelector("h1"),
@@ -74,7 +74,7 @@ const AboutMe = () => {
     });
     // Paragraphs animation
     SplitText.create(paragraphsWrapperRef.current.querySelectorAll("p"), {
-      type: "chars",
+      type: "lines chars",
       autoSplit: true,
       onSplit: (self) => {
         return gsap.from(self.chars, {
@@ -82,8 +82,8 @@ const AboutMe = () => {
           stagger: { each: 0.1, from: "start" },
           scrollTrigger: {
             trigger: paragraphsWrapperRef.current,
-            start: "top 60%",
-            end: "bottom 80%",
+            start: "top 85%",
+            end: "top 30%",
             markers: false,
             scrub: true,
             once: true,

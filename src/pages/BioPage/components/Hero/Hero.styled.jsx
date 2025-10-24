@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { DEVICE } from "../../../../styles/theme";
 
 const HeroWrapper = styled.section`
   position: relative;
@@ -32,6 +33,9 @@ const Title1 = styled.h1`
   text-align: left;
   line-height: 0.8;
   -webkit-text-size-adjust: 100%;
+  @media ${DEVICE["768"]} {
+    margin-bottom: clamp(-1.6rem, -1vw, -2rem);
+  }
 `;
 const Title2 = styled.h1`
   width: 100%;
@@ -54,6 +58,12 @@ const Location = styled.p`
   line-height: ${({ theme }) => theme.lineHeights.paragraph};
   letter-spacing: 0.4em;
   margin-top: -0.4rem;
+  padding-left: clamp(0rem, 1vw, 0.5rem);
+  @media ${DEVICE["768"]} {
+    letter-spacing: 0.8em;
+    padding-left: clamp(0rem, 10vw, 0.5rem);
+    margin-top: clamp(-0.8rem, -1vw, -2rem);
+  }
   span {
     position: absolute;
     top: 0;
@@ -68,6 +78,11 @@ const Location = styled.p`
     height: 100%;
     background-color: ${({ theme }) => theme.colors.secondary};
     color: ${({ theme }) => theme.colors.primary};
+    @media ${DEVICE["768"]} {
+      left: 0;
+      transform: translate(0%, 0%);
+      width: 50%;
+    }
   }
 `;
 const ContactWrapper = styled.div`
@@ -120,6 +135,9 @@ const ImageWrapper = styled.div`
   transform: translate(0%, -67%);
   opacity: 0;
   z-index: -1;
+  @media ${DEVICE["768"]} {
+    top: clamp(65%, 30vh, 80%);
+    right: -9.5%;
 `;
 const Image = styled.img`
   width: 100%;

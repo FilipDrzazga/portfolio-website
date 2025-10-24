@@ -3,18 +3,18 @@ precision highp float;
 #endif
 varying vec2 vUv;
 
-uniform float u_screenRatio;
+uniform float u_meshRatio;
 uniform sampler2D u_texture;
 uniform float u_textureRatio;
 
-vec2 coverUV(vec2 uv,  float screenAspect, float textureAspect) {
+vec2 coverUV(vec2 uv,  float meshRatio, float textureAspect) {
 
     vec2 newUV = uv - 0.5;
 
-    if (screenAspect > textureAspect) {
-        newUV.x *= screenAspect / textureAspect;
+    if (meshRatio > textureAspect) {
+        newUV.x *= meshRatio / textureAspect;
     } else {
-        newUV.y *= textureAspect / screenAspect;
+        newUV.y *= textureAspect / meshRatio;
     }
 
     newUV += 0.5;
@@ -28,10 +28,14 @@ void main() {
     vec2 uvMask = uv;
     uvMask -= 0.5;
     float textureTopMask = 1.0 - smoothstep(0.8, 0.2, uvMask.y + smoothstep(0.0, 2.5, abs(uvMask.x)));
+    float textureRightMask = 1.0 - smoothstep(0.4, 0.2, uvMask.x);
+    float finalMask = textureTopMask + textureRightMask;
 
-    vec2 textureUV = coverUV(vUv, u_screenRatio, u_textureRatio);
+    vec2 textureUV = coverUV(vUv, u_meshRatio, u_textureRatio);
     vec3 baseTexture = texture2D(u_texture, textureUV).rgb;
-    vec3 finalTexture = baseTexture + textureTopMask + ambient;
+    vec3 finalTexture = baseTexture + ambient + finalMask;
+
+    vec3 t = vec3(textureRightMask);
 
     gl_FragColor = vec4(finalTexture, 1.0);
 }

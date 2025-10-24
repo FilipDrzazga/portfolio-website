@@ -11,6 +11,7 @@ const BioPageWrapper = styled.section`
   gap: 4rem;
   padding-left: clamp(1rem, 5vw, 3rem);
   padding-right: clamp(1rem, 5vw, 3rem);
+  overflow-x: hidden;
 `;
 
 export { BioPageWrapper };

@@ -3,11 +3,11 @@ export const GLOBAL_THEME = {
     // primary: "#1a1a1aff",
     primary: "#f9fafa",
     // secondary: "#e5e3ff",
-    secondary: "#2b2c2e",
+    secondary: "#1a1a1aff",
   },
   fontSizes: {
     h1: "clamp(2rem, 16vw, 8rem)",
-    h2: "clamp(1.2rem, 3vw + 0.3rem, 3rem)",
+    h2: "clamp(0.9rem, 2.2vw, 2.5rem)",
     paragraph: "clamp(0.9rem, 1.5vw, 2rem)",
   },
   lineHeights: {

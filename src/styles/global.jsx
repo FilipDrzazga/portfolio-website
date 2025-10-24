@@ -51,12 +51,14 @@ const GlobalStyle = createGlobalStyle`
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: geometricPrecision;
+
 }
     html {
     scroll-behavior: smooth;
 }
 
 body {
+    word-break: normal;
     overflow-x: hidden;
     background-color: ${({ theme }) => theme.colors.primary};
 }

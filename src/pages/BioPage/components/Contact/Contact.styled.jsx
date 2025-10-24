@@ -76,6 +76,12 @@ const SocialLinksList = styled.ul`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  @media ${DEVICE["768"]} {
+    width: 60%;
+  }
+  @media ${DEVICE["1024"]} {
+    width: 47%;
+  }
 `;
 const SocialLinksListItem = styled.li`
   list-style: none;
@@ -107,11 +113,11 @@ const SocialLinksLink = styled.a`
   }
 `;
 const Footer = styled.footer`
+  width: 100%;
   position: absolute;
   bottom: 2rem;
   left: 50%;
   transform: translate(-50%, 0%);
-  width: 100%;
 `;
 const FooterText = styled.p`
   font-family: "JetBrainsMonoRegular", monospace;

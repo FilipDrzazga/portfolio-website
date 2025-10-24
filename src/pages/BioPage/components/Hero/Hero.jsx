@@ -34,7 +34,7 @@ const Hero = () => {
       autoSplit: true,
       mask: "chars",
       onSplit: (split) => {
-        return gsap.from(split.chars, { x: -70, delay: 0.02, stagger: 0.02 });
+        return gsap.from(split.chars, { x: -80, delay: 0.02, stagger: 0.02 });
       },
     });
     // Location Animation
