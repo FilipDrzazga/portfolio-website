@@ -26,6 +26,9 @@ const TitleWrapper = styled.div`
   @media ${DEVICE["1366"]} {
     margin-top: 1.5rem;
   }
+  @media ${DEVICE["1728"]} {
+    margin-top: 3rem;
+  }
 `;
 const Title1 = styled.h1`
   width: 100%;
@@ -41,6 +44,9 @@ const Title1 = styled.h1`
   @media ${DEVICE["768"]} {
     margin-bottom: clamp(-1.6rem, -1vw, -2rem);
   }
+  @media ${DEVICE["1728"]} {
+    font-size: ${({ theme }) => `calc(${theme.fontSizes.h1} + 1.0rem)`};
+  }
 `;
 const Title2 = styled.h1`
   width: 100%;
@@ -52,6 +58,9 @@ const Title2 = styled.h1`
   text-align: left;
   line-height: 1.1;
   -webkit-text-size-adjust: 100%;
+  @media ${DEVICE["1728"]} {
+    font-size: ${({ theme }) => `calc(${theme.fontSizes.h1} + 1.0rem)`};
+  }
 `;
 const Location = styled.p`
   width: 100%;
@@ -70,6 +79,12 @@ const Location = styled.p`
   }
   @media ${DEVICE["1366"]} {
     font-size: ${({ theme }) => `calc(${theme.fontSizes.paragraph} - 0.3rem)`};
+  }
+  @media ${DEVICE["1728"]} {
+    font-size: ${({ theme }) => `calc(${theme.fontSizes.paragraph} - 0.5rem)`};
+  }
+  @media ${DEVICE["1920"]} {
+    font-size: ${({ theme }) => `calc(${theme.fontSizes.paragraph} - 0.8rem)`};
   }
   span {
     position: absolute;
@@ -93,6 +108,12 @@ const Location = styled.p`
     @media ${DEVICE["1366"]} {
       font-size: ${({ theme }) => `calc(${theme.fontSizes.paragraph} - 0.3rem)`};
     }
+    @media ${DEVICE["1728"]} {
+      font-size: ${({ theme }) => `calc(${theme.fontSizes.paragraph} - 0.5rem)`};
+    }
+    @media ${DEVICE["1920"]} {
+      font-size: ${({ theme }) => `calc(${theme.fontSizes.paragraph} - 0.8rem)`};
+    }
   }
 `;
 const ContactWrapper = styled.div`
@@ -104,6 +125,9 @@ const ContactWrapper = styled.div`
   align-items: flex-start;
   @media ${DEVICE["1366"]} {
     margin-left: 0.8rem;
+  }
+  @media ${DEVICE["1728"]} {
+    max-width: 600px;
   }
 `;
 const Contact = styled.p`
@@ -149,6 +173,10 @@ const Description = styled.p`
     margin-right: 20rem;
     text-align: right;
     font-size: ${({ theme }) => `calc(${theme.fontSizes.paragraph} - 0.3rem)`};
+  }
+  @media ${DEVICE["1728"]} {
+    max-width: 700px;
+    margin-right: 22rem;
   }
 `;
 

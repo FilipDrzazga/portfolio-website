@@ -15,6 +15,13 @@ const NavigationWrapper = styled.nav`
     max-width: 1260px;
     padding: 0;
   }
+  @media ${DEVICE["1440"]} {
+    max-width: 1440px;
+    padding: 0 8rem;
+  }
+  @media ${DEVICE["1728"]} {
+    padding: 0 6rem;
+  }
 `;
 const NavigationList = styled.ul`
   display: flex;
@@ -26,7 +33,6 @@ const NavigationList = styled.ul`
   color: ${({ theme }) => theme.colors.primary};
   list-style: none;
   @media ${DEVICE["1366"]} {
-    max-width: 1260px;
   }
 `;
 const NavigationItem = styled.li`
@@ -43,6 +49,12 @@ const NavigationLink = styled(Link)`
   @media ${DEVICE["1366"]} {
     font-size: ${({ theme }) => `calc(${theme.fontSizes.paragraph} - 0.4rem)`};
   }
+  @media ${DEVICE["1728"]} {
+    font-size: ${({ theme }) => `calc(${theme.fontSizes.paragraph} - 0.6rem)`};
+  }
+  @media ${DEVICE["1920"]} {
+    font-size: ${({ theme }) => `calc(${theme.fontSizes.paragraph} - 0.8rem)`};
+  }
   span {
     position: absolute;
     top: 0;
@@ -58,6 +70,12 @@ const NavigationLink = styled(Link)`
     color: ${({ theme }) => theme.colors.primary};
     @media ${DEVICE["1366"]} {
       font-size: ${({ theme }) => `calc(${theme.fontSizes.paragraph} - 0.3rem)`};
+    }
+    @media ${DEVICE["1728"]} {
+      font-size: ${({ theme }) => `calc(${theme.fontSizes.paragraph} - 0.6rem)`};
+    }
+    @media ${DEVICE["1920"]} {
+      font-size: ${({ theme }) => `calc(${theme.fontSizes.paragraph} - 0.8rem)`};
     }
   }
 `;

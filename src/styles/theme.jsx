@@ -43,7 +43,7 @@ export const DEVICE = {
 
   // LAPTOP DEVICES
   ["1366"]: `(min-width: ${1366}px)`,
-  // ["1440"]: `(min-width: ${1440}px)`,
+  ["1440"]: `(min-width: ${1440}px)`,
   ["1728"]: `(min-width: ${1728}px)`,
   ["1920"]: `(min-width: ${1920}px)`,
 };

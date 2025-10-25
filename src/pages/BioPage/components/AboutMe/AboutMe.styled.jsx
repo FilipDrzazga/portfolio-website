@@ -49,6 +49,10 @@ const Subtitle = styled.h2`
   @media ${DEVICE["1366"]} {
     max-width: 65%;
   }
+  @media ${DEVICE["1728"]} {
+    font-size: ${({ theme }) => `calc(${theme.fontSizes.h2} - 0.6rem)`};
+    max-width: 80%;
+  }
   span {
     position: absolute;
     width: 100%;
@@ -63,6 +67,9 @@ const Subtitle = styled.h2`
     text-align: center;
     background-color: ${({ theme }) => theme.colors.secondary};
     color: ${({ theme }) => theme.colors.primary};
+    @media ${DEVICE["1728"]} {
+      font-size: ${({ theme }) => `calc(${theme.fontSizes.h2} - 0.6rem)`};
+    }
   }
 `;
 const ParagraphsWrapper = styled.div`
@@ -91,6 +98,9 @@ const Text = styled.p`
     width: 70%;
     font-size: ${({ theme }) => `calc(${theme.fontSizes.paragraph} - 0.3rem)`};
   }
+  @media ${DEVICE["1728"]} {
+    width: 80%;
+  }
 `;
 const TechStackWrapper = styled.div`
   width: 100%;
@@ -106,6 +116,12 @@ const TechStack = styled.h3`
   letter-spacing: ${({ theme }) => theme.lettersSpacing.h2};
   text-align: center;
   font-weight: 400;
+  @media ${DEVICE["1728"]} {
+    width: 100%;
+    text-align: left;
+    text-align-last: center;
+    font-size: ${({ theme }) => `calc(${theme.fontSizes.h2} - 0.6rem)`};
+  }
 `;
 
 export { AboutMeWrapper, Header, Title, Subtitle, ParagraphsWrapper, Text, TechStackWrapper, TechStack };

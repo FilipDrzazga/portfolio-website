@@ -67,6 +67,8 @@ const Title = styled.h1`
     font-family: "InterExtraBold", sans-serif;
     text-decoration: none;
     color: inherit;
+    @media ${DEVICE["1728"]} {
+      font-size: clamp(4rem, 8vw + 1.5rem, 5.7rem);
   }
 `;
 const SocialLinksWrapper = styled.div`
@@ -76,6 +78,9 @@ const SocialLinksWrapper = styled.div`
   justify-content: center;
   align-items: center;
   margin-top: ${({ theme }) => theme.margins.paragraph};
+  @media ${DEVICE["1728"]} {
+    margin-top: ${({ theme }) => `calc(${theme.margins.paragraph} + 1.5rem)`};
+  }
 `;
 const SocialLinksList = styled.ul`
   width: 80%;
@@ -89,6 +94,12 @@ const SocialLinksList = styled.ul`
     width: 47%;
   }
   @media ${DEVICE["1366"]} {
+    width: 40%;
+  }
+  @media ${DEVICE["1440"]} {
+    width: 36%;
+  }
+  @media ${DEVICE["1728"]} {
     width: 40%;
   }
 `;
@@ -141,6 +152,9 @@ const FooterText = styled.p`
   font-size: 0.6rem;
   line-height: ${({ theme }) => theme.lineHeights.paragraph};
   text-align: center;
+  @media ${DEVICE["1728"]} {
+    font-size: 0.8rem;
+  }
   span {
     position: absolute;
     top: 0;
@@ -155,6 +169,9 @@ const FooterText = styled.p`
     height: 100%;
     background-color: ${({ theme }) => theme.colors.secondary};
     color: ${({ theme }) => theme.colors.primary};
+    @media ${DEVICE["1728"]} {
+      font-size: 0.8rem;
+    }
   }
 `;
 
