@@ -72,7 +72,7 @@ const Location = styled.p`
   line-height: ${({ theme }) => theme.lineHeights.paragraph};
   letter-spacing: 0.4em;
   margin-top: -0.4rem;
-  margin-left: 0.5rem;
+  margin-left: 0.1rem;
   @media ${DEVICE["768"]} {
     letter-spacing: 0.8em;
     margin-top: clamp(-0.8rem, -1vw, -2rem);
@@ -116,48 +116,10 @@ const Location = styled.p`
     }
   }
 `;
-const ContactWrapper = styled.div`
-  width: 100%;
-  max-width: 400px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  @media ${DEVICE["1366"]} {
-    margin-left: 0.8rem;
-  }
-  @media ${DEVICE["1728"]} {
-    max-width: 600px;
-  }
-`;
-const Contact = styled.p`
-  font-family: "JetBrainsMonoRegular", monospace;
-  font-weight: 400;
-  color: ${({ theme }) => theme.colors.secondary};
-  font-size: ${({ theme }) => theme.fontSizes.paragraph};
-  line-height: ${({ theme }) => theme.lineHeights.paragraph};
-  letter-spacing: ${({ theme }) => theme.lettersSpacing.paragraph};
-  @media ${DEVICE["1366"]} {
-    font-size: ${({ theme }) => `calc(${theme.fontSizes.paragraph} - 0.3rem)`};
-  }
-`;
-const ContactLink = styled.a`
-  align-self: flex-end;
-  font-family: "JetBrainsMonoExtraBold", sans-serif;
-  font-weight: 400;
-  color: ${({ theme }) => theme.colors.secondary};
-  font-size: ${({ theme }) => theme.fontSizes.paragraph};
-  line-height: ${({ theme }) => theme.lineHeights.paragraph};
-  letter-spacing: ${({ theme }) => theme.lettersSpacing.paragraph};
-  text-align: right;
-  @media ${DEVICE["1366"]} {
-    font-size: ${({ theme }) => `calc(${theme.fontSizes.paragraph} - 0.3rem)`};
-  }
-`;
 const Description = styled.p`
   width: 100%;
   max-width: 400px;
-  margin-bottom: clamp(1rem, 10vw, 3rem);
+  margin-bottom: clamp(4rem, 10vw, 5rem);
   font-family: "JetBrainsMonoRegular", sans-serif;
   color: ${({ theme }) => theme.colors.secondary};
   font-size: ${({ theme }) => theme.fontSizes.paragraph};
@@ -186,13 +148,13 @@ const ImageWrapper = styled.div`
   max-width: 600px;
   height: 70%;
   max-height: 1100px;
-  top: clamp(63%, 25vh, 75%);
-  right: 0;
+  top: clamp(65%, 25vh, 75%);
+  right: -10%;
   transform: translate(0%, -67%);
   opacity: 0;
   z-index: -1;
   @media ${DEVICE["768"]} {
-    top: clamp(65%, 30vh, 80%);
+    top: clamp(70%, 30vh, 80%);
     right: -9.5%;
   }
   @media ${DEVICE["1366"]} {
@@ -210,16 +172,4 @@ const Image = styled.img`
   aspect-ratio: 16 / 9;
 `;
 
-export {
-  HeroWrapper,
-  TitleWrapper,
-  Title1,
-  Title2,
-  Description,
-  Location,
-  ContactWrapper,
-  Contact,
-  ContactLink,
-  ImageWrapper,
-  Image,
-};
+export { HeroWrapper, TitleWrapper, Title1, Title2, Description, Location, ImageWrapper, Image };

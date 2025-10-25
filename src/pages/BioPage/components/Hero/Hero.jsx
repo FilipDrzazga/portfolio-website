@@ -2,19 +2,7 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { SplitText } from "gsap/SplitText";
-import {
-  HeroWrapper,
-  TitleWrapper,
-  Title1,
-  Title2,
-  Description,
-  Location,
-  ContactWrapper,
-  Contact,
-  ContactLink,
-  ImageWrapper,
-  Image,
-} from "./Hero.styled";
+import { HeroWrapper, TitleWrapper, Title1, Title2, Description, Location, ImageWrapper, Image } from "./Hero.styled";
 import image from "../../../../assets/images/bio_tablet_img_lg.webp";
 import { usePageStore } from "../../../../store/useStore";
 
@@ -24,7 +12,6 @@ const Hero = () => {
   const { setGetMeshPosition } = usePageStore();
   const titleRef = useRef(null);
   const descriptionRef = useRef(null);
-  const contactRef = useRef(null);
   const imageRef = useRef(null);
 
   useGSAP(() => {
@@ -73,36 +60,12 @@ const Hero = () => {
       autoSplit: true,
       mask: "lines",
       onSplit: (split) => {
-        return gsap.from(split.lines, { y: 50, autoAlpha: 0, duration: 1, delay: 1, stagger: 0.05, ease: "power4.out" });
-      },
-    });
-    // Contact Animation
-    SplitText.create(contactRef.current.getElementsByTagName("p"), {
-      type: "lines",
-      autoSplit: true,
-      mask: "lines",
-      onSplit: (split) => {
         return gsap.from(split.lines, {
           y: 50,
           autoAlpha: 0,
-          duration: 1.2,
-          delay: 1.15,
-          stagger: 1,
-          ease: "power4.out",
-        });
-      },
-    });
-    SplitText.create(contactRef.current.getElementsByTagName("a"), {
-      type: "lines",
-      autoSplit: true,
-      mask: "lines",
-      onSplit: (split) => {
-        return gsap.from(split.lines, {
-          y: 50,
-          autoAlpha: 0,
-          duration: 1.2,
-          delay: 1.11,
-          stagger: 1,
+          duration: 1,
+          delay: 0.7,
+          stagger: 0.05,
           ease: "power4.out",
         });
       },
@@ -132,10 +95,6 @@ const Hero = () => {
       <ImageWrapper ref={imageRef}>
         <Image src={image} alt="Just myself" />
       </ImageWrapper>
-      <ContactWrapper ref={contactRef}>
-        <Contact>Available for Colaboration</Contact>
-        <ContactLink href="mailto:filip.drzazga@gmail.com">filip.drzazga@gmail.com</ContactLink>
-      </ContactWrapper>
       <Description ref={descriptionRef}>
         More than visuals - I design meaningful digital encounters that resonate with curiosity, intention, and flow.
       </Description>
