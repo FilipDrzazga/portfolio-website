@@ -4,15 +4,17 @@ import { DEVICE } from "../../../../styles/theme";
 const HeroWrapper = styled.section`
   position: relative;
   width: 100%;
-  max-width: 1440px;
+  max-width: 1260px;
   height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  align-items: space-between;
-  // background-color: ${({ theme }) => theme.colors.primary};
+  align-items: flex-start;
   padding-top: 11.5vh;
   z-index: 1;
+  @media ${DEVICE["1366"]} {
+    gap: 6rem;
+  }
 `;
 const TitleWrapper = styled.div`
   width: 100%;
@@ -21,6 +23,9 @@ const TitleWrapper = styled.div`
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
+  @media ${DEVICE["1366"]} {
+    margin-top: 1.5rem;
+  }
 `;
 const Title1 = styled.h1`
   width: 100%;
@@ -58,11 +63,13 @@ const Location = styled.p`
   line-height: ${({ theme }) => theme.lineHeights.paragraph};
   letter-spacing: 0.4em;
   margin-top: -0.4rem;
-  padding-left: clamp(0rem, 1vw, 0.5rem);
+  margin-left: 0.5rem;
   @media ${DEVICE["768"]} {
     letter-spacing: 0.8em;
-    padding-left: clamp(0rem, 10vw, 0.5rem);
     margin-top: clamp(-0.8rem, -1vw, -2rem);
+  }
+  @media ${DEVICE["1366"]} {
+    font-size: ${({ theme }) => `calc(${theme.fontSizes.paragraph} - 0.3rem)`};
   }
   span {
     position: absolute;
@@ -83,6 +90,9 @@ const Location = styled.p`
       transform: translate(0%, 0%);
       width: 50%;
     }
+    @media ${DEVICE["1366"]} {
+      font-size: ${({ theme }) => `calc(${theme.fontSizes.paragraph} - 0.3rem)`};
+    }
   }
 `;
 const ContactWrapper = styled.div`
@@ -92,6 +102,9 @@ const ContactWrapper = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
+  @media ${DEVICE["1366"]} {
+    margin-left: 0.8rem;
+  }
 `;
 const Contact = styled.p`
   font-family: "JetBrainsMonoRegular", monospace;
@@ -100,6 +113,9 @@ const Contact = styled.p`
   font-size: ${({ theme }) => theme.fontSizes.paragraph};
   line-height: ${({ theme }) => theme.lineHeights.paragraph};
   letter-spacing: ${({ theme }) => theme.lettersSpacing.paragraph};
+  @media ${DEVICE["1366"]} {
+    font-size: ${({ theme }) => `calc(${theme.fontSizes.paragraph} - 0.3rem)`};
+  }
 `;
 const ContactLink = styled.a`
   align-self: flex-end;
@@ -110,10 +126,13 @@ const ContactLink = styled.a`
   line-height: ${({ theme }) => theme.lineHeights.paragraph};
   letter-spacing: ${({ theme }) => theme.lettersSpacing.paragraph};
   text-align: right;
+  @media ${DEVICE["1366"]} {
+    font-size: ${({ theme }) => `calc(${theme.fontSizes.paragraph} - 0.3rem)`};
+  }
 `;
 const Description = styled.p`
   width: 100%;
-  max-width: 320px;
+  max-width: 400px;
   margin-bottom: clamp(1rem, 10vw, 3rem);
   font-family: "JetBrainsMonoRegular", sans-serif;
   color: ${({ theme }) => theme.colors.secondary};
@@ -122,6 +141,15 @@ const Description = styled.p`
   letter-spacing: ${({ theme }) => theme.lettersSpacing.paragraph};
   font-weight: 400;
   text-align: left;
+  @media ${DEVICE["1024"]} {
+    max-width: 500px;
+  }
+  @media ${DEVICE["1366"]} {
+    align-self: flex-end;
+    margin-right: 20rem;
+    text-align: right;
+    font-size: ${({ theme }) => `calc(${theme.fontSizes.paragraph} - 0.3rem)`};
+  }
 `;
 
 const ImageWrapper = styled.div`
@@ -138,6 +166,12 @@ const ImageWrapper = styled.div`
   @media ${DEVICE["768"]} {
     top: clamp(65%, 30vh, 80%);
     right: -9.5%;
+  }
+  @media ${DEVICE["1366"]} {
+    max-width: 750px;
+    height: 85%;
+    top: clamp(70%, 35vh, 85%);
+    right: -15%;
 `;
 const Image = styled.img`
   width: 100%;

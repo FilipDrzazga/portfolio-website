@@ -61,6 +61,7 @@ float cnoise(vec2 P) {
 
 void main() {
     vec2 uv = vUv;
+
     vec2 distortionUV = vUv;
     distortionUV -= 0.5;
     distortionUV.x *= u_resolution.x / u_resolution.y;
@@ -68,14 +69,14 @@ void main() {
 
     float noise =  0.5 * cnoise(vec2(uv.x * 2.0 + u_time * 0.05,uv.y * 2.0 + u_time * 0.05));
     noise +=  0.25 * cnoise(vec2(uv.x * 4.0 + u_time * 0.05,uv.y * 4.0 + u_time * 0.05));
-    noise +=  0.02 * cnoise(vec2(uv.x * 8.0 + u_time * 0.05,uv.y * 8.0 + u_time * 0.05));
+    //noise +=  0.02 * cnoise(vec2(uv.x * 8.0 + u_time * 0.05,uv.y * 8.0 + u_time * 0.05));
     
     noise = noise * 0.5 + 0.5; // normalize to [0,1]
 
-    vec2 distortion = distortionUV + vec2(noise - 0.5) * 4.0;
+    vec2 distortion = distortionUV + vec2(noise - 0.5) * 20.0;
 
-    vec2 mixedUV = mix(uv, distortion, smoothstep(0.0, 0.3, u_scroll));
-    vec2 finalUvMix = mix(mixedUV, vec2(noise), clamp(u_scroll, 0.0, 0.6));
+    vec2 mixedUV = mix(uv, distortion, u_scroll);
+    vec2 finalUvMix = mix(mixedUV, vec2(noise + 0.5, noise), clamp(u_scroll, 0.0, 0.95));
 
     vec3 FboTexture = texture2D(u_fbo, finalUvMix).rgb;
     float alpha = mix(0.8, 0.70, u_scroll);

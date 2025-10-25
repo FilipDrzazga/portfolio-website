@@ -6,9 +6,9 @@ export const GLOBAL_THEME = {
     secondary: "#1a1a1aff",
   },
   fontSizes: {
-    h1: "clamp(2rem, 16vw, 8rem)",
+    h1: "clamp(2rem, 16vw, 9rem)",
     h2: "clamp(0.9rem, 2.2vw, 2.5rem)",
-    paragraph: "clamp(0.9rem, 1.5vw, 2rem)",
+    paragraph: "clamp(0.9rem, 1.5vw, 1.8rem)",
   },
   lineHeights: {
     h1: 1.1,

@@ -4,7 +4,7 @@ import { DEVICE } from "../../../../styles/theme";
 const AboutMeWrapper = styled.section`
   position: relative;
   width: 100%;
-  max-width: 1440px;
+  max-width: 1260px;
   height: auto;
   display: flex;
   flex-direction: column;
@@ -37,14 +37,17 @@ const Subtitle = styled.h2`
   color: ${({ theme }) => theme.colors.secondary};
   font-size: ${({ theme }) => theme.fontSizes.h2};
   margin-bottom: ${({ theme }) => theme.margins.h2};
-  padding-left: clamp(0rem, 1vw, 0.5rem);
+  margin-left: 0.1rem;
   line-height: ${({ theme }) => theme.lineHeights.h2};
   letter-spacing: ${({ theme }) => theme.lettersSpacing.h2};
   text-align: left;
   font-weight: 400;
   @media ${DEVICE["768"]} {
     max-width: 90%;
-    padding-left: clamp(0rem, 10vw, 0.5rem);
+    margin-left: 0.5rem;
+  }
+  @media ${DEVICE["1366"]} {
+    max-width: 65%;
   }
   span {
     position: absolute;
@@ -64,7 +67,7 @@ const Subtitle = styled.h2`
 `;
 const ParagraphsWrapper = styled.div`
   width: 100%;
-  max-width: 1000px;
+  max-width: 1260px;
   height: auto;
   display: flex;
   flex-direction: column;
@@ -82,11 +85,16 @@ const Text = styled.p`
   letter-spacing: ${({ theme }) => theme.lettersSpacing.paragraph};
   @media ${DEVICE["768"]} {
     width: 80%;
-    padding-left: clamp(0rem, 10vw, 0.5rem);
+    margin-left: 0.5rem;
+  }
+  @media ${DEVICE["1366"]} {
+    width: 70%;
+    font-size: ${({ theme }) => `calc(${theme.fontSizes.paragraph} - 0.3rem)`};
   }
 `;
 const TechStackWrapper = styled.div`
   width: 100%;
+  max-width: 1260px;
   height: auto;
 `;
 const TechStack = styled.h3`

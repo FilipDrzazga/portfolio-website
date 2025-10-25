@@ -4,7 +4,7 @@ import { DEVICE } from "../../../../styles/theme";
 const ContactWrapper = styled.section`
   position: relative;
   width: 100%;
-  max-width: 1440px;
+  max-width: 1260px;
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -31,6 +31,9 @@ const Subtitle = styled.p`
   @media ${DEVICE["375"]} {
     font-size: 0.85rem;
   }
+  @media ${DEVICE["1366"]} {
+    font-size: ${({ theme }) => `calc(${theme.fontSizes.paragraph} - 0.3rem)`};
+  }
   span {
     position: absolute;
     top: 0;
@@ -45,6 +48,9 @@ const Subtitle = styled.p`
     height: 100%;
     background-color: ${({ theme }) => theme.colors.secondary};
     color: ${({ theme }) => theme.colors.primary};
+    @media ${DEVICE["1366"]} {
+      font-size: ${({ theme }) => `calc(${theme.fontSizes.paragraph} - 0.3rem)`};
+    }
   }
 `;
 const Title = styled.h1`
@@ -82,6 +88,9 @@ const SocialLinksList = styled.ul`
   @media ${DEVICE["1024"]} {
     width: 47%;
   }
+  @media ${DEVICE["1366"]} {
+    width: 40%;
+  }
 `;
 const SocialLinksListItem = styled.li`
   list-style: none;
@@ -96,6 +105,9 @@ const SocialLinksLink = styled.a`
   text-align: center;
   margin-bottom: ${({ theme }) => theme.margins.paragraph};
   text-decoration: none;
+  @media ${DEVICE["1366"]} {
+    font-size: ${({ theme }) => `calc(${theme.fontSizes.paragraph} - 0.3rem)`};
+  }
   span {
     position: absolute;
     top: 0;
@@ -110,6 +122,9 @@ const SocialLinksLink = styled.a`
     height: 100%;
     background-color: ${({ theme }) => theme.colors.secondary};
     color: ${({ theme }) => theme.colors.primary};
+    @media ${DEVICE["1366"]} {
+      font-size: ${({ theme }) => `calc(${theme.fontSizes.paragraph} - 0.3rem)`};
+    }
   }
 `;
 const Footer = styled.footer`
