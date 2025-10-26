@@ -96,23 +96,21 @@ const AboutMe = () => {
     <AboutMeWrapper>
       <Header ref={headerRef}>
         <Title>about me</Title>
-        <Subtitle>Hi. I’m Filip, a self-taught coder based in Watford.</Subtitle>
+        <Subtitle>Hi, I’m Filip, a front-end developer with a creative edge.</Subtitle>
       </Header>
       <ParagraphsWrapper ref={paragraphsWrapperRef}>
         <Text>
-          A self-taught coder, enthusiastic about dynamic areas of motion and animation. Focusing on the smallest details
-          to ensure everything is flawless. Constantly honing skills to create smooth and engaging experiences.
+          Passionate about motion, detail, and design. I focus on creating smooth, engaging experiences that feel alive,
+          always learning, experimenting, and pushing my skills further.
         </Text>
         <Text>
-          For the past four years, I’ve been diving into the world of web/app development, mastering JavaScript, React
-          environment, and range of others libraries essential for creating dynamic and functional websites or
-          applications.
+          Over the past four years, I’ve been diving into web and app development, mastering JavaScript, the React
+          ecosystem, and a range of libraries essential for building dynamic, functional experiences.
         </Text>
         <Text>
-          Exploring the magic of shaders and WebGL is my favorite playground - combining Three.js + R3F with silky-smooth
-          motion using GSAP/Motion and Reanimated to make the browser/app feel alive.
+          I’m exploring the world of WebGL, Three.js, and GLSL, experimenting, breaking things, and learning how it all
+          connects. It’s a constant process of discovery, and that’s what makes it so exciting.
         </Text>
-        <Text>Constantly refining my craft and exploring new possibilities.</Text>
       </ParagraphsWrapper>
       <TechStackWrapper>
         <TechStack>

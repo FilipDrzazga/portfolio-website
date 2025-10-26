@@ -96,7 +96,7 @@ const Hero = () => {
         <Image src={image} alt="Just myself" />
       </ImageWrapper>
       <Description ref={descriptionRef}>
-        More than visuals - I design meaningful digital encounters that resonate with curiosity, intention, and flow.
+        More than visuals - I craft digital experiences that resonate with curiosity, intention, and flow.
       </Description>
     </HeroWrapper>
   );

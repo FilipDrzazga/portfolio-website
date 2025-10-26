@@ -10,7 +10,7 @@ const HeroWrapper = styled.section`
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-start;
-  padding-top: 11.5vh;
+  padding-top: 12vh;
   z-index: 1;
   @media ${DEVICE["1366"]} {
     gap: 6rem;
@@ -33,7 +33,7 @@ const TitleWrapper = styled.div`
 const Title1 = styled.h1`
   width: 100%;
   height: auto;
-  margin-bottom: clamp(-0.9rem, -2vw, -3rem);
+  margin-bottom: clamp(-0.7rem, -2vw, -3rem);
   font-family: "InterExtraBold", sans-serif;
   color: ${({ theme }) => theme.colors.secondary};
   font-size: ${({ theme }) => theme.fontSizes.h1};
@@ -119,7 +119,7 @@ const Location = styled.p`
 const Description = styled.p`
   width: 100%;
   max-width: 400px;
-  margin-bottom: clamp(4rem, 10vw, 5rem);
+  margin-bottom: 3.5rem;
   font-family: "JetBrainsMonoRegular", sans-serif;
   color: ${({ theme }) => theme.colors.secondary};
   font-size: ${({ theme }) => theme.fontSizes.paragraph};
@@ -127,10 +127,17 @@ const Description = styled.p`
   letter-spacing: ${({ theme }) => theme.lettersSpacing.paragraph};
   font-weight: 400;
   text-align: left;
+  @media ${DEVICE["360"]} {
+    margin-bottom: 4.5rem;
+  }
+  @media ${DEVICE["390"]} {
+    margin-bottom: 5.5rem;
+  }
   @media ${DEVICE["1024"]} {
     max-width: 500px;
   }
   @media ${DEVICE["1366"]} {
+    max-width: 550px;
     align-self: flex-end;
     margin-right: 20rem;
     text-align: right;
@@ -148,11 +155,17 @@ const ImageWrapper = styled.div`
   max-width: 600px;
   height: 70%;
   max-height: 1100px;
-  top: clamp(65%, 25vh, 75%);
+  top: clamp(60%, 25vh, 75%);
   right: -10%;
   transform: translate(0%, -67%);
   opacity: 0;
   z-index: -1;
+  @media ${DEVICE["375"]} {
+    top: clamp(63%, 30vh, 75%);
+  }
+    @media ${DEVICE["390"]} {
+    top: clamp(62%, 28vh, 75%);
+  }
   @media ${DEVICE["768"]} {
     top: clamp(70%, 30vh, 80%);
     right: -9.5%;

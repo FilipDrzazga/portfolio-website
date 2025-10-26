@@ -36,6 +36,7 @@ const Scene = () => {
   );
   const effectUniforms = useMemo(
     () => ({
+      u_mouse: { value: new THREE.Vector2(0, 0) },
       u_resolution: { value: new THREE.Vector2(size.width, size.height) },
       u_fbo: { value: fbo.texture },
       u_scroll: { value: 0 },
@@ -47,7 +48,6 @@ const Scene = () => {
   useGSAP(() => {
     ScrollTrigger.create({
       onUpdate: (self) => {
-        console.log(self.progress);
         effectUniforms.u_scroll.value = self.progress;
       },
     });
@@ -88,17 +88,25 @@ const Scene = () => {
       imageUniforms.u_textureRatio.value = loadedTexture.image.width / loadedTexture.image.height;
     });
 
+    const handleMouseMove = (event) => {
+      const x = event.clientX / size.width;
+      const y = 1 - event.clientY / size.height;
+      effectUniforms.u_mouse.value.set(x, y);
+    };
+
     const handleResize = () => {
       imageUniforms.u_meshRatio.value = width / height;
     };
 
+    window.addEventListener("mousemove", handleMouseMove);
     window.addEventListener("resize", handleResize);
     handleResize();
 
     return () => {
       window.removeEventListener("resize", handleResize);
+      window.removeEventListener("mousemove", handleMouseMove);
     };
-  }, [size, imageUniforms, isTextureLoaded]);
+  }, [size, imageUniforms, isTextureLoaded, effectUniforms]);
 
   return (
     <>

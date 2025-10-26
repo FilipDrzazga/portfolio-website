@@ -6,7 +6,7 @@ const Hero = () => {
       <Header>
         <Title>Playground</Title>
         <Text>
-          A space where I tinker with code, build playful animations and experiment with new ideas—featuring creative
+          A space where I tinker with code, build playful animations and experiment with new ideas, featuring creative
           snippets, prototypes and small ‘lab’ projects, it’s all about having fun, learning and sharing the process.
         </Text>
       </Header>

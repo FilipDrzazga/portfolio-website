@@ -174,7 +174,7 @@ const Contact = () => {
           </SocialLinksListItem>
           <SocialLinksListItem>
             <SocialLinksLink href="https://github.com/FilipDrzazga" target="_blank" rel="noopener noreferrer">
-              Email
+              X/Twitter
             </SocialLinksLink>
           </SocialLinksListItem>
           <SocialLinksListItem>

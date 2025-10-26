@@ -1,12 +1,30 @@
-import { ShowcaseCardWrapper, Title } from "./ShowcaseCard.styled";
-import { usePageStore } from "../../../../store/useStore";
+import {
+  CardDescriptionWrapper,
+  ShowcaseCardWrapper,
+  Title,
+  Card,
+  TechStack,
+  CardImagePlaceholder,
+  CardImageWrapper,
+  CardImage,
+  CardImagePlaceholderWrapper,
+} from "./ShowcaseCard.styled";
 
 const ShowcaseCard = () => {
-  const playgroundAnimationName = usePageStore((state) => state.playgroundAnimationName);
-
   return (
     <ShowcaseCardWrapper>
-      <Title>{playgroundAnimationName}</Title>
+      <Card>
+        <CardDescriptionWrapper>
+          <Title>Experimenting with normals and light behavior,</Title>
+          <TechStack>GLSL (Shadertoy)</TechStack>
+        </CardDescriptionWrapper>
+        <CardImageWrapper>
+          <CardImage src="" alt="Showcase Card Image" />
+        </CardImageWrapper>
+        <CardImagePlaceholderWrapper>
+          <CardImagePlaceholder>SHADERTOY.0001.JPG</CardImagePlaceholder>
+        </CardImagePlaceholderWrapper>
+      </Card>
     </ShowcaseCardWrapper>
   );
 };

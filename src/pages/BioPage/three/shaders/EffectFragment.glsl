@@ -7,6 +7,7 @@ uniform vec2 u_resolution;
 uniform sampler2D u_fbo;
 uniform float u_time;
 uniform float u_scroll;
+uniform vec2 u_mouse;
 
 vec4 mod289(vec4 x) {
   return x - floor(x * (1.0 / 289.0)) * 289.0;
@@ -67,9 +68,13 @@ void main() {
     distortionUV.x *= u_resolution.x / u_resolution.y;
     distortionUV += 0.5;
 
+    vec2 strength = distortionUV - u_mouse;
+    float dist = length(distortionUV - u_mouse);
+    float m = exp(-dist * 10.0);
+
+
     float noise =  0.5 * cnoise(vec2(uv.x * 2.0 + u_time * 0.05,uv.y * 2.0 + u_time * 0.05));
     noise +=  0.25 * cnoise(vec2(uv.x * 4.0 + u_time * 0.05,uv.y * 4.0 + u_time * 0.05));
-    //noise +=  0.02 * cnoise(vec2(uv.x * 8.0 + u_time * 0.05,uv.y * 8.0 + u_time * 0.05));
     
     noise = noise * 0.5 + 0.5; // normalize to [0,1]
 
@@ -78,8 +83,9 @@ void main() {
     vec2 mixedUV = mix(uv, distortion, u_scroll);
     vec2 finalUvMix = mix(mixedUV, vec2(noise + 0.5, noise), clamp(u_scroll, 0.0, 0.95));
 
-    vec3 FboTexture = texture2D(u_fbo, finalUvMix).rgb;
+    vec3 finalTexture = texture2D(u_fbo, finalUvMix).rgb;
+
     float alpha = mix(0.8, 0.70, u_scroll);
 
-    gl_FragColor = vec4(FboTexture, alpha);
+    gl_FragColor = vec4(finalTexture, alpha);
 }

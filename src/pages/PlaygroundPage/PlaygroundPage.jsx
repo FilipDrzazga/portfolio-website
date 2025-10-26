@@ -6,8 +6,8 @@ const PlaygroundPage = () => {
   return (
     <PlaygroundPageWrapper>
       <Hero />
-      <ThreeCanvas />
       <ShowcaseCard />
+      {/* <ThreeCanvas /> */}
     </PlaygroundPageWrapper>
   );
 };

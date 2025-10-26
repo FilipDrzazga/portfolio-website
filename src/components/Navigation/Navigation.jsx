@@ -43,9 +43,6 @@ const Navigation = () => {
           <NavigationLink to="/playground">Playground</NavigationLink>
         </NavigationItem>
         <NavigationItem>
-          <NavigationLink to="/work">Work</NavigationLink>
-        </NavigationItem>
-        <NavigationItem>
           <NavigationLink to="/mail">Mail</NavigationLink>
         </NavigationItem>
       </NavigationList>
