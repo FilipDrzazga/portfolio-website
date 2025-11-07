@@ -9,7 +9,7 @@ const BioPageWrapper = styled.section`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 4rem;
+  gap: 5rem;
   padding-left: clamp(1rem, 5vw, 3rem);
   padding-right: clamp(1rem, 5vw, 3rem);
   overflow-x: hidden;

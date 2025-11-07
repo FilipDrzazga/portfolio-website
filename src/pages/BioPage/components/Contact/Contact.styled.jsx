@@ -28,11 +28,8 @@ const Subtitle = styled.p`
   line-height: ${({ theme }) => theme.lineHeights.paragraph};
   letter-spacing: ${({ theme }) => theme.lettersSpacing.paragraph};
   text-align: center;
-  @media ${DEVICE["375"]} {
-    font-size: 0.85rem;
-  }
-  @media ${DEVICE["1366"]} {
-    font-size: ${({ theme }) => `calc(${theme.fontSizes.paragraph} - 0.3rem)`};
+  @media ${DEVICE["1920"]} {
+    font-size: 1.125rem;
   }
   span {
     position: absolute;
@@ -48,27 +45,42 @@ const Subtitle = styled.p`
     height: 100%;
     background-color: ${({ theme }) => theme.colors.secondary};
     color: ${({ theme }) => theme.colors.primary};
-    @media ${DEVICE["1366"]} {
-      font-size: ${({ theme }) => `calc(${theme.fontSizes.paragraph} - 0.3rem)`};
+    @media ${DEVICE["1920"]} {
+      font-size: 1.125rem;
     }
   }
 `;
 const Title = styled.h1`
   width: 100%;
   height: auto;
-  color: ${({ theme }) => theme.colors.secondary};
   margin-bottom: ${({ theme }) => theme.margins.h1};
-  font-weight: 400;
+  color: ${({ theme }) => theme.colors.secondary};
   text-align: center;
   a {
     width: 100%;
     height: auto;
-    font-size: clamp(3.1rem, 10vw + 1.1rem, 5rem);
-    font-family: "InterExtraBold", sans-serif;
+    font-size: 2.9rem;
+    font-family: "InterBold", sans-serif;
+    font-weight: 700;
     text-decoration: none;
     color: inherit;
-    @media ${DEVICE["1728"]} {
-      font-size: clamp(4rem, 8vw + 1.5rem, 5.7rem);
+    @media ${DEVICE["360"]} {
+      font-size: 3rem;
+    }
+    @media ${DEVICE["375"]} {
+      font-size: 3.1rem;
+    }
+    @media ${DEVICE["412"]} {
+      font-size: 3.3rem;
+    }
+    @media ${DEVICE["430"]} {
+      font-size: 4rem;
+    }
+    @media ${DEVICE["768"]} {
+      font-size: 4.3rem;
+    }
+      @media ${DEVICE["1920"]} {
+    font-size: 4.8rem;
   }
 `;
 const SocialLinksWrapper = styled.div`
@@ -78,6 +90,9 @@ const SocialLinksWrapper = styled.div`
   justify-content: center;
   align-items: center;
   margin-top: ${({ theme }) => theme.margins.paragraph};
+  @media ${DEVICE["1366"]} {
+    margin-top: ${({ theme }) => `calc(${theme.margins.paragraph} + 1rem)`};
+  }
   @media ${DEVICE["1728"]} {
     margin-top: ${({ theme }) => `calc(${theme.margins.paragraph} + 1.5rem)`};
   }
@@ -88,19 +103,25 @@ const SocialLinksList = styled.ul`
   justify-content: space-between;
   align-items: center;
   @media ${DEVICE["768"]} {
-    width: 60%;
+    width: 55%;
+  }
+  @media ${DEVICE["820"]} {
+    width: 50%;
   }
   @media ${DEVICE["1024"]} {
-    width: 47%;
+    width: 40%;
   }
   @media ${DEVICE["1366"]} {
-    width: 40%;
+    width: 35%;
   }
   @media ${DEVICE["1440"]} {
-    width: 36%;
+    width: 32%;
   }
   @media ${DEVICE["1728"]} {
-    width: 40%;
+    width: 30%;
+  }
+  @media ${DEVICE["1920"]} {
+    width: 33%;
   }
 `;
 const SocialLinksListItem = styled.li`
@@ -116,8 +137,8 @@ const SocialLinksLink = styled.a`
   text-align: center;
   margin-bottom: ${({ theme }) => theme.margins.paragraph};
   text-decoration: none;
-  @media ${DEVICE["1366"]} {
-    font-size: ${({ theme }) => `calc(${theme.fontSizes.paragraph} - 0.3rem)`};
+  @media ${DEVICE["1920"]} {
+    font-size: 1.125rem;
   }
   span {
     position: absolute;
@@ -133,8 +154,8 @@ const SocialLinksLink = styled.a`
     height: 100%;
     background-color: ${({ theme }) => theme.colors.secondary};
     color: ${({ theme }) => theme.colors.primary};
-    @media ${DEVICE["1366"]} {
-      font-size: ${({ theme }) => `calc(${theme.fontSizes.paragraph} - 0.3rem)`};
+    @media ${DEVICE["1920"]} {
+      font-size: 1.125rem;
     }
   }
 `;

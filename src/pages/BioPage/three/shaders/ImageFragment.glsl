@@ -22,20 +22,18 @@ vec2 coverUV(vec2 uv,  float meshRatio, float textureAspect) {
 }
 
 void main() {
-    vec3 ambient = vec3(0.1);
+    vec3 ambient = vec3(0.005);
     vec2 uv = vUv;
 
     vec2 uvMask = uv;
     uvMask -= 0.5;
-    float textureTopMask = 1.0 - smoothstep(0.8, 0.2, uvMask.y + smoothstep(0.0, 2.5, abs(uvMask.x)));
-    float textureRightMask = 1.0 - smoothstep(0.4, 0.2, uvMask.x);
-    float finalMask = textureTopMask + textureRightMask;
+    float bottomMask = 1.0 - smoothstep(0.05, 0.2, uv.y);
 
     vec2 textureUV = coverUV(vUv, u_meshRatio, u_textureRatio);
     vec3 baseTexture = texture2D(u_texture, textureUV).rgb;
-    vec3 finalTexture = baseTexture + ambient + finalMask;
+    vec3 finalTexture = baseTexture + ambient + bottomMask;
 
-    vec3 t = vec3(textureRightMask);
+    // vec3 t = vec3(bottomMask);
 
     gl_FragColor = vec4(finalTexture, 1.0);
 }

@@ -96,7 +96,7 @@ const AboutMe = () => {
     <AboutMeWrapper>
       <Header ref={headerRef}>
         <Title>about me</Title>
-        <Subtitle>Hi, I’m Filip, a front-end developer with a creative edge.</Subtitle>
+        <Subtitle>Hi, I’m Filip, a self-taught frontend developer with a creative edge.</Subtitle>
       </Header>
       <ParagraphsWrapper ref={paragraphsWrapperRef}>
         <Text>

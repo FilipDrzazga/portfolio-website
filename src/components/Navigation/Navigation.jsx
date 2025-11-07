@@ -1,13 +1,27 @@
 import { useRef } from "react";
+import { usePageStore } from "../../store/useStore";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { SplitText } from "gsap/SplitText";
-import { NavigationWrapper, NavigationList, NavigationItem, NavigationLink } from "./Navigation.styled";
+import {
+  NavigationWrapper,
+  Button,
+  MenuWrapper,
+  NavigationList,
+  NavigationItem,
+  NavigationLink,
+} from "./Navigation.styled";
 
 gsap.registerPlugin(useGSAP, SplitText);
 
 const Navigation = () => {
+  const { isMenuOpen, setIsMenuOpen } = usePageStore();
   const navigationRef = useRef(null);
+
+  const handleClick = () => {
+    setIsMenuOpen(!isMenuOpen);
+    document.body.style.overflowY = !isMenuOpen ? "hidden" : "auto";
+  };
 
   useGSAP(() => {
     // Terminal typing animation on navigation links
@@ -35,17 +49,21 @@ const Navigation = () => {
 
   return (
     <NavigationWrapper ref={navigationRef}>
-      <NavigationList>
-        <NavigationItem>
-          <NavigationLink to="/bio">Bio</NavigationLink>
-        </NavigationItem>
-        <NavigationItem>
-          <NavigationLink to="/playground">Playground</NavigationLink>
-        </NavigationItem>
-        <NavigationItem>
-          <NavigationLink to="/mail">Mail</NavigationLink>
-        </NavigationItem>
-      </NavigationList>
+      <Button $isClicked={isMenuOpen} onClick={handleClick}>
+        *
+      </Button>
+      {isMenuOpen && (
+        <MenuWrapper>
+          <NavigationList>
+            <NavigationItem>
+              <NavigationLink to="/bio">bio</NavigationLink>
+            </NavigationItem>
+            <NavigationItem>
+              <NavigationLink to="/playground">lab</NavigationLink>
+            </NavigationItem>
+          </NavigationList>
+        </MenuWrapper>
+      )}
     </NavigationWrapper>
   );
 };

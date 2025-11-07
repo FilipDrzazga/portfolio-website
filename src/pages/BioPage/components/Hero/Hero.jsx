@@ -2,7 +2,17 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { SplitText } from "gsap/SplitText";
-import { HeroWrapper, TitleWrapper, Title1, Title2, Description, Location, ImageWrapper, Image } from "./Hero.styled";
+import {
+  HeroWrapper,
+  TitleWrapper,
+  Title1,
+  Title2,
+  Title3,
+  WorkStatusWrapper,
+  Status,
+  ImageWrapper,
+  Image,
+} from "./Hero.styled";
 import image from "../../../../assets/images/bio_tablet_img_lg.webp";
 import { usePageStore } from "../../../../store/useStore";
 
@@ -11,21 +21,27 @@ gsap.registerPlugin(useGSAP, SplitText);
 const Hero = () => {
   const { setGetMeshPosition } = usePageStore();
   const titleRef = useRef(null);
-  const descriptionRef = useRef(null);
+  const workStatusRef = useRef(null);
   const imageRef = useRef(null);
 
   useGSAP(() => {
     // Title Animation
     SplitText.create(titleRef.current.getElementsByTagName("h1"), {
-      type: "words, chars",
+      type: "lines",
       autoSplit: true,
-      mask: "chars",
+      mask: "lines",
       onSplit: (split) => {
-        return gsap.from(split.chars, { x: -150, delay: 0.05, stagger: 0.02 });
+        return gsap.from(split.lines, {
+          y: 80,
+          delay: 0.05,
+          stagger: 0.15,
+          duration: 2,
+          ease: "power4.out",
+        });
       },
     });
-    // Location Animation
-    SplitText.create(titleRef.current.getElementsByTagName("p"), {
+    // Work Status Animation
+    SplitText.create(workStatusRef.current.getElementsByTagName("p"), {
       type: "chars",
       autoSplit: true,
       mask: "chars",
@@ -48,26 +64,22 @@ const Hero = () => {
         tl.from(split.chars, { visibility: "hidden", stagger: { each: 0.05 } }).to(
           spans,
           { visibility: "hidden", stagger: { each: 0.05 } },
-          ">-0.6"
+          ">-0.75"
         );
 
         return tl;
       },
     });
-    // Description Animation
-    SplitText.create(descriptionRef.current, {
-      type: "lines",
-      autoSplit: true,
-      mask: "lines",
-      onSplit: (split) => {
-        return gsap.from(split.lines, {
-          y: 50,
-          autoAlpha: 0,
-          duration: 1,
-          delay: 0.7,
-          stagger: 0.05,
-          ease: "power4.out",
-        });
+    gsap.to(workStatusRef.current, {
+      autoAlpha: 0,
+      y: 100,
+      ease: "none",
+      scrollTrigger: {
+        trigger: workStatusRef.current,
+        start: "top 95%",
+        end: "bottom 60%",
+        scrub: true,
+        markers: false,
       },
     });
   }, []);
@@ -88,16 +100,16 @@ const Hero = () => {
   return (
     <HeroWrapper>
       <TitleWrapper ref={titleRef}>
-        <Title1>Creative</Title1>
-        <Title2>Developer</Title2>
-        <Location>based in watford</Location>
+        <Title1>Frontend Developer</Title1>
+        <Title2>Based In Watford</Title2>
+        <Title3>Working Globally.</Title3>
       </TitleWrapper>
       <ImageWrapper ref={imageRef}>
         <Image src={image} alt="Just myself" />
       </ImageWrapper>
-      <Description ref={descriptionRef}>
-        More than visuals - I craft digital experiences that resonate with curiosity, intention, and flow.
-      </Description>
+      <WorkStatusWrapper ref={workStatusRef}>
+        <Status>Available For Work.</Status>
+      </WorkStatusWrapper>
     </HeroWrapper>
   );
 };

@@ -12,16 +12,18 @@ import { BIO_TABLET_LG as bioImageSrc } from "../../../assets/images/images";
 import Vertex from "./shaders/Vertex.glsl?raw";
 import ImageFragment from "./shaders/ImageFragment.glsl?raw";
 import EffectFragment from "./shaders/EffectFragment.glsl?raw";
+import MenuFragment from "./shaders/MenuFragment.glsl?raw";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const Scene = () => {
   const imageMeshRef = useRef(null);
   const effectMeshRef = useRef(null);
+  const menuMeshRef = useRef(null);
   const [isTextureLoaded, setIsTextureLoaded] = useState(false);
   const initialScreenSize = useRef({ width: window.innerWidth, height: window.innerHeight });
-  const { getMeshPosition } = usePageStore();
-  const { size, gl } = useThree();
+  const { getMeshPosition, isMenuOpen } = usePageStore();
+  const { camera, size, gl } = useThree();
   const fbo = useFBO(size.width * gl.getPixelRatio(), size.height * gl.getPixelRatio(), {
     depthBuffer: true,
   });
@@ -45,15 +47,31 @@ const Scene = () => {
     [size, fbo]
   );
 
+  const menuUniforms = useMemo(
+    () => ({
+      u_time: { value: 0.0 },
+      u_isOpen: { value: 1.0 },
+      u_progress: { value: 0.0 },
+      u_direction: { value: null },
+    }),
+    []
+  );
+
   useGSAP(() => {
     ScrollTrigger.create({
       onUpdate: (self) => {
         effectUniforms.u_scroll.value = self.progress;
       },
     });
-  });
+    gsap.to(menuUniforms.u_progress, {
+      value: isMenuOpen ? 1.0 : 0.0,
+      duration: 2.0,
+      ease: isMenuOpen ? "power2.out" : "power2.in",
+    });
+  }, [isMenuOpen]);
 
   useFrame((state) => {
+    // console.log(menuUniforms.u_direction.value);
     if (!isTextureLoaded) return;
     const cameraMain = state.scene.children.find((obj) => obj.isPerspectiveCamera);
 
@@ -63,11 +81,13 @@ const Scene = () => {
     state.gl.render(state.scene, cameraMain);
     state.gl.setRenderTarget(null);
 
+    menuUniforms.u_time.value = state.clock.getElapsedTime();
     effectUniforms.u_time.value = state.clock.getElapsedTime();
     effectUniforms.u_fbo.value = fbo.texture;
   });
 
   useEffect(() => {
+    camera.layers.enable(2); // Enable layer 2 for menu
     // Update mesh position and scale based on getMeshPosition
     if (!getMeshPosition || !imageMeshRef.current) return;
 
@@ -117,6 +137,10 @@ const Scene = () => {
       <mesh ref={effectMeshRef} layers={[1]} visible={isTextureLoaded}>
         <planeGeometry args={[2, 2, 1, 1]} />
         <shaderMaterial fragmentShader={EffectFragment} vertexShader={Vertex} uniforms={effectUniforms} />
+      </mesh>
+      <mesh ref={menuMeshRef} layers={[2]} visible={true}>
+        <planeGeometry args={[2, 2, 1, 1]} />
+        <shaderMaterial transparent fragmentShader={MenuFragment} vertexShader={Vertex} uniforms={menuUniforms} />
       </mesh>
     </>
   );
