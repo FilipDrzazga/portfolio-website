@@ -16,40 +16,52 @@ gsap.registerPlugin(useGSAP, SplitText);
 
 const Navigation = () => {
   const { isMenuOpen, setIsMenuOpen } = usePageStore();
+  const menuBtnRef = useRef(null);
   const navigationRef = useRef(null);
 
-  const handleClick = () => {
-    setIsMenuOpen(!isMenuOpen);
-    document.body.style.overflowY = !isMenuOpen ? "hidden" : "auto";
-  };
-
-  useGSAP(() => {
-    // Terminal typing animation on navigation links
-    gsap.utils.toArray(navigationRef.current.querySelectorAll("a")).forEach((el) => {
-      SplitText.create(el, {
-        type: "chars",
-        autoSplit: true,
-        onSplit: (split) => {
-          let tl = gsap.timeline();
-          split.chars.forEach((char) => {
-            const square = document.createElement("span");
-            square.textContent = gsap.utils.random(["%", "&", "*", "$"]);
-            char.appendChild(square);
-          });
-          const spans = split.chars.map((el) => el.querySelector("span"));
-          tl.from(split.chars, { visibility: "hidden", delay: 0.5, stagger: { each: 0.05, from: "start" } }).to(
-            spans,
-            { visibility: "hidden", delay: 0.5, stagger: { each: 0.05, from: "start" } },
-            ">-95%"
-          );
-        },
+  useGSAP(
+    (_, contextSafe) => {
+      const tl = gsap.timeline({ pause: true, onReverseComplete: () => setIsMenuOpen(false) });
+      const handleClick = contextSafe(() => {
+        if (isMenuOpen) {
+          console.log(tl.getChildren());
+          return tl.reverse();
+        }
+        setIsMenuOpen(true);
       });
-    });
-  });
+
+      if (isMenuOpen) {
+        const split = SplitText.create(navigationRef.current.querySelectorAll("a"), {
+          type: "chars",
+          mask: "chars",
+          autoSplit: true,
+        });
+        tl.addLabel("splitText").from(split.chars, {
+          x: -90,
+          stagger: { each: 0.03 },
+          duration: 1.5,
+          ease: "power4.out",
+        });
+        tl.addLabel("menuBtnRotation").to(
+          menuBtnRef.current,
+          { rotation: "+=360", duration: 2, ease: "linear", repeat: -1, transformOrigin: "50% 50%" },
+          0
+        );
+        tl.play();
+      }
+
+      menuBtnRef.current.addEventListener("click", handleClick);
+
+      return () => {
+        menuBtnRef.current.removeEventListener("click", handleClick);
+      };
+    },
+    { dependencies: [isMenuOpen] }
+  );
 
   return (
     <NavigationWrapper ref={navigationRef}>
-      <Button $isClicked={isMenuOpen} onClick={handleClick}>
+      <Button ref={menuBtnRef} $isClicked={isMenuOpen}>
         *
       </Button>
       {isMenuOpen && (

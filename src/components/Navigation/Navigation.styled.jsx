@@ -27,8 +27,8 @@ const NavigationWrapper = styled.nav`
   }
 `;
 const Button = styled.button`
-  width: 15%;
-  height: 100%;
+  width: auto;
+  height: auto;
   font-size: ${({ theme }) => theme.fontSizes.h1};
   font-family: "JetBrainsMonoBold", sans-serif;
   font-weight: 400;
@@ -62,7 +62,7 @@ const NavigationList = styled.ul`
   width: 100%;
   height: 100%;
   list-style: none;
-  padding-bottom: 10vh;
+  padding-bottom: 15vh;
 `;
 const NavigationItem = styled.li`
   width: auto;

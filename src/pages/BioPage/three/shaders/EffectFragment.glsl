@@ -85,7 +85,7 @@ void main() {
 
     vec3 finalTexture = texture2D(u_fbo, finalUvMix).rgb;
 
-    float alpha = mix(0.8, 0.70, u_scroll);
+    float alpha = mix(0.7, 0.6, u_scroll);
 
     gl_FragColor = vec4(finalTexture, alpha);
 }

@@ -66,7 +66,7 @@ const Scene = () => {
     gsap.to(menuUniforms.u_progress, {
       value: isMenuOpen ? 1.0 : 0.0,
       duration: 2.0,
-      ease: isMenuOpen ? "power2.out" : "power2.in",
+      ease: "power4.out",
     });
   }, [isMenuOpen]);
 
