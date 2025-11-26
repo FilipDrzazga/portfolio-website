@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 import { usePageStore } from "../../store/useStore";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
@@ -11,6 +11,7 @@ import {
   NavigationItem,
   NavigationLink,
 } from "./Navigation.styled";
+import { split } from "three/tsl";
 
 gsap.registerPlugin(useGSAP, SplitText);
 
@@ -19,63 +20,49 @@ const Navigation = () => {
   const menuBtnRef = useRef(null);
   const navigationRef = useRef(null);
 
+  const handleClick = () => {
+    setIsMenuOpen(!isMenuOpen);
+    document.body.style.overflow = isMenuOpen ? "auto" : "hidden";
+  };
+
   useGSAP(
-    (_, contextSafe) => {
-      const tl = gsap.timeline({ pause: true, onReverseComplete: () => setIsMenuOpen(false) });
-      const handleClick = contextSafe(() => {
-        if (isMenuOpen) {
-          console.log(tl.getChildren());
-          return tl.reverse();
-        }
-        setIsMenuOpen(true);
+    (ctx) => {
+      if (!isMenuOpen) return;
+
+      const split = new SplitText(navigationRef.current.querySelectorAll("a"), {
+        type: "chars",
+        mask: "chars",
       });
 
-      if (isMenuOpen) {
-        const split = SplitText.create(navigationRef.current.querySelectorAll("a"), {
-          type: "chars",
-          mask: "chars",
-          autoSplit: true,
-        });
-        tl.addLabel("splitText").from(split.chars, {
-          x: -90,
-          stagger: { each: 0.03 },
-          duration: 1.5,
+      ctx.add(() => {
+        gsap.from(split.chars, {
+          x: -100,
+          duration: 1.2,
+          stagger: 0.05,
           ease: "power4.out",
         });
-        tl.addLabel("menuBtnRotation").to(
-          menuBtnRef.current,
-          { rotation: "+=360", duration: 2, ease: "linear", repeat: -1, transformOrigin: "50% 50%" },
-          0
-        );
-        tl.play();
-      }
+      });
 
-      menuBtnRef.current.addEventListener("click", handleClick);
-
-      return () => {
-        menuBtnRef.current.removeEventListener("click", handleClick);
-      };
+      return () => split.revert();
     },
-    { dependencies: [isMenuOpen] }
+    { scope: navigationRef, dependencies: [isMenuOpen] }
   );
 
   return (
     <NavigationWrapper ref={navigationRef}>
-      <Button ref={menuBtnRef} $isClicked={isMenuOpen}>
+      <Button $isClicked={isMenuOpen} ref={menuBtnRef} onClick={handleClick}>
         *
       </Button>
-      {isMenuOpen && (
-        <MenuWrapper>
-          <NavigationList>
-            <NavigationItem>
-              <NavigationLink to="/bio">bio</NavigationLink>
-            </NavigationItem>
-            <NavigationItem>
-              <NavigationLink to="/playground">lab</NavigationLink>
-            </NavigationItem>
-          </NavigationList>
-        </MenuWrapper>
-      )}
+      <MenuWrapper $isVisible={isMenuOpen}>
+        <NavigationList>
+          <NavigationItem>
+            <NavigationLink to="/bio">bio</NavigationLink>
+          </NavigationItem>
+          <NavigationItem>
+            <NavigationLink to="/playground">lab</NavigationLink>
+          </NavigationItem>
+        </NavigationList>
+      </MenuWrapper>
     </NavigationWrapper>
   );
 };
