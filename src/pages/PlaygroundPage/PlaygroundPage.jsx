@@ -1,5 +1,4 @@
 import { PlaygroundPageWrapper } from "./PlaygroundPage.styled";
-import ThreeCanvas from "./three/ThreeCanvas";
 import { Hero, ShowcaseCard } from "./components";
 
 const PlaygroundPage = () => {
@@ -7,7 +6,6 @@ const PlaygroundPage = () => {
     <PlaygroundPageWrapper>
       <Hero />
       <ShowcaseCard />
-      {/* <ThreeCanvas /> */}
     </PlaygroundPageWrapper>
   );
 };

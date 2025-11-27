@@ -19,7 +19,7 @@ const ShowcaseCard = () => {
           <TechStack>GLSL (Shadertoy)</TechStack>
         </CardDescriptionWrapper>
         <CardImageWrapper>
-          <CardImage src="" alt="Showcase Card Image" />
+          <CardImage src="SHADERTOY.0001.JPG" alt="Showcase Card Image" />
         </CardImageWrapper>
         <CardImagePlaceholderWrapper>
           <CardImagePlaceholder>SHADERTOY.0001.JPG</CardImagePlaceholder>

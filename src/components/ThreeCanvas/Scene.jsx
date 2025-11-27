@@ -5,9 +5,10 @@ import { useThree, useFrame } from "@react-three/fiber";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { usePageStore } from "../../../store/useStore";
+import { usePageStore } from "../../store/useStore";
+import { useLocation } from "react-router";
 import { useFBO } from "@react-three/drei";
-import { BIO_TABLET_LG as bioImageSrc } from "../../../assets/images/images";
+import { BIO_TABLET_LG as bioImageSrc } from "../../assets/images/images";
 
 import Vertex from "./shaders/Vertex.glsl?raw";
 import ImageFragment from "./shaders/ImageFragment.glsl?raw";
@@ -17,6 +18,7 @@ import MenuFragment from "./shaders/MenuFragment.glsl?raw";
 gsap.registerPlugin(ScrollTrigger);
 
 const Scene = () => {
+  const location = useLocation();
   const imageMeshRef = useRef(null);
   const effectMeshRef = useRef(null);
   const menuMeshRef = useRef(null);
@@ -44,7 +46,7 @@ const Scene = () => {
       u_scroll: { value: 0 },
       u_time: { value: 0 },
     }),
-    [size, fbo]
+    []
   );
 
   const menuUniforms = useMemo(
@@ -71,7 +73,6 @@ const Scene = () => {
   }, [isMenuOpen]);
 
   useFrame((state) => {
-    // console.log(menuUniforms.u_direction.value);
     if (!isTextureLoaded) return;
     const cameraMain = state.scene.children.find((obj) => obj.isPerspectiveCamera);
 
@@ -81,9 +82,13 @@ const Scene = () => {
     state.gl.render(state.scene, cameraMain);
     state.gl.setRenderTarget(null);
 
-    menuUniforms.u_time.value = state.clock.getElapsedTime();
-    effectUniforms.u_time.value = state.clock.getElapsedTime();
-    effectUniforms.u_fbo.value = fbo.texture;
+    if (menuMeshRef.current) {
+      menuMeshRef.current.material.uniforms.u_time.value = state.clock.getElapsedTime();
+    }
+    if (effectMeshRef.current) {
+      effectMeshRef.current.material.uniforms.u_time.value = state.clock.getElapsedTime();
+      effectMeshRef.current.material.uniforms.u_fbo.value = fbo.texture;
+    }
   });
 
   useEffect(() => {
@@ -126,15 +131,15 @@ const Scene = () => {
       window.removeEventListener("resize", handleResize);
       window.removeEventListener("mousemove", handleMouseMove);
     };
-  }, [size, imageUniforms, isTextureLoaded, effectUniforms]);
+  }, [size, imageUniforms, isTextureLoaded, effectUniforms, getMeshPosition, camera]);
 
   return (
     <>
-      <mesh ref={imageMeshRef} layers={[0]}>
+      <mesh ref={imageMeshRef} layers={[0]} visible={location.pathname === "/bio" && isTextureLoaded}>
         <planeGeometry args={[getMeshPosition.width, getMeshPosition.height, 1, 1]} />
         <shaderMaterial fragmentShader={ImageFragment} vertexShader={Vertex} uniforms={imageUniforms} />
       </mesh>
-      <mesh ref={effectMeshRef} layers={[1]} visible={isTextureLoaded}>
+      <mesh ref={effectMeshRef} layers={[1]} visible={location.pathname === "/bio" && isTextureLoaded}>
         <planeGeometry args={[2, 2, 1, 1]} />
         <shaderMaterial fragmentShader={EffectFragment} vertexShader={Vertex} uniforms={effectUniforms} />
       </mesh>

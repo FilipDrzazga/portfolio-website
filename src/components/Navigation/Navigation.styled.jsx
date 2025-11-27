@@ -54,6 +54,7 @@ const MenuWrapper = styled.div`
   padding-right: clamp(1rem, 5vw, 3rem);
   background-color: transparent;
   opacity: ${({ $isVisible }) => ($isVisible ? 1 : 0)};
+  z-index: 1000;
 `;
 const NavigationList = styled.ul`
   display: flex;

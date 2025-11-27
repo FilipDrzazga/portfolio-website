@@ -2,11 +2,23 @@
 import { Canvas } from "@react-three/fiber";
 import Camera from "./Camera";
 import Scene from "./Scene";
+import { usePageStore } from "../../store/useStore";
 
 const ThreeCanvas = () => {
+  const { isMenuOpen } = usePageStore();
   return (
     <Canvas
-      style={{ position: "absolute", top: "50%", left: 0, width: "100%", height: "60vh" }}
+      style={{
+        position: "fixed",
+        top: 0,
+        left: 0,
+        width: "100%",
+        maxWidth: "2560px",
+        height: "100vh",
+        zIndex: isMenuOpen ? 999 : -1,
+        pointerEvents: "none",
+      }}
+      camera={{ fov: 45, near: 0.1, far: 1000, position: [0, 0, 5] }}
       gl={{ antialias: true, alpha: true }}
       dpr={[1, Math.min(window.devicePixelRatio, 2)]}
     >

@@ -26,7 +26,7 @@ const Hero = () => {
 
   useGSAP(() => {
     // Title Animation
-    SplitText.create(titleRef.current.getElementsByTagName("h1"), {
+    const split = SplitText.create(titleRef.current.getElementsByTagName("h1"), {
       type: "lines",
       autoSplit: true,
       mask: "lines",
@@ -39,9 +39,12 @@ const Hero = () => {
           ease: "power4.out",
         });
       },
+      onComplete: () => {
+        split.revert();
+      },
     });
-    // Work Status Animation
-    SplitText.create(workStatusRef.current.getElementsByTagName("p"), {
+    // Work Status Animation -- NEEDS REFACTORING
+    const split2 = SplitText.create(workStatusRef.current.getElementsByTagName("p"), {
       type: "chars",
       autoSplit: true,
       mask: "chars",
@@ -82,6 +85,11 @@ const Hero = () => {
         markers: false,
       },
     });
+
+    return () => {
+      split.revert();
+      split2.revert();
+    };
   }, []);
 
   useEffect(() => {
