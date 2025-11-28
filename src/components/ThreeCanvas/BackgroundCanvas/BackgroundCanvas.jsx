@@ -2,10 +2,8 @@
 import { Canvas } from "@react-three/fiber";
 import Camera from "./Camera";
 import Scene from "./Scene";
-import { usePageStore } from "../../store/useStore";
 
-const ThreeCanvas = () => {
-  const { isMenuOpen } = usePageStore();
+const BackgroundCanvas = () => {
   return (
     <Canvas
       style={{
@@ -15,7 +13,7 @@ const ThreeCanvas = () => {
         width: "100%",
         maxWidth: "2560px",
         height: "100vh",
-        zIndex: isMenuOpen ? 999 : -1,
+        zIndex: -1,
         pointerEvents: "none",
       }}
       camera={{ fov: 45, near: 0.1, far: 1000, position: [0, 0, 5] }}
@@ -29,4 +27,4 @@ const ThreeCanvas = () => {
   );
 };
 
-export default ThreeCanvas;
+export default BackgroundCanvas;
